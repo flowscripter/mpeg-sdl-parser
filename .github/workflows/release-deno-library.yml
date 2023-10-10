@@ -1,0 +1,22 @@
+name: release-deno-library
+on:
+  push:
+    branches: [main]
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macOS-latest, windows-latest, ubuntu-latest]
+    steps:
+      - name: Test Deno
+        uses: flowscripter/.github/actions/run-deno-tests@v1
+  release:
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Release Deno
+        uses: flowscripter/.github/actions/release-deno-library@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
