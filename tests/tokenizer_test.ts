@@ -1,6 +1,6 @@
 import { assertNotEquals, assertStrictEquals } from "./test_deps.ts";
 import tokenizer from "../src/tokenizer.ts";
-import TokenKind from "../src/tokens.ts";
+import TokenKind from "../src/token_kind.ts";
 
 function testTokenizer(
   input: string,
@@ -37,11 +37,10 @@ Deno.test("Test comment token is ignored", () => {
 });
 
 Deno.test("Test value tokens", () => {
-  const input =
-      "0b0 0b010101 0b0101.0101 0b0101.0101.01 " +
-      "0xA 0xAB01AB 0xAB01.AB01 0xAB01.AB01.AB " +
-      "1 123 0 -1 " +
-      "0.1 1.1 1.1e1 1.1e-1 -0.1 -1.1 -1.1e1 -1.1e-1";
+  const input = "0b0 0b010101 0b0101.0101 0b0101.0101.01 " +
+    "0xA 0xAB01AB 0xAB01.AB01 0xAB01.AB01.AB " +
+    "1 123 0 -1 " +
+    "0.1 1.1 1.1e1 1.1e-1 -0.1 -1.1 -1.1e1 -1.1e-1";
   const expected: [TokenKind, string][] = [
     [TokenKind.ValueBinary, "0b0"],
     [TokenKind.ValueBinary, "0b010101"],
@@ -62,7 +61,18 @@ Deno.test("Test value tokens", () => {
     [TokenKind.ValueFloat, "-0.1"],
     [TokenKind.ValueFloat, "-1.1"],
     [TokenKind.ValueFloat, "-1.1e1"],
-    [TokenKind.ValueFloat, "-1.1e-1"]
+    [TokenKind.ValueFloat, "-1.1e-1"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test string literal tokens", () => {
+  const input = "\"Hello πό\"\"\uFEFFHello πό\"\"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=\"";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.StringLiteral, "\"Hello πό\""],
+    [TokenKind.StringLiteral, "\"\uFEFFHello πό\""],
+    [TokenKind.StringLiteral, "\"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=\""],
   ];
 
   testTokenizer(input, expected);
@@ -70,7 +80,7 @@ Deno.test("Test value tokens", () => {
 
 Deno.test("Test operator tokens with and without whitespace", () => {
   // whitespace added where necessary to avoid operator aliasing
-  let input = '++--*/%+-<<>>< <=> >===!=&|&&||...=';
+  let input = "++--*/%+-<<>>< <=> >===!=&|&&||...=";
   const expected: [TokenKind, string][] = [
     [TokenKind.OperatorPostfixIncrement, "++"],
     [TokenKind.OperatorPostfixDecrement, "--"],
@@ -81,30 +91,30 @@ Deno.test("Test operator tokens with and without whitespace", () => {
     [TokenKind.OperatorSubtract, "-"],
     [TokenKind.OperatorShiftLeft, "<<"],
     [TokenKind.OperatorShiftRight, ">>"],
-    [TokenKind.OperatorLessThan, '<'],
-    [TokenKind.OperatorLessThanOrEqual, '<='],
-    [TokenKind.OperatorGreaterThan, '>'],
-    [TokenKind.OperatorGreaterThanOrEqual, '>='],
-    [TokenKind.OperatorEqual, '=='],
-    [TokenKind.OperatorNotEqual, '!='],
-    [TokenKind.OperatorBinaryAnd, '&'],
-    [TokenKind.OperatorBinaryOr, '|'],
-    [TokenKind.OperatorLogicalAnd, '&&'],
-    [TokenKind.OperatorLogicalOr, '||'],
-    [TokenKind.OperatorRange, '..'],
-    [TokenKind.OperatorClassMemberAccess, '.'],
-    [TokenKind.OperatorAssignment, '='],
+    [TokenKind.OperatorLessThan, "<"],
+    [TokenKind.OperatorLessThanOrEqual, "<="],
+    [TokenKind.OperatorGreaterThan, ">"],
+    [TokenKind.OperatorGreaterThanOrEqual, ">="],
+    [TokenKind.OperatorEqual, "=="],
+    [TokenKind.OperatorNotEqual, "!="],
+    [TokenKind.OperatorBinaryAnd, "&"],
+    [TokenKind.OperatorBinaryOr, "|"],
+    [TokenKind.OperatorLogicalAnd, "&&"],
+    [TokenKind.OperatorLogicalOr, "||"],
+    [TokenKind.OperatorRange, ".."],
+    [TokenKind.OperatorClassMemberAccess, "."],
+    [TokenKind.OperatorAssignment, "="],
   ];
 
   testTokenizer(input, expected);
 
-  input = '++ -- * / % + - << >> < <= > >= == != & | && || .. . =';
+  input = "++ -- * / % + - << >> < <= > >= == != & | && || .. . =";
 
   testTokenizer(input, expected);
 });
 
 Deno.test("Test punctuator tokens with and without whitespace", () => {
-  let input = '(){}[]:;,"';
+  let input = '(){}[]:;,';
   const expected: [TokenKind, string][] = [
     [TokenKind.PunctuatorOpenParenthesis, "("],
     [TokenKind.PunctuatorCloseParenthesis, ")"],
@@ -114,13 +124,12 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
     [TokenKind.PunctuatorCloseBracket, "]"],
     [TokenKind.PunctuatorColon, ":"],
     [TokenKind.PunctuatorSemicolon, ";"],
-    [TokenKind.PunctuatorComma, ","],
-    [TokenKind.PunctuatorDoubleQuote, '"'],
+    [TokenKind.PunctuatorComma, ","]
   ];
 
   testTokenizer(input, expected);
 
-  input = '( ) { } [ ] : ; , "';
+  input = '( ) { } [ ] : ; ,';
 
   testTokenizer(input, expected);
 });

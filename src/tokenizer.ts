@@ -1,7 +1,7 @@
 // deno-fmt-ignore-file
 
 import { buildLexer } from "../deps.ts";
-import Tokens from "./tokens.ts";
+import TokenKind from "./token_kind.ts";
 
 /* Whitespace */
 
@@ -79,6 +79,12 @@ const OPERATOR_RANGE_PATTERN = '\\.\\.';
 
 const OPERATOR_CLASS_MEMBER_ACCESS_PATTERN = '\\.';
 
+/* Rule E.5: String data types */
+
+// not a quote or a backslash or a backslash followed by any character
+const STRING_LITERAL_CHARACTER_PATTERN = '(?:[^"\\\\]|\\\\.)';
+const STRING_LITERAL_PATTERN = '"' + STRING_LITERAL_CHARACTER_PATTERN + '*"';
+
 /* Punctuators */
 
 const PUNCTUATOR_OPEN_PARENTHESIS = '\\(';
@@ -90,7 +96,6 @@ const PUNCTUATOR_CLOSE_BRACKET = '\\]';
 const PUNCTUATOR_COLON = ':';
 const PUNCTUATOR_SEMICOLON = ';';
 const PUNCTUATOR_COMMA = ',';
-const PUNCTUATOR_DOUBLE_QUOTE = '"';
 
 /* Keywords */
 
@@ -127,80 +132,82 @@ function getRegExp(pattern: string) {
 
 export default buildLexer([
     // discarded tokens
-    [false, getRegExp(WHITESPACE_PATTERN), Tokens.Whitespace],
-    [false, getRegExp(COMMENT_PATTERN), Tokens.Comment],
+    [false, getRegExp(WHITESPACE_PATTERN), TokenKind.Whitespace],
+    [false, getRegExp(COMMENT_PATTERN), TokenKind.Comment],
 
     // value tokens
-    [true, getRegExp(VALUE_BINARY_PATTERN), Tokens.ValueBinary],
-    [true, getRegExp(VALUE_HEXADECIMAL_PATTERN), Tokens.ValueHexadecimal],
-    [true, getRegExp(VALUE_POSITIVE_INTEGER_PATTERN), Tokens.ValuePositiveInteger],
-    [true, getRegExp(VALUE_INTEGER_PATTERN), Tokens.ValueInteger],
-    [true, getRegExp(VALUE_FLOAT_PATTERN), Tokens.ValueFloat],
+    [true, getRegExp(VALUE_BINARY_PATTERN), TokenKind.ValueBinary],
+    [true, getRegExp(VALUE_HEXADECIMAL_PATTERN), TokenKind.ValueHexadecimal],
+    [true, getRegExp(VALUE_POSITIVE_INTEGER_PATTERN), TokenKind.ValuePositiveInteger],
+    [true, getRegExp(VALUE_INTEGER_PATTERN), TokenKind.ValueInteger],
+    [true, getRegExp(VALUE_FLOAT_PATTERN), TokenKind.ValueFloat],
+
+    // string literal tokens
+    [true, getRegExp(STRING_LITERAL_PATTERN), TokenKind.StringLiteral],
 
     // operator tokens
-    [true, getRegExp(OPERATOR_POSTFIX_INCREMENT_PATTERN), Tokens.OperatorPostfixIncrement],
-    [true, getRegExp(OPERATOR_POSTFIX_DECREMENT_PATTERN), Tokens.OperatorPostfixDecrement],
-    [true, getRegExp(OPERATOR_MULTIPLY_PATTERN), Tokens.OperatorMultiply],
-    [true, getRegExp(OPERATOR_DIVIDE_PATTERN), Tokens.OperatorDivide],
-    [true, getRegExp(OPERATOR_MODULUS_PATTERN), Tokens.OperatorModulus],
-    [true, getRegExp(OPERATOR_ADD_PATTERN), Tokens.OperatorAdd],
-    [true, getRegExp(OPERATOR_SUBTRACT_PATTERN), Tokens.OperatorSubtract],
-    [true, getRegExp(OPERATOR_SHIFT_LEFT_PATTERN), Tokens.OperatorShiftLeft],
-    [true, getRegExp(OPERATOR_SHIFT_RIGHT_PATTERN), Tokens.OperatorShiftRight],
-    [true, getRegExp(OPERATOR_LESS_THAN_PATTERN), Tokens.OperatorLessThan],
-    [true, getRegExp(OPERATOR_LESS_THAN_OR_EQUAL_PATTERN), Tokens.OperatorLessThanOrEqual],
-    [true, getRegExp(OPERATOR_GREATER_THAN_PATTERN), Tokens.OperatorGreaterThan],
-    [true, getRegExp(OPERATOR_GREATER_THAN_OR_EQUAL_PATTERN), Tokens.OperatorGreaterThanOrEqual],
-    [true, getRegExp(OPERATOR_EQUAL_PATTERN), Tokens.OperatorEqual],
-    [true, getRegExp(OPERATOR_NOT_EQUAL_PATTERN), Tokens.OperatorNotEqual],
-    [true, getRegExp(OPERATOR_BINARY_AND_PATTERN), Tokens.OperatorBinaryAnd],
-    [true, getRegExp(OPERATOR_BINARY_OR_PATTERN), Tokens.OperatorBinaryOr],
-    [true, getRegExp(OPERATOR_LOGICAL_AND_PATTERN), Tokens.OperatorLogicalAnd],
-    [true, getRegExp(OPERATOR_LOGICAL_OR_PATTERN), Tokens.OperatorLogicalOr],
-    [true, getRegExp(OPERATOR_RANGE_PATTERN), Tokens.OperatorRange],
-    [true, getRegExp(OPERATOR_CLASS_MEMBER_ACCESS_PATTERN), Tokens.OperatorClassMemberAccess],
-    [true, getRegExp(OPERATOR_ASSIGNMENT_PATTERM), Tokens.OperatorAssignment],
+    [true, getRegExp(OPERATOR_POSTFIX_INCREMENT_PATTERN), TokenKind.OperatorPostfixIncrement],
+    [true, getRegExp(OPERATOR_POSTFIX_DECREMENT_PATTERN), TokenKind.OperatorPostfixDecrement],
+    [true, getRegExp(OPERATOR_MULTIPLY_PATTERN), TokenKind.OperatorMultiply],
+    [true, getRegExp(OPERATOR_DIVIDE_PATTERN), TokenKind.OperatorDivide],
+    [true, getRegExp(OPERATOR_MODULUS_PATTERN), TokenKind.OperatorModulus],
+    [true, getRegExp(OPERATOR_ADD_PATTERN), TokenKind.OperatorAdd],
+    [true, getRegExp(OPERATOR_SUBTRACT_PATTERN), TokenKind.OperatorSubtract],
+    [true, getRegExp(OPERATOR_SHIFT_LEFT_PATTERN), TokenKind.OperatorShiftLeft],
+    [true, getRegExp(OPERATOR_SHIFT_RIGHT_PATTERN), TokenKind.OperatorShiftRight],
+    [true, getRegExp(OPERATOR_LESS_THAN_PATTERN), TokenKind.OperatorLessThan],
+    [true, getRegExp(OPERATOR_LESS_THAN_OR_EQUAL_PATTERN), TokenKind.OperatorLessThanOrEqual],
+    [true, getRegExp(OPERATOR_GREATER_THAN_PATTERN), TokenKind.OperatorGreaterThan],
+    [true, getRegExp(OPERATOR_GREATER_THAN_OR_EQUAL_PATTERN), TokenKind.OperatorGreaterThanOrEqual],
+    [true, getRegExp(OPERATOR_EQUAL_PATTERN), TokenKind.OperatorEqual],
+    [true, getRegExp(OPERATOR_NOT_EQUAL_PATTERN), TokenKind.OperatorNotEqual],
+    [true, getRegExp(OPERATOR_BINARY_AND_PATTERN), TokenKind.OperatorBinaryAnd],
+    [true, getRegExp(OPERATOR_BINARY_OR_PATTERN), TokenKind.OperatorBinaryOr],
+    [true, getRegExp(OPERATOR_LOGICAL_AND_PATTERN), TokenKind.OperatorLogicalAnd],
+    [true, getRegExp(OPERATOR_LOGICAL_OR_PATTERN), TokenKind.OperatorLogicalOr],
+    [true, getRegExp(OPERATOR_RANGE_PATTERN), TokenKind.OperatorRange],
+    [true, getRegExp(OPERATOR_CLASS_MEMBER_ACCESS_PATTERN), TokenKind.OperatorClassMemberAccess],
+    [true, getRegExp(OPERATOR_ASSIGNMENT_PATTERM), TokenKind.OperatorAssignment],
 
     // punctuator tokens
-    [true, getRegExp(PUNCTUATOR_OPEN_PARENTHESIS), Tokens.PunctuatorOpenParenthesis],
-    [true, getRegExp(PUNCTUATOR_CLOSE_PARENTHESIS), Tokens.PunctuatorCloseParenthesis],
-    [true, getRegExp(PUNCTUATOR_OPEN_BRACE), Tokens.PunctuatorOpenBrace],
-    [true, getRegExp(PUNCTUATOR_CLOSE_BRACE), Tokens.PunctuatorCloseBrace],
-    [true, getRegExp(PUNCTUATOR_OPEN_BRACKET), Tokens.PunctuatorOpenBracket],
-    [true, getRegExp(PUNCTUATOR_CLOSE_BRACKET), Tokens.PunctuatorCloseBracket],
-    [true, getRegExp(PUNCTUATOR_COLON), Tokens.PunctuatorColon],
-    [true, getRegExp(PUNCTUATOR_SEMICOLON), Tokens.PunctuatorSemicolon],
-    [true, getRegExp(PUNCTUATOR_COMMA), Tokens.PunctuatorComma],
-    [true, getRegExp(PUNCTUATOR_DOUBLE_QUOTE), Tokens.PunctuatorDoubleQuote],
+    [true, getRegExp(PUNCTUATOR_OPEN_PARENTHESIS), TokenKind.PunctuatorOpenParenthesis],
+    [true, getRegExp(PUNCTUATOR_CLOSE_PARENTHESIS), TokenKind.PunctuatorCloseParenthesis],
+    [true, getRegExp(PUNCTUATOR_OPEN_BRACE), TokenKind.PunctuatorOpenBrace],
+    [true, getRegExp(PUNCTUATOR_CLOSE_BRACE), TokenKind.PunctuatorCloseBrace],
+    [true, getRegExp(PUNCTUATOR_OPEN_BRACKET), TokenKind.PunctuatorOpenBracket],
+    [true, getRegExp(PUNCTUATOR_CLOSE_BRACKET), TokenKind.PunctuatorCloseBracket],
+    [true, getRegExp(PUNCTUATOR_COLON), TokenKind.PunctuatorColon],
+    [true, getRegExp(PUNCTUATOR_SEMICOLON), TokenKind.PunctuatorSemicolon],
+    [true, getRegExp(PUNCTUATOR_COMMA), TokenKind.PunctuatorComma],
 
     // keyword tokens
-    [true, getRegExp(KEYWORD_ABSTRACT_PATTERN), Tokens.KeywordAbstract],
-    [true, getRegExp(KEYWORD_ALIGNED_PATTERN), Tokens.KeywordAligned],
-    [true, getRegExp(KEYWORD_BASE64_STRING_PATTERN), Tokens.KeywordBase64String],
-    [true, getRegExp(KEYWORD_BIT_PATTERN), Tokens.KeywordBit],
-    [true, getRegExp(KEYWORD_BREAK_PATTERN), Tokens.KeywordBreak],
-    [true, getRegExp(KEYWORD_CASE_PATTERN), Tokens.KeywordCase],
-    [true, getRegExp(KEYWORD_CLASS_PATTERN), Tokens.KeywordClass],
-    [true, getRegExp(KEYWORD_CONST_PATTERN), Tokens.KeywordConst],
-    [true, getRegExp(KEYWORD_DEFAULT_PATTERN), Tokens.KeywordDefault],
-    [true, getRegExp(KEYWORD_DO_PATTERN), Tokens.KeywordDo],
-    [true, getRegExp(KEYWORD_ELSE_PATTERN), Tokens.KeywordElse],
-    [true, getRegExp(KEYWORD_EXPANDABLE_PATTERN), Tokens.KeywordExpandable],
-    [true, getRegExp(KEYWORD_EXTENDS_PATTERN), Tokens.KeywordExtends],
-    [true, getRegExp(KEYWORD_FLOAT_PATTERN), Tokens.KeywordFloat],
-    [true, getRegExp(KEYWORD_FOR_PATTERN), Tokens.KeywordFor],
-    [true, getRegExp(KEYWORD_IF_PATTERN), Tokens.KeywordIf],
-    [true, getRegExp(KEYWORD_INT_PATTERN), Tokens.KeywordInt],
-    [true, getRegExp(KEYWORD_LENGTHOF_PATTERN), Tokens.KeywordLengthof],
-    [true, getRegExp(KEYWORD_MAP_PATTERN), Tokens.KeywordMap],
-    [true, getRegExp(KEYWORD_SWITCH_PATTERN), Tokens.KeywordSwitch],
-    [true, getRegExp(KEYWORD_TYPE_PATTERN), Tokens.KeywordType],
-    [true, getRegExp(KEYWORD_UNSIGNED_PATTERN), Tokens.KeywordUnsigned],
-    [true, getRegExp(KEYWORD_UTF8_STRING_PATTERN), Tokens.KeywordUtf8String],
-    [true, getRegExp(KEYWORD_UTF8_LIST_PATTERN), Tokens.KeywordUtf8List],
-    [true, getRegExp(KEYWORD_UTF_STRING_PATTERN), Tokens.KeywordUtfString],
-    [true, getRegExp(KEYWORD_WHILE_PATTERN), Tokens.KeywordWhile],
+    [true, getRegExp(KEYWORD_ABSTRACT_PATTERN), TokenKind.KeywordAbstract],
+    [true, getRegExp(KEYWORD_ALIGNED_PATTERN), TokenKind.KeywordAligned],
+    [true, getRegExp(KEYWORD_BASE64_STRING_PATTERN), TokenKind.KeywordBase64String],
+    [true, getRegExp(KEYWORD_BIT_PATTERN), TokenKind.KeywordBit],
+    [true, getRegExp(KEYWORD_BREAK_PATTERN), TokenKind.KeywordBreak],
+    [true, getRegExp(KEYWORD_CASE_PATTERN), TokenKind.KeywordCase],
+    [true, getRegExp(KEYWORD_CLASS_PATTERN), TokenKind.KeywordClass],
+    [true, getRegExp(KEYWORD_CONST_PATTERN), TokenKind.KeywordConst],
+    [true, getRegExp(KEYWORD_DEFAULT_PATTERN), TokenKind.KeywordDefault],
+    [true, getRegExp(KEYWORD_DO_PATTERN), TokenKind.KeywordDo],
+    [true, getRegExp(KEYWORD_ELSE_PATTERN), TokenKind.KeywordElse],
+    [true, getRegExp(KEYWORD_EXPANDABLE_PATTERN), TokenKind.KeywordExpandable],
+    [true, getRegExp(KEYWORD_EXTENDS_PATTERN), TokenKind.KeywordExtends],
+    [true, getRegExp(KEYWORD_FLOAT_PATTERN), TokenKind.KeywordFloat],
+    [true, getRegExp(KEYWORD_FOR_PATTERN), TokenKind.KeywordFor],
+    [true, getRegExp(KEYWORD_IF_PATTERN), TokenKind.KeywordIf],
+    [true, getRegExp(KEYWORD_INT_PATTERN), TokenKind.KeywordInt],
+    [true, getRegExp(KEYWORD_LENGTHOF_PATTERN), TokenKind.KeywordLengthof],
+    [true, getRegExp(KEYWORD_MAP_PATTERN), TokenKind.KeywordMap],
+    [true, getRegExp(KEYWORD_SWITCH_PATTERN), TokenKind.KeywordSwitch],
+    [true, getRegExp(KEYWORD_TYPE_PATTERN), TokenKind.KeywordType],
+    [true, getRegExp(KEYWORD_UNSIGNED_PATTERN), TokenKind.KeywordUnsigned],
+    [true, getRegExp(KEYWORD_UTF8_STRING_PATTERN), TokenKind.KeywordUtf8String],
+    [true, getRegExp(KEYWORD_UTF8_LIST_PATTERN), TokenKind.KeywordUtf8List],
+    [true, getRegExp(KEYWORD_UTF_STRING_PATTERN), TokenKind.KeywordUtfString],
+    [true, getRegExp(KEYWORD_WHILE_PATTERN), TokenKind.KeywordWhile],
 
     // identifier token
-    [true, getRegExp(IDENTIFIER_PATTERN), Tokens.Identifier]
+    [true, getRegExp(IDENTIFIER_PATTERN), TokenKind.Identifier]
 ]);
