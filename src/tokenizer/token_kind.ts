@@ -7,6 +7,8 @@ enum TokenKind {
   ValueInteger,
   ValueFloat,
   StringLiteral,
+  EncodingPrefixUtf8,
+  EncodingPrefixUtf16,
   OperatorPostfixIncrement,
   OperatorPostfixDecrement,
   OperatorMultiply,

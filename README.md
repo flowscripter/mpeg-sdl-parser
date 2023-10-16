@@ -1,6 +1,7 @@
 # mpeg-sdl-parser
 
-> ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) parser implemented in TypeScript
+> ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) parser implemented
+> in TypeScript
 
 ## Development
 

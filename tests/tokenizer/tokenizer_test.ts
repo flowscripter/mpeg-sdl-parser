@@ -1,6 +1,6 @@
-import { assertNotEquals, assertStrictEquals } from "./test_deps.ts";
-import tokenizer from "../src/tokenizer.ts";
-import TokenKind from "../src/token_kind.ts";
+import { assertNotEquals, assertStrictEquals } from "../test_deps.ts";
+import tokenizer from "../../src/tokenizer/tokenizer.ts";
+import TokenKind from "../../src/tokenizer/token_kind.ts";
 
 function testTokenizer(
   input: string,
@@ -29,11 +29,13 @@ Deno.test("Test whitespace token is ignored", () => {
   assertStrictEquals(token, undefined);
 });
 
-Deno.test("Test comment token is ignored", () => {
-  const input = "// ignore me";
-  const token = tokenizer.parse(input);
+Deno.test("Test comment token is not ignored", () => {
+  const input = "// hello world";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.Comment, "// hello world"],
+  ];
 
-  assertStrictEquals(token, undefined);
+  testTokenizer(input, expected);
 });
 
 Deno.test("Test value tokens", () => {
@@ -68,11 +70,15 @@ Deno.test("Test value tokens", () => {
 });
 
 Deno.test("Test string literal tokens", () => {
-  const input = "\"Hello πό\"\"\uFEFFHello πό\"\"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=\"";
+  const input =
+    '"Hello πό""\uFEFFHello πό""R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="';
   const expected: [TokenKind, string][] = [
-    [TokenKind.StringLiteral, "\"Hello πό\""],
-    [TokenKind.StringLiteral, "\"\uFEFFHello πό\""],
-    [TokenKind.StringLiteral, "\"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=\""],
+    [TokenKind.StringLiteral, '"Hello πό"'],
+    [TokenKind.StringLiteral, '"\uFEFFHello πό"'],
+    [
+      TokenKind.StringLiteral,
+      '"R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="',
+    ],
   ];
 
   testTokenizer(input, expected);
@@ -114,7 +120,7 @@ Deno.test("Test operator tokens with and without whitespace", () => {
 });
 
 Deno.test("Test punctuator tokens with and without whitespace", () => {
-  let input = '(){}[]:;,';
+  let input = "(){}[]:;,";
   const expected: [TokenKind, string][] = [
     [TokenKind.PunctuatorOpenParenthesis, "("],
     [TokenKind.PunctuatorCloseParenthesis, ")"],
@@ -124,12 +130,12 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
     [TokenKind.PunctuatorCloseBracket, "]"],
     [TokenKind.PunctuatorColon, ":"],
     [TokenKind.PunctuatorSemicolon, ";"],
-    [TokenKind.PunctuatorComma, ","]
+    [TokenKind.PunctuatorComma, ","],
   ];
 
   testTokenizer(input, expected);
 
-  input = '( ) { } [ ] : ; ,';
+  input = "( ) { } [ ] : ; ,";
 
   testTokenizer(input, expected);
 });

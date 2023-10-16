@@ -1,6 +1,6 @@
 // deno-fmt-ignore-file
 
-import { buildLexer } from "../deps.ts";
+import { buildLexer } from "../../deps.ts";
 import TokenKind from "./token_kind.ts";
 
 /* Whitespace */
@@ -17,8 +17,8 @@ const BINARY_CHARACTER_PATTERN = '[01]';
 const BINARY_CHARACTER_STRING_PATTERN = BINARY_CHARACTER_PATTERN + '*';
 const FOUR_BINARY_CHARACTERS_PATTERN = BINARY_CHARACTER_PATTERN + '{4}';
 const ONE_TO_FOUR_BINARY_CHARACTERS_PATTERN = BINARY_CHARACTER_PATTERN + '{1,4}';
-const PERIOD_SEPARATED_BINARY_CHARACTER_STRING_PATTERN = FOUR_BINARY_CHARACTERS_PATTERN + '(\\.' + FOUR_BINARY_CHARACTERS_PATTERN + ')+(\\.' + ONE_TO_FOUR_BINARY_CHARACTERS_PATTERN + ')?';
-const VALUE_BINARY_PATTERN = '0b(' + PERIOD_SEPARATED_BINARY_CHARACTER_STRING_PATTERN + '|' + BINARY_CHARACTER_STRING_PATTERN + ')';
+const PERIOD_SEPARATED_BINARY_CHARACTER_STRING_PATTERN = FOUR_BINARY_CHARACTERS_PATTERN + '(?:\\.' + FOUR_BINARY_CHARACTERS_PATTERN + ')+(?:\\.' + ONE_TO_FOUR_BINARY_CHARACTERS_PATTERN + ')?';
+const VALUE_BINARY_PATTERN = '0b(?:' + PERIOD_SEPARATED_BINARY_CHARACTER_STRING_PATTERN + '|' + BINARY_CHARACTER_STRING_PATTERN + ')';
 
 /* Rule S.3: Hexadecimal value */
 
@@ -26,15 +26,15 @@ const HEXADECIMAL_CHARACTER_PATTERN = '[0-9A-F]';
 const HEXADECIMAL_CHARACTER_STRING_PATTERN = HEXADECIMAL_CHARACTER_PATTERN + '*';
 const FOUR_HEXADECIMAL_CHARACTERS_PATTERN = HEXADECIMAL_CHARACTER_PATTERN + '{4}';
 const ONE_TO_FOUR_HEXADECIMAL_CHARACTERS_PATTERN = HEXADECIMAL_CHARACTER_PATTERN + '{1,4}';
-const PERIOD_SEPARATED_HEXADECIMAL_CHARACTER_STRING_PATTERN = FOUR_HEXADECIMAL_CHARACTERS_PATTERN + '(\\.' + FOUR_HEXADECIMAL_CHARACTERS_PATTERN + ')+(\\.' + ONE_TO_FOUR_HEXADECIMAL_CHARACTERS_PATTERN + ')?';
-const VALUE_HEXADECIMAL_PATTERN = '0x(' + PERIOD_SEPARATED_HEXADECIMAL_CHARACTER_STRING_PATTERN + '|' + HEXADECIMAL_CHARACTER_STRING_PATTERN + ')';
+const PERIOD_SEPARATED_HEXADECIMAL_CHARACTER_STRING_PATTERN = FOUR_HEXADECIMAL_CHARACTERS_PATTERN + '(?:\\.' + FOUR_HEXADECIMAL_CHARACTERS_PATTERN + ')+(?:\\.' + ONE_TO_FOUR_HEXADECIMAL_CHARACTERS_PATTERN + ')?';
+const VALUE_HEXADECIMAL_PATTERN = '0x(?:' + PERIOD_SEPARATED_HEXADECIMAL_CHARACTER_STRING_PATTERN + '|' + HEXADECIMAL_CHARACTER_STRING_PATTERN + ')';
 
 /* Identifiers */
 
 const POSITIVE_DIGIT_PATTERN = '[1-9]';
-const DIGIT_PATTERN = '(0|' + POSITIVE_DIGIT_PATTERN + ')';
+const DIGIT_PATTERN = '(?:0|' + POSITIVE_DIGIT_PATTERN + ')';
 const CHARACTER_PATTERN = '[a-zA-Z]';
-const IDENTIFIER_CHARACTER_PATTERN = '(' + POSITIVE_DIGIT_PATTERN + '|' + CHARACTER_PATTERN + '|' + '_' + ')';
+const IDENTIFIER_CHARACTER_PATTERN = '(?:' + POSITIVE_DIGIT_PATTERN + '|' + CHARACTER_PATTERN + '|' + '_' + ')';
 
 /* An identifier may start with and contain any identifier_character but must contain at least one character */
 const IDENTIFIER_PATTERN = IDENTIFIER_CHARACTER_PATTERN + '*' + CHARACTER_PATTERN + IDENTIFIER_CHARACTER_PATTERN + '*';
@@ -42,8 +42,8 @@ const IDENTIFIER_PATTERN = IDENTIFIER_CHARACTER_PATTERN + '*' + CHARACTER_PATTER
 /* Numbers */
 
 const VALUE_POSITIVE_INTEGER_PATTERN = POSITIVE_DIGIT_PATTERN + DIGIT_PATTERN + '*';
-const VALUE_INTEGER_PATTERN = '(-?(0|' + VALUE_POSITIVE_INTEGER_PATTERN + '))'
-const VALUE_FLOAT_PATTERN = VALUE_INTEGER_PATTERN + '(\\.' + DIGIT_PATTERN + '+)?(e' + VALUE_INTEGER_PATTERN + ')?';
+const VALUE_INTEGER_PATTERN = '(?:-?(0|' + VALUE_POSITIVE_INTEGER_PATTERN + '))'
+const VALUE_FLOAT_PATTERN = VALUE_INTEGER_PATTERN + '(?:\\.' + DIGIT_PATTERN + '+)?(?:e' + VALUE_INTEGER_PATTERN + ')?';
 
 /* Expressions */
 
@@ -84,6 +84,8 @@ const OPERATOR_CLASS_MEMBER_ACCESS_PATTERN = '\\.';
 // not a quote or a backslash or a backslash followed by any character
 const STRING_LITERAL_CHARACTER_PATTERN = '(?:[^"\\\\]|\\\\.)';
 const STRING_LITERAL_PATTERN = '"' + STRING_LITERAL_CHARACTER_PATTERN + '*"';
+const ENCODING_PREFIX_UTF8_PATTERN = 'u8';
+const ENCODING_PREFIX_UTF16_PATTERN = 'u';
 
 /* Punctuators */
 
@@ -131,9 +133,14 @@ function getRegExp(pattern: string) {
 }
 
 export default buildLexer([
-    // discarded tokens
+    // misc tokens
     [false, getRegExp(WHITESPACE_PATTERN), TokenKind.Whitespace],
-    [false, getRegExp(COMMENT_PATTERN), TokenKind.Comment],
+    [true, getRegExp(COMMENT_PATTERN), TokenKind.Comment],
+
+    // string literal tokens
+    [true, getRegExp(STRING_LITERAL_PATTERN), TokenKind.StringLiteral],
+    [true, getRegExp(ENCODING_PREFIX_UTF8_PATTERN), TokenKind.EncodingPrefixUtf8],
+    [true, getRegExp(ENCODING_PREFIX_UTF16_PATTERN), TokenKind.EncodingPrefixUtf16],
 
     // value tokens
     [true, getRegExp(VALUE_BINARY_PATTERN), TokenKind.ValueBinary],
@@ -141,9 +148,6 @@ export default buildLexer([
     [true, getRegExp(VALUE_POSITIVE_INTEGER_PATTERN), TokenKind.ValuePositiveInteger],
     [true, getRegExp(VALUE_INTEGER_PATTERN), TokenKind.ValueInteger],
     [true, getRegExp(VALUE_FLOAT_PATTERN), TokenKind.ValueFloat],
-
-    // string literal tokens
-    [true, getRegExp(STRING_LITERAL_PATTERN), TokenKind.StringLiteral],
 
     // operator tokens
     [true, getRegExp(OPERATOR_POSTFIX_INCREMENT_PATTERN), TokenKind.OperatorPostfixIncrement],

@@ -7,9 +7,17 @@ import StringLiteralKind from "./string_literal_kind.ts"
 import UnaryOperatorKind from "./unary_operator_kind.ts"
 import BinaryOperatorKind from "./binary_operator_kind.ts"
 import ElementaryTypeKind from "./elementary_type_kind.ts";
+import ArrayDimensionKind from "./array_dimension_kind.ts";
 
 interface Node {
   kind: NodeKind
+}
+
+/* Comment */
+
+export interface Comment extends Node {
+  kind: NodeKind.COMMENT;
+  comment: string;
 }
 
 /* Numbers */
@@ -98,9 +106,9 @@ export interface NonParsableVariableDefinition extends VariableDefinition {
 }
 
 export interface ParsableVariableDefinition extends VariableDefinition {
-  kind: NodeKind.PARSABLE_VALUE_VARIABLE_DEFINITION;
+  kind: NodeKind.PARSABLE_VARIABLE_DEFINITION;
   alignment?: number;
-  width: Expression;
+  width: Expression | NumberValue;
   isLookahead: boolean;
   endValue?: NumberValue;
 }
@@ -110,31 +118,42 @@ export type ElementaryTypeVariableDefinition =
     | ParsableVariableDefinition;
 
 
-// /* Rule E.3: Maps */
-//
-// output_value ::= aggregate_output_value | number | elementary_type width_attribute
-//
-// aggregate_output_value ::= '{' ( output_value ',' )* output_value '}'
-//
-// map_definition_entry ::= binary_value ',' aggregate_output_value
-//
-// /* The identifier within the literal brackets must refer to the name of a class */
-//
-// map_definition ::= 'map' identifier '(' ( identifier | elementary_type ) ')' '{' ( map_definition_entry ',' )+ map_definition_entry '}'
+/* Rule E.3: Maps */
+
+export interface ParsableTypeMapOutput extends Node {
+  kind: NodeKind.PARSABLE_TYPE_MAP_OUTPUT;
+  elementaryType: ElementaryTypeKind;
+  width: NumberValue;
+}
+
+export type MapOutputType = NumberValue | ParsableTypeMapOutput | MapOutputType[];
+
 export interface MapDefinition extends Node {
   kind: NodeKind.MAP_DEFINITION;
+
+  identifier: Identifier;
+
+  // If the outputType is Identifier type, it must refer to the name of a class
+  outputType: Identifier | ElementaryTypeKind;
+
+  // inputValue.numberKind must be BINARY
+  entries: { inputValue: NumberValue, outputValue: MapOutputType };
 }
 
 
-// /* Rule E.4: Mapped data types */
-//
-// /* The identifier before the literal brackets must refer to the name of a class */
-//
-// /* The identifier within the literal brackets must refer to the name of a map */
-//
-// map_variable_definition ::= ( identifier | elementary_type ) '(' identifier ')' identifier ';'
+/* Rule E.4: Mapped data types */
+
 export interface MapVariableDefinition extends Node {
   kind: NodeKind.MAP_VARIABLE_DEFINITION;
+
+  // If the outputType is Identifier type, it must refer to the name of a class
+  // The outputType must match the outputType of the map specified by mapIdentifier
+  outputType: Identifier | ElementaryTypeKind;
+
+  // The identifier must refer to the name of a map
+  mapIdentifier: Identifier;
+
+  identifier: Identifier;
 }
 
 
@@ -154,75 +173,96 @@ export interface StringVariableDefinition extends Node {
 }
 
 
-// /* Rule C.2: Derived classes */
-//
-// /* The identifier must refer to the name of a class */
-//
-// extends_attribute ::= 'extends' identifier
-//
-// bit_attribute ::= [: bit(length) [id_name =] object_id | id_range | extended_id_range ]
+/* Rule C.1: Classes */
+/* Rule C.2: Derived classes */
+/* Rule C.3: Abstract classes */
+/* Rule C.4: Expandable classes */
+/* Rule C.5: Class parameter types */
+
+export interface ClassIdSpecification extends Node {
+  kind: NodeKind.CLASS_ID_SPECIFICATION;
+  id: number;
+  idRangeEnd?: number;
+}
+
+export interface ClassDefinitionBitAttribute extends Node {
+  kind: NodeKind.CLASS_DEFINITION_BIT_ATTRIBUTE;
+
+  length: number;
+  identifier?: Identifier;
+  classIdSpecifications: ClassIdSpecification[];
+}
+
+export interface ClassDefinitionParameter extends Node {
+  kind: NodeKind.CLASS_DEFINITION_PARAMETER;
+
+  parameterType: Identifier | ElementaryTypeKind;
+
+  identifier: Identifier;
+}
+
 export interface ClassDefinition extends Node {
   kind: NodeKind.CLASS_DEFINITION;
+  isAbstract: boolean;
+  alignment?: number;
+  expandable?: number;
+  identifier: Identifier;
+  parameters: ClassDefinitionParameter[];
+
+  // parentClass must refer to the name of a class
+  parentClass?: Identifier;
+  bitAttribute?: ClassDefinitionBitAttribute;
+  statements: Statement[];
 }
+
 
 export interface ClassVariableDefinition extends Node {
   kind: NodeKind.CLASS_VARIABLE_DEFINITION;
+
+  identifier: Identifier;
+
+  // className must refer to the name of a class
+  className: Identifier;
+
+  parameterValues: Expression[];
 }
 
 
-// /* Rule C.3: Abstract classes */
-//
-// abstract_attribute ::= 'abstract'
-//
-//
-// /* Rule C.4: Expandable classes */
-//
-// expandable_attribute ::= 'expandable' ( '(' positive_integer_value ')' )?
-//
-//
-//     /* Rule C.5: Class parameter types */
-//
-//     /* The optional identifier must refer to the name of a class */
-//
-//     parameter_list_item ::= ( identifier | elementary_type ) identifier
-//
-// parameter_list ::= '(' ( parameter_list_item ',' )* parameter_list_item ')'
-//
-// parameter_values ::= '(' ( expression ',' )* expression ')'
-//
-//
-// /* Rule C.1: Classes */
-//
-// class_definition ::= aligned_attribute expandable_attribute? abstract_attribute? 'class' identifier parameter_list? extends_attribute? bit_attribute? '{' statement* '}'
-//
-//     /* The first identifier must refer to the name of a class */
-//
-//     class_variable_definition ::= identifier identifier parameter_values? ';'
-//
-//
-//     /* Rule A.3: Partial arrays */
-//
-//     partial_array_dimension_specifier ::= '[' expression ']'
-//
-//
-// /* Rule A.4: Implicit arrays */
-//
-// implicit_array_dimension_specifier ::= ( positive_integer_value range_operator positive_integer_value )+
-//
-//
-//     /* Rule A.1: Arrays */
-//
-//     /* Rule A.2: Multi-dimensional arrays */
-//
-//     /* The optional identifier must refer to the name of a class */
-//
-//     array_item_type ::= elementary_type width_attribute | identifier
-//
-// array_dimension_definition ::= '[' ( expression | partial_array_dimension_specifier | implicit_array_dimension_specifier ) ']'
-//
-// array_variable_definition ::= array_item_type identifier array_dimension_definition+ ';'
+/* Rule A.1: Arrays */
+/* Rule A.2: Multi-dimensional arrays */
+/* Rule A.3: Partial arrays */
+/* Rule A.4: Implicit arrays */
+
+export interface ElementaryTypeArrayItemType extends Node {
+  kind: NodeKind.ELEMENTARY_TYPE_ARRAY_ITEM_TYPE;
+  elementaryType: ElementaryTypeKind;
+  width: NumberValue;
+}
+
+export interface ArrayDimension extends Node {
+  kind: NodeKind.ARRAY_DIMENSION;
+  arrayDimensionKind: ArrayDimensionKind;
+
+  // expression is required for ArrayDimensionKind.EXPLICIT,
+  // optional for ArrayDimensionKind.PARTIAL and illegal for ArrayDimensionKind.IMPLICIT
+  expression?: Expression;
+
+  // rangeStart is optional for ArrayDimensionKind.IMPLICIT and illegal otherwise
+  // if rangeStart is specified, rangeEnd must also be specified
+  rangeStart?: NumberValue;
+
+  // rangeEnd is optional for ArrayDimensionKind.IMPLICIT and illegal otherwise
+  // if rangeEnd is specified, rangeStart must also be specified
+  rangeEnd?: NumberValue;
+}
+
 export interface ArrayVariableDefinition extends Node {
   kind: NodeKind.ARRAY_VARIABLE_DEFINITION;
+
+  // If the itemType is Identifier type, it must refer to the name of a class
+  itemType: Identifier | ElementaryTypeArrayItemType;
+  identifier: Identifier;
+  dimensions: ArrayDimension[];
 }
 
 

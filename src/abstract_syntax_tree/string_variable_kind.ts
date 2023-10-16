@@ -1,8 +1,8 @@
 enum StringVariableKind {
-    utf8string,
-    utfstring,
-    utf8list,
-    base64string
+  UTF8,
+  UTF16,
+  UTF8_LIST,
+  BASE64,
 }
 
 export default StringVariableKind;
