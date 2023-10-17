@@ -323,8 +323,16 @@ export interface CompoundStatement extends Node {
   statements: Statement[]
 }
 
+export interface CommentedStatement extends Node {
+  kind: NodeKind.COMMENTED_STATEMENT;
+  statement: Statement;
+  comment: Comment;
+}
+
 export type Statement =
   CompoundStatement
+  | Comment
+  | CommentedStatement
   | ElementaryTypeVariableDefinition
   | MapDefinition
   | MapVariableDefinition

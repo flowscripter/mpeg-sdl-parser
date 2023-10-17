@@ -1,3 +1,7 @@
+/* Comment */
+
+comment ::= //[#x0000-#x10FFFF]+
+
 /* Rule S.2: Binary value */
 
 binary_character ::= 0 | 1
@@ -304,4 +308,4 @@ statement ::= compound_statement
 
 /* Top level */
 
-Definition ::= statement*
+Definition ::= ( statement | comment | ( statement comment ) )*
