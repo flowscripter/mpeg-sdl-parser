@@ -1,3 +1,5 @@
+// deno-fmt-ignore-file
+
 /* References are either to sub-clauses or rules appearing in 14496-34 */
 
 /* Note that (?:x) matches x but does not remember the match and thus improves performance */

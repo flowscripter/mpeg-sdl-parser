@@ -35,7 +35,6 @@ this repository: [grammar.txt](grammar.txt)
 Parsing an SDL definition results in an abstract syntax tree output which can
 then be used for further processing in consuming applications.
 
-
 ```mermaid
 classDiagram
     
@@ -61,9 +60,9 @@ Link to auto-generated API docs for the library:
 
 ### Debug Logging
 
-Internal framework logging can be enabled by setting the `MPEG_SDL_PARSER_DEBUG` environment
-variable. (Permission will need to be granted to the CLI to access the
-environment to look for this environment variable i.e. `--allow-env`.)
+Internal framework logging can be enabled by setting the `MPEG_SDL_PARSER_DEBUG`
+environment variable. (Permission will need to be granted to the CLI to access
+the environment to look for this environment variable i.e. `--allow-env`.)
 
 The `logger` implementation will detect this and define a default Deno
 `ConsoleHandler` logger with `DEBUG` level which is used by internal

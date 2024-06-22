@@ -8,11 +8,11 @@ if (defaultLogger === undefined) {
 }
 
 const LEVEL_PADDINGS: Record<string, string> = {
-  DEBUG: '    ',
-  INFO: '     ',
-  WARN: '     ',
-  ERROR: '    ',
-  CRITICAL: ' '
+  DEBUG: "    ",
+  INFO: "     ",
+  WARN: "     ",
+  ERROR: "    ",
+  CRITICAL: " ",
 };
 
 let maxLoggerNameLength = 0;
@@ -31,9 +31,13 @@ async function setupLogger() {
             const { msg, args, levelName, loggerName } = logRecord;
 
             if (args.length === 0) {
-              return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${LOGGER_NAME_PADDINGS[loggerName]} ${msg}`;
+              return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${
+                LOGGER_NAME_PADDINGS[loggerName]
+              } ${msg}`;
             }
-            return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${LOGGER_NAME_PADDINGS[loggerName]} ${sprintf(msg, ...args)}`;
+            return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${
+              LOGGER_NAME_PADDINGS[loggerName]
+            } ${sprintf(msg, ...args)}`;
           },
         },
       ),
@@ -50,18 +54,16 @@ async function setupLogger() {
 }
 
 export default function getLogger(name: string): log.Logger {
-
   if (name.length > maxLoggerNameLength) {
     maxLoggerNameLength = name.length;
 
     for (const key of Object.keys(LOGGER_NAME_PADDINGS)) {
-      LOGGER_NAME_PADDINGS[key] = ' '.repeat(maxLoggerNameLength - key.length);
+      LOGGER_NAME_PADDINGS[key] = " ".repeat(maxLoggerNameLength - key.length);
     }
 
-    LOGGER_NAME_PADDINGS[name] = '';
-  }
-  else if (LOGGER_NAME_PADDINGS[name] === undefined) {
-    LOGGER_NAME_PADDINGS[name] = ' '.repeat(maxLoggerNameLength - name.length);
+    LOGGER_NAME_PADDINGS[name] = "";
+  } else if (LOGGER_NAME_PADDINGS[name] === undefined) {
+    LOGGER_NAME_PADDINGS[name] = " ".repeat(maxLoggerNameLength - name.length);
   }
 
   const logger = log.getLogger(name);

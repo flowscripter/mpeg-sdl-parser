@@ -9,7 +9,7 @@ Deno.test("Can acquire a logger", () => {
 Deno.test("Logging with args ", () => {
   const logger = getLogger("logger test 2");
 
-  logger.debug("foobar with args: %s", 'yes');
+  logger.debug("foobar with args: %s", "yes");
 });
 
 Deno.test("Logging with different length logging names ", () => {
@@ -18,8 +18,8 @@ Deno.test("Logging with different length logging names ", () => {
 
   logger1.debug("foobar");
   logger2.debug("foobar");
-  logger1.debug("foobar with args: %s", 'yes');
-  logger2.debug("foobar with args: %s", 'yes');
+  logger1.debug("foobar with args: %s", "yes");
+  logger2.debug("foobar with args: %s", "yes");
 });
 
 Deno.test("Logging at all levels ", () => {

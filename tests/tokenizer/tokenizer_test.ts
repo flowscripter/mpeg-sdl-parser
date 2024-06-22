@@ -1,4 +1,8 @@
-import {assertNotEquals, assertStrictEquals, assertThrows} from "../test_deps.ts";
+import {
+  assertNotEquals,
+  assertStrictEquals,
+  assertThrows,
+} from "../test_deps.ts";
 import Tokenizer from "../../src/tokenizer/tokenizer.ts";
 import TokenKind from "../../src/tokenizer/token_kind.ts";
 
@@ -15,9 +19,15 @@ function testTokenizer(
     assertStrictEquals(
       token!.kind,
       expectedToken[0],
-      `${TokenKind[token!.kind]} != ${TokenKind[expectedToken[0]]}, text: ${token!.text}`,
+      `${TokenKind[token!.kind]} != ${TokenKind[expectedToken[0]]}, text: ${
+        token!.text
+      }`,
     );
-    assertStrictEquals(token!.text, expectedToken[1], `${token!.text} != ${expectedToken[1]}`);
+    assertStrictEquals(
+      token!.text,
+      expectedToken[1],
+      `${token!.text} != ${expectedToken[1]}`,
+    );
     token = token!.next;
   }
   assertStrictEquals(token, undefined);
@@ -41,9 +51,9 @@ Deno.test("Test comment token", () => {
 });
 
 Deno.test("Test comment with more complex scenarios", () => {
-  const input = "// hello world \\n {} \\\" // second comment";
+  const input = '// hello world \\n {} \\" // second comment';
   const expected: [TokenKind, string][] = [
-    [TokenKind.COMMENT_TOKEN, "// hello world \\n {} \\\" // second comment"],
+    [TokenKind.COMMENT_TOKEN, '// hello world \\n {} \\" // second comment'],
   ];
 
   testTokenizer(input, expected);
@@ -69,7 +79,7 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
     [TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN, "]"],
     [TokenKind.PUNCTUATOR_COLON_TOKEN, ":"],
     [TokenKind.PUNCTUATOR_SEMICOLON_TOKEN, ";"],
-    [TokenKind.PUNCTUATOR_COMMA_TOKEN, ","]
+    [TokenKind.PUNCTUATOR_COMMA_TOKEN, ","],
   ];
 
   testTokenizer(input, expected);
@@ -81,8 +91,8 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
 
 Deno.test("Test keyword tokens", () => {
   const input =
-      "abstract aligned base64string bit break case class const default do else expandable extends " +
-      "float for if int lengthof map switch unsigned utf8string utf8list utfstring while";
+    "abstract aligned base64string bit break case class const default do else expandable extends " +
+    "float for if int lengthof map switch unsigned utf8string utf8list utfstring while";
   const expected: [TokenKind, string][] = [
     [TokenKind.KEYWORD_ABSTRACT_TOKEN, "abstract"],
     [TokenKind.KEYWORD_ALIGNED_TOKEN, "aligned"],
@@ -108,7 +118,7 @@ Deno.test("Test keyword tokens", () => {
     [TokenKind.KEYWORD_UTF8STRING_TOKEN, "utf8string"],
     [TokenKind.KEYWORD_UTF8LIST_TOKEN, "utf8list"],
     [TokenKind.KEYWORD_UTFSTRING_TOKEN, "utfstring"],
-    [TokenKind.KEYWORD_WHILE_TOKEN, "while"]
+    [TokenKind.KEYWORD_WHILE_TOKEN, "while"],
   ];
 
   testTokenizer(input, expected);
@@ -139,7 +149,7 @@ Deno.test("Test operator tokens with and without whitespace", () => {
     [TokenKind.OPERATOR_LOGICAL_AND_TOKEN, "&&"],
     [TokenKind.OPERATOR_LOGICAL_OR_TOKEN, "||"],
     [TokenKind.OPERATOR_RANGE_TOKEN, ".."],
-    [TokenKind.OPERATOR_ASSIGNMENT_TOKEN, "="]
+    [TokenKind.OPERATOR_ASSIGNMENT_TOKEN, "="],
   ];
 
   testTokenizer(input, expected);
@@ -178,7 +188,7 @@ Deno.test("Test integer literal tokens", () => {
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_INTEGER_TOKEN, "1"],
     [TokenKind.LITERAL_INTEGER_TOKEN, "123"],
-    [TokenKind.LITERAL_INTEGER_TOKEN, "0"]
+    [TokenKind.LITERAL_INTEGER_TOKEN, "0"],
   ];
 
   testTokenizer(input, expected);
@@ -188,7 +198,7 @@ Deno.test("Test decimal literal tokens", () => {
   const input = "0.1 1.1";
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_DECIMAL_TOKEN, "0.1"],
-    [TokenKind.LITERAL_DECIMAL_TOKEN, "1.1"]
+    [TokenKind.LITERAL_DECIMAL_TOKEN, "1.1"],
   ];
 
   testTokenizer(input, expected);
@@ -198,60 +208,61 @@ Deno.test("Test floating point tokens", () => {
   const input = "1.1e1 1.1e-1";
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "1.1e1"],
-    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "1.1e-1"]
+    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "1.1e-1"],
   ];
 
   testTokenizer(input, expected);
 });
 
 Deno.test("Test string literal tokens", () => {
-  const input = '"" "Hello" " " "\\n" "\\\\" "\\\"" "world\\\\n" "\\uFEFF"';
+  const input = '"" "Hello" " " "\\n" "\\\\" "\\"" "world\\\\n" "\\uFEFF"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '""'],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"Hello"'],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '" "'],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\n"'],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\\\"'],
-    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\\""'],
+    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\""'],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"world\\\\n"'],
-    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\uFEFF"']
+    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\uFEFF"'],
   ];
 
   testTokenizer(input, expected);
 });
 
 Deno.test("Test string literal tokens with UTF8 prefix", () => {
-  const input = 'u8"\\u1234" u8"\\U00001234" u8"basic" u8"Hello πό" u8"Hello πό \\\\u1234world"';
+  const input =
+    'u8"\\u1234" u8"\\U00001234" u8"basic" u8"Hello πό" u8"Hello πό \\\\u1234world"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\u1234"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\U00001234"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"basic"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"Hello πό"'],
-    [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"Hello πό \\\\u1234world"']
+    [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"Hello πό \\\\u1234world"'],
   ];
 
   testTokenizer(input, expected);
 });
 
 Deno.test("Test string literal tokens with UTF16 prefix", () => {
-  const input = 'u"\\u1234" u"\\U00001234" u"basic" u"Hello πό" u"Hello πό \\\\u1234world"';
+  const input =
+    'u"\\u1234" u"\\U00001234" u"basic" u"Hello πό" u"Hello πό \\\\u1234world"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\u1234"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\U00001234"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"basic"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"Hello πό"'],
-    [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"Hello πό \\\\u1234world"']
+    [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"Hello πό \\\\u1234world"'],
   ];
 
   testTokenizer(input, expected);
 });
 
 Deno.test("Test string literal tokens across line breaks", () => {
-  const input =
-      '"Hello" \n "world"';
+  const input = '"Hello" \n "world"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"Hello"'],
-    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"world"']
+    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"world"'],
   ];
 
   testTokenizer(input, expected);
@@ -261,27 +272,35 @@ Deno.test("Test string literal tokens with non-escaped double quote fails to par
   // should treat first two double quotes as empty string, then should fail to pass the third
   const input = '"""';
   const expected: [TokenKind, string][] = [
-    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '""']
+    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '""'],
   ];
 
-  assertThrows(() => testTokenizer(input, expected), Error, 'Unable to tokenize the rest of the input');
+  assertThrows(
+    () => testTokenizer(input, expected),
+    Error,
+    "Unable to tokenize the rest of the input",
+  );
 });
 
 Deno.test("Test string literal tokens with unicode characters in non-unicode literal fails to parse", () => {
   // second literal is considered illegal as not prefixed by u or u8
   const input = '"hello" "πό"';
   const expected: [TokenKind, string][] = [
-    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"hello"']
+    [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"hello"'],
   ];
 
-  assertThrows(() => testTokenizer(input, expected), Error, 'Unable to tokenize the rest of the input');
+  assertThrows(
+    () => testTokenizer(input, expected),
+    Error,
+    "Unable to tokenize the rest of the input",
+  );
 });
 
 Deno.test("Test string literal tokens with invalid universal character name parses unexpectedly", () => {
   // should be 4 hexadecimal characters so this is not recognised as a UTF16 string literal
   let input = 'u"\\u12"';
   let expected: [TokenKind, string][] = [
-    [TokenKind.IDENTIFIER_TOKEN, 'u'],
+    [TokenKind.IDENTIFIER_TOKEN, "u"],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\u12"'],
   ];
 
@@ -290,7 +309,7 @@ Deno.test("Test string literal tokens with invalid universal character name pars
   // should be 8 hexadecimal characters so this is not recognised as a UTF16 string literal
   input = 'u"\\U000012"';
   expected = [
-    [TokenKind.IDENTIFIER_TOKEN, 'u'],
+    [TokenKind.IDENTIFIER_TOKEN, "u"],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\U000012"'],
   ];
 
