@@ -9,7 +9,7 @@
 
 Install [Deno](https://deno.land/manual/getting_started/installation)
 
-Test: `deno test -A --unstable`
+Test: `deno test -A`
 
 Lint: `deno fmt`
 
@@ -58,6 +58,16 @@ Link to auto-generated API docs for the library:
 
 **NOTE: coming soon!**
 [API Documentation](https://doc.deno.land/https://deno.land/x/flowscripter_mpeg_sdl_parser/mod.ts)
+
+### Debug Logging
+
+Internal framework logging can be enabled by setting the `MPEG_SDL_PARSER_DEBUG` environment
+variable. (Permission will need to be granted to the CLI to access the
+environment to look for this environment variable i.e. `--allow-env`.)
+
+The `logger` implementation will detect this and define a default Deno
+`ConsoleHandler` logger with `DEBUG` level which is used by internal
+implementation classes such as the `parser` and `tokenizer`.
 
 ## License
 
