@@ -1,9 +1,10 @@
 // deno-fmt-ignore-file
 
 import { buildLexer, Lexer, Token, TokenPosition } from "../../deps.ts";
-import TokenKind from "./token_kind.ts";
+import TokenKind from "./enum/token_kind.ts";
 import * as patterns from "./patterns.ts";
 import getLogger from "../util/logger.ts";
+import { InternalParserError } from "../util/ParserError.ts";
 
 const logger = getLogger("tokenizer");
 
@@ -20,12 +21,21 @@ class LoggingTokenWrapper implements Token<TokenKind> {
 
     constructor(token: Token<TokenKind>) {
         this.token = token;
-
-        logger.debug("found token: %s => %j", TokenKind[token.kind], { kind: token.kind, row: token.pos.rowBegin, column: token.pos.columnBegin, offset: token.pos.index, text: token.text });
-
         this.pos = token.pos;
         this.text = token.text;
         this.kind = token.kind;
+
+        if (this.pos.rowBegin === 0) {
+            throw new InternalParserError('Expected pos.rowBegin to be > 0', this.token);
+        }
+        if (this.pos.columnBegin === 0) {
+            throw new InternalParserError('Expected pos.columnBegin to be > 0', this.token);
+        }
+        if (this.pos.index < 0) {
+            throw new InternalParserError('Expected pos.index to be >= 0', this.token);
+        }
+
+        logger.debug("found token: %s => %s", TokenKind[token.kind], this.toString());
     }
 
     public get next(): Token<TokenKind> | undefined {
@@ -37,6 +47,16 @@ class LoggingTokenWrapper implements Token<TokenKind> {
         }
 
         return undefined;
+    }
+
+    public toString(): string {
+        return JSON.stringify({
+            kind: this.kind,
+            row: this.pos.rowBegin - 1,
+            column: this.pos.columnBegin - 1,
+            offset: this.pos.index,
+            text: this.text
+        });
     }
 }
 
@@ -112,10 +132,10 @@ export default class Tokenizer implements Lexer<TokenKind> {
             [true, getRegExp(patterns.LITERAL_STRING_BASIC_PATTERN), TokenKind.LITERAL_STRING_BASIC_TOKEN],
             [true, getRegExp(patterns.LITERAL_STRING_UTF8_PATTERN), TokenKind.LITERAL_STRING_UTF8_TOKEN],
             [true, getRegExp(patterns.LITERAL_STRING_UTF16_PATTERN), TokenKind.LITERAL_STRING_UTF16_TOKEN],
-            [true, getRegExp(patterns.IDENTIFIER_PATTERN), TokenKind.IDENTIFIER_TOKEN]
+            [true, getRegExp(patterns.IDENTIFIER_PATTERN), TokenKind.IDENTIFIER_TOKEN],
         ];
 
-        rules.forEach((rule) => logger.debug("adding rule: %s => %s", TokenKind[rule[2]], rule[1].source));
+        rules.forEach((rule) => logger.debug("adding rule: %s => %s", TokenKind[rule[2]], rule[1].toString()));
 
         this.lexer = buildLexer(rules);
     }

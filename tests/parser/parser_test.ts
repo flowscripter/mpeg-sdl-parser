@@ -1,17 +1,21 @@
 import { assertEquals } from "../test_deps.ts";
 import { parse } from "../../src/parser/parser.ts";
-import NodeKind from "../../src/abstract_syntax_tree/node_kind.ts";
+import Comment from "../../src/abstract_syntax_tree/node/Comment.ts";
+import Specification from "../../src/abstract_syntax_tree/node/Specification.ts";
 
-Deno.test("Test Comment", () => {
-  assertEquals(parse("// hello world"), {
-    kind: NodeKind.DEFINITION,
-    statements: [
-      {
-        kind: NodeKind.COMMENT_NODE,
-        comment: "hello world",
-      },
-    ],
-  });
+Deno.test("Test comment", () => {
+  assertEquals(
+    parse("// hello world"),
+    new Specification(
+      [
+        new Comment({ row: 0, column: 0, position: 0 }, {
+          row: 0,
+          column: 3,
+          position: 3,
+        }, "hello world"),
+      ],
+    ),
+  );
 });
 
 // TODO: more tests!

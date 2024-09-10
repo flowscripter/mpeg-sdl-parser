@@ -13,7 +13,7 @@ basic_character ::= digit_character | latin_character | graphic_character
 
 /* 5.4 Comments */
 
-/* Rule S.1: Comments */
+/* Rule S.1: Comments - until the end of the line */
 
 comment ::= '//' basic_character*
 
@@ -93,37 +93,46 @@ logical_or ::= '||'
 assignment ::= '='
 
 postfix_operator ::= postfix_increment | postfix_decrement
-arithmetic_operator ::= multiplication | division | modulus | addition | subtraction
+unary_operator ::= unary_plus | unary_negation
+multiplicative_operator ::= multiplication | division | modulus
+additive_operator ::=  addition | subtraction
 shift_operator ::= bitwise_shift_left | bitwise_shift_right
-comparison_operator ::= relational_less_than | relational_less_than_or_equal | relational_greater_than |
-    relational_greater_than_or_equal | relational_equal | relational_not_equal
+relational_operator ::= relational_less_than | relational_less_than_or_equal | relational_greater_than |
+    relational_greater_than_or_equal
+equality_operator ::= relational_equal | relational_not_equal
 binary_operator ::= bitwise_and | bitwise_or
 logical_operator ::= logical_and | logical_or
 
 /* 5.9 Expressions and evaluation */
 
-unary_expression ::= (identifier | number_literal | lengthof_expression |
+unary_expression ::= unary_operator? (identifier | number_literal | lengthof_expression |
 	class_member_access_expression | array_element_access_expression | open_parenthesis
 	expression close_parenthesis) postfix_operator?
-constant_expression ::= number_literal | string_literal
-expression ::= unary_expression ((arithmetic_operator | shift_operator | comparison_operator |
-    binary_operator | logical_operator) unary_expression)*
-assignment_target ::= identifier | class_member_access_expression | array_access_expression
+multiplicative_expression ::= unary_expression (multiplicative_operator multiplicative_expression)?
+additive_expression ::= multiplicative_expression (additive_operator additive_expression)?
+shift_expression ::= additive_expression (shift_operator shift_expression)?
+relational_expression ::= shift_expression (relational_operator relational_expression)?
+equality_expression ::= relational_expression (equality_operator equality_expression)?
+bitwise_expression ::= equality_expression (bitwise_operator bitwise_expression)?
+expression ::= bitwise_expression (logical_operator unary_expression)?
+
+assignment_target ::= identifier | class_member_access_expression | array_element_access_expression
 assignment_expression ::= assignment_target assignment expression
 
 /* 5.10 Statements */
 
-/* A statement consists of an expression followed by a semicolon */
 expression_statement ::= (expression | assignment_expression) semicolon
 
 /* Block scoping */
 compound_statement ::= open_brace statement* close_brace
 
-statement ::= expression_statement | compound_statement | elementary_type_definition
-  | map_declaration | map_definition | string_definition
-  | class_declaration | class_definition | array_definition
-  | non_parsable_elementary_type_definition | non_parsable_array_definition
-  | if_statement | switch_statement | for_statement | do_statement | while_statement
+commented_statement ::= expression_statement comment
+
+statement ::= comment | expression_statement | compound_statement | commented_statement
+    elementary_type_definition | map_declaration | map_definition |
+    string_definition | class_declaration | class_definition |
+    array_definition | non_parsable_elementary_type_definition | non_parsable_array_definition |
+    if_statement | switch_statement | for_statement | do_statement | while_statement
 
 /* 5.11 Built-in operators */
 
@@ -148,10 +157,10 @@ binary_character ::= 0 | 1
 binary_character_string ::= binary_character*
 four_binary_characters ::= binary_character binary_character binary_character binary_character
 one_to_four_binary_characters ::= binary_character binary_character? binary_character? binary_character?
-period_separated_binary_character_string ::= four_binary_characters ('.'
-	four_binary_characters)+ ('.' one_to_four_binary_characters)?
+period_separated_binary_character_string ::= four_binary_characters '.'
+    (four_binary_characters '.')* one_to_four_binary_characters
 
-binary_literal ::= '0b' (period_separated_binary_character_string | binary_character_string )
+binary_literal ::= '0b' (period_separated_binary_character_string | binary_character_string)
 
 /* 5.15 Hexadecimal literal values */
 
@@ -163,8 +172,8 @@ four_hexadecimal_characters ::= hexadecimal_character hexadecimal_character
 	hexadecimal_character hexadecimal_character
 one_to_four_hexadecimal_characters ::= hexadecimal_character hexadecimal_character?
 	hexadecimal_character? hexadecimal_character?
-period_separated_hexadecimal_character_string ::= four_hexadecimal_characters ('.'
-	four_hexadecimal_characters)+ ('.' one_to_four_hexadecimal_characters)?
+period_separated_hexadecimal_character_string ::= four_hexadecimal_characters '.'
+    (four_hexadecimal_characters '.')* one_to_four_hexadecimal_characters
 
 hexadecimal_literal ::= '0x' (period_separated_hexadecimal_character_string | hexadecimal_character_string)
 
@@ -172,13 +181,11 @@ hexadecimal_literal ::= '0x' (period_separated_hexadecimal_character_string | he
 
 positive_integer ::= non_zero_digit_character digit_character*
 
-integer_literal ::= 0 | ((unary_plus | unary_negation)? positive_integer)
+integer_literal ::= (unary_plus | unary_negation)? (0 | positive_integer)
 decimal_literal ::= integer_literal '.' digit_character*
-floating_point_literal ::= (unary_plus | unary_negation)? (0 | positive_integer) '.' digit_character* 'e'
-	integer_literal
+floating_point_literal ::= (integer_literal | decimal_literal) 'e' integer_literal
 
-number_literal ::= binary_literal | hexadecimal_literal | integer_literal |
-	 decimal_literal | floating_point_literal
+number_literal ::= binary_literal | hexadecimal_literal | integer_literal | decimal_literal | floating_point_literal
 
 /* 5.17 String literal values */
 
@@ -195,11 +202,9 @@ string_literal ::= basic_string_literal | utf8_string_literal | utf16_string_lit
 
 /* 5.18 Scope */
 
-/* global scope and entry point: only comments, */
-/* class declarations and class definitions are allowed */
+/* global scope and entry point: only comments and class declarations are allowed */
 
-Specification ::= (class_declaration | class_definition | comment | (class_declaration comment) |
-    (class_definition comment))+
+Specification ::= (comment | class_declaration | (class_declaration comment))+
 
 /* 6.2 Constant-length direct representation bit fields */
 
@@ -208,9 +213,8 @@ Specification ::= (class_declaration | class_definition | comment | (class_decla
 aligned_modifier ::= aligned (open_bracket ('8' | '16' | '32' | '64' | '128')
 	close_bracket)?
 
-/* double is a legacy alias for the keyword float. */
 /* The use of the keyword double is no longer recommended. */
-type ::= int | unsigned int | float | bit | double
+type ::= int | unsigned int | float | bit
 
 length_attribute ::= open_parenthesis expression close_parenthesis
 
@@ -249,12 +253,12 @@ base64_string_literal ::= double_quote base64_character* '='? '='? double_quote
 
 /* 6.7 String value */
 
-utf8_string_declaration ::= (utf8string | utfstring | utf8list) identifier (assignment utf8_string_literal)?
-utf16_string_declaration ::= utfstring identifier (assignment utf16_string_literal)?
-base64_string_declaration ::= base64string identifier (assignment base64_string_literal)?
+utf8_string_definition ::= (utf8string | utfstring | utf8list) identifier (assignment utf8_string_literal)?
+utf16_string_definition ::= utfstring identifier (assignment utf16_string_literal)?
+base64_string_definition ::= base64string identifier (assignment base64_string_literal)?
 
-string_declaration ::=  const? aligned_modifier? (base64_string_declaration | utf8_string_declaration |
-	utf16_string_declaration) semicolon
+string_definition ::=  const? aligned_modifier? (base64_string_definition | utf8_string_definition |
+	utf16_string_definition) semicolon
 
 /* 7.1 Classes */
 
@@ -365,9 +369,10 @@ if_statement ::= if open_parenthesis expression close_parenthesis compound_state
 
 /* Rule FC.2: Flow control using switch */
 
+constant_expression ::= number_literal | string_literal
 switch_case_clause ::= case constant_expression colon ((statement* break semicolon) |
 	(open_brace statement* break semicolon close_brace))
-switch_default_clause ::= default colon (statement* | ( open_brace statement* close_brace))
+switch_default_clause ::= default colon (statement* | (open_brace statement* close_brace))
 
 switch_statement ::= switch open_parenthesis expression close_parenthesis open_brace
 	switch_case_clause* switch_default_clause? close_brace
@@ -377,7 +382,7 @@ switch_statement ::= switch open_parenthesis expression close_parenthesis open_b
 /* Rule FC.3: Flow control using for */
 
 for_statement ::= for open_parenthesis (assignment_expression |
-	non_parsable_elementary_type_definition )? semicolon expression? semicolon
+	non_parsable_elementary_type_definition)? semicolon expression? semicolon
 	(assignment_expression | expression)? close_parenthesis compound_statement
 
 /* Rule FC.4: Flow control using do */

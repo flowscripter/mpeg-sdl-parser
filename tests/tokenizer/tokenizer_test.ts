@@ -1,10 +1,6 @@
-import {
-  assertNotEquals,
-  assertStrictEquals,
-  assertThrows,
-} from "../test_deps.ts";
+import { assertEquals, assertNotEquals, assertThrows } from "../test_deps.ts";
 import Tokenizer from "../../src/tokenizer/tokenizer.ts";
-import TokenKind from "../../src/tokenizer/token_kind.ts";
+import TokenKind from "../../src/tokenizer/enum/token_kind.ts";
 
 function testTokenizer(
   input: string,
@@ -16,32 +12,40 @@ function testTokenizer(
 
   for (const expectedToken of expectedTokens) {
     assertNotEquals(token, undefined);
-    assertStrictEquals(
+    assertEquals(
       token!.kind,
       expectedToken[0],
       `${TokenKind[token!.kind]} != ${TokenKind[expectedToken[0]]}, text: ${
         token!.text
       }`,
     );
-    assertStrictEquals(
+    assertEquals(
       token!.text,
       expectedToken[1],
       `${token!.text} != ${expectedToken[1]}`,
     );
     token = token!.next;
   }
-  assertStrictEquals(token, undefined);
+  assertEquals(token, undefined);
 }
 
-Deno.test("Test whitespace token is ignored", () => {
-  const input = "\r\n   \t";
+Deno.test("Test whitespace token - 1", () => {
+  const input = "\r\n\t";
   const tokenizer = new Tokenizer();
   const token = tokenizer.parse(input);
 
-  assertStrictEquals(token, undefined);
+  assertEquals(token, undefined);
 });
 
-Deno.test("Test comment token", () => {
+Deno.test("Test whitespace token - 2", () => {
+  const input = " \r \n ";
+  const tokenizer = new Tokenizer();
+  const token = tokenizer.parse(input);
+
+  assertEquals(token, undefined);
+});
+
+Deno.test("Test comment token - 1", () => {
   const input = "// hello world";
   const expected: [TokenKind, string][] = [
     [TokenKind.COMMENT_TOKEN, "// hello world"],
@@ -50,10 +54,62 @@ Deno.test("Test comment token", () => {
   testTokenizer(input, expected);
 });
 
-Deno.test("Test comment with more complex scenarios", () => {
-  const input = '// hello world \\n {} \\" // second comment';
+Deno.test("Test comment token - 2", () => {
+  const input = "// hello\t world \n";
   const expected: [TokenKind, string][] = [
-    [TokenKind.COMMENT_TOKEN, '// hello world \\n {} \\" // second comment'],
+    [TokenKind.COMMENT_TOKEN, "// hello\t world "],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment token - 3", () => {
+  const input = "// hello\t world \n\n";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.COMMENT_TOKEN, "// hello\t world "],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment token - 4", () => {
+  const input = "// hello world \n ";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.COMMENT_TOKEN, "// hello world "],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment token - 5", () => {
+  const input =
+    '// escaped carriage return \\n {} \\" // comment within a comment';
+  const expected: [TokenKind, string][] = [
+    [
+      TokenKind.COMMENT_TOKEN,
+      '// escaped carriage return \\n {} \\" // comment within a comment',
+    ],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment token - 6", () => {
+  const input = "// hello \n // world";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.COMMENT_TOKEN, "// hello "],
+    [TokenKind.COMMENT_TOKEN, "// world"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment token - 7", () => {
+  // const input = "// hello \nhelloWorld";
+  const input = "// hello \n//world";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.COMMENT_TOKEN, "// hello "],
+    [TokenKind.COMMENT_TOKEN, "//world"],
   ];
 
   testTokenizer(input, expected);
@@ -62,6 +118,17 @@ Deno.test("Test comment with more complex scenarios", () => {
 Deno.test("Test identifier token", () => {
   const input = "helloWorld";
   const expected: [TokenKind, string][] = [
+    [TokenKind.IDENTIFIER_TOKEN, "helloWorld"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test comment and identifier tokens with new line", () => {
+  // const input = "// hello \nhelloWorld";
+  const input = "// hello \n helloWorld";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.COMMENT_TOKEN, "// hello "],
     [TokenKind.IDENTIFIER_TOKEN, "helloWorld"],
   ];
 
@@ -160,10 +227,12 @@ Deno.test("Test operator tokens with and without whitespace", () => {
 });
 
 Deno.test("Test binary literal tokens", () => {
-  const input = "0b0 0b010101 0b0101.0101 0b0101.0101.01";
+  const input = "0b0 0b0101 0b010101 0b0101.01 0b0101.0101 0b0101.0101.01";
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_BINARY_TOKEN, "0b0"],
+    [TokenKind.LITERAL_BINARY_TOKEN, "0b0101"],
     [TokenKind.LITERAL_BINARY_TOKEN, "0b010101"],
+    [TokenKind.LITERAL_BINARY_TOKEN, "0b0101.01"],
     [TokenKind.LITERAL_BINARY_TOKEN, "0b0101.0101"],
     [TokenKind.LITERAL_BINARY_TOKEN, "0b0101.0101.01"],
   ];
@@ -172,10 +241,12 @@ Deno.test("Test binary literal tokens", () => {
 });
 
 Deno.test("Test hexadecimal literal tokens", () => {
-  const input = "0xA 0xAB01AB 0xAB01.AB01 0xAB01.AB01.AB ";
+  const input = "0xA 0xAB01 0xAB01AB 0xAB01.AB 0xAB01.AB01 0xAB01.AB01.AB ";
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xA"],
+    [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xAB01"],
     [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xAB01AB"],
+    [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xAB01.AB"],
     [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xAB01.AB01"],
     [TokenKind.LITERAL_HEXADECIMAL_TOKEN, "0xAB01.AB01.AB"],
   ];
@@ -214,6 +285,70 @@ Deno.test("Test floating point tokens", () => {
   testTokenizer(input, expected);
 });
 
+Deno.test("Test integer literal tokens with unary plus and unary negation", () => {
+  const input = "+1 -123";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_INTEGER_TOKEN, "1"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_INTEGER_TOKEN, "123"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test decimal literal tokens with unary plus and unary negation", () => {
+  const input = "+0.1 -1.1";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_DECIMAL_TOKEN, "0.1"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_DECIMAL_TOKEN, "1.1"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test integer zero literal tokens with unary plus and unary negation which will be coerced to floating point", () => {
+  const input = "+0 -0";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_INTEGER_TOKEN, "0"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_INTEGER_TOKEN, "0"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test decimal zero literal tokens with unary plus and unary negation which will be coerced to floating point", () => {
+  const input = "+0.0 -0.0";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_DECIMAL_TOKEN, "0.0"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_DECIMAL_TOKEN, "0.0"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test floating point tokens with unary plus and unary negation", () => {
+  const input = "+1.1e1 -1.1e-1 +0e0 -0e0";
+  const expected: [TokenKind, string][] = [
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "1.1e1"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "1.1e-1"],
+    [TokenKind.OPERATOR_PLUS_TOKEN, "+"],
+    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "0e0"],
+    [TokenKind.OPERATOR_MINUS_TOKEN, "-"],
+    [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "0e0"],
+  ];
+
+  testTokenizer(input, expected);
+});
+
 Deno.test("Test string literal tokens", () => {
   const input = '"" "Hello" " " "\\n" "\\\\" "\\"" "world\\\\n" "\\uFEFF"';
   const expected: [TokenKind, string][] = [
@@ -232,9 +367,11 @@ Deno.test("Test string literal tokens", () => {
 
 Deno.test("Test string literal tokens with UTF8 prefix", () => {
   const input =
-    'u8"\\u1234" u8"\\U00001234" u8"basic" u8"Hello πό" u8"Hello πό \\\\u1234world"';
+    'u8"\\u1234" u8"\\u03A9" u8"\\U0001F3DD" u8"\\U00001234" u8"basic" u8"Hello πό" u8"Hello πό \\\\u1234world"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\u1234"'],
+    [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\u03A9"'],
+    [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\U0001F3DD"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"\\U00001234"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"basic"'],
     [TokenKind.LITERAL_STRING_UTF8_TOKEN, 'u8"Hello πό"'],
@@ -246,9 +383,11 @@ Deno.test("Test string literal tokens with UTF8 prefix", () => {
 
 Deno.test("Test string literal tokens with UTF16 prefix", () => {
   const input =
-    'u"\\u1234" u"\\U00001234" u"basic" u"Hello πό" u"Hello πό \\\\u1234world"';
+    'u"\\u1234" u"\\u03A9" u"\\U0001F3DD" u"\\U00001234" u"basic" u"Hello πό" u"Hello πό \\\\u1234world"';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\u1234"'],
+    [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\u03A9"'],
+    [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\U0001F3DD"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"\\U00001234"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"basic"'],
     [TokenKind.LITERAL_STRING_UTF16_TOKEN, 'u"Hello πό"'],
@@ -269,7 +408,7 @@ Deno.test("Test string literal tokens across line breaks", () => {
 });
 
 Deno.test("Test string literal tokens with non-escaped double quote fails to parse", () => {
-  // should treat first two double quotes as empty string, then should fail to pass the third
+  // should treat first two double quotes as empty string, then should fail to parse the third
   const input = '"""';
   const expected: [TokenKind, string][] = [
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '""'],

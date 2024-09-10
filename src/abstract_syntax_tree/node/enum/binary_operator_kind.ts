@@ -15,7 +15,7 @@ enum BinaryOperatorKind {
   BINARY_AND,
   BINARY_OR,
   LOGICAL_AND,
-  LOGICAL_OD,
+  LOGICAL_OR,
 }
 
 export default BinaryOperatorKind;

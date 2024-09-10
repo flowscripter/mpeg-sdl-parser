@@ -1,6 +1,6 @@
 enum UnaryOperatorKind {
-  POSTFIX_INCREMENT,
-  POSTFIX_DECREMENT,
+  UNARY_PLUS,
+  UNARY_NEGATION,
 }
 
 export default UnaryOperatorKind;
