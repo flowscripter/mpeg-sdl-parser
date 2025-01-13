@@ -6,15 +6,12 @@ import { assertEquals, path } from "../../test_deps.ts";
 
 // TODO: fix this
 class VerbatimPrintingNodeCallback implements NodeCallback<string> {
-
   public printedSpecification: string = "";
 
   beforeVisit(node: AbstractNode, context: string): void {
-
   }
 
   afterVisit(node: AbstractNode, context: string): void {
-
   }
 }
 
@@ -31,7 +28,8 @@ Deno.test("Test traversing visitor", async () => {
 
   traversingVisitor.visitSpecification(parsedSpecification);
 
-  const reproducedSampleSdlSpecification = verbatimPrintingNodeCallback.printedSpecification;
+  const reproducedSampleSdlSpecification =
+    verbatimPrintingNodeCallback.printedSpecification;
 
   assertEquals(
     reproducedSampleSdlSpecification,

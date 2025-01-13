@@ -52,466 +52,466 @@ import NodeVisitor from "./NodeVisitor.ts";
 
 // TODO: complete this
 class TraversingVisitor<T> implements NodeVisitor {
+  private contextStack: (T | undefined)[] = [];
 
-    private contextStack: (T | undefined)[] = [];
+  private pushContext(): void {
+    this.contextStack.push(undefined);
+  }
 
-    private pushContext(): void {
-      this.contextStack.push(undefined);
+  private popContext(): T {
+    if (this.contextStack.length === 0) {
+      throw new InternalParserError("Context stack is empty");
     }
 
-    private popContext(): T {
-      if (this.contextStack.length === 0) {
-        throw new InternalParserError("Context stack is empty");
-      }
+    return this.contextStack.pop()!;
+  }
 
-      return this.contextStack.pop()!;
+  private peekContext(): T {
+    if (this.contextStack.length === 0) {
+      throw new InternalParserError("Context stack is empty");
     }
 
-    private peekContext(): T {
-      if (this.contextStack.length === 0) {
-        throw new InternalParserError("Context stack is empty");
-      }
+    return this.contextStack[this.contextStack.length - 1]!;
+  }
 
-      return this.contextStack[this.contextStack.length - 1]!;
-    }
+  constructor(private nodeCallback: NodeCallback<T>) {}
 
-    constructor(private nodeCallback: NodeCallback<T>) {}
+  visitAggregateMapOutputValue(node: MapAggregateOutputValue): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitAggregateMapOutputValue(node: MapAggregateOutputValue): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    node.outputValues.forEach((child) => {
+      child.accept(this);
+    });
 
-      node.outputValues.forEach((child) => {
-        child.accept(this);
-      });
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
+  visitAlignedModifier(node: AlignedModifier): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.bitCountModifier?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitArrayDefinition(node: ArrayDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.alignedModifier?.accept(this);
+    node.arrayElementType?.accept(this);
+    node.identifier?.accept(this);
+    node.implicitArrayDimension?.accept(this);
+    node.dimensions?.forEach((child) => child.accept(this));
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitArrayElementAccess(node: ArrayElementAccess): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.indexExpression.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitArrayElementType(node: ArrayElementType): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.elementaryType?.accept(this);
+    node.lengthAttribute?.accept(this);
+    node.classIdentifier?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitAssignmentExpression(node: AssignmentExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.valueTarget.accept(this);
+    node.valueSource.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitBinaryExpression(node: BinaryExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.leftOperand.accept(this);
+    node.rightOperand.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitBitModifier(node: BitModifier): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.length.accept(this);
+    node.identifier?.accept(this);
+    node.classId?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassDeclaration(node: ClassDeclaration): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.alignedModifier?.accept(this);
+    node.expandableModifier?.accept(this);
+    node.identifier?.accept(this);
+    node.parameterList?.accept(this);
+    node.extendsModifier?.accept(this);
+    node.bitModifier?.accept(this);
+
+    node.statements.forEach((child) => {
+      child.accept(this);
+    });
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassDefinition(node: ClassDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.classIdentifier.accept(this);
+    node.identifier.accept(this);
+    node.parameterValueList?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassDefinitionParameter(node: ParameterList): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.parameters.forEach((child) => {
+      child.accept(this);
+    });
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassId(node: ClassId): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.value.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassIdRange(node: ClassIdRange): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.startClassId.accept(this);
+    node.endClassId.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitClassMemberAccess(node: ClassMemberAccess): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.memberIdentifier.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitCompoundStatement(node: CompoundStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.statements.forEach((child) => {
+      child.accept(this);
+    });
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitComputedArrayDefinition(node: ComputedArrayDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.elementaryType.accept(this);
+    node.identifier.accept(this);
+    node.dimensions.forEach((child) => {
+      child.accept(this);
+    });
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitComputedElementaryTypeDefinition(
+    node: ComputedElementaryDefinition,
+  ): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.elementaryType.accept(this);
+    node.identifier.accept(this);
+    node.valueExpression?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitDoStatement(node: DoStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+    throw new Error("Method not implemented.");
+  }
+
+  visitElementaryType(node: ElementaryType): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitElementaryTypeDefinition(node: ElementaryTypeDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.alignedModifier?.accept(this);
+    node.elementaryType.accept(this);
+    node.lengthAttribute.accept(this);
+    node.identifier.accept(this);
+    node.valueExpression?.accept(this);
+    node.endValueExpression?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitExpandableModifier(node: ExpandableModifier): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.maxClassSize?.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitExplicitArrayDimension(node: ExplicitArrayDimension): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.sizeExpression.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitExpressionStatement(node: ExpressionStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.expression.accept(this);
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitExtendedClassIdRange(node: ExtendedClassIdRange): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.classIds.forEach((child) => {
+      child.accept(this);
+    });
+
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
+
+  visitExtendsModifier(node: ExtendsModifier): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+
+    node.identifier.accept(this);
+    node.parameterValueList?.accept(this),
       this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  }
 
-    visitAlignedModifier(node: AlignedModifier): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitForStatement(node: ForStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+    throw new Error("Method not implemented.");
+  }
 
-      node.bitCountModifier?.accept(this);
+  visitIdentifier(node: Identifier): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitIfStatement(node: IfStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+    throw new Error("Method not implemented.");
+  }
 
-    visitArrayDefinition(node: ArrayDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitImplicitArrayDimension(node: ImplicitArrayDimension): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.alignedModifier?.accept(this);
-      node.arrayElementType?.accept(this);
-      node.identifier?.accept(this);
-      node.implicitArrayDimension?.accept(this);
-      node.dimensions?.forEach((child) => child.accept(this));
+    node.rangeStartExpression?.accept(this);
+    node.rangeEndExpression?.accept(this);
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitArrayElementAccess(node: ArrayElementAccess): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitLengthAttribute(node: LengthAttribute): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.indexExpression.accept(this);
+    node.lengthExpression.accept(this);
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitArrayElementType(node: ArrayElementType): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitLengthOfExpression(node: LengthOfExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.elementaryType?.accept(this);
-      node.lengthAttribute?.accept(this);
-      node.classIdentifier?.accept(this);
+    node.expression.accept(this);
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitAssignmentExpression(node: AssignmentExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitMapDeclaration(node: MapDeclaration): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.valueTarget.accept(this);
-      node.valueSource.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    node.identifier.accept(this);
+    node.outputElementaryType?.accept(this);
+    node.outputClassIdentifier?.accept(this);
+    node.mapEntryList.accept(this);
 
-    visitBinaryExpression(node: BinaryExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.leftOperand.accept(this);
-      node.rightOperand.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitMapDefinition(node: MapDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitBitModifier(node: BitModifier): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    node.elementaryType?.accept(this);
+    node.classIdentifier?.accept(this);
+    node.mapIdentifier.accept(this);
+    node.identifier.accept(this);
 
-      node.length.accept(this);
-      node.identifier?.accept(this);
-      node.classId?.accept(this);
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitMapEntry(node: MapEntry): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitClassDeclaration(node: ClassDeclaration): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    node.inputValue.accept(this);
+    node.outputValue.accept(this);
 
-      node.alignedModifier?.accept(this);
-      node.expandableModifier?.accept(this);
-      node.identifier?.accept(this);
-      node.parameterList?.accept(this);
-      node.extendsModifier?.accept(this);
-      node.bitModifier?.accept(this);
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.statements.forEach((child) => {
-        child.accept(this);
-      });          
+  visitMapEntryList(node: MapEntryList): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    node.mapEntries.forEach((child) => {
+      child.accept(this);
+    });
 
-    visitClassDefinition(node: ClassDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.classIdentifier.accept(this);
-      node.identifier.accept(this);
-      node.parameterValueList?.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitMapOutputValue(node: MapOutputValue): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitClassDefinitionParameter(node: ParameterList): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    node.numberLiteralValue?.accept(this);
+    node.elementaryType?.accept(this);
+    node.lengthAttribute?.accept(this);
 
-      node.parameters.forEach((child) => {
-        child.accept(this);
-      });
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitNumberLiteral(node: NumberLiteral): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitClassId(node: ClassId): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitParameter(node: Parameter): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.value.accept(this);
+    node.classIdentifier?.accept(this);
+    node.elementaryType?.accept(this);
+    node.identifier.accept(this);
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitClassIdRange(node: ClassIdRange): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitParameterList(node: ParameterList): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.startClassId.accept(this);
-      node.endClassId.accept(this);
+    node.parameters.forEach((child) => {
+      child.accept(this);
+    });
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitClassMemberAccess(node: ClassMemberAccess): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitParameterValueList(node: ParameterValueList): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.memberIdentifier.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    node.valueExpressions.forEach((child) => {
+      child.accept(this);
+    });
 
-    visitCompoundStatement(node: CompoundStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.statements.forEach((child) => {
-        child.accept(this);
-      });
+  visitPartialArrayDimension(node: PartialArrayDimension): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    node.indexExpression.accept(this);
 
-    visitComputedArrayDefinition(node: ComputedArrayDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.elementaryType.accept(this);
-      node.identifier.accept(this);
-      node.dimensions.forEach((child) => {
-        child.accept(this);
-      });
+  visitPostfixExpression(node: PostfixExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    node.operand.accept(this);
+    node.arrayElementAccess?.accept(this);
+    node.classMemberAccess?.accept(this);
 
-    visitComputedElementaryTypeDefinition(node: ComputedElementaryDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.elementaryType.accept(this);
-      node.identifier.accept(this);
-      node.valueExpression?.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitPrimaryExpression(node: PrimaryExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitDoStatement(node: DoStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-      throw new Error("Method not implemented.");
-    }
+    node.operand.accept(this);
 
-    visitElementaryType(node: ElementaryType): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitElementaryTypeDefinition(node: ElementaryTypeDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitSpecification(node: Specification): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.alignedModifier?.accept(this);
-      node.elementaryType.accept(this);
-      node.lengthAttribute.accept(this);
-      node.identifier.accept(this);
-      node.valueExpression?.accept(this);
-      node.endValueExpression?.accept(this);
+    node.globals.forEach((child) => {
+      child.accept(this);
+    });
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitExpandableModifier(node: ExpandableModifier): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitStringDefinition(node: StringDefinition): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-      node.maxClassSize?.accept(this);
+    node.alignedModifier?.accept(this);
+    node.identifier.accept(this);
+    node.stringLiteral?.accept(this);
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitExplicitArrayDimension(node: ExplicitArrayDimension): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+  visitStringLiteral(node: StringLiteral): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-      node.sizeExpression.accept(this);
+  visitSwitchStatement(node: SwitchStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+    throw new Error("Method not implemented.");
+  }
 
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+  visitUnaryExpression(node: UnaryExpression): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
 
-    visitExpressionStatement(node: ExpressionStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
+    node.operand.accept(this);
 
-      node.expression.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
+    this.nodeCallback.afterVisit(node, this.peekContext());
+  }
 
-    visitExtendedClassIdRange(node: ExtendedClassIdRange): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.classIds.forEach((child) => {
-        child.accept(this);
-      });
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitExtendsModifier(node: ExtendsModifier): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.identifier.accept(this);
-      node.parameterValueList?.accept(this),
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitForStatement(node: ForStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-      throw new Error("Method not implemented.");
-    }
-
-    visitIdentifier(node: Identifier): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitIfStatement(node: IfStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-      throw new Error("Method not implemented.");
-    }
-
-    visitImplicitArrayDimension(node: ImplicitArrayDimension): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.rangeStartExpression?.accept(this);
-      node.rangeEndExpression?.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitLengthAttribute(node: LengthAttribute): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.lengthExpression.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitLengthOfExpression(node: LengthOfExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.expression.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitMapDeclaration(node: MapDeclaration): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.identifier.accept(this);
-      node.outputElementaryType?.accept(this);
-      node.outputClassIdentifier?.accept(this);
-      node.mapEntryList.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitMapDefinition(node: MapDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.elementaryType?.accept(this);
-      node.classIdentifier?.accept(this);
-      node.mapIdentifier.accept(this);
-      node.identifier.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitMapEntry(node: MapEntry): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.inputValue.accept(this);
-      node.outputValue.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitMapEntryList(node: MapEntryList): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.mapEntries.forEach((child) => {
-        child.accept(this);
-      });
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitMapOutputValue(node: MapOutputValue): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.numberLiteralValue?.accept(this);
-      node.elementaryType?.accept(this);
-      node.lengthAttribute?.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitNumberLiteral(node: NumberLiteral): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitParameter(node: Parameter): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.classIdentifier?.accept(this);
-      node.elementaryType?.accept(this);
-      node.identifier.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitParameterList(node: ParameterList): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.parameters.forEach((child) => {
-        child.accept(this);
-      });
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitParameterValueList(node: ParameterValueList): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.valueExpressions.forEach((child) => {
-        child.accept(this);
-      });
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitPartialArrayDimension(node: PartialArrayDimension): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.indexExpression.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitPostfixExpression(node: PostfixExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.operand.accept(this);
-      node.arrayElementAccess?.accept(this);
-      node.classMemberAccess?.accept(this);
-  
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitPrimaryExpression(node: PrimaryExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.operand.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitSpecification(node: Specification): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.globals.forEach((child) => {
-        child.accept(this);
-      });
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitStringDefinition(node: StringDefinition): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.alignedModifier?.accept(this);
-      node.identifier.accept(this);
-      node.stringLiteral?.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitStringLiteral(node: StringLiteral): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitSwitchStatement(node: SwitchStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-      throw new Error("Method not implemented.");
-    }
-
-    visitUnaryExpression(node: UnaryExpression): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-
-      node.operand.accept(this);
-
-      this.nodeCallback.afterVisit(node, this.peekContext());
-    }
-
-    visitWhileStatement(node: WhileStatement): void {
-      this.nodeCallback.beforeVisit(node, this.peekContext());
-      this.nodeCallback.afterVisit(node, this.peekContext());
-      throw new Error("Method not implemented.");
-    }
+  visitWhileStatement(node: WhileStatement): void {
+    this.nodeCallback.beforeVisit(node, this.peekContext());
+    this.nodeCallback.afterVisit(node, this.peekContext());
+    throw new Error("Method not implemented.");
+  }
 }
 
 export default TraversingVisitor;
