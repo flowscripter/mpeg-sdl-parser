@@ -1,6 +1,6 @@
 enum ElementaryTypeKind {
-  INT,
-  UNSIGNED_INT,
+  INTEGER,
+  UNSIGNED_INTEGER,
   FLOATING_POINT,
   BIT,
 }

@@ -1,15 +1,64 @@
-import { expectEOF, expectSingleResult } from "../../deps.ts";
-import * as parserRules from "./parser_rules.ts";
-import Tokenizer from "../tokenizer/tokenizer.ts";
+import { expectEOF, expectSingleResult, TokenError } from "../../deps.ts";
 import Specification from "../abstract_syntax_tree/node/Specification.ts";
+import SyntaxToken from "../tokenizer/token/SyntaxToken.ts";
+import Tokenizer from "../tokenizer/Tokenizer.ts";
+import {
+  InternalParserError,
+  LexicalParserError,
+} from "../util/ParserError.ts";
+import * as rules from "./syntax_rules.ts";
 
-export function parse(definition: string): Specification {
-  const tokenizer = new Tokenizer();
-  const token = tokenizer.parse(definition);
+class Parser {
+  readonly tokens: SyntaxToken[] = [];
 
-  // TODO: wrap in own errors => specifically catch Parsec Error and convert to Syntax Error
-  //  error: Error: {"index":6,"rowBegin":1,"columnBegin":7,"rowEnd":1,"columnEnd":8}: The parser cannot reach the end of file, stops at "." at position {"index":6,"rowBegin":1,"columnBegin":7,"rowEnd":1,"columnEnd":8}.
-  return expectSingleResult(
-    expectEOF(parserRules.SPECIFICATION_RULE.parse(token)),
-  );
+  private tokenizer: Tokenizer;
+
+  constructor() {
+    this.tokenizer = new Tokenizer();
+
+    rules.initRules();
+  }
+
+  parse(specificationString: string): Specification {
+    const token = this.tokenizer.parse(specificationString);
+
+    try {
+      return expectSingleResult(
+        expectEOF(
+          rules.SPECIFICATION_RULE.parse(token),
+        ),
+      );
+    } catch (error) {
+      if (!(error instanceof Error)) {
+        throw new InternalParserError(
+          "Unexpected error: " + JSON.stringify(error),
+        );
+      }
+
+      const tokenError = error as TokenError;
+
+      if (!tokenError.errorMessage) {
+        throw new InternalParserError(
+          "Unexpected error: " + tokenError.message,
+        );
+      }
+
+      if (!tokenError.pos) {
+        throw new InternalParserError(
+          "Unexpected error: " + tokenError.errorMessage,
+        );
+      }
+
+      // note that the Parsec position has 1-based row and column values
+      const location = {
+        row: tokenError.pos.rowBegin - 1,
+        column: tokenError.pos.columnBegin - 1,
+        position: tokenError.pos.index,
+      };
+
+      throw new LexicalParserError(tokenError.errorMessage, location);
+    }
+  }
 }
+
+export default Parser;

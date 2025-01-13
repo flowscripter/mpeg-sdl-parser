@@ -1,24 +1,19 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import NumberLiteralKind from "./enum/number_literal_kind.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class NumberLiteral extends Node {
-  readonly numberLiteralKind: NumberLiteralKind;
-  readonly value: number;
-  readonly verbatimValue: string;
-
+class NumberLiteral extends AbstractExpression {
   constructor(
-    location: Location,
-    numberLiteralKind: NumberLiteralKind,
-    value: number,
-    verbatimValue: string,
+    public readonly numberLiteralKind: NumberLiteralKind,
+    public readonly value: number,
+    // an array supports multiple concatenated multiple character literal tokens
+    public readonly tokens: SyntaxToken[],
   ) {
-    super(NodeKind.NUMBER_LITERAL, location);
+    super(NodeKind.NUMBER_LITERAL, tokens[0].location);
     this.numberLiteralKind = numberLiteralKind;
     this.value = value;
-    this.verbatimValue = verbatimValue;
   }
 
   public accept(visitor: NodeVisitor) {

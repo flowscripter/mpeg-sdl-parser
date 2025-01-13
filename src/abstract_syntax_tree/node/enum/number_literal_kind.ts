@@ -3,6 +3,7 @@ enum NumberLiteralKind {
   HEXADECIMAL,
   INTEGER,
   DECIMAL,
+  MULTIPLE_CHARACTER,
   FLOATING_POINT,
 }
 

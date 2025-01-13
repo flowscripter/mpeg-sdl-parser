@@ -1,37 +1,36 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import StringVariableKind from "./enum/string_variable_kind.ts";
 import Identifier from "./Identifier.ts";
-import Alignment from "./Alignment.ts";
+import AlignedModifier from "./AlignedModifier.ts";
 import StringLiteral from "./StringLiteral.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class StringDefinition extends Node {
-  readonly isConst: boolean;
-  readonly constLocation?: Location;
-  readonly alignment?: Alignment;
-  readonly stringVariableKind: StringVariableKind;
-  readonly stringVariableKindLocation: Location;
-  readonly identifier: Identifier;
-  readonly stringLiteral?: StringLiteral;
-  readonly semicolonLocation: Location;
+class StringDefinition extends AbstractStatement {
   constructor(
-    location: Location,
-    isConst: boolean,
-    stringVariableKind: StringVariableKind,
-    stringVariableKindLocation: Location,
-    identifier: Identifier,
-    stringLiteral: StringLiteral | undefined,
-    semicolonLocation: Location,
+    public readonly isReserved: boolean,
+    public readonly isLegacy: boolean,
+    public readonly isConst: boolean,
+    public readonly alignedModifier: AlignedModifier | undefined,
+    public readonly stringVariableKind: StringVariableKind,
+    public readonly identifier: Identifier,
+    public readonly stringLiteral: StringLiteral | undefined,
+    public readonly reservedToken: SyntaxToken | undefined,
+    public readonly legacyToken: SyntaxToken | undefined,
+    public readonly constToken: SyntaxToken | undefined,
+    public readonly stringVariableKindToken: SyntaxToken,
+    public readonly assignmentPunctuatorToken: SyntaxToken | undefined,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.STRING_DEFINITION, location);
-    this.isConst = isConst;
-    this.stringVariableKind = stringVariableKind;
-    this.stringVariableKindLocation = stringVariableKindLocation;
-    this.identifier = identifier;
-    this.stringLiteral = stringLiteral;
-    this.semicolonLocation = semicolonLocation;
+    super(
+      NodeKind.STRING_DEFINITION,
+      reservedToken?.location ??
+        legacyToken?.location ??
+        constToken?.location ??
+        alignedModifier?.location ??
+        stringVariableKindToken.location,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

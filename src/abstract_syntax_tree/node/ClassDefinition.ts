@@ -1,18 +1,23 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import Identifier from "./Identifier.ts";
+import ParameterValueList from "./ParameterValueList.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class ClassDefinition extends Node {
-  // TODO: implement
-  //   readonly class_definition ::= identifier identifier parameter_values? semicolon
-  // identifier: Identifier;
-  // className must refer to the name of a class
-  // className: Identifier;
-  // parameterValues: Expression[];
-  constructor(location: Location, _name: string) {
-    super(NodeKind.CLASS_DEFINITION, location);
-    // this.name = name;
+class ClassDefinition extends AbstractStatement {
+  constructor(
+    public readonly isLegacy: boolean,
+    public readonly classIdentifier: Identifier,
+    public readonly identifier: Identifier,
+    public readonly parameterValueList: ParameterValueList | undefined,
+    public readonly legacyToken: SyntaxToken | undefined,
+    public readonly semicolonToken: SyntaxToken,
+  ) {
+    super(
+      NodeKind.CLASS_DEFINITION,
+      legacyToken?.location ?? identifier.location,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

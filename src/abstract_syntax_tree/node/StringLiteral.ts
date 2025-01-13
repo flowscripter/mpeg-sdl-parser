@@ -1,24 +1,17 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import AbstractNode from "./AbstractNode.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import StringLiteralKind from "./enum/string_literal_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class StringLiteral extends Node {
-  readonly stringLiteralKind: StringLiteralKind;
-  readonly value: string;
-  readonly verbatimValue: string;
-
+class StringLiteral extends AbstractNode {
   constructor(
-    location: Location,
-    stringLiteralKind: StringLiteralKind,
-    value: string,
-    verbatimValue: string,
+    public readonly stringLiteralKind: StringLiteralKind,
+    public readonly value: string,
+    // an array supports multiple concatenated string literal tokens
+    public readonly stringLiteralTokens: SyntaxToken[],
   ) {
-    super(NodeKind.STRING_LITERAL, location);
-    this.stringLiteralKind = stringLiteralKind;
-    this.value = value;
-    this.verbatimValue = verbatimValue;
+    super(NodeKind.STRING_LITERAL, stringLiteralTokens[0].location);
   }
 
   public accept(visitor: NodeVisitor) {

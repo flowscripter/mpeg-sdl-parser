@@ -1,5 +1,5 @@
-import { Token } from "../../deps.ts";
-import TokenKind from "../tokenizer/enum/token_kind.ts";
+import SyntaxToken from "../tokenizer/token/SyntaxToken.ts";
+import Location from "../tokenizer/token/Location.ts";
 
 /**
  * Base error class.
@@ -7,9 +7,16 @@ import TokenKind from "../tokenizer/enum/token_kind.ts";
 abstract class ParserError extends Error {
   protected constructor(
     public errorMessage: string,
-    public token?: Token<TokenKind>,
+    public location?: Location,
+    public token?: SyntaxToken,
   ) {
-    super(errorMessage + (token ? ` => ${token}` : ""));
+    super(
+      errorMessage +
+        (location
+          ? ` => { row: ${location.row}, column: ${location.position}, position: ${location.position} }`
+          : "") +
+        (token ? ` => ${token}` : ""),
+    );
   }
 }
 
@@ -17,8 +24,17 @@ abstract class ParserError extends Error {
  * Indicates an internal logic error in the parsing implementation.
  */
 export class InternalParserError extends ParserError {
-  constructor(public errorMessage: string, public token?: Token<TokenKind>) {
-    super(`INTERNAL ERROR: ${errorMessage}`, token);
+  constructor(errorMessage: string, token?: SyntaxToken) {
+    super(`INTERNAL ERROR: ${errorMessage}`, token?.location, token);
+  }
+}
+
+/**
+ * Indicates a lexical error when parsing.
+ */
+export class LexicalParserError extends ParserError {
+  constructor(errorMessage: string, location: Location) {
+    super(`LEXICAL ERROR: ${errorMessage}`, location);
   }
 }
 
@@ -26,8 +42,8 @@ export class InternalParserError extends ParserError {
  * Indicates a syntactic error when parsing.
  */
 export class SyntacticParserError extends ParserError {
-  constructor(public errorMessage: string, public token: Token<TokenKind>) {
-    super(`SYNTACTIC ERROR: ${errorMessage}`, token);
+  constructor(errorMessage: string, token?: SyntaxToken) {
+    super(`SYNTACTIC ERROR: ${errorMessage}`, token?.location, token);
   }
 }
 
@@ -35,7 +51,7 @@ export class SyntacticParserError extends ParserError {
  * Indicates a semantic error when parsing.
  */
 export class SemanticParserError extends ParserError {
-  constructor(public errorMessage: string, public token: Token<TokenKind>) {
-    super(`SEMANTIC ERROR: ${errorMessage}`, token);
+  constructor(errorMessage: string, token?: SyntaxToken) {
+    super(`SEMANTIC ERROR: ${errorMessage}`, token?.location, token);
   }
 }

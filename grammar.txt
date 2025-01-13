@@ -10,12 +10,16 @@ latin_character ::= [a-zA-Z]
 graphic_character ::= '!' | '%' | '&' | ',' | '.' | '/' | ';' | '<' | '>' | '\' | '_' | '{' | '}' |
     '~' | '"' | '#' | "'" | '(' | ')' | '*' | '+' | '-' | ':' | '=' | '?' | '[' | ']' | '^' | '|'
 basic_character ::= digit_character | latin_character | graphic_character
+sdl_compatible_ucs_character ::= [#x0020-#x10FFFF] - #xFEFF - #x0085 - #x2028 - #x2029
+universal_character_name ::= ('\u' four_hexadecimal_characters) | ('\U' four_hexadecimal_characters four_hexadecimal_characters)
+multiple_character_literal_character ::= [#x0020-#x007E]
 
 /* 5.4 Comments */
 
 /* Rule S.1: Comments - until the end of the line */
-
-comment ::= '//' basic_character*
+/* Comments are treated as whitespace and therefore not included in the grammar as a token */
+/* however a suitable rule for tokenization would be as follows */
+/* comment ::= '//' (sdl_compatible_ucs_character | universal_character_name)* */
 
 /* 5.5 Identifiers */
 
@@ -36,6 +40,7 @@ colon ::= ':'
 semicolon ::= ';'
 comma ::= ','
 double_quote ::= '"'
+single_quote ::= "'"
 
 /* 5.7 Keywords */
 
@@ -46,6 +51,7 @@ bit ::= 'bit'
 break ::= 'break'
 case ::= 'case'
 class ::= 'class'
+computed ::= 'computed'
 const ::= 'const'
 default ::= 'default'
 do ::= 'do'
@@ -56,10 +62,13 @@ float ::= 'float'
 for ::= 'for'
 if ::= 'if'
 int ::= 'int'
+legacy ::= 'legacy'
 lengthof ::= 'lengthof'
 map ::= 'map'
+reserved ::= 'reserved'
 switch ::= 'switch'
 unsigned ::= 'unsigned'
+utf16string ::= 'utf16string'
 utf8string ::= 'utf8string'
 utf8list ::= 'utf8list'
 utfstring ::= 'utfstring'
@@ -67,8 +76,8 @@ while ::= 'while'
 
 /* 5.8 Operators */
 
-class_member_access ::= '.'
-/* [] array element access defined as part of array_element_access_expression */
+/* . class member access defined as part of class_member_access */
+/* [] array element access defined as part of array_element_access */
 postfix_increment ::= '++'
 postfix_decrement ::= '--'
 unary_plus ::= '+'
@@ -100,24 +109,28 @@ shift_operator ::= bitwise_shift_left | bitwise_shift_right
 relational_operator ::= relational_less_than | relational_less_than_or_equal | relational_greater_than |
     relational_greater_than_or_equal
 equality_operator ::= relational_equal | relational_not_equal
-binary_operator ::= bitwise_and | bitwise_or
+bitwise_operator ::= bitwise_and | bitwise_or
 logical_operator ::= logical_and | logical_or
 
 /* 5.9 Expressions and evaluation */
 
-unary_expression ::= unary_operator? (identifier | number_literal | lengthof_expression |
-	class_member_access_expression | array_element_access_expression | open_parenthesis
-	expression close_parenthesis) postfix_operator?
+class_member_access ::= '.' identifier
+array_element_access ::= open_bracket expression close_bracket
+
+primary_expression ::= identifier | number_literal | open_parenthesis expression close_parenthesis
+postfix_expression ::= expression (array_element_access | class_member_access | postfix_operator)? | primary_expression
+unary_expression ::= unary_operator? (postfix_expression | lengthof_expression)
 multiplicative_expression ::= unary_expression (multiplicative_operator multiplicative_expression)?
 additive_expression ::= multiplicative_expression (additive_operator additive_expression)?
 shift_expression ::= additive_expression (shift_operator shift_expression)?
 relational_expression ::= shift_expression (relational_operator relational_expression)?
 equality_expression ::= relational_expression (equality_operator equality_expression)?
 bitwise_expression ::= equality_expression (bitwise_operator bitwise_expression)?
-expression ::= bitwise_expression (logical_operator unary_expression)?
+expression ::= bitwise_expression (logical_operator expression)?
 
-assignment_target ::= identifier | class_member_access_expression | array_element_access_expression
-assignment_expression ::= assignment_target assignment expression
+/* Left hand operand must evaluate to a parsed variable value target */
+/* Right hand operand must evaluate to a value source */
+assignment_expression ::= expression assignment expression
 
 /* 5.10 Statements */
 
@@ -126,28 +139,21 @@ expression_statement ::= (expression | assignment_expression) semicolon
 /* Block scoping */
 compound_statement ::= open_brace statement* close_brace
 
-commented_statement ::= expression_statement comment
-
-statement ::= comment | expression_statement | compound_statement | commented_statement
+statement ::= expression_statement | compound_statement |
     elementary_type_definition | map_declaration | map_definition |
-    string_definition | class_declaration | class_definition |
-    array_definition | non_parsable_elementary_type_definition | non_parsable_array_definition |
+    string_definition | class_declaration | class_definition | array_definition |
+    computed_elementary_type_definition | computed_array_definition |
     if_statement | switch_statement | for_statement | do_statement | while_statement
 
 /* 5.11 Built-in operators */
 
 /* Rule O.1: lengthof() Operator */
 
-lengthof_expression ::= lengthof open_parenthesis (identifier |
-	class_member_access_expression | array_element_access_expression) close_parenthesis
+lengthof_expression ::= lengthof open_parenthesis expression close_parenthesis
 
 /* Rule O.2: Range operator */
 
 range_operator ::= '..'
-
-/* Rule O.3: Class member access operator */
-
-class_member_access_expression ::= identifier (class_member_access identifier)+
 
 /* 5.14 Binary literal values */
 
@@ -169,61 +175,70 @@ binary_literal ::= '0b' (period_separated_binary_character_string | binary_chara
 hexadecimal_character ::= [0-9A-F]
 hexadecimal_character_string ::= hexadecimal_character*
 four_hexadecimal_characters ::= hexadecimal_character hexadecimal_character
-	hexadecimal_character hexadecimal_character
+    hexadecimal_character hexadecimal_character
 one_to_four_hexadecimal_characters ::= hexadecimal_character hexadecimal_character?
-	hexadecimal_character? hexadecimal_character?
+    hexadecimal_character? hexadecimal_character?
 period_separated_hexadecimal_character_string ::= four_hexadecimal_characters '.'
     (four_hexadecimal_characters '.')* one_to_four_hexadecimal_characters
 
 hexadecimal_literal ::= '0x' (period_separated_hexadecimal_character_string | hexadecimal_character_string)
 
-/* 5.16 Integer, decimal and floating-point literal values
+/* 5.16 Multiple character literal values */
+
+/* Rule S.4: Multiple character literal value */
+
+escaped_multiple_character_literal_character ::= (multiple_character_literal_character - single_quote - '\') | ('\' single_quote) | '\\'
+multiple_character_literal ::= single_quote escaped_multiple_character_literal_character+ single_quote
+
+/* 5.17 Integer, decimal and floating-point literal values */
 
 positive_integer ::= non_zero_digit_character digit_character*
 
-integer_literal ::= (unary_plus | unary_negation)? (0 | positive_integer)
+integer_literal ::= 0 | positive_integer
 decimal_literal ::= integer_literal '.' digit_character*
-floating_point_literal ::= (integer_literal | decimal_literal) 'e' integer_literal
+floating_point_literal ::= (integer_literal | decimal_literal) 'e' 0 | (unary_plus | unary_negation)? positive_integer
 
-number_literal ::= binary_literal | hexadecimal_literal | integer_literal | decimal_literal | floating_point_literal
+/* One or more multiple character literals to support concatenation */
 
-/* 5.17 String literal values */
+number_literal ::= binary_literal | hexadecimal_literal | multiple_character_literal+ | integer_literal |
+    decimal_literal | floating_point_literal
 
-literal_character ::= (basic_character - double_quote - '\') | ('\' double_quote) | '\\'
-utf_literal_character ::= ([#x0000-#x10FFFF] - double_quote - '\' - #xFEFF) | ('\' double_quote) | '\\'
-universal_character_name ::= ('\u' four_hexadecimal_characters)
-    ('\U' four_hexadecimal_characters four_hexadecimal_characters)
+/* 5.18 String literal values */
 
-basic_string_literal ::= double_quote literal_character* double_quote
-utf8_string_literal ::= 'u8' double_quote (utf_literal_character | universal_character_name)* double_quote
-utf16_string_literal ::= 'u' double_quote (utf_literal_character | universal_character_name)* double_quote
+escaped_basic_character ::= (basic_character - double_quote - '\') | ('\' double_quote) | '\\'
+basic_string_literal ::= double_quote escaped_basic_character* double_quote
 
-string_literal ::= basic_string_literal | utf8_string_literal | utf16_string_literal
+escaped_sdl_compatible_ucs_character ::= (sdl_compatible_ucs_character - double_quote - '\') | ('\' double_quote) | '\\'
+utf_string_literal ::= 'u' double_quote (escaped_sdl_compatible_ucs_character | universal_character_name)* double_quote
 
-/* 5.18 Scope */
+string_literal ::= basic_string_literal | utf_string_literal
 
-/* global scope and entry point: only comments and class declarations are allowed */
+/* 5.19 Scope */
 
-Specification ::= (comment | class_declaration | (class_declaration comment))+
+/* computed_elementary_type_definition can only be const */
+
+Specification ::= (class_declaration | map declaration | computed_elementary_type_definition)+
 
 /* 6.2 Constant-length direct representation bit fields */
 
 /* Rule E.1: Elementary data types */
 
-aligned_modifier ::= aligned (open_bracket ('8' | '16' | '32' | '64' | '128')
-	close_bracket)?
+aligned_modifier ::= aligned (open_bracket ('8' | '16' | '32' | '64' | '128') close_bracket)?
 
-/* The use of the keyword double is no longer recommended. */
-type ::= int | unsigned int | float | bit
+elementary_type ::= int | unsigned int | float | bit
 
 length_attribute ::= open_parenthesis expression close_parenthesis
 
 /* Rule E.2: Look-ahead parsing */
 
+/* Rule E.3: Legacy keyword */
+
+/* Rule E.4: Reserved keyword */
+
 /* 6.3 Variable length direct representation bit fields */
 
-elementary_type_definition ::= const? aligned_modifier? type length_attribute '*'?
-	identifier (assignment number_literal (range_operator number_literal)?)? semicolon
+elementary_type_definition ::= (reserved | legacy)? const? aligned_modifier? elementary_type length_attribute '*'?
+    identifier (assignment expression (range_operator expression)?)? semicolon
 
 /* 6.4 Constant-length indirect representation bit fields */
 
@@ -235,14 +250,14 @@ elementary_type_definition ::= const? aligned_modifier? type length_attribute '*
 
 /* Rule E.5: Maps with escape codes */
 
-output_value ::= number_literal | type length_attribute | aggregate_output_value
+output_value ::= number_literal | elementary_type length_attribute | aggregate_output_value
 aggregate_output_value ::= open_brace (output_value comma)* output_value close_brace
 map_entry ::= binary_literal comma aggregate_output_value
 
-map_declaration ::= map identifier open_parenthesis (type | identifier) close_parenthesis
-	open_brace (map_entry comma)+ map_entry close_brace
+map_declaration ::= map identifier open_parenthesis (elementary_type | identifier) close_parenthesis
+    open_brace (map_entry comma)+ map_entry close_brace
 
-map_definition ::= (type | identifier) open_parenthesis identifier close_parenthesis identifier semicolon
+map_definition ::= (reserved | legacy)? (elementary_type | identifier) open_parenthesis identifier close_parenthesis identifier semicolon
 
 /* 6.6 Variable length strings */
 
@@ -253,12 +268,15 @@ base64_string_literal ::= double_quote base64_character* '='? '='? double_quote
 
 /* 6.7 String value */
 
-utf8_string_definition ::= (utf8string | utfstring | utf8list) identifier (assignment utf8_string_literal)?
-utf16_string_definition ::= utfstring identifier (assignment utf16_string_literal)?
-base64_string_definition ::= base64string identifier (assignment base64_string_literal)?
+/* One or more string literals to support concatenation */
 
-string_definition ::=  const? aligned_modifier? (base64_string_definition | utf8_string_definition |
-	utf16_string_definition) semicolon
+utf16_string_definition ::= utf16string identifier (assignment utf_string_literal+)?
+utf8_string_definition ::= (utf8string | utf8list) identifier (assignment utf_string_literal+)?
+utf_string_definition ::= utfstring identifier (assignment utf_string_literal+)?
+base64_string_definition ::= base64string identifier (assignment base64_string_literal+)?
+
+string_definition ::= (reserved | legacy)? const? aligned_modifier? (base64_string_definition | utf16_string_definition |
+    utf8_string_definition | utf_string_definition) semicolon
 
 /* 7.1 Classes */
 
@@ -278,11 +296,12 @@ string_definition ::=  const? aligned_modifier? (base64_string_definition | utf8
 
 /* Rule C.5: Class polymorphism */
 
-object_id ::= 0 | positive_integer
-id_range ::= object_id range_operator object_id
+class_id ::= 0 | positive_integer
+class_id_range ::= class_id range_operator class_id
+extended_class_id_range ::= class_id | class_id_range (comma (class_id | class_id_range))*
 
 bit_modifier ::= (colon bit open_parenthesis positive_integer_value close_parenthesis
-	(identifier assignment)? object_id | id_range (comma (object_id | id_range))*)?
+    (identifier assignment)? extended_class_id_range)?
 
 /* 7.5 Expandable classes */
 
@@ -301,11 +320,11 @@ parameter_values ::= open_parenthesis (expression comma)* expression close_paren
 extends_modifier ::= extends identifier parameter_values?
 
 class_declaration ::= aligned_modifier? expandable_modifier? abstract? class identifier
-	parameter_list? extends_modifier? bit_modifier? open_brace statement* close_brace
+    parameter_list? extends_modifier? bit_modifier? open_brace statement* close_brace
 
 /* Rule C.8: Parameterized class data types */
 
-class_definition ::= identifier identifier parameter_values? semicolon
+class_definition ::= legacy? identifier identifier parameter_values? semicolon
 
 /* 7.7 Arrays */
 
@@ -315,9 +334,7 @@ class_definition ::= identifier identifier parameter_values? semicolon
 
 /* Rule A.2: Multi-dimensional arrays */
 
-typespec ::= (elementary_type length_attribute) | identifier
-
-array_element_access_expression ::= identifier (open_bracket expression close_bracket)+
+array_element_type ::= (elementary_type length_attribute) | identifier
 
 /* 7.9 Partial arrays */
 
@@ -325,28 +342,26 @@ array_element_access_expression ::= identifier (open_bracket expression close_br
 
 /* Rule A.4: Partial multi-dimensional arrays */
 
-array_dimension ::= open_bracket expression close_bracket
-partial_array_dimension ::= open_bracket open_bracket expression close_bracket close_bracket
+explicit_array_dimension ::= open_bracket expression close_bracket
 
-explicit_array_definition ::= aligned_modifier? typespec identifier (array_dimension |
-	partial_array_dimension)+ semicolon
+partial_array_dimension ::= open_bracket open_bracket expression close_bracket close_bracket
 
 /* 7.10 Implicit arrays */
 
 /* Rule A.5: Implicit arrays */
 
-implicit_array_definition ::= aligned_modifier? typespec identifier open_bracket
-	(positive_integer range_operator positive_integer)? close_bracket semicolon
+implicit_array_dimension ::= open_bracket (positive_integer range_operator positive_integer)? close_bracket
 
-array_definition ::= explicit_array_definition | implicit_array_definition
+array_definition ::= (reserved | legacy)? aligned_modifier? array_element_type identifier
+    (implicit_array_dimension | (explicit_array_dimension | partial_array_dimension)+) semicolon
 
-/* 8 Non-parsable variables */
+/* 8 Computed variables */
 
 /* 8.2 Elementary data types */
 
 /* Rule NP.1: Elementary data types */
 
-non_parsable_elementary_type_definition ::= const? type identifier (assignment number_literal)? semicolon
+computed_elementary_type_definition ::= computed const? elementary_type identifier (assignment number_literal)? semicolon
 
 /* 8.3 Arrays */
 
@@ -356,7 +371,7 @@ non_parsable_elementary_type_definition ::= const? type identifier (assignment n
 
 /* Rule NP.3: Multi-dimensional arrays */
 
-non_parsable_array_definition ::= type identifier (array_dimension)+ semicolon
+computed_array_definition ::= computed elementary_type identifier (explicit_array_dimension)+ semicolon
 
 /* 9 Syntactic flow control */
 
@@ -364,13 +379,13 @@ non_parsable_array_definition ::= type identifier (array_dimension)+ semicolon
 
 /* Rule FC.1: Flow control using if-then-else */
 
-if_statement ::= if open_parenthesis expression close_parenthesis compound_statement (else
-	if open_parenthesis expression open_parenthesis compound_statement)* (else compound_statement)*
+if_statement ::= if open_parenthesis expression close_parenthesis compound_statement
+    (else if open_parenthesis expression open_parenthesis compound_statement)*
+    (else compound_statement)*
 
 /* Rule FC.2: Flow control using switch */
 
-constant_expression ::= number_literal | string_literal
-switch_case_clause ::= case constant_expression colon ((statement* break semicolon) |
+switch_case_clause ::= case number_literal colon ((statement* break semicolon) |
 	(open_brace statement* break semicolon close_brace))
 switch_default_clause ::= default colon (statement* | (open_brace statement* close_brace))
 
@@ -381,9 +396,8 @@ switch_statement ::= switch open_parenthesis expression close_parenthesis open_b
 
 /* Rule FC.3: Flow control using for */
 
-for_statement ::= for open_parenthesis (assignment_expression |
-	non_parsable_elementary_type_definition)? semicolon expression? semicolon
-	(assignment_expression | expression)? close_parenthesis compound_statement
+for_statement ::= for open_parenthesis (assignment_expression | computed_elementary_type_definition)? semicolon
+    expression? semicolon (assignment_expression | expression)? close_parenthesis compound_statement
 
 /* Rule FC.4: Flow control using do */
 
@@ -392,4 +406,3 @@ do_statement ::= do compound_statement while open_parenthesis expression close_p
 /* Rule FC.5: Flow control using while */
 
 while_statement ::= while open_parenthesis expression close_parenthesis compound_statement
-

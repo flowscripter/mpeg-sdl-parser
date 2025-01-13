@@ -1,7 +1,6 @@
 enum StringLiteralKind {
   BASIC,
-  UTF8,
-  UTF16,
+  UTF,
 }
 
 export default StringLiteralKind;

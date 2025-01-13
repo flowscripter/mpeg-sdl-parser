@@ -1,24 +1,15 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
-import ValueTarget from "./ValueTarget.ts";
-import Expression from "./Expression.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class AssignmentExpression extends Node {
-  readonly valueTarget: ValueTarget;
-  readonly equalOperatorLocation: Location;
-  readonly expression: Expression;
-
+class AssignmentExpression extends AbstractExpression {
   constructor(
-    valueTarget: ValueTarget,
-    equalOperatorLocation: Location,
-    expression: Expression,
+    public readonly valueTarget: AbstractExpression,
+    public readonly valueSource: AbstractExpression,
+    public readonly equalOperatorToken: SyntaxToken,
   ) {
     super(NodeKind.ASSIGNMENT_EXPRESSION, valueTarget.location);
-    this.valueTarget = valueTarget;
-    this.equalOperatorLocation = equalOperatorLocation;
-    this.expression = expression;
   }
 
   public accept(visitor: NodeVisitor) {

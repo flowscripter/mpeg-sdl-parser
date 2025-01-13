@@ -1,12 +1,12 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
+import Location from "../../tokenizer/token/Location.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 
-class ForStatement extends Node {
+class ForStatement extends AbstractStatement {
   // TODO: implement
-  //   readonly for_statement ::= for open_parenthesis (assignment_expression | non_parsable_elementary_type_definition )? semicolon expression? semicolon (assignment_expression | expression)? close_parenthesis compound_statement
-  //   readonly expression1: AssignmentExpression | NonParsableVariableDefinition;
+  //   readonly for_statement ::= for open_parenthesis (assignment_expression | computed_elementary_type_definition )? semicolon expression? semicolon (assignment_expression | expression)? close_parenthesis compound_statement
+  //   readonly expression1: AssignmentExpression | ComputedVariableDefinition;
   //   readonly expression2: Expression;
   //   readonly expression3: AssignmentExpression | Expression;
   //   readonly compoundStatement: CompoundStatement;

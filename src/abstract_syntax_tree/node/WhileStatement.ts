@@ -1,9 +1,9 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
+import Location from "../../tokenizer/token/Location.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 
-class WhileStatement extends Node {
+class WhileStatement extends AbstractStatement {
   // TODO: implement
   //   readonly while_statement ::= while open_parenthesis expression close_parenthesis compound_statement
   //   readonly expression: Expression;

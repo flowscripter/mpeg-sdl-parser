@@ -1,3 +1,4 @@
-export * from "./src/parser/parser.ts";
-export * from "./src/abstract_syntax_tree/abstract_syntax_tree.ts";
-export { ParserError } from "./src/util/ParserError.ts";
+export * from "./src/abstract_syntax_tree/node/Specification.ts";
+export * from "./src/abstract_syntax_tree/visitor/NodeVisitor.ts";
+export * from "./src/parser/Parser.ts";
+export * from "./src/util/ParserError.ts";

@@ -1,21 +1,15 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
-import AssignmentExpression from "./AssignmentExpression.ts";
-import Expression from "./Expression.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class ExpressionStatement extends Node {
-  readonly expression: Expression | AssignmentExpression;
-  readonly semicolonPunctuatorLocation: Location;
-
+class ExpressionStatement extends AbstractStatement {
   constructor(
-    expression: Expression | AssignmentExpression,
-    semicolonPunctuatorLocation: Location,
+    public readonly expression: AbstractExpression,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(NodeKind.EXPRESSION_STATEMENT, expression.location);
-    this.expression = expression;
-    this.semicolonPunctuatorLocation = semicolonPunctuatorLocation;
   }
 
   public accept(visitor: NodeVisitor) {

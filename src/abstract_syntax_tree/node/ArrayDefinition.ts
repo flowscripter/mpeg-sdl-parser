@@ -1,20 +1,37 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
+import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
+import AlignedModifier from "./AlignedModifier.ts";
+import ArrayElementType from "./ArrayElementType.ts";
 import NodeKind from "./enum/node_kind.ts";
+import ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
+import Identifier from "./Identifier.ts";
+import ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
+import PartialArrayDimension from "./PartialArrayDimension.ts";
 
-class ArrayDefinition extends Node {
-  // If the itemType is Identifier type, it must refer to the name of a class
-  // TODO: implement
-  //  readonly explicit_array_definition ::= aligned_modifier? typespec identifier (array_dimension | partial_array_dimension)+ semicolon
-  //  readonly implicit_array_definition ::= aligned_modifier? typespec identifier open_bracket (positive_integer range_operator positive_integer)? close_bracket semicolon
-  //  readonly array_definition ::= explicit_array_definition | implicit_array_definition
-  //  readonly itemType: Identifier | ElementaryTypeArrayItemType;
-  //  readonly identifier: Identifier;
-  //  readonly dimensions: ArrayDimension[];
-  constructor(location: Location, _name: string) {
-    super(NodeKind.ARRAY_DEFINITION, location);
-    // this.name = name;
+class ArrayDefinition extends AbstractArrayDefinition {
+  constructor(
+    public readonly isReserved: boolean,
+    public readonly isLegacy: boolean,
+    public readonly alignedModifier: AlignedModifier | undefined,
+    public readonly arrayElementType: ArrayElementType,
+    identifier: Identifier,
+    public readonly implicitArrayDimension: ImplicitArrayDimension | undefined,
+    public readonly dimensions:
+      | (ExplicitArrayDimension | PartialArrayDimension)[]
+      | undefined,
+    public readonly reservedToken: SyntaxToken | undefined,
+    public readonly legacyToken: SyntaxToken | undefined,
+    semicolonPunctuatorToken: SyntaxToken,
+  ) {
+    super(
+      NodeKind.ARRAY_DEFINITION,
+      reservedToken?.location ?? legacyToken?.location ??
+        alignedModifier?.location ??
+        arrayElementType.location,
+      identifier,
+      semicolonPunctuatorToken,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

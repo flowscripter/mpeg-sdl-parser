@@ -1,0 +1,221 @@
+import ArrayElementAccess from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
+import AssignmentExpression from "../../../src/abstract_syntax_tree/node/AssignmentExpression.ts";
+import BinaryExpression from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
+import ClassMemberAccess from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
+import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
+import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { ASSIGNMENT_EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
+import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
+import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
+import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
+
+Deno.test("Test assignment expression pattern", () => {
+  testSyntaxPattern(
+    ASSIGNMENT_EXPRESSION_RULE,
+    "i=1*2",
+    new AssignmentExpression(
+      new Identifier(
+        "i",
+        new SyntaxToken(
+          TokenKind.IDENTIFIER_TOKEN,
+          {
+            row: 0,
+            column: 0,
+            position: 0,
+          },
+          "i",
+          [],
+          [],
+        ),
+      ),
+      new BinaryExpression(
+        new NumberLiteral(
+          NumberLiteralKind.INTEGER,
+          1,
+          [
+            new SyntaxToken(
+              TokenKind.LITERAL_INTEGER_TOKEN,
+              {
+                row: 0,
+                column: 2,
+                position: 2,
+              },
+              "1",
+              [],
+              [],
+            ),
+          ],
+        ),
+        BinaryOperatorKind.MULTIPLY,
+        new NumberLiteral(
+          NumberLiteralKind.INTEGER,
+          2,
+          [
+            new SyntaxToken(
+              TokenKind.LITERAL_INTEGER_TOKEN,
+              {
+                row: 0,
+                column: 4,
+                position: 4,
+              },
+              "2",
+              [],
+              [],
+            ),
+          ],
+        ),
+        new SyntaxToken(
+          TokenKind.OPERATOR_MULTIPLY_TOKEN,
+          {
+            row: 0,
+            column: 3,
+            position: 3,
+          },
+          "*",
+          [],
+          [],
+        ),
+      ),
+      new SyntaxToken(
+        TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
+        {
+          row: 0,
+          column: 1,
+          position: 1,
+        },
+        "=",
+        [],
+        [],
+      ),
+    ),
+  );
+});
+
+Deno.test("Test assignment expression pattern - class member and array element access expressions", () => {
+  testSyntaxPattern(
+    ASSIGNMENT_EXPRESSION_RULE,
+    "a.b=c[1]",
+    new AssignmentExpression(
+      new PostfixExpression(
+        new Identifier(
+          "a",
+          new SyntaxToken(
+            TokenKind.IDENTIFIER_TOKEN,
+            {
+              row: 0,
+              column: 0,
+              position: 0,
+            },
+            "a",
+            [],
+            [],
+          ),
+        ),
+        undefined,
+        new ClassMemberAccess(
+          new Identifier(
+            "b",
+            new SyntaxToken(
+              TokenKind.IDENTIFIER_TOKEN,
+              {
+                row: 0,
+                column: 2,
+                position: 2,
+              },
+              "b",
+              [],
+              [],
+            ),
+          ),
+          new SyntaxToken(
+            TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
+            {
+              row: 0,
+              column: 1,
+              position: 1,
+            },
+            ".",
+            [],
+            [],
+          ),
+        ),
+        undefined,
+        undefined,
+      ),
+      new PostfixExpression(
+        new Identifier(
+          "c",
+          new SyntaxToken(
+            TokenKind.IDENTIFIER_TOKEN,
+            {
+              row: 0,
+              column: 4,
+              position: 4,
+            },
+            "c",
+            [],
+            [],
+          ),
+        ),
+        new ArrayElementAccess(
+          new NumberLiteral(
+            NumberLiteralKind.INTEGER,
+            1,
+            [
+              new SyntaxToken(
+                TokenKind.LITERAL_INTEGER_TOKEN,
+                {
+                  row: 0,
+                  column: 6,
+                  position: 6,
+                },
+                "1",
+                [],
+                [],
+              ),
+            ],
+          ),
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
+            {
+              row: 0,
+              column: 5,
+              position: 5,
+            },
+            "[",
+            [],
+            [],
+          ),
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
+            {
+              row: 0,
+              column: 7,
+              position: 7,
+            },
+            "]",
+            [],
+            [],
+          ),
+        ),
+        undefined,
+        undefined,
+        undefined,
+      ),
+      new SyntaxToken(
+        TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
+        {
+          row: 0,
+          column: 3,
+          position: 3,
+        },
+        "=",
+        [],
+        [],
+      ),
+    ),
+  );
+});

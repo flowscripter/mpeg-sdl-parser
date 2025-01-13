@@ -1,14 +1,14 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class Identifier extends Node {
-  readonly name: string;
-
-  constructor(location: Location, name: string) {
-    super(NodeKind.IDENTIFIER, location);
-    this.name = name;
+class Identifier extends AbstractExpression {
+  constructor(
+    public readonly name: string,
+    public readonly token: SyntaxToken,
+  ) {
+    super(NodeKind.IDENTIFIER, token.location);
   }
 
   public accept(visitor: NodeVisitor) {

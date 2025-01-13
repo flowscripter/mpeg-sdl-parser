@@ -1,26 +1,34 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import AlignedModifier from "./AlignedModifier.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import BitModifier from "./BitModifier.ts";
+import Identifier from "./Identifier.ts";
+import ParameterList from "./ParameterList.ts";
+import ExtendsModifier from "./ExtendsModifier.ts";
+import ExpandableModifier from "./ExpandableModifier.ts";
 
-class ClassDeclaration extends Node {
-  // TODO: implement
-  //   readonly expandable_modifier ::= expandable (open_parenthesis positive_integer close_parenthesis)?
-  //   readonly extends_modifier ::= extends identifier parameter_values?
-  //   readonly class_declaration ::= aligned_modifier? expandable_modifier? abstract? class identifier parameter_list? extends_modifier? bit_modifier? open_brace statement* close_brace
-  // isAbstract: boolean;
-  // alignment?: number;
-  // expandable?: number;
-  // identifier: Identifier;
-  // parameters: ClassDefinitionParameter[];
-  //
-  // // parentClass must refer to the name of a class
-  // parentClass?: Identifier;
-  // bitAttribute?: ClassDefinitionBitAttribute;
-  // statements: Statement[];
-  constructor(location: Location, _name: string) {
-    super(NodeKind.CLASS_DECLARATION, location);
-    // this.name = name;
+class ClassDeclaration extends AbstractStatement {
+  constructor(
+    public readonly alignedModifier: AlignedModifier | undefined,
+    public readonly expandableModifier: ExpandableModifier | undefined,
+    public readonly isAbstract: boolean,
+    public readonly identifier: Identifier,
+    public readonly parameterList: ParameterList | undefined,
+    public readonly extendsModifier: ExtendsModifier | undefined,
+    public readonly bitModifier: BitModifier | undefined,
+    public readonly statements: AbstractStatement[],
+    public readonly abstractToken: SyntaxToken | undefined,
+    public readonly classToken: SyntaxToken,
+    public readonly openBraceToken: SyntaxToken,
+    public readonly closeBraceToken: SyntaxToken,
+  ) {
+    super(
+      NodeKind.CLASS_DECLARATION,
+      alignedModifier?.location ?? expandableModifier?.location ??
+        identifier.location,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

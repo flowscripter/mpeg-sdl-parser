@@ -1,38 +1,19 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
+import AbstractExpression from "./AbstractExpression.ts";
 import NodeKind from "./enum/node_kind.ts";
-import PostfixOperatorKind from "./enum/postfix_operator_kind.ts";
 import UnaryOperatorKind from "./enum/unary_operator_kind.ts";
-import OperatorTarget from "./OperatorTarget.ts";
 
-// TODO: enable below
-//     ClassMemberAccessExpression |
-//     ArrayElementAccessExpression |
-class UnaryExpression extends Node {
-  readonly unaryOperatorKind?: UnaryOperatorKind;
-  readonly openParenthesisLocation?: Location;
-  readonly operatorTarget: OperatorTarget;
-  readonly closeParenthesisLocation?: Location;
-  readonly postfixOperatorKind?: PostfixOperatorKind;
-  readonly postfixOperatorLocation?: Location;
-
+class UnaryExpression extends AbstractExpression {
   constructor(
-    location: Location,
-    unaryOperatorKind: UnaryOperatorKind | undefined,
-    openParenthesisLocation: Location | undefined,
-    operatorTarget: OperatorTarget,
-    closeParenthesisLocation: Location | undefined,
-    postfixOperatorKind?: PostfixOperatorKind,
-    postfixOperatorLocation?: Location,
+    public readonly unaryOperatorKind: UnaryOperatorKind,
+    public readonly operand: AbstractExpression,
+    public readonly unaryOperatorToken: SyntaxToken,
   ) {
-    super(NodeKind.UNARY_EXPRESSION, location);
-    this.unaryOperatorKind = unaryOperatorKind;
-    this.openParenthesisLocation = openParenthesisLocation;
-    this.operatorTarget = operatorTarget;
-    this.closeParenthesisLocation = closeParenthesisLocation;
-    this.postfixOperatorKind = postfixOperatorKind;
-    this.postfixOperatorLocation = postfixOperatorLocation;
+    super(
+      NodeKind.UNARY_EXPRESSION,
+      unaryOperatorToken.location,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

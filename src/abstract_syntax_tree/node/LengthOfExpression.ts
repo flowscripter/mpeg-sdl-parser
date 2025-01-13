@@ -1,25 +1,16 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
-import ValueTarget from "./ValueTarget.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class LengthOfExpression extends Node {
-  readonly openParenthesisPunctuatorLocation: Location;
-  readonly valueTarget: ValueTarget;
-  readonly closeParenthesisPunctuatorLocation: Location;
-
+class LengthOfExpression extends AbstractExpression {
   constructor(
-    location: Location,
-    openParenthesisPunctuatorLocation: Location,
-    valueTarget: ValueTarget,
-    closeParenthesisPunctuatorLocation: Location,
+    public readonly expression: AbstractExpression,
+    public readonly lengthOfToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.LENGTH_OF_EXPRESSION, location);
-    this.openParenthesisPunctuatorLocation = openParenthesisPunctuatorLocation;
-    this.valueTarget = valueTarget;
-    this.closeParenthesisPunctuatorLocation =
-      closeParenthesisPunctuatorLocation;
+    super(NodeKind.LENGTH_OF_EXPRESSION, lengthOfToken.location);
   }
 
   public accept(visitor: NodeVisitor) {

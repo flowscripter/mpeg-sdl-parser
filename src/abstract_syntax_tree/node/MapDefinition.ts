@@ -1,20 +1,29 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
-import Location from "../Location.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import Identifier from "./Identifier.ts";
+import ElementaryType from "./ElementaryType.ts";
 
-class MapDefinition extends Node {
-  // TODO: implement
-  //   readonly map_definition ::= (type | identifier) open_parenthesis identifier close_parenthesis identifier semicolon
-  // If the outputType is Identifier type, it must refer to the name of a class
-  // The outputType must match the outputType of the map specified by mapIdentifier
-  // outputType: Identifier | ElementaryTypeKind;
-  // The identifier must refer to the name of a map
-  // mapIdentifier: Identifier;
-  // identifier: Identifier;
-  constructor(location: Location, _name: string) {
-    super(NodeKind.MAP_DEFINITION, location);
-    // this.name = name;
+class MapDefinition extends AbstractStatement {
+  constructor(
+    public readonly isReserved: boolean,
+    public readonly isLegacy: boolean,
+    public readonly elementaryType: ElementaryType | undefined,
+    public readonly classIdentifier: Identifier | undefined,
+    public readonly mapIdentifier: Identifier,
+    public readonly identifier: Identifier,
+    public readonly reservedToken: SyntaxToken | undefined,
+    public readonly legacyToken: SyntaxToken | undefined,
+    public readonly openParenthesisToken: SyntaxToken,
+    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly semicolonToken: SyntaxToken,
+  ) {
+    super(
+      NodeKind.MAP_DEFINITION,
+      reservedToken?.location ?? legacyToken?.location ??
+        elementaryType?.location ?? classIdentifier!.location,
+    );
   }
 
   public accept(visitor: NodeVisitor) {

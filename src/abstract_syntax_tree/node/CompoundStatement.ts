@@ -1,21 +1,16 @@
-import Node from "../Node.ts";
-import NodeVisitor from "../NodeVisitor.ts";
+import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
-import Statement from "./Statement.ts";
-import Location from "../Location.ts";
+import Statement from "./AbstractStatement.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class CompoundStatement extends Node {
-  readonly statements: Statement[];
-  readonly closeBracePunctuatorLocation: Location;
-
+class CompoundStatement extends AbstractStatement {
   constructor(
-    openBraceLocation: Location,
-    statements: Statement[],
-    closeBracePunctuatorLocation: Location,
+    public readonly statements: Statement[],
+    public readonly openBracePunctuatorToken: SyntaxToken,
+    public readonly closeBracePunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.COMPOUND_STATEMENT, openBraceLocation);
-    this.statements = statements;
-    this.closeBracePunctuatorLocation = closeBracePunctuatorLocation;
+    super(NodeKind.COMPOUND_STATEMENT, openBracePunctuatorToken.location);
   }
 
   public accept(visitor: NodeVisitor) {

@@ -1,0 +1,312 @@
+do a search for undefined behavior
+
+at the specification layer, /* elementary_type_definition can only be const non-parsable */
+
+5.5 Identifiers
+It is illegal to define an identifier which conflicts (ignoring case) with SDL syntax items such as keywords, binary, hexadecimal and string literal prefixes.
+
+5.8.2 Specific operator behavior
+
+The sign of the result for the modulus operator with negative operands is not defined by the SDL which may lead to undefined behavior.
+
+The result of the modulus operator where the value of the second operand is zero is not defined by the SDL which may lead to undefined behavior.
+
+The direction of truncation for integer division with negative operands is not defined by the SDL which may lead to undefined behavior.
+
+The value of division where the value of the second operand is zero is not defined by the SDL which may lead to undefined behavior.
+
+The behaviour of the right shift operator applied to a signed int value is not defined by the SDL which may lead to undefined behavior.
+
+Usage of the equality (i.e. ‘==’) and inequality operators (i.e. ‘<’, ‘<=’, '>’, ‘>=’ and ‘!=’) with operands of differing types is not defined by the SDL which may lead to undefined behavior.
+
+The array element access operator (i.e. ‘[]’) cannot be used with float value operands or negative integer values.
+
+The modulus operator (i.e. ‘%’) cannot be used with float value operands.
+
+/* Left hand operand must evaluate to a parsed variable value target */
+/* Right hand operand must evaluate to a value source */
+assignment_expression ::= expression assignment expression
+
+5.11 Built-in operators
+lengthof: It is illegal to reference a non-parsable variable.
+
+/* Expression must evaluate to a parsed variable value target */
+lengthof_expression ::= lengthof open_parenthesis expression close_parenthesis
+
+range: The min_value and max_value shall be of the same type and the max_value shall be greater than or equal to the min_value.
+
+5.12.2 Representation of numbers
+Although the SDL supports signed zero for floating point literals, the interpretation and use of such values is unspecified behavior.
+
+5.12.3	Number limits
+Parsable variables have defined width attributes which explicitly define the maximum and minimum (for signed numbers) limits of values which can be found in encoded bitstreams.
+
+5.12.4	Value coercion
+Apart from logic value coercion (defined in 5.13) the SDL does not specify behaviour with respect to coercion of values.
+Therefore conversion between values of different types or values using different widths or ranges of the same type will result in unspecified behaviour.
+
+5.13 Logic values
+To accommodate this, a numeric value of zero is coerced to a logic value of false when required and a non-zero value is coerced to a logic value of true.
+
+5.17 String literal values
+It is illegal to place non-compatible string literal tokens adjacent to each other.
+
+5.18 Scope
+
+If the identifier appears within the list of parameters for a class declaration or within the top-level block declaring the class, the identifier has class scope. It is accessible anywhere within the block which declares the class. Class scope variables can be accessed outside of the class using the class member access operator (i.e. ‘.’).
+An identifier declared within a block (introduced by the character '{' and exited by a matching paired character '}' has block scope. It is accessible from the point it is declared until the end of the block.
+
+5.18.1	Parsable variable scope
+Parsable variables defined within a class declaration, regardless of nested block scopes or conditional branch (defined in 9.1) scopes have class scope, i.e., they are available as class member variables.
+
+5.18.2	Non-parsable variable scope
+In general, non-parsable variables have block scope. However, non-parsable variables defined in the top-level scope of a class have class scope i.e. they are available as class member variables.
+
+5.19 SDL specification limits
+•	Maximum levels of block nesting
+•	Maximum levels of expression nesting
+•	Maximum levels of class nesting
+•	Maximum levels of map nesting
+•	Maximum number of identifiers
+•	Maximum number of class members
+•	Maximum number of labelled statements in a switch clause
+•	Maximum number of characters in a string literal
+•	Maximum number of parameters in a class parameter list
+•	Maximum character length of a string literal value
+•	Maximum number of concatenated adjacent string literal values
+•	Maximum number of dimensions in a multi-dimensional array
+•	Maximum number of elements in each dimension of an array
+
+6.2.2 Type
+NOTE double is a legacy alias for the keyword float. The use of the keyword double is no longer recommended.
+
+6.2.3 Length
+When the grammar construct type is float, then the length attribute shall be equal to 16, 32, 64, 128 or 256.
+
+6.2.4 Value
+The single value or range of values defined shall be valid for the defined variable type.
+Parsable elementary data type variables with definitions that fall outside the flow of parsing shall have a default value of 0.
+
+6.2.5	Constants
+A const variable value shall not be modified. For example, the following is an invalid specification:
+
+6.3	Variable length direct representation bit fields
+In case the length attribute is determined by an expression, the result of this expression shall be a strictly positive integer value.
+
+6.4	Constant-length indirect representation bit fields
+For the case of constant-length indirect representation bit fields, these binary literal values shall all be the same length.
+
+The output_type of a map shall be either a type or a declared class (classes are defined in 7.1).
+
+Output values shall only be literal numeric values or constants (with the exception of parsed values as defined in 4).
+
+The type and number of constituent values within the aggregate output values of the map declaration shall match the corresponding constituent type within the map’s output_type.
+
+The output_type of the variable shall be identical to the output_type declared for the map.
+
+output_type(map_identifier) map_variable_identifier;
+=> map_identifier shall refer to a map declaration.
+
+6.5	Variable length indirect representation bit fields
+
+The only difference is that the indices of the map are now of variable length and shall unambiguously identify each output value in addition of being unique (e.g. leaf values of a binary tree).
+
+In this case, the type of an output value within the map declaration shall match the type associated with the map’s output_type.
+
+6.6	Variable length strings
+In a utf8list string, there shall not be any leading or trailing space character nor two consecutive space characters.
+
+6.7	String value
+Parsable string variables with definitions that fall outside the flow of parsing shall have a default value of an empty string (e.g. '').
+
+7.1	Classes
+A class declaration shall not recursively reference itself.
+
+class_identifier class_variable_identifier [(parameter_list)];
+=> class_identifier shall refer to a class declaration.
+
+7.2	Base and derived classes
+
+[aligned[(modifier)]] class class_identifier [extends base_class] {
+	[element; …]
+}
+=> base_class shall refer to a class declaration.
+
+A derived class shall not differ in declared alignment from the base class.
+
+7.4	Polymorphism in class declaration
+When the bit keyword is declared, all derived class class_id attributes shall declare the same length attribute value as the base class.
+
+When a class_id_identifier is declared, all derived classes shall declare the same class_id_identifier. If a class_id_identifier is not declared, all derived classes will also not declare one.
+
+In the example above as there are no class declarations for the class_id values of 6 and 7 this may result in undefined behavior. The behavior shall be specified by the standard presenting the SDL specification.
+
+7.4.2	Polymorphism for abstract classes
+
+For the abstract base class, the class_id shall be specified as 0 or alternatively an id_range or extended_id_range shall be specified.
+
+7.5	Expandable classes
+The size information is implicitly accessible within the class as the member variable sizeOfInstance whenever a class is made expandable.
+
+A non-expandable class may not derive from an expandable class.
+
+7.6	Parameter types
+
+The parameter_list is a list of type or class identifiers and variable identifier pairs separated by commas.
+Usage of a string_type in a parameter_list is not supported.
+Class definition with parameters should be for a parameterised class declaration.
+
+7.7	Arrays
+Arrays are defined using square brackets. The array definition is applicable to both elementary types and classes.
+positive integer
+
+7.8	Multi-dimensional arrays
+Individual values of a multi-dimensional array are accessed using a sequence of array element access operators
+(e.g. a matching pair of square brackets ‘[‘ and ‘]’) where the number of operators matches the dimensionality of the array. For example:
+identifier must be an array
+
+7.9	Partial arrays
+they shall all agree on the typespec specification.
+
+8.2	Elementary data types
+The result of accessing the value of a non-parable variable which has not yet been initialised with a value via the assignment operator (e.g. ‘=’) is not defined by the SDL any may lead to undefined behavior.
+
+8.3	Arrays
+Arrays are defined using square brackets. The array definition for non-parsable variables is only applicable to elementary types.
+
+8.4 Multi-dimensional arrays
+Individual values of a multi-dimensional array are accessed using a sequence of array element access operators
+(e.g. a matching pair of square brackets ‘[‘ and ‘]’) where the number of operators matches the dimensionality of the array. For example:
+identifier must be an array
+
+9.1	Conditionals
+Each condition is evaluated sequentially in order until a condition evaluates to a logic value of true.
+Because an else statement is optional there is potential for ambiguity when an else is omitted within a nested if-then-else construct.
+In this case, the else statement shall be associated with the closest previous if statement that did not have an if.
+A parsable variable may be defined more than once across conditional branches if the defined type is identical (the length attribute may differ).
+It is illegal to define if-then-else clauses which will result in duplicate class member variables being declared simultaneously.
+
+The condition in a switch statement shall evaluate to an integer value. Each label should be an integer constant expression and each label in the same switch statement shall be unique.
+As with if-then-else construct, parsable variables may be defined more than once across conditional branches in a switch statement if the defined type is identical (the length attribute may differ). Additionally it is illegal to define switch clauses which will result in duplicate class member variables being declared simultaneously.
+
+9.2	Loops
+If specified, expression1 can be either a non-parsable variable definition with an assigned value or a value assignment and is evaluated
+prior to starting the repetitions. Then if expression2 is not specified, or it is specified and it evaluates to a logic value of true,
+the statements within the scope of the for-loop are processed, followed by the evaluated of expression3 if it is specified.
+
+5.14.1	Parsable Variables
+All parsable variables (defined in 6 and 7) regardless of nested scope blocks and conditional branches have class scope, i.e., they are available as class member variables. The value of parsable variables with declarations that fall outside the flow of parsing shall have a default value of 0 for elementary types and an empty string for string types.
+
+5.14.2	Non-Parsable Variables
+For non-parsable variables (defined in 8), a new scope is introduced by the character '{' and exited by the character '}'.
+[Editor’s note: Make a reference to the implicit usage of {} in single line if/else or loop clauses]
+
+A non-parsable variable identifier can only be defined once within a single scope. If an identifier defined in an outer scope is defined again within a nested inner scope, then within the inner scope, references to the identifier will refer to the inner scope variable definition and the outer scope variable definition is not visible.
+Non-parsable variables declared in the top-level scope of a class are considered class member variables and are thus available in references to that particular type.
+[Editor’s note: There is an outstanding question as to the validity of the last statement above]
+
+It is illegal to define a variable identifier which conflicts (ignoring case) with SDL syntax items such as keywords, binary, hexadecimal and string literal prefixes.
+Variable identifiers can be comprised of a mixture of upper- and lower-case ASCII alphabetic characters, digits and underscore (e.g. ‘_’). An identifier must include at least one alphabetic character.
+
+An identifier may start with and contain any identifier_character but must contain at least one character
+
+[Editor’s note: I believe these statements are true:
+•	It is an error to invoke lengthof() of an out-of-scope variable.
+•	Invoking with a non-parsable variable results in zero.
+•	Invoking on an already parsed elementary type variable results in the width attribute.
+I am not sure what the answers to these should be:
+•	Invoking on an elementary type variable which has not been parsed?
+•	Invoking on a string variable which has not been parsed?
+•	Invoking on an already parsed string variable?
+•	Invoking on a map output which is created from parsing some input bits?
+•	Invoking on a class not yet parsed?
+•	Invoking on a parsed class which included flow control?]
+•	Invoking on a parsed class which included parameter list values?]
+
+The min_value and max_value must be of the same type and the max_value must be greater than or equal to the min_value.
+
+It is illegal to place non-compatible string literal tokens adjacent to each other. For example the following is an invalid specification:
+u"hello" "world"  // illegal concatenation of UCS and basic character values
+
+double is a legacy alias for the keyword float. The use of the keyword double is no longer recommended.
+
+When the grammar construct type is float, then the length attribute shall be equal to 16, 32, 64, 128 or 256.
+
+[Editor’s note: What should be a limit for the width of variable types? Is unsigned int(5500000000) parsable_variable1 valid? Should it be stated to be undefined and dependent on usage/parser implementation?]
+
+The single value or range of values defined must be valid for the declared variable type.
+
+Error or warn on truncated values
+
+[Editor’s note: As a parsable variable value is mutable, once parsed is the value in memory constrained to the length attribute representation?]
+[Editor’s note: string coercion to unsigned int needs to be explained as there is existing heavy use of unsigned int(32) "four character code" – potentially discuss string to int coercion and move the above truncation example in a new clause related to bitstream and in-memory values, value coercion etc.]
+
+
+In case the length attribute is determined by an expression, the result of this expression shall be a strictly positive integer value.
+
+In the above example the class YUVblocks contains only non-parsable member variables (defined in 8) Although the SDL does not prevent declaring map outputs to be classes containing parsable member variables, the behavior in this case is undefined.
+
+map identifier must refer to a map identifier
+
+The output_type of the variable shall be identical to the output_type defined for the map
+
+The only difference is that the indices of the map are now of variable length and shall unambiguously identify each output value in addition of being unique (e.g. leaf values of a binary tree).
+
+In this case, the type of an output value within the map definition shall match the type associated with the map’s output_type.
+
+[Editor’s note: single quote is extensively used in existing standards, either switch from double to single or support both]
+
+[Editor’s note: should const be supported for string types? How can strings be mutated?]
+
+When a string literal is present, the encoding prefix of the string literal shall be compatible with the string_type of the variable:
+	a string literal prefix u8 with utf8string, utfstring and utf8list variables.
+	a string literal prefix u with utfstring.
+There shall not be any encoding prefix with base64string variables.
+
+class identifier must refer to a class identifier
+
+[Editor’s note: Can a non-aligned class derive from an aligned sub-class?]
+[Editor’s note: Can an aligned class derive from a non-aligned sub-class?]
+[Editor’s note: Can an aligned class derive from an aligned sub-class with a different alignment width?]
+
+[Editor’s note: Can an abstract class derive from an abstract class?]
+[Editor’s note: Can an abstract class derive from a non-abstract class?]
+
+The size information is implicitly accessible within the class as the member variable sizeOfInstance whenever a class is made expandable.
+
+As the expandable keyword implies an encoded sizeOfInstance value, it cannot appear with the abstract keyword which implies a non-encoded class..
+
+If the expandable keyword has a maxClassSize attribute, then this indicates the maximum permissible size of this class in bytes, i.e. a maximum permissible value for sizeOfInstance. This information can help a parser to determine the appropriate type of integer to choose for holding the value of the variable sizeOfInstance.
+
+Expandable class shall not derive from another expandable class.
+
+[Editor’s note: Can a non-expandable class derive from an expandable class?]
+[Editor’s note: Can an expandable class derive from a non-expandable class?]
+
+When the bit keyword is used, all derived class class_id attributes shall specify the same length attribute value as the base class.
+
+[Editor’s note: It is proposed to state that derived classes shall also always declare the same class_id_identifier.]
+
+NOTE Derived classes may use the same class_id value as the base class. In that case, classes can only be discriminated through contextual information such as the value of a member variable from the base class.
+
+Each derived class declaration shall assign a constant value or a range of valid values via an class_id value or an id_range or extended_id_range. This value or range of values shall correspond to legal values defined for the base class.
+
+For the abstract base class, the class_id shall be specified as 0 or alternatively an id_range or extended_id_range shall be specified.
+
+The parameter_list is a list of type or class identifiers and variable identifier pairs separated by commas. Usage of a string_type in a parameter_list is not supported. */
+
+[Editor’s note: Use of string_type in a parameter list is not necessarily required to support existing constructs such as class FileTypeBox extends Box('ftyp')as long as value coercion is discussed]
+
+When populating the member values of such a class, the parameters must be already be populated with values.
+
+typespec is a parsable type specification (e.g., an elementary type with a length attribute, e.g. ‘int(2)’) or a class identifier.
+
+Several such partial definitions may be given, but they shall all agree on the typespec specification.
+
+Implicit arrays must have bit ids on all classes
+
+If a conditional clause contains a single statement, then usage of braces ‘{’ and ‘}’ is optional (they are implicit), but if multiple statements are present then braces are required.
+
+NOTE The use of bar_flag necessitates its declaration before the conditional is encountered.
+
+A parsable variable may be defined more than once across conditional branches if the declared type is identical (the length attribute may differ).  In the following example, two different representations for the parsable variable ‘bar’ are defined, depending on the value of ‘bar_flag’.
