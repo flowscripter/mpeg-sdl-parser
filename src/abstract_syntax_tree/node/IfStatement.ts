@@ -1,20 +1,26 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import Location from "../../tokenizer/token/Location.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
+import StatementKind from "./enum/statement_kind.ts";
 
 class IfStatement extends AbstractStatement {
   // TODO: implement
-  //   readonly if_statement ::= if open_parenthesis expression close_parenthesis compound_statement (else if open_parenthesis expression open_parenthesis compound_statement)* (else compound_statement)*
-  //   readonly ifClauses: { expression: Expression, compoundStatement: CompoundStatement}[];
-  //   readonly elseExpression?: Expression;
-  constructor(location: Location, _name: string) {
-    super(NodeKind.IF_STATEMENT, location);
-    // this.name = name;
+  constructor() {
+    super(StatementKind.IF, {
+      position: 0,
+      row: 0,
+      column: 0,
+    });
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitIfStatement(this);
+  // TODO: implement
+  override getChildNodeIterable(): IterableIterator<AbstractNode> {
+    throw new Error("Method not implemented.");
+  }
+
+  // TODO: implement
+  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    throw new Error("Method not implemented.");
   }
 }
 

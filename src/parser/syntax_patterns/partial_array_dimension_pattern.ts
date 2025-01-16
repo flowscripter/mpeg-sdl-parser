@@ -1,5 +1,5 @@
 import { apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import PartialArrayDimension from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -10,7 +10,7 @@ function getPartialArrayDimension(
   values: [
     SyntaxToken,
     SyntaxToken,
-    AbstractExpression,
+    AbstractNode,
     SyntaxToken,
     SyntaxToken,
   ],
@@ -18,13 +18,13 @@ function getPartialArrayDimension(
   const [
     openBracketToken,
     innerOpenBracketToken,
-    indexExpression,
+    index,
     innerCloseBracketToken,
     closeBracketToken,
   ] = values;
 
   return new PartialArrayDimension(
-    indexExpression,
+    index,
     openBracketToken,
     innerOpenBracketToken,
     innerCloseBracketToken,

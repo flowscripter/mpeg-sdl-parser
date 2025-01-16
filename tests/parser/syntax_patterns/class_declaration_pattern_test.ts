@@ -1,7 +1,6 @@
 import AlignedModifier from "../../../src/abstract_syntax_tree/node/AlignedModifier.ts";
 import BitModifier from "../../../src/abstract_syntax_tree/node/BitModifier.ts";
 import ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
-import ClassId from "../../../src/abstract_syntax_tree/node/ClassId.ts";
 import ClassIdRange from "../../../src/abstract_syntax_tree/node/ClassIdRange.ts";
 import ElementaryType from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
 import ElementaryTypeKind from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
@@ -16,6 +15,7 @@ import ParameterList from "../../../src/abstract_syntax_tree/node/ParameterList.
 import ParameterValueList from "../../../src/abstract_syntax_tree/node/ParameterValueList.ts";
 import { CLASS_DECLARATION_RULE } from "../../../src/parser/syntax_rules.ts";
 import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
+import SingleClassId from "../../../src/abstract_syntax_tree/node/SingleClassId.ts";
 import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
 import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
@@ -400,7 +400,7 @@ Deno.test("Test class declaration pattern - all features", () => {
         new ExtendedClassIdRange(
           [
             new ClassIdRange(
-              new ClassId(
+              new SingleClassId(
                 new NumberLiteral(
                   NumberLiteralKind.INTEGER,
                   1,
@@ -415,7 +415,7 @@ Deno.test("Test class declaration pattern - all features", () => {
                   ],
                 ),
               ),
-              new ClassId(
+              new SingleClassId(
                 new NumberLiteral(
                   NumberLiteralKind.INTEGER,
                   2,
@@ -438,7 +438,7 @@ Deno.test("Test class declaration pattern - all features", () => {
                 [],
               ),
             ),
-            new ClassId(
+            new SingleClassId(
               new NumberLiteral(
                 NumberLiteralKind.INTEGER,
                 5,

@@ -1,5 +1,7 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import PrimaryExpression from "../../abstract_syntax_tree/node/PrimaryExpression.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -13,15 +15,16 @@ import {
 
 function getPrimaryExpression(
   value:
-    | AbstractExpression
+    | Identifier
+    | NumberLiteral
     | [
       SyntaxToken,
-      AbstractExpression,
+      AbstractNode,
       SyntaxToken,
     ],
-): AbstractExpression {
+): AbstractNode {
   if (!Array.isArray(value)) {
-    return value as AbstractExpression;
+    return value;
   }
 
   const [openParenthesisToken, operand, closeParenthesisToken] = value;

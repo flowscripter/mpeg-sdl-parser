@@ -8,10 +8,10 @@ import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   CLASS_ID_RANGE_RULE,
-  CLASS_ID_RULE,
   EXTENDED_CLASS_ID_RANGE_RULE,
   IDENTIFIER_RULE,
   NUMBER_LITERAL_RULE,
+  SINGLE_CLASS_ID_RULE,
 } from "../syntax_rules.ts";
 
 function getBitModifier(
@@ -23,7 +23,7 @@ function getBitModifier(
     SyntaxToken,
     Identifier | undefined,
     SyntaxToken | undefined,
-    AbstractClassId | undefined,
+    AbstractClassId,
   ],
 ): BitModifier {
   const [
@@ -63,12 +63,10 @@ function getBitModifierPattern() {
       opt_sc(
         getToken(TokenKind.OPERATOR_ASSIGNMENT_TOKEN),
       ),
-      opt_sc(
-        alt_sc(
-          EXTENDED_CLASS_ID_RANGE_RULE,
-          CLASS_ID_RANGE_RULE,
-          CLASS_ID_RULE,
-        ),
+      alt_sc(
+        EXTENDED_CLASS_ID_RANGE_RULE,
+        CLASS_ID_RANGE_RULE,
+        SINGLE_CLASS_ID_RULE,
       ),
     ),
     getBitModifier,

@@ -1,9 +1,9 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AlignedModifier from "./AlignedModifier.ts";
 import ArrayElementType from "./ArrayElementType.ts";
-import NodeKind from "./enum/node_kind.ts";
+import StatementKind from "./enum/statement_kind.ts";
 import ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
 import Identifier from "./Identifier.ts";
 import ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
@@ -25,7 +25,7 @@ class ArrayDefinition extends AbstractArrayDefinition {
     semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
-      NodeKind.ARRAY_DEFINITION,
+      StatementKind.ARRAY_DEFINITION,
       reservedToken?.location ?? legacyToken?.location ??
         alignedModifier?.location ??
         arrayElementType.location,
@@ -34,8 +34,52 @@ class ArrayDefinition extends AbstractArrayDefinition {
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitArrayDefinition(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.alignedModifier) {
+      yield this.alignedModifier;
+    }
+
+    yield this.arrayElementType;
+    yield this.identifier;
+
+    if (this.implicitArrayDimension) {
+      yield this.implicitArrayDimension;
+    }
+
+    if (this.dimensions) {
+      for (const dimension of this.dimensions) {
+        yield dimension;
+      }
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    if (this.isReserved) {
+      yield this.reservedToken!;
+    }
+
+    if (this.isLegacy) {
+      yield this.legacyToken!;
+    }
+
+    if (this.alignedModifier) {
+      yield* this.alignedModifier.getSyntaxTokenIterable();
+    }
+
+    yield* this.arrayElementType.getSyntaxTokenIterable();
+    yield* this.identifier.getSyntaxTokenIterable();
+
+    if (this.implicitArrayDimension) {
+      yield* this.implicitArrayDimension.getSyntaxTokenIterable();
+    }
+
+    if (this.dimensions) {
+      for (const dimension of this.dimensions) {
+        yield* dimension.getSyntaxTokenIterable();
+      }
+    }
+
+    yield this.semicolonPunctuatorToken;
   }
 }
 

@@ -1,23 +1,23 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
 import AbstractMapOutputValue from "../../abstract_syntax_tree/node/AbstractMapOutputValue.ts";
-import MapAggregateOutputValue from "../../abstract_syntax_tree/node/AggregateMapOutputValue.ts";
+import AggregateMapOutputValue from "../../abstract_syntax_tree/node/AggregateMapOutputValue.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import {
-  MAP_AGGREGATE_OUTPUT_VALUE_RULE,
-  MAP_OUTPUT_VALUE_RULE,
+  AGGREGATE_MAP_OUTPUT_VALUE_RULE,
+  SINGLE_MAP_OUTPUT_VALUE_RULE,
 } from "../syntax_rules.ts";
 
-function getMapAggregateOutputValue(
+function getAggregateMapOutputValue(
   values: [
     SyntaxToken,
     [AbstractMapOutputValue, SyntaxToken][],
     AbstractMapOutputValue | undefined,
     SyntaxToken,
   ],
-): MapAggregateOutputValue {
+): AggregateMapOutputValue {
   const [
     openBraceToken,
     leadingOutputValueAndCommaArray,
@@ -53,7 +53,7 @@ function getMapAggregateOutputValue(
 
   outputValues.push(finalOutputValue);
 
-  return new MapAggregateOutputValue(
+  return new AggregateMapOutputValue(
     outputValues,
     openBraceToken,
     commaTokens,
@@ -61,29 +61,29 @@ function getMapAggregateOutputValue(
   );
 }
 
-function getMapAggregateOutputValuePattern() {
+function getAggregateMapOutputValuePattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN),
       rep_sc(
         seq(
           alt_sc(
-            MAP_OUTPUT_VALUE_RULE,
-            MAP_AGGREGATE_OUTPUT_VALUE_RULE,
+            SINGLE_MAP_OUTPUT_VALUE_RULE,
+            AGGREGATE_MAP_OUTPUT_VALUE_RULE,
           ),
           getToken(TokenKind.PUNCTUATOR_COMMA_TOKEN),
         ),
       ),
       opt_sc(
         alt_sc(
-          MAP_OUTPUT_VALUE_RULE,
-          MAP_AGGREGATE_OUTPUT_VALUE_RULE,
+          SINGLE_MAP_OUTPUT_VALUE_RULE,
+          AGGREGATE_MAP_OUTPUT_VALUE_RULE,
         ),
       ),
       getToken(TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN),
     ),
-    getMapAggregateOutputValue,
+    getAggregateMapOutputValue,
   );
 }
 
-export default getMapAggregateOutputValuePattern;
+export default getAggregateMapOutputValuePattern;

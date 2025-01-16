@@ -1,10 +1,10 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
 import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import Identifier from "./Identifier.ts";
 
-class ClassMemberAccess extends AbstractNode {
+class ClassMemberAccess extends AbstractCompositeNode {
   constructor(
     public readonly memberIdentifier: Identifier,
     public readonly classMemberAccessOperatorToken: SyntaxToken,
@@ -15,8 +15,13 @@ class ClassMemberAccess extends AbstractNode {
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitClassMemberAccess(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.memberIdentifier;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.classMemberAccessOperatorToken;
+    yield* this.memberIdentifier.getSyntaxTokenIterable();
   }
 }
 

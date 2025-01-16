@@ -1,10 +1,10 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
-import AbstractStatement from "./AbstractStatement.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import ElementaryType from "./ElementaryType.ts";
+import StatementKind from "./enum/statement_kind.ts";
 import Identifier from "./Identifier.ts";
 import MapEntryList from "./MapEntryList.ts";
-import ElementaryType from "./ElementaryType.ts";
 
 class MapDeclaration extends AbstractStatement {
   constructor(
@@ -16,11 +16,30 @@ class MapDeclaration extends AbstractStatement {
     public readonly openParenthesisToken: SyntaxToken,
     public readonly closeParenthesisToken: SyntaxToken,
   ) {
-    super(NodeKind.MAP_DECLARATION, mapToken.location);
+    super(StatementKind.MAP_DECLARATION, mapToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitMapDeclaration(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.identifier;
+    if (this.outputElementaryType) {
+      yield this.outputElementaryType;
+    } else if (this.outputClassIdentifier) {
+      yield this.outputClassIdentifier;
+    }
+    yield this.mapEntryList;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.mapToken;
+    yield* this.identifier.getSyntaxTokenIterable();
+    if (this.outputElementaryType) {
+      yield* this.outputElementaryType.getSyntaxTokenIterable();
+    } else if (this.outputClassIdentifier) {
+      yield* this.outputClassIdentifier.getSyntaxTokenIterable();
+    }
+    yield this.openParenthesisToken;
+    yield* this.mapEntryList.getSyntaxTokenIterable();
+    yield this.closeParenthesisToken;
   }
 }
 

@@ -112,6 +112,17 @@ Deno.test("Test specification pattern", () => {
           ),
         ),
       ],
+      new SyntaxToken(
+        TokenKind.EOF_TOKEN,
+        {
+          row: 0,
+          column: 10,
+          position: 10,
+        },
+        "",
+        [],
+        [],
+      ),
     ),
   );
 });
@@ -219,6 +230,17 @@ Deno.test("Test specification pattern - line breaks", () => {
           ),
         ),
       ],
+      new SyntaxToken(
+        TokenKind.EOF_TOKEN,
+        {
+          row: 2,
+          column: 1,
+          position: 26,
+        },
+        "",
+        [],
+        [],
+      ),
     ),
   );
 });

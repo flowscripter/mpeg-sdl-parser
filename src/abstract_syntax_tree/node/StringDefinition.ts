@@ -1,11 +1,11 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import AlignedModifier from "./AlignedModifier.ts";
+import StatementKind from "./enum/statement_kind.ts";
 import StringVariableKind from "./enum/string_variable_kind.ts";
 import Identifier from "./Identifier.ts";
-import AlignedModifier from "./AlignedModifier.ts";
 import StringLiteral from "./StringLiteral.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
 class StringDefinition extends AbstractStatement {
   constructor(
@@ -24,7 +24,7 @@ class StringDefinition extends AbstractStatement {
     public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
-      NodeKind.STRING_DEFINITION,
+      StatementKind.STRING_DEFINITION,
       reservedToken?.location ??
         legacyToken?.location ??
         constToken?.location ??
@@ -33,8 +33,37 @@ class StringDefinition extends AbstractStatement {
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitStringDefinition(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.alignedModifier) {
+      yield this.alignedModifier;
+    }
+
+    yield this.identifier;
+    if (this.stringLiteral) {
+      yield this.stringLiteral;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    if (this.reservedToken) {
+      yield this.reservedToken;
+    }
+    if (this.legacyToken) {
+      yield this.legacyToken;
+    }
+    if (this.constToken) {
+      yield this.constToken;
+    }
+    if (this.alignedModifier) {
+      yield* this.alignedModifier.getSyntaxTokenIterable();
+    }
+    yield this.stringVariableKindToken;
+    yield* this.identifier.getSyntaxTokenIterable();
+    if (this.assignmentPunctuatorToken) {
+      yield this.assignmentPunctuatorToken;
+      yield* this.stringLiteral!.getSyntaxTokenIterable();
+    }
+    yield this.semicolonPunctuatorToken;
   }
 }
 

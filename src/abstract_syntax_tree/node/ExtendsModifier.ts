@@ -1,11 +1,11 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
 import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import Identifier from "./Identifier.ts";
 import ParameterValueList from "./ParameterValueList.ts";
 
-class ExtendsModifier extends AbstractNode {
+class ExtendsModifier extends AbstractCompositeNode {
   constructor(
     public readonly identifier: Identifier,
     public readonly parameterValueList: ParameterValueList | undefined,
@@ -14,8 +14,19 @@ class ExtendsModifier extends AbstractNode {
     super(NodeKind.EXTENDS_MODIFIER, extendsToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitExtendsModifier(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.identifier;
+    if (this.parameterValueList) {
+      yield this.parameterValueList;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.extendsToken;
+    yield* this.identifier.getSyntaxTokenIterable();
+    if (this.parameterValueList) {
+      yield* this.parameterValueList.getSyntaxTokenIterable();
+    }
   }
 }
 

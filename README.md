@@ -5,21 +5,59 @@
 
 **NOTE: Under development**
 
+- fix GitHub workflows
+- implement control flow parsing: `do`, `for`, `if`, `switch`, `while`
+- publish to registry
+- provide separate CLI module: 
+    - test library module exports
+    - implement pretty printer
+    - implement syntax highlighter
+- update this readme with:
+    - import location for module
+    - updated UML diagram
+    - link to API documentation
+    - link to CLI
+- implement semantic checks
+
 ## Development
 
-Install [Deno](https://deno.land/manual/getting_started/installation)
-
-Test: `deno test -A`
+Install [Deno](https://docs.deno.com/runtime/getting_started/installation/)
 
 Lint: `deno fmt`
+
+Test: `deno test -A`
 
 ## Usage
 
 ```typescript
-import sdl from "https://deno.land/x/flowscripter_mped_sdl_parser_library/mod.ts";
+// TODO: location pending
+// import * from "https://deno.land/x/flowscripter_mped_sdl_parser_library/mod.ts";
 
-// Parse SDL and output an abstract syntax tree
-console.log(sdl.parse("// hello world"));
+const parser = new Parser();
+
+// Parse SDL and produce an AST (abstract syntax tree)
+
+const ast = parser.parse("computed int i;");
+
+console.log(JSON.stringify(ast));
+
+class MyNodeVisitor implements NodeVisitor {
+  visitBefore(node: AbstractNode): boolean {
+    return true;
+  }
+
+  visitAfter(_node: AbstractNode): boolean {
+    return true;
+  }
+}
+
+const myNodeVisitor = new MyNodeVisitor();
+const traversingVisitor = new TraversingVisitor(myNodeVisitor);
+
+// Traverse the AST
+
+ast.accept(traversingVisitor);
+
 ```
 
 ## Documentation
@@ -41,7 +79,7 @@ then be used for further processing in consuming applications.
 classDiagram
     
     class Parser {
-        parse(definitionString) Definition
+        parse(specificationString) Specification
     }
 
     Tokenizer ..> TokenKind
@@ -52,10 +90,6 @@ classDiagram
     
     Parser --> Definition : produces
 ```
-
-### Usage
-
-**NOTE: TODO: coming soon!**
 
 ### API
 

@@ -1,10 +1,10 @@
-import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import AbstractNode from "./AbstractNode.ts";
+import NodeKind from "./enum/node_kind.ts";
 import NumberLiteral from "./NumberLiteral.ts";
 
-class ExpandableModifier extends AbstractNode {
+class ExpandableModifier extends AbstractCompositeNode {
   constructor(
     public readonly maxClassSize: NumberLiteral | undefined,
     public readonly expandableToken: SyntaxToken,
@@ -14,8 +14,20 @@ class ExpandableModifier extends AbstractNode {
     super(NodeKind.EXPANDABLE_MODIFIER, expandableToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitExpandableModifier(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.maxClassSize) {
+      yield this.maxClassSize;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.expandableToken;
+
+    if (this.openParenthesisToken) {
+      yield this.openParenthesisToken;
+      yield* this.maxClassSize!.getSyntaxTokenIterable();
+      yield this.closeParenthesisToken!;
+    }
   }
 }
 

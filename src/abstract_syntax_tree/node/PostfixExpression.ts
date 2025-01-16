@@ -1,27 +1,43 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import AbstractExpression from "./AbstractExpression.ts";
+import AbstractNode from "./AbstractNode.ts";
 import ArrayElementAccess from "./ArrayElementAccess.ts";
 import ClassMemberAccess from "./ClassMemberAccess.ts";
-import NodeKind from "./enum/node_kind.ts";
+import ExpressionKind from "./enum/expression_kind.ts";
 import PostfixOperatorKind from "./enum/postfix_operator_kind.ts";
 
 class PostfixExpression extends AbstractExpression {
   constructor(
-    public readonly operand: AbstractExpression,
+    public readonly operand: AbstractNode,
     public readonly arrayElementAccess: ArrayElementAccess | undefined,
     public readonly classMemberAccess: ClassMemberAccess | undefined,
     public readonly postfixOperatorKind: PostfixOperatorKind | undefined,
     public readonly postfixOperatorToken: SyntaxToken | undefined,
   ) {
     super(
-      NodeKind.POSTFIX_EXPRESSION,
+      ExpressionKind.POSTFIX,
       operand.location,
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitPostfixExpression(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.operand;
+    if (this.arrayElementAccess) {
+      yield this.arrayElementAccess;
+    } else if (this.classMemberAccess) {
+      yield this.classMemberAccess;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.operand.getSyntaxTokenIterable();
+    if (this.arrayElementAccess) {
+      yield* this.arrayElementAccess.getSyntaxTokenIterable();
+    } else if (this.classMemberAccess) {
+      yield* this.classMemberAccess.getSyntaxTokenIterable();
+    } else if (this.postfixOperatorToken) {
+      yield this.postfixOperatorToken;
+    }
   }
 }
 

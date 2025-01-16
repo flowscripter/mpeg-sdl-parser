@@ -1,19 +1,23 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import AbstractStatement from "./AbstractStatement.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import StatementKind from "./enum/statement_kind.ts";
 
 class ExpressionStatement extends AbstractStatement {
   constructor(
-    public readonly expression: AbstractExpression,
+    public readonly expression: AbstractNode,
     public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.EXPRESSION_STATEMENT, expression.location);
+    super(StatementKind.EXPRESSION, expression.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitExpressionStatement(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.expression;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.expression.getSyntaxTokenIterable();
+    yield this.semicolonPunctuatorToken;
   }
 }
 

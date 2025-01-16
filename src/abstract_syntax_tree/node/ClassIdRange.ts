@@ -1,20 +1,27 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractClassId from "./AbstractClassId.ts";
-import ClassId from "./ClassId.ts";
+import AbstractNode from "./AbstractNode.ts";
+import SingleClassId from "./SingleClassId.ts";
+import ClassIdKind from "./enum/class_id_kind.ts";
 
 class ClassIdRange extends AbstractClassId {
   constructor(
-    public readonly startClassId: ClassId,
-    public readonly endClassId: ClassId,
+    public readonly startClassId: SingleClassId,
+    public readonly endClassId: SingleClassId,
     public readonly rangeToken: SyntaxToken,
   ) {
-    super(NodeKind.CLASS_ID_RANGE, startClassId.location);
+    super(ClassIdKind.RANGE, startClassId.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitClassIdRange(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.startClassId;
+    yield this.endClassId;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.startClassId.getSyntaxTokenIterable();
+    yield this.rangeToken;
+    yield* this.endClassId.getSyntaxTokenIterable();
   }
 }
 

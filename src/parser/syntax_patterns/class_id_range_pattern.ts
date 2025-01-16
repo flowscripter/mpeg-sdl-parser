@@ -1,16 +1,16 @@
 import { apply, seq } from "../../../deps.ts";
-import ClassId from "../../abstract_syntax_tree/node/ClassId.ts";
 import ClassIdRange from "../../abstract_syntax_tree/node/ClassIdRange.ts";
+import SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import { CLASS_ID_RULE } from "../syntax_rules.ts";
+import { SINGLE_CLASS_ID_RULE } from "../syntax_rules.ts";
 
 function getClassIdRange(
   values: [
-    ClassId,
+    SingleClassId,
     SyntaxToken,
-    ClassId,
+    SingleClassId,
   ],
 ): ClassIdRange {
   const [startClassId, rangeToken, endClassId] = values;
@@ -21,9 +21,9 @@ function getClassIdRange(
 function getClassIdRangePattern() {
   return apply(
     seq(
-      CLASS_ID_RULE,
+      SINGLE_CLASS_ID_RULE,
       getToken(TokenKind.OPERATOR_RANGE_TOKEN),
-      CLASS_ID_RULE,
+      SINGLE_CLASS_ID_RULE,
     ),
     getClassIdRange,
   );

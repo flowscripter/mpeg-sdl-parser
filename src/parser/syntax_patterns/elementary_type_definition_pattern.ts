@@ -1,5 +1,5 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import ElementaryTypeDefinition from "../../abstract_syntax_tree/node/ElementaryTypeDefinition.ts";
@@ -29,8 +29,8 @@ function getElementaryTypeDefinition(
     Identifier,
     [
       SyntaxToken,
-      AbstractExpression,
-      [SyntaxToken, AbstractExpression] | undefined,
+      AbstractNode,
+      [SyntaxToken, AbstractNode] | undefined,
     ] | undefined,
     SyntaxToken,
   ],
@@ -55,17 +55,17 @@ function getElementaryTypeDefinition(
     );
   }
 
-  let valueExpression: AbstractExpression | undefined;
-  let endValueExpression: AbstractExpression | undefined;
+  let value: AbstractNode | undefined;
+  let endValue: AbstractNode | undefined;
   let assignmentToken: SyntaxToken | undefined;
   let rangeOperatorToken: SyntaxToken | undefined;
 
   if (assignmentAndValueOrRange) {
     assignmentToken = assignmentAndValueOrRange[0];
-    valueExpression = assignmentAndValueOrRange[1];
+    value = assignmentAndValueOrRange[1];
     if (assignmentAndValueOrRange[2]) {
       rangeOperatorToken = assignmentAndValueOrRange[2][0];
-      endValueExpression = assignmentAndValueOrRange[2][1];
+      endValue = assignmentAndValueOrRange[2][1];
     }
   }
 
@@ -78,8 +78,8 @@ function getElementaryTypeDefinition(
     lengthAttribute,
     lookaheadToken !== undefined,
     identifier,
-    valueExpression,
-    endValueExpression,
+    value,
+    endValue,
     reservedToken,
     legacyToken,
     constToken,

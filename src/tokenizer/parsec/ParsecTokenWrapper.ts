@@ -15,6 +15,7 @@ import Tokenizer from "../Tokenizer.ts";
  */
 class ParsecTokenWrapper implements ParsecToken<TokenKind> {
   private nextToken: ParsecTokenWrapper | undefined | null;
+  private syntaxToken: SyntaxToken | undefined;
 
   constructor(
     private readonly tokenizer: Tokenizer,
@@ -63,18 +64,22 @@ class ParsecTokenWrapper implements ParsecToken<TokenKind> {
   }
 
   public getSyntaxToken(): SyntaxToken {
-    return new SyntaxToken(
-      this.kind,
-      {
-        position: this.pos.index,
-        // note that the SyntaxToken location has 0-based row and column values
-        row: this.pos.rowBegin - 1,
-        column: this.pos.columnBegin - 1,
-      },
-      this.text,
-      this.leadingTrivia,
-      this.trailingTrivia,
-    );
+    if (this.syntaxToken === undefined) {
+      this.syntaxToken = new SyntaxToken(
+        this.kind,
+        {
+          position: this.pos.index,
+          // note that the SyntaxToken location has 0-based row and column values
+          row: this.pos.rowBegin - 1,
+          column: this.pos.columnBegin - 1,
+        },
+        this.text,
+        this.leadingTrivia,
+        this.trailingTrivia,
+      );
+    }
+
+    return this.syntaxToken;
   }
 }
 

@@ -1,5 +1,5 @@
 import { apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -7,13 +7,12 @@ import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getLengthAttribute(
-  values: [SyntaxToken, AbstractExpression, SyntaxToken],
+  values: [SyntaxToken, AbstractNode, SyntaxToken],
 ): LengthAttribute {
-  const [openParenthesisToken, lengthExpression, closeParenthesisToken] =
-    values;
+  const [openParenthesisToken, length, closeParenthesisToken] = values;
 
   return new LengthAttribute(
-    lengthExpression,
+    length,
     openParenthesisToken,
     closeParenthesisToken,
   );

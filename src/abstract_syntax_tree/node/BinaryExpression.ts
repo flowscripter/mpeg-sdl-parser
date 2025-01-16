@@ -1,21 +1,28 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import AbstractExpression from "./AbstractExpression.ts";
+import AbstractNode from "./AbstractNode.ts";
 import BinaryOperatorKind from "./enum/binary_operator_kind.ts";
-import NodeKind from "./enum/node_kind.ts";
+import ExpressionKind from "./enum/expression_kind.ts";
 
 class BinaryExpression extends AbstractExpression {
   constructor(
-    public readonly leftOperand: AbstractExpression,
+    public readonly leftOperand: AbstractNode,
     public readonly binaryOperatorKind: BinaryOperatorKind,
-    public readonly rightOperand: AbstractExpression,
+    public readonly rightOperand: AbstractNode,
     public readonly binaryOperandToken: SyntaxToken,
   ) {
-    super(NodeKind.BINARY_EXPRESSION, leftOperand.location);
+    super(ExpressionKind.BINARY, leftOperand.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitBinaryExpression(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.leftOperand;
+    yield this.rightOperand;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.leftOperand.getSyntaxTokenIterable();
+    yield this.binaryOperandToken;
+    yield* this.rightOperand.getSyntaxTokenIterable();
   }
 }
 

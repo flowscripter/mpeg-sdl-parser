@@ -5,9 +5,11 @@ import PostfixOperatorKind from "../../../src/abstract_syntax_tree/node/enum/pos
 import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
 import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
 import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import PrimaryExpression from "../../../src/abstract_syntax_tree/node/PrimaryExpression.ts";
 import { POSTFIX_EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
 import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
 import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
+import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test expression pattern - postfix operator", () => {
@@ -789,6 +791,97 @@ Deno.test("Test postfix expression pattern - class member and array element acce
       ),
       undefined,
       undefined,
+    ),
+  );
+});
+
+Deno.test("Test postfix expression pattern - expression in parenthesis with postfix operator and whitespace", () => {
+  testSyntaxPattern(
+    POSTFIX_EXPRESSION_RULE,
+    "( i ) ++",
+    new PostfixExpression(
+      new PrimaryExpression(
+        new Identifier(
+          "i",
+          new SyntaxToken(
+            TokenKind.IDENTIFIER_TOKEN,
+            {
+              row: 0,
+              column: 2,
+              position: 2,
+            },
+            "i",
+            [],
+            [
+              new Trivia(
+                TokenKind.WHITESPACE_TOKEN,
+                {
+                  row: 0,
+                  column: 3,
+                  position: 3,
+                },
+                " ",
+              ),
+            ],
+          ),
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
+          {
+            row: 0,
+            column: 0,
+            position: 0,
+          },
+          "(",
+          [],
+          [
+            new Trivia(
+              TokenKind.WHITESPACE_TOKEN,
+              {
+                row: 0,
+                column: 1,
+                position: 1,
+              },
+              " ",
+            ),
+          ],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
+          {
+            row: 0,
+            column: 4,
+            position: 4,
+          },
+          ")",
+          [],
+          [
+            new Trivia(
+              TokenKind.WHITESPACE_TOKEN,
+              {
+                row: 0,
+                column: 5,
+                position: 5,
+              },
+              " ",
+            ),
+          ],
+        ),
+      ),
+      undefined,
+      undefined,
+      PostfixOperatorKind.POSTFIX_INCREMENT,
+      new SyntaxToken(
+        TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
+        {
+          row: 0,
+          column: 6,
+          position: 6,
+        },
+        "++",
+        [],
+        [],
+      ),
     ),
   );
 });

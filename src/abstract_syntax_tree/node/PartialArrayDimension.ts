@@ -1,12 +1,11 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import AbstractArrayDimension from "./AbstractArrayDimension.ts";
-import AbstractExpression from "./AbstractExpression.ts";
+import AbstractNode from "./AbstractNode.ts";
 import ArrayDimensionKind from "./enum/array_dimension_kind.ts";
 
 class PartialArrayDimension extends AbstractArrayDimension {
   constructor(
-    public readonly indexExpression: AbstractExpression,
+    public readonly index: AbstractNode,
     public readonly openBracketToken: SyntaxToken,
     public readonly innerOpenBracketToken: SyntaxToken,
     public readonly innerCloseBracketToken: SyntaxToken,
@@ -15,8 +14,16 @@ class PartialArrayDimension extends AbstractArrayDimension {
     super(ArrayDimensionKind.PARTIAL, openBracketToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitPartialArrayDimension(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.index;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openBracketToken;
+    yield this.innerOpenBracketToken;
+    yield* this.index.getSyntaxTokenIterable();
+    yield this.innerCloseBracketToken;
+    yield this.closeBracketToken;
   }
 }
 

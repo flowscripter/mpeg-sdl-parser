@@ -1,5 +1,5 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ExpressionStatement from "../../abstract_syntax_tree/node/ExpressionStatement.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -11,13 +11,13 @@ import {
 
 function getExpressionStatement(
   values: [
-    AbstractExpression,
+    AbstractNode,
     SyntaxToken,
   ],
 ): ExpressionStatement {
-  const [abstractExpression, semicolonToken] = values;
+  const [expression, semicolonToken] = values;
   return new ExpressionStatement(
-    abstractExpression,
+    expression,
     semicolonToken,
   );
 }

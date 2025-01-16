@@ -7,7 +7,7 @@ import LengthAttribute from "../../../src/abstract_syntax_tree/node/LengthAttrib
 import MapDeclaration from "../../../src/abstract_syntax_tree/node/MapDeclaration.ts";
 import MapEntry from "../../../src/abstract_syntax_tree/node/MapEntry.ts";
 import MapEntryList from "../../../src/abstract_syntax_tree/node/MapEntryList.ts";
-import MapOutputValue from "../../../src/abstract_syntax_tree/node/MapOutputValue.ts";
+import SingleMapOutputValue from "../../../src/abstract_syntax_tree/node/SingleMapOutputValue.ts";
 import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
 import { MAP_DECLARATION_RULE } from "../../../src/parser/syntax_rules.ts";
 import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
@@ -66,7 +66,7 @@ Deno.test("Test map declaration pattern - elementary type output", () => {
             ),
             new AggregateMapOutputValue(
               [
-                new MapOutputValue(
+                new SingleMapOutputValue(
                   new NumberLiteral(
                     NumberLiteralKind.INTEGER,
                     1024,
@@ -124,7 +124,7 @@ Deno.test("Test map declaration pattern - elementary type output", () => {
             ),
             new AggregateMapOutputValue(
               [
-                new MapOutputValue(
+                new SingleMapOutputValue(
                   new NumberLiteral(
                     NumberLiteralKind.INTEGER,
                     2048,
@@ -278,7 +278,7 @@ Deno.test("Test map declaration pattern - class output", () => {
             ),
             new AggregateMapOutputValue(
               [
-                new MapOutputValue(
+                new SingleMapOutputValue(
                   new NumberLiteral(
                     NumberLiteralKind.INTEGER,
                     1024,
@@ -424,7 +424,7 @@ Deno.test("Test map declaration pattern - nested outputs", () => {
             ),
             new AggregateMapOutputValue(
               [
-                new MapOutputValue(
+                new SingleMapOutputValue(
                   new NumberLiteral(
                     NumberLiteralKind.INTEGER,
                     1024,
@@ -443,7 +443,7 @@ Deno.test("Test map declaration pattern - nested outputs", () => {
                 ),
                 new AggregateMapOutputValue(
                   [
-                    new MapOutputValue(
+                    new SingleMapOutputValue(
                       new NumberLiteral(
                         NumberLiteralKind.INTEGER,
                         1,
@@ -460,7 +460,7 @@ Deno.test("Test map declaration pattern - nested outputs", () => {
                       undefined,
                       undefined,
                     ),
-                    new MapOutputValue(
+                    new SingleMapOutputValue(
                       new NumberLiteral(
                         NumberLiteralKind.INTEGER,
                         2,
@@ -640,7 +640,7 @@ Deno.test("Test map declaration pattern - escape codes", () => {
             ),
             new AggregateMapOutputValue(
               [
-                new MapOutputValue(
+                new SingleMapOutputValue(
                   undefined,
                   new ElementaryType(
                     ElementaryTypeKind.INTEGER,

@@ -1,12 +1,11 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
 import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import AbstractExpression from "./AbstractExpression.ts";
 import NodeKind from "./enum/node_kind.ts";
 
-class ArrayElementAccess extends AbstractNode {
+class ArrayElementAccess extends AbstractCompositeNode {
   constructor(
-    public readonly indexExpression: AbstractExpression,
+    public readonly index: AbstractNode,
     public readonly openBracketToken: SyntaxToken,
     public readonly closeBracketToken: SyntaxToken,
   ) {
@@ -16,8 +15,14 @@ class ArrayElementAccess extends AbstractNode {
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitArrayElementAccess(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.index;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openBracketToken;
+    yield* this.index.getSyntaxTokenIterable();
+    yield this.closeBracketToken;
   }
 }
 

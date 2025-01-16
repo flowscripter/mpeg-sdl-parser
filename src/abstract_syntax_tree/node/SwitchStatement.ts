@@ -1,25 +1,26 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import Location from "../../tokenizer/token/Location.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-
-/* Rule FC.2: Flow control using switch */
+import StatementKind from "./enum/statement_kind.ts";
 
 class SwitchStatement extends AbstractStatement {
   // TODO: implement
-  //   readonly switch_case_clause ::= case constant_expression colon ((statement* break semicolon) | (open_brace statement* break semicolon close_brace))
-  //   readonly switch_default_clause ::= default colon (statement* | ( open_brace statement* close_brace))
-  //   readonly switch_statement ::= switch open_parenthesis expression close_parenthesis open_brace switch_case_clause* switch_default_clause? close_brace
-  //   readonly expression: Expression;
-  //   readonly caseClauses: { case: NumberLiteral (? integer only ?), statements: Statement[]}[];
-  //   readonly defaultClauseStatements?: Statement[];
-  constructor(location: Location, _name: string) {
-    super(NodeKind.SWITCH_STATEMENT, location);
-    // this.name = name;
+  constructor() {
+    super(StatementKind.SWITCH, {
+      position: 0,
+      row: 0,
+      column: 0,
+    });
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitSwitchStatement(this);
+  // TODO: implement
+  override getChildNodeIterable(): IterableIterator<AbstractNode> {
+    throw new Error("Method not implemented.");
+  }
+
+  // TODO: implement
+  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    throw new Error("Method not implemented.");
   }
 }
 

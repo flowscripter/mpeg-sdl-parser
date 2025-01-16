@@ -1,13 +1,13 @@
 import { apply } from "../../../deps.ts";
-import ClassId from "../../abstract_syntax_tree/node/ClassId.ts";
 import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import { NUMBER_LITERAL_RULE } from "../syntax_rules.ts";
 
-function getClassId(
+function getSingleClassId(
   numberLiteral: NumberLiteral,
-): ClassId {
+): SingleClassId {
   if (
     (numberLiteral.numberLiteralKind !== NumberLiteralKind.BINARY) &&
     (numberLiteral.numberLiteralKind !== NumberLiteralKind.HEXADECIMAL) &&
@@ -27,14 +27,14 @@ function getClassId(
     );
   }
 
-  return new ClassId(numberLiteral);
+  return new SingleClassId(numberLiteral);
 }
 
-function getClassIdPattern() {
+function getSingleClassIdPattern() {
   return apply(
     NUMBER_LITERAL_RULE,
-    getClassId,
+    getSingleClassId,
   );
 }
 
-export default getClassIdPattern;
+export default getSingleClassIdPattern;

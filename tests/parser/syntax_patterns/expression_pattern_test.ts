@@ -20,168 +20,7 @@ import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
 import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
-Deno.test("Test expression pattern - expression in parenthesis with postfix operator and whitespace", () => {
-  testSyntaxPattern(
-    EXPRESSION_RULE,
-    "( i ) ++",
-    new PostfixExpression(
-      new PrimaryExpression(
-        new Identifier(
-          "i",
-          new SyntaxToken(
-            TokenKind.IDENTIFIER_TOKEN,
-            {
-              row: 0,
-              column: 2,
-              position: 2,
-            },
-            "i",
-            [],
-            [
-              new Trivia(
-                TokenKind.WHITESPACE_TOKEN,
-                {
-                  row: 0,
-                  column: 3,
-                  position: 3,
-                },
-                " ",
-              ),
-            ],
-          ),
-        ),
-        new SyntaxToken(
-          TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          {
-            row: 0,
-            column: 0,
-            position: 0,
-          },
-          "(",
-          [],
-          [
-            new Trivia(
-              TokenKind.WHITESPACE_TOKEN,
-              {
-                row: 0,
-                column: 1,
-                position: 1,
-              },
-              " ",
-            ),
-          ],
-        ),
-        new SyntaxToken(
-          TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          {
-            row: 0,
-            column: 4,
-            position: 4,
-          },
-          ")",
-          [],
-          [
-            new Trivia(
-              TokenKind.WHITESPACE_TOKEN,
-              {
-                row: 0,
-                column: 5,
-                position: 5,
-              },
-              " ",
-            ),
-          ],
-        ),
-      ),
-      undefined,
-      undefined,
-      PostfixOperatorKind.POSTFIX_INCREMENT,
-      new SyntaxToken(
-        TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-        {
-          row: 0,
-          column: 6,
-          position: 6,
-        },
-        "++",
-        [],
-        [],
-      ),
-    ),
-  );
-});
-
-Deno.test("Test expression pattern - lengthof operator with unary minus", () => {
-  testSyntaxPattern(
-    EXPRESSION_RULE,
-    "-lengthof(i)",
-    new UnaryExpression(
-      UnaryOperatorKind.UNARY_NEGATION,
-      new LengthOfExpression(
-        new Identifier(
-          "i",
-          new SyntaxToken(
-            TokenKind.IDENTIFIER_TOKEN,
-            {
-              row: 0,
-              column: 10,
-              position: 10,
-            },
-            "i",
-            [],
-            [],
-          ),
-        ),
-        new SyntaxToken(
-          TokenKind.KEYWORD_LENGTHOF_TOKEN,
-          {
-            row: 0,
-            column: 1,
-            position: 1,
-          },
-          "lengthof",
-          [],
-          [],
-        ),
-        new SyntaxToken(
-          TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          {
-            row: 0,
-            column: 9,
-            position: 9,
-          },
-          "(",
-          [],
-          [],
-        ),
-        new SyntaxToken(
-          TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          {
-            row: 0,
-            column: 11,
-            position: 11,
-          },
-          ")",
-          [],
-          [],
-        ),
-      ),
-      new SyntaxToken(
-        TokenKind.OPERATOR_MINUS_TOKEN,
-        {
-          row: 0,
-          column: 0,
-          position: 0,
-        },
-        "-",
-        [],
-        [],
-      ),
-    ),
-  );
-});
-
-Deno.test("Test expression pattern - multiplication of two literals", () => {
+Deno.test("Test binary expression pattern - multiplication of two literals", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1*2",
@@ -236,7 +75,7 @@ Deno.test("Test expression pattern - multiplication of two literals", () => {
   );
 });
 
-Deno.test("Test expression pattern - multiplication of two literals with unary operators", () => {
+Deno.test("Test binary expression pattern - multiplication of two literals with unary operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "+1*-2",
@@ -319,7 +158,7 @@ Deno.test("Test expression pattern - multiplication of two literals with unary o
   );
 });
 
-Deno.test("Test expression pattern - multiplication of three literals", () => {
+Deno.test("Test binary expression pattern - multiplication of three literals", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1*2*3",
@@ -405,7 +244,7 @@ Deno.test("Test expression pattern - multiplication of three literals", () => {
   );
 });
 
-Deno.test("Test expression pattern - binary expression in parenthesis", () => {
+Deno.test("Test binary expression pattern - binary expression in parenthesis", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "(1*2)",
@@ -484,7 +323,7 @@ Deno.test("Test expression pattern - binary expression in parenthesis", () => {
   );
 });
 
-Deno.test("Test expression pattern - binary expression in parenthesis with postfix operator - invalid syntax", () => {
+Deno.test("Test binary expression pattern - binary expression in parenthesis with postfix operator - invalid syntax", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "(1*2)++",
@@ -579,7 +418,7 @@ Deno.test("Test expression pattern - binary expression in parenthesis with postf
   );
 });
 
-Deno.test("Test expression pattern - multiplicative operators - left-to-right associativity", () => {
+Deno.test("Test binary expression pattern - multiplicative operators - left-to-right associativity", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1/2*3",
@@ -665,7 +504,7 @@ Deno.test("Test expression pattern - multiplicative operators - left-to-right as
   );
 });
 
-Deno.test("Test expression pattern - multiplicative and additive operators - precedence", () => {
+Deno.test("Test binary expression pattern - multiplicative and additive operators - precedence", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1+2*3",
@@ -751,7 +590,7 @@ Deno.test("Test expression pattern - multiplicative and additive operators - pre
   );
 });
 
-Deno.test("Test expression pattern - multiplicative and additive operators - precedence overridden by parenthesis", () => {
+Deno.test("Test binary expression pattern - multiplicative and additive operators - precedence overridden by parenthesis", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "(1+2)*3",
@@ -861,7 +700,7 @@ Deno.test("Test expression pattern - multiplicative and additive operators - pre
   );
 });
 
-Deno.test("Test expression pattern - logical operators", () => {
+Deno.test("Test binary expression pattern - logical operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i||j && k",
@@ -958,7 +797,7 @@ Deno.test("Test expression pattern - logical operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - additive operators", () => {
+Deno.test("Test binary expression pattern - additive operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i+j - k",
@@ -1055,7 +894,7 @@ Deno.test("Test expression pattern - additive operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - shift operators", () => {
+Deno.test("Test binary expression pattern - shift operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i<<j >> k",
@@ -1144,7 +983,7 @@ Deno.test("Test expression pattern - shift operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - relational operators", () => {
+Deno.test("Test binary expression pattern - relational operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i<j<=k>l>=m",
@@ -1277,7 +1116,7 @@ Deno.test("Test expression pattern - relational operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - equality operators", () => {
+Deno.test("Test binary expression pattern - equality operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i==j != k",
@@ -1374,7 +1213,7 @@ Deno.test("Test expression pattern - equality operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - bitwise operators", () => {
+Deno.test("Test binary expression pattern - bitwise operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i&j | k",
@@ -1471,7 +1310,7 @@ Deno.test("Test expression pattern - bitwise operators", () => {
   );
 });
 
-Deno.test("Test expression pattern - all precedence rules", () => {
+Deno.test("Test binary expression pattern - all precedence rules", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "8&&7|6==5>4>>3+2*1",
@@ -1712,7 +1551,7 @@ Deno.test("Test expression pattern - all precedence rules", () => {
   );
 });
 
-Deno.test("Test expression pattern - mixed unary and binary", () => {
+Deno.test("Test binary expression pattern - mixed unary and binary", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i++ * lengthof(j)",
@@ -1832,7 +1671,7 @@ Deno.test("Test expression pattern - mixed unary and binary", () => {
   );
 });
 
-Deno.test("Test expression pattern - nested parenthesis", () => {
+Deno.test("Test binary expression pattern - nested parenthesis", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "((1*2)+3)/(2*3)",
@@ -2052,7 +1891,7 @@ Deno.test("Test expression pattern - nested parenthesis", () => {
   );
 });
 
-Deno.test("Test expression pattern - three levels of precedence", () => {
+Deno.test("Test binary expression pattern - three levels of precedence", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1+2*3<<2",

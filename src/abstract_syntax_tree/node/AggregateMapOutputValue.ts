@@ -1,21 +1,37 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractMapOutputValue from "./AbstractMapOutputValue.ts";
+import AbstractNode from "./AbstractNode.ts";
+import MapOutputValueKind from "./enum/map_output_value_kind.ts";
 
-class MapAggregateOutputValue extends AbstractMapOutputValue {
+class AggregateMapOutputValue extends AbstractMapOutputValue {
   constructor(
     public readonly outputValues: AbstractMapOutputValue[],
     public readonly openBraceToken: SyntaxToken,
     public readonly commaTokens: SyntaxToken[] | undefined,
     public readonly closeBraceToken: SyntaxToken,
   ) {
-    super(NodeKind.MAP_AGGREGATE_OUTPUT_VALUE, openBraceToken.location);
+    super(MapOutputValueKind.AGGREGATE, openBraceToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitAggregateMapOutputValue(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    for (let i = 0; i < this.outputValues.length; i++) {
+      yield this.outputValues[i];
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openBraceToken;
+
+    for (let i = 0; i < this.outputValues.length; i++) {
+      yield* this.outputValues[i].getSyntaxTokenIterable();
+
+      if (i < this.outputValues.length - 1) {
+        yield this.commaTokens![i];
+      }
+    }
+
+    yield this.closeBraceToken;
   }
 }
 
-export default MapAggregateOutputValue;
+export default AggregateMapOutputValue;

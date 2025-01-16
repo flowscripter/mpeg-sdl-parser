@@ -1,4 +1,5 @@
 enum BinaryOperatorKind {
+  ASSIGNMENT,
   MULTIPLY,
   DIVIDE,
   MODULUS,

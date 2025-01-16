@@ -8,11 +8,11 @@ import { ELEMENTARY_TYPE_RULE, IDENTIFIER_RULE } from "../syntax_rules.ts";
 function getParameter(
   values: [Identifier | ElementaryType, Identifier],
 ): Parameter {
-  const [classIdenifierOrElementaryType, identifier] = values;
+  const [classIdentifierOrElementaryType, identifier] = values;
 
-  if (classIdenifierOrElementaryType.nodeKind === NodeKind.IDENTIFIER) {
+  if (classIdentifierOrElementaryType.nodeKind === NodeKind.IDENTIFIER) {
     return new Parameter(
-      classIdenifierOrElementaryType as Identifier,
+      classIdentifierOrElementaryType as Identifier,
       undefined,
       identifier,
     );
@@ -20,7 +20,7 @@ function getParameter(
 
   return new Parameter(
     undefined,
-    classIdenifierOrElementaryType as ElementaryType,
+    classIdentifierOrElementaryType as ElementaryType,
     identifier,
   );
 }

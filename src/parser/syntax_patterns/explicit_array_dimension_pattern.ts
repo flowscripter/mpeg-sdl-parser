@@ -1,5 +1,5 @@
 import { apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ExplicitArrayDimension from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -9,18 +9,18 @@ import { EXPRESSION_RULE } from "../syntax_rules.ts";
 function getExplicitArrayDimension(
   values: [
     SyntaxToken,
-    AbstractExpression,
+    AbstractNode,
     SyntaxToken,
   ],
 ): ExplicitArrayDimension {
   const [
     openBracketToken,
-    sizeExpression,
+    size,
     closeBracketToken,
   ] = values;
 
   return new ExplicitArrayDimension(
-    sizeExpression,
+    size,
     openBracketToken,
     closeBracketToken,
   );

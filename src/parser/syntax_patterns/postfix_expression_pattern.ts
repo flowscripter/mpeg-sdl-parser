@@ -1,5 +1,6 @@
 import { alt_sc, lrec_sc } from "../../../deps.ts";
 import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ArrayElementAccess from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
 import ClassMemberAccess from "../../abstract_syntax_tree/node/ClassMemberAccess.ts";
 import NodeKind from "../../abstract_syntax_tree/node/enum/node_kind.ts";
@@ -16,9 +17,9 @@ import {
 } from "../syntax_rules.ts";
 
 function getPostfixExpression(
-  operand: AbstractExpression,
-  postfixOperator: AbstractExpression | SyntaxToken | undefined,
-): AbstractExpression {
+  operand: AbstractNode,
+  postfixOperator: AbstractNode | AbstractExpression | SyntaxToken | undefined,
+): AbstractNode {
   if (!postfixOperator) {
     return operand;
   }
@@ -33,12 +34,12 @@ function getPostfixExpression(
       undefined
   ) {
     if (
-      (postfixOperator as AbstractExpression).nodeKind ===
+      (postfixOperator as AbstractNode).nodeKind ===
         NodeKind.ARRAY_ELEMENT_ACCESS
     ) {
       arrayElementAccess = postfixOperator as ArrayElementAccess;
     } else if (
-      (postfixOperator as AbstractExpression).nodeKind ===
+      (postfixOperator as AbstractNode).nodeKind ===
         NodeKind.CLASS_MEMBER_ACCESS
     ) {
       classMemberAccess = postfixOperator as ClassMemberAccess;

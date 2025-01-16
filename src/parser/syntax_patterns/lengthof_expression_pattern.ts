@@ -1,5 +1,5 @@
 import { apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import LengthOfExpression from "../../abstract_syntax_tree/node/LengthOfExpression.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -10,18 +10,18 @@ function getLengthofExpression(
   values: [
     SyntaxToken,
     SyntaxToken,
-    AbstractExpression,
+    AbstractNode,
     SyntaxToken,
   ],
 ): LengthOfExpression {
   const [
     lengthofToken,
     openParenthesisToken,
-    abstractExpression,
+    operand,
     closeParenthesisToken,
   ] = values;
   return new LengthOfExpression(
-    abstractExpression,
+    operand,
     lengthofToken,
     openParenthesisToken,
     closeParenthesisToken,

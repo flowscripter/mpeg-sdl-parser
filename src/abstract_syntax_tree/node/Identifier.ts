@@ -1,9 +1,8 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
-import AbstractExpression from "./AbstractExpression.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractLeafNode from "./AbstractLeafNode.ts";
+import NodeKind from "./enum/node_kind.ts";
 
-class Identifier extends AbstractExpression {
+class Identifier extends AbstractLeafNode {
   constructor(
     public readonly name: string,
     public readonly token: SyntaxToken,
@@ -11,8 +10,8 @@ class Identifier extends AbstractExpression {
     super(NodeKind.IDENTIFIER, token.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitIdentifier(this);
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.token;
   }
 }
 

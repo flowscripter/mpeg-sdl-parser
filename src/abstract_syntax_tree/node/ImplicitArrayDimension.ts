@@ -1,13 +1,12 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import AbstractArrayDimension from "./AbstractArrayDimension.ts";
-import ArrayDimensionKind from "./enum/array_dimension_kind.ts";
-import AbstractExpression from "./AbstractExpression.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractArrayDimension from "./AbstractArrayDimension.ts";
+import AbstractNode from "./AbstractNode.ts";
+import ArrayDimensionKind from "./enum/array_dimension_kind.ts";
 
 class ImplicitArrayDimension extends AbstractArrayDimension {
   constructor(
-    public readonly rangeStartExpression: AbstractExpression | undefined,
-    public readonly rangeEndExpression: AbstractExpression | undefined,
+    public readonly rangeStart: AbstractNode | undefined,
+    public readonly rangeEnd: AbstractNode | undefined,
     public readonly openBracketToken: SyntaxToken,
     public readonly rangeOperatorToken: SyntaxToken | undefined,
     public readonly closeBracketToken: SyntaxToken,
@@ -15,8 +14,25 @@ class ImplicitArrayDimension extends AbstractArrayDimension {
     super(ArrayDimensionKind.IMPLICIT, openBracketToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitImplicitArrayDimension(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.rangeStart) {
+      yield this.rangeStart;
+      yield this.rangeEnd!;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openBracketToken;
+
+    if (this.rangeStart) {
+      yield* this.rangeStart.getSyntaxTokenIterable();
+
+      yield this.rangeOperatorToken!;
+
+      yield* this.rangeEnd!.getSyntaxTokenIterable();
+    }
+
+    yield this.closeBracketToken;
   }
 }
 

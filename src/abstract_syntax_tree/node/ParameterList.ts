@@ -1,10 +1,10 @@
-import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import AbstractNode from "./AbstractNode.ts";
+import NodeKind from "./enum/node_kind.ts";
 import Parameter from "./Parameter.ts";
 
-class ParameterList extends AbstractNode {
+class ParameterList extends AbstractCompositeNode {
   constructor(
     public readonly parameters: Parameter[],
     public readonly openParenthesisToken: SyntaxToken,
@@ -14,8 +14,21 @@ class ParameterList extends AbstractNode {
     super(NodeKind.PARAMETER_LIST, openParenthesisToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitClassDefinitionParameter(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    for (let i = 0; i < this.parameters.length; i++) {
+      yield this.parameters[i];
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openParenthesisToken;
+    for (let i = 0; i < this.parameters.length; i++) {
+      yield* this.parameters[i].getSyntaxTokenIterable();
+      if (i < this.commaTokens!.length) {
+        yield this.commaTokens![i];
+      }
+    }
+    yield this.closeParenthesisToken;
   }
 }
 

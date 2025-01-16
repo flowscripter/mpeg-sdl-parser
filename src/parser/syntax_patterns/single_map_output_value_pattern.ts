@@ -1,7 +1,7 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
 import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
-import MapOutputValue from "../../abstract_syntax_tree/node/MapOutputValue.ts";
+import SingleMapOutputValue from "../../abstract_syntax_tree/node/SingleMapOutputValue.ts";
 import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import {
   ELEMENTARY_TYPE_RULE,
@@ -9,28 +9,28 @@ import {
   NUMBER_LITERAL_RULE,
 } from "../syntax_rules.ts";
 
-function getMapOutputValueRule(
+function getSingleMapOutputValueRule(
   value:
     | NumberLiteral
     | [ElementaryType, LengthAttribute],
-): MapOutputValue {
+): SingleMapOutputValue {
   if (Array.isArray(value)) {
     const [elementaryType, lengthAttribute] = value;
-    return new MapOutputValue(
+    return new SingleMapOutputValue(
       undefined,
       elementaryType,
       lengthAttribute,
     );
   }
 
-  return new MapOutputValue(
+  return new SingleMapOutputValue(
     value as NumberLiteral,
     undefined,
     undefined,
   );
 }
 
-function getMapOutputValueRulePattern() {
+function getSingleMapOutputValueRulePattern() {
   return apply(
     alt_sc(
       NUMBER_LITERAL_RULE,
@@ -39,8 +39,8 @@ function getMapOutputValueRulePattern() {
         LENGTH_ATTRIBUTE_RULE,
       ),
     ),
-    getMapOutputValueRule,
+    getSingleMapOutputValueRule,
   );
 }
 
-export default getMapOutputValueRulePattern;
+export default getSingleMapOutputValueRulePattern;

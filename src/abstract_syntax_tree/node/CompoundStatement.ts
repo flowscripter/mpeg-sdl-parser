@@ -1,8 +1,10 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
-import Statement from "./AbstractStatement.ts";
-import AbstractStatement from "./AbstractStatement.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
+import {
+  default as AbstractStatement,
+  default as Statement,
+} from "./AbstractStatement.ts";
+import StatementKind from "./enum/statement_kind.ts";
 
 class CompoundStatement extends AbstractStatement {
   constructor(
@@ -10,11 +12,21 @@ class CompoundStatement extends AbstractStatement {
     public readonly openBracePunctuatorToken: SyntaxToken,
     public readonly closeBracePunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.COMPOUND_STATEMENT, openBracePunctuatorToken.location);
+    super(StatementKind.COMPOUND, openBracePunctuatorToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitCompoundStatement(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    for (const statement of this.statements) {
+      yield statement;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.openBracePunctuatorToken;
+    for (const statement of this.statements) {
+      yield* statement.getSyntaxTokenIterable();
+    }
+    yield this.closeBracePunctuatorToken;
   }
 }
 

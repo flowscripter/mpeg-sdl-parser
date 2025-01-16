@@ -1,10 +1,9 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractLeafNode from "./AbstractLeafNode.ts";
 import NodeKind from "./enum/node_kind.ts";
 import NumberLiteralKind from "./enum/number_literal_kind.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class NumberLiteral extends AbstractExpression {
+class NumberLiteral extends AbstractLeafNode {
   constructor(
     public readonly numberLiteralKind: NumberLiteralKind,
     public readonly value: number,
@@ -16,8 +15,8 @@ class NumberLiteral extends AbstractExpression {
     this.value = value;
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitNumberLiteral(this);
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.tokens;
   }
 }
 

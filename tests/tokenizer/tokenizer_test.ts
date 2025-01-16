@@ -14,7 +14,7 @@ Deno.test("Test whitespace token - 1", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.WHITESPACE_TOKEN],
       ["\r\n\t"],
       [],
@@ -37,9 +37,40 @@ Deno.test("Test whitespace token - 2", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.WHITESPACE_TOKEN],
       [" \r \n "],
+      [],
+      [],
+    ],
+  ];
+
+  testTokenizer(input, expected);
+});
+
+Deno.test("Test whitespace token - 3", () => {
+  const input = " }\n";
+  const expected: [
+    TokenKind,
+    string,
+    TokenKind[],
+    string[],
+    TokenKind[],
+    string[],
+  ][] = [
+    [
+      TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
+      "}",
+      [TokenKind.WHITESPACE_TOKEN],
+      [" "],
+      [],
+      [],
+    ],
+    [
+      TokenKind.EOF_TOKEN,
+      "",
+      [TokenKind.WHITESPACE_TOKEN],
+      ["\n"],
       [],
       [],
     ],
@@ -60,7 +91,7 @@ Deno.test("Test comment token - basic", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.COMMENT_TOKEN],
       ["// hello world"],
       [],
@@ -83,7 +114,7 @@ Deno.test("Test comment token - escaped tab", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.COMMENT_TOKEN],
       ["// hello\\t world "],
       [],
@@ -114,7 +145,7 @@ Deno.test("Test comment token - tab in comment does not fail tokenization but wi
     ],
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [],
       [],
       [],
@@ -137,7 +168,7 @@ Deno.test("Test comment token - escaped tab and line breaks", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.COMMENT_TOKEN, TokenKind.WHITESPACE_TOKEN],
       ["// hello\\t world \\n", "\n"],
       [],
@@ -162,7 +193,7 @@ Deno.test("Test comment token - trailing whitespace and comment", () => {
       TokenKind.WHITESPACE_TOKEN,
       TokenKind.COMMENT_TOKEN,
     ], [" ", "// hello world"]],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -180,7 +211,7 @@ Deno.test("Test comment token - line break", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [
         TokenKind.COMMENT_TOKEN,
         TokenKind.WHITESPACE_TOKEN,
@@ -210,7 +241,7 @@ Deno.test("Test comment token - comment within a comment", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [
         TokenKind.COMMENT_TOKEN,
       ],
@@ -237,7 +268,7 @@ Deno.test("Test comment token - two comments across line break", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [
         TokenKind.COMMENT_TOKEN,
         TokenKind.WHITESPACE_TOKEN,
@@ -268,7 +299,7 @@ Deno.test("Test comment token - SDL compatible UCS", () => {
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [
         TokenKind.COMMENT_TOKEN,
       ],
@@ -295,7 +326,7 @@ Deno.test("Test comment token - code point escape sequences (which are not parse
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [
         TokenKind.COMMENT_TOKEN,
       ],
@@ -322,7 +353,7 @@ Deno.test("Test comment token - code point escape sequences (which are not parse
   ][] = [
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.COMMENT_TOKEN],
       ["// π hello ό \\u0085 \\U00002028"],
       [],
@@ -351,7 +382,7 @@ Deno.test("Test comment and identifier tokens with new line", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -368,7 +399,7 @@ Deno.test("Test identifier token", () => {
     string[],
   ][] = [
     [TokenKind.IDENTIFIER_TOKEN, "helloWorld", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -393,7 +424,7 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
     [TokenKind.PUNCTUATOR_COLON_TOKEN, ":", [], [], [], []],
     [TokenKind.PUNCTUATOR_SEMICOLON_TOKEN, ";", [], [], [], []],
     [TokenKind.PUNCTUATOR_COMMA_TOKEN, ",", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -467,7 +498,7 @@ Deno.test("Test punctuator tokens with and without whitespace", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -712,7 +743,7 @@ Deno.test("Test keyword tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -769,7 +800,7 @@ Deno.test("Test operator tokens with and without whitespace", () => {
     [TokenKind.OPERATOR_LOGICAL_OR_TOKEN, "||", [], [], [], []],
     [TokenKind.OPERATOR_RANGE_TOKEN, "..", [], [], [], []],
     [TokenKind.OPERATOR_ASSIGNMENT_TOKEN, "=", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -947,7 +978,7 @@ Deno.test("Test operator tokens with and without whitespace", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1006,7 +1037,7 @@ Deno.test("Test binary literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1065,7 +1096,7 @@ Deno.test("Test hexadecimal literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1092,7 +1123,7 @@ Deno.test("Test multiple character literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1132,7 +1163,7 @@ Deno.test("Test integer literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1159,7 +1190,7 @@ Deno.test("Test decimal literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1202,7 +1233,7 @@ Deno.test("Test floating point tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1236,7 +1267,7 @@ Deno.test("Test signed integer literal tokens parsed with separate operator toke
       [],
     ],
     [TokenKind.LITERAL_INTEGER_TOKEN, "123", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1270,7 +1301,7 @@ Deno.test("Test signed integer zero literal tokens parsed with separate operator
       [],
     ],
     [TokenKind.LITERAL_INTEGER_TOKEN, "0", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1310,7 +1341,7 @@ Deno.test("Test signed decimal literal tokens parsed with separate operator toke
       [],
     ],
     [TokenKind.LITERAL_DECIMAL_TOKEN, "1.1", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1339,7 +1370,7 @@ Deno.test("Test signed decimal zero literal tokens parsed with separate operator
       [],
     ],
     [TokenKind.LITERAL_DECIMAL_TOKEN, "0.0", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1401,7 +1432,7 @@ Deno.test("Test signed floating point literal tokens parsed with separate operat
       [],
     ],
     [TokenKind.LITERAL_FLOATING_POINT_TOKEN, "0e0", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1430,7 +1461,7 @@ Deno.test("Test floating point literal tokens with invalid signed zero exponent 
     ],
     [TokenKind.OPERATOR_PLUS_TOKEN, "+", [], [], [], []],
     [TokenKind.LITERAL_INTEGER_TOKEN, "0", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1505,7 +1536,7 @@ Deno.test("Test string literal tokens", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1522,7 +1553,7 @@ Deno.test("Test string literal tokens ignoring embedded multiple character liter
     string[],
   ][] = [
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, "\"Hello 'abcd'\"", [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1590,7 +1621,7 @@ Deno.test("Test string literal tokens with UTF prefix", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1621,7 +1652,7 @@ Deno.test("Test string literal tokens across line breaks", () => {
       [],
       [],
     ],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1686,7 +1717,7 @@ Deno.test("Test string literal tokens with invalid universal character name pars
   ][] = [
     [TokenKind.IDENTIFIER_TOKEN, "u", [], [], [], []],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\u12"', [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1696,7 +1727,7 @@ Deno.test("Test string literal tokens with invalid universal character name pars
   expected = [
     [TokenKind.IDENTIFIER_TOKEN, "u", [], [], [], []],
     [TokenKind.LITERAL_STRING_BASIC_TOKEN, '"\\U000012"', [], [], [], []],
-    [TokenKind.EOF_TOKEN, "<EOF_TOKEN>", [], [], [], []],
+    [TokenKind.EOF_TOKEN, "", [], [], [], []],
   ];
 
   testTokenizer(input, expected);
@@ -1778,7 +1809,7 @@ Deno.test("Mixture of tokens", () => {
     ],
     [
       TokenKind.EOF_TOKEN,
-      "<EOF_TOKEN>",
+      "",
       [TokenKind.WHITESPACE_TOKEN],
       ["\n"],
       [],

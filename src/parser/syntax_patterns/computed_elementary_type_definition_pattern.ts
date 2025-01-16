@@ -1,5 +1,6 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
 import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ComputedElementaryTypeDefinition from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
 import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
@@ -18,7 +19,7 @@ function getComputedElementaryTypeDefinition(
     SyntaxToken | undefined,
     ElementaryType,
     Identifier,
-    [SyntaxToken, AbstractExpression] | undefined,
+    [SyntaxToken, AbstractNode] | undefined,
     SyntaxToken,
   ],
 ): ComputedElementaryTypeDefinition {
@@ -31,19 +32,19 @@ function getComputedElementaryTypeDefinition(
     semicolonPunctuatorToken,
   ] = values;
 
-  let valueExpression: AbstractExpression | undefined;
+  let value: AbstractNode | undefined;
   let assignmentToken: SyntaxToken | undefined;
 
   if (assignmentAndValue) {
     assignmentToken = assignmentAndValue[0];
-    valueExpression = assignmentAndValue[1];
+    value = assignmentAndValue[1];
   }
 
   return new ComputedElementaryTypeDefinition(
     constToken !== undefined,
     elementaryType,
     identifier,
-    valueExpression,
+    value,
     computedToken,
     constToken,
     assignmentToken,

@@ -1,5 +1,5 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ImplicitArrayDimension from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -9,7 +9,7 @@ import { EXPRESSION_RULE } from "../syntax_rules.ts";
 function getImplicitArrayDimension(
   values: [
     SyntaxToken,
-    [AbstractExpression, SyntaxToken, AbstractExpression] | undefined,
+    [AbstractNode, SyntaxToken, AbstractNode] | undefined,
     SyntaxToken,
   ],
 ): ImplicitArrayDimension {
@@ -19,19 +19,19 @@ function getImplicitArrayDimension(
     closeBracketToken,
   ] = values;
 
-  let rangeStartExpression: AbstractExpression | undefined;
+  let rangeStart: AbstractNode | undefined;
   let rangeOperatorToken: SyntaxToken | undefined;
-  let rangeEndExpression: AbstractExpression | undefined;
+  let rangeEnd: AbstractNode | undefined;
 
   if (rangeAttribute) {
-    rangeStartExpression = rangeAttribute[0];
+    rangeStart = rangeAttribute[0];
     rangeOperatorToken = rangeAttribute[1];
-    rangeEndExpression = rangeAttribute[2];
+    rangeEnd = rangeAttribute[2];
   }
 
   return new ImplicitArrayDimension(
-    rangeStartExpression,
-    rangeEndExpression,
+    rangeStart,
+    rangeEnd,
     openBracketToken,
     rangeOperatorToken,
     closeBracketToken,

@@ -1,13 +1,13 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
 import AlignedModifier from "./AlignedModifier.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import BitModifier from "./BitModifier.ts";
+import StatementKind from "./enum/statement_kind.ts";
+import ExpandableModifier from "./ExpandableModifier.ts";
+import ExtendsModifier from "./ExtendsModifier.ts";
 import Identifier from "./Identifier.ts";
 import ParameterList from "./ParameterList.ts";
-import ExtendsModifier from "./ExtendsModifier.ts";
-import ExpandableModifier from "./ExpandableModifier.ts";
 
 class ClassDeclaration extends AbstractStatement {
   constructor(
@@ -25,14 +25,75 @@ class ClassDeclaration extends AbstractStatement {
     public readonly closeBraceToken: SyntaxToken,
   ) {
     super(
-      NodeKind.CLASS_DECLARATION,
+      StatementKind.CLASS_DECLARATION,
       alignedModifier?.location ?? expandableModifier?.location ??
         identifier.location,
     );
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitClassDeclaration(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.alignedModifier) {
+      yield this.alignedModifier;
+    }
+
+    if (this.expandableModifier) {
+      yield this.expandableModifier;
+    }
+
+    yield this.identifier;
+
+    if (this.parameterList) {
+      yield this.parameterList;
+    }
+
+    if (this.extendsModifier) {
+      yield this.extendsModifier;
+    }
+
+    if (this.bitModifier) {
+      yield this.bitModifier;
+    }
+
+    for (const statement of this.statements) {
+      yield statement;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    if (this.alignedModifier) {
+      yield* this.alignedModifier.getSyntaxTokenIterable();
+    }
+
+    if (this.expandableModifier) {
+      yield* this.expandableModifier.getSyntaxTokenIterable();
+    }
+
+    if (this.isAbstract) {
+      yield this.abstractToken!;
+    }
+
+    yield this.classToken;
+    yield* this.identifier.getSyntaxTokenIterable();
+
+    if (this.parameterList) {
+      yield* this.parameterList.getSyntaxTokenIterable();
+    }
+
+    if (this.extendsModifier) {
+      yield* this.extendsModifier.getSyntaxTokenIterable();
+    }
+
+    if (this.bitModifier) {
+      yield* this.bitModifier.getSyntaxTokenIterable();
+    }
+
+    yield this.openBraceToken;
+
+    for (const statement of this.statements) {
+      yield* statement.getSyntaxTokenIterable();
+    }
+
+    yield this.closeBraceToken;
   }
 }
 

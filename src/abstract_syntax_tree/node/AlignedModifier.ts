@@ -1,10 +1,10 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
 import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 import NumberLiteral from "./NumberLiteral.ts";
 
-class AlignedModifier extends AbstractNode {
+class AlignedModifier extends AbstractCompositeNode {
   constructor(
     public readonly bitCount: number,
     public readonly isDefault8BitCount: boolean,
@@ -16,8 +16,20 @@ class AlignedModifier extends AbstractNode {
     super(NodeKind.ALIGNED_MODIFIER, alignedToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitAlignedModifier(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (!this.isDefault8BitCount) {
+      yield this.bitCountModifier!;
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.alignedToken;
+
+    if (!this.isDefault8BitCount) {
+      yield this.openParenthesisToken!;
+      yield* this.bitCountModifier!.getSyntaxTokenIterable();
+      yield this.closeParenthesisToken!;
+    }
   }
 }
 

@@ -1,10 +1,14 @@
 import Location from "../../tokenizer/token/Location.ts";
-import AbstractNode from "./AbstractNode.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import ClassIdKind from "./enum/class_id_kind.ts";
 import NodeKind from "./enum/node_kind.ts";
 
-abstract class AbstractClassId extends AbstractNode {
-  constructor(nodeKind: NodeKind, location: Location) {
-    super(nodeKind, location);
+abstract class AbstractClassId extends AbstractCompositeNode {
+  constructor(
+    public readonly classIdKind: ClassIdKind,
+    location: Location,
+  ) {
+    super(NodeKind.CLASS_ID, location);
   }
 }
 

@@ -430,7 +430,7 @@ class Tokenizer implements Lexer<TokenKind> {
     column: number,
   ): ParsecTokenWrapper | undefined {
     logger.debug(
-      "getNextSyntaxToken => position: %d, row: %d, column: %d",
+      "getNextSyntaxToken: position: %d, row: %d, column: %d",
       position,
       row,
       column,
@@ -597,7 +597,7 @@ class Tokenizer implements Lexer<TokenKind> {
     matchKind: MatchKind,
   ): MatchResult | undefined {
     logger.debug(
-      "matchToken => position: %d, matchKind: %s",
+      "matchToken: position: %d, matchKind: %s",
       position,
       MatchKind[matchKind],
     );
@@ -605,11 +605,11 @@ class Tokenizer implements Lexer<TokenKind> {
     // if at the end of the input return EOF
     if (position === input.length) {
       logger.debug(
-        "matchToken => returning EOF_TOKEN",
+        "matchToken: returning EOF_TOKEN",
       );
       return {
         tokenKind: TokenKind.EOF_TOKEN,
-        text: "<EOF_TOKEN>",
+        text: "",
         position,
         row,
         column,
@@ -680,7 +680,7 @@ class Tokenizer implements Lexer<TokenKind> {
     }
 
     logger.debug(
-      "matchToken => returning " +
+      "matchToken: returning " +
         (matchResult ? TokenKind[matchResult!.tokenKind] : "undefined"),
     );
 

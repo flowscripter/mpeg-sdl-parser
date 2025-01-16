@@ -1,7 +1,7 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import ClassId from "../../abstract_syntax_tree/node/ClassId.ts";
 import ClassIdRange from "../../abstract_syntax_tree/node/ClassIdRange.ts";
 import ExtendedClassIdRange from "../../abstract_syntax_tree/node/ExtendedClassIdRange.ts";
+import SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
@@ -9,12 +9,12 @@ import {
   InternalParserError,
   SyntacticParserError,
 } from "../../util/ParserError.ts";
-import { CLASS_ID_RANGE_RULE, CLASS_ID_RULE } from "../syntax_rules.ts";
+import { CLASS_ID_RANGE_RULE, SINGLE_CLASS_ID_RULE } from "../syntax_rules.ts";
 
 function getExtendedClassIdRange(
   values: [
-    [(ClassId | ClassIdRange), SyntaxToken][],
-    (ClassId | ClassIdRange | undefined),
+    [(SingleClassId | ClassIdRange), SyntaxToken][],
+    (SingleClassId | ClassIdRange | undefined),
   ],
 ): ExtendedClassIdRange {
   const [
@@ -22,7 +22,7 @@ function getExtendedClassIdRange(
     finalClassId,
   ] = values;
 
-  const classIds: (ClassId | ClassIdRange)[] = [];
+  const classIds: (SingleClassId | ClassIdRange)[] = [];
   const commaTokens: SyntaxToken[] = [];
 
   if (leadingClassIdAndCommaArray.length === 0) {
@@ -60,7 +60,7 @@ function getExtendedClassIdRangePattern() {
         seq(
           alt_sc(
             CLASS_ID_RANGE_RULE,
-            CLASS_ID_RULE,
+            SINGLE_CLASS_ID_RULE,
           ),
           getToken(TokenKind.PUNCTUATOR_COMMA_TOKEN),
         ),
@@ -68,7 +68,7 @@ function getExtendedClassIdRangePattern() {
       opt_sc(
         alt_sc(
           CLASS_ID_RANGE_RULE,
-          CLASS_ID_RULE,
+          SINGLE_CLASS_ID_RULE,
         ),
       ),
     ),

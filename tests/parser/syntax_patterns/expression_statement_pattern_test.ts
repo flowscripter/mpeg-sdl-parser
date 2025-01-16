@@ -1,4 +1,3 @@
-import AssignmentExpression from "../../../src/abstract_syntax_tree/node/AssignmentExpression.ts";
 import BinaryExpression from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
 import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
 import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
@@ -7,7 +6,6 @@ import ExpressionStatement from "../../../src/abstract_syntax_tree/node/Expressi
 import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
 import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
 import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
-import UnaryExpression from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
 import { EXPRESSION_STATEMENT_RULE } from "../../../src/parser/syntax_rules.ts";
 import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
 import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
@@ -68,7 +66,7 @@ Deno.test("Test expression statement pattern - assignment expression", () => {
     EXPRESSION_STATEMENT_RULE,
     "i=1*2;",
     new ExpressionStatement(
-      new AssignmentExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -83,6 +81,7 @@ Deno.test("Test expression statement pattern - assignment expression", () => {
             [],
           ),
         ),
+        BinaryOperatorKind.ASSIGNMENT,
         new BinaryExpression(
           new NumberLiteral(
             NumberLiteralKind.INTEGER,

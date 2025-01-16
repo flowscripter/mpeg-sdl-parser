@@ -1,20 +1,31 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractClassId from "./AbstractClassId.ts";
-import ClassId from "./ClassId.ts";
+import AbstractNode from "./AbstractNode.ts";
+import SingleClassId from "./SingleClassId.ts";
 import ClassIdRange from "./ClassIdRange.ts";
+import ClassIdKind from "./enum/class_id_kind.ts";
 
 class ExtendedClassIdRange extends AbstractClassId {
   constructor(
-    public readonly classIds: Array<(ClassId | ClassIdRange)>,
+    public readonly classIds: Array<(SingleClassId | ClassIdRange)>,
     public readonly commaTokens: SyntaxToken[],
   ) {
-    super(NodeKind.EXTENDED_CLASS_ID_RANGE, classIds[0].location);
+    super(ClassIdKind.EXTENDED_RANGE, classIds[0].location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitExtendedClassIdRange(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    for (let i = 0; i < this.classIds.length; i++) {
+      yield this.classIds[i];
+    }
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    for (let i = 0; i < this.classIds.length; i++) {
+      yield* this.classIds[i].getSyntaxTokenIterable();
+      if (i < this.commaTokens.length) {
+        yield this.commaTokens[i];
+      }
+    }
   }
 }
 

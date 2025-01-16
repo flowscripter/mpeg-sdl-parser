@@ -1,22 +1,26 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import Location from "../../tokenizer/token/Location.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-
-/* Rule FC.4: Flow control using do */
+import StatementKind from "./enum/statement_kind.ts";
 
 class DoStatement extends AbstractStatement {
   // TODO: implement
-  //   readonly do_statement ::= do compound_statement while open_parenthesis expression close_parenthesis semicolon
-  //   readonly compoundStatement: CompoundStatement;
-  //   readonly expression: Expression;
-  constructor(location: Location, _name: string) {
-    super(NodeKind.DO_STATEMENT, location);
-    // this.name = name;
+  constructor() {
+    super(StatementKind.DO, {
+      position: 0,
+      row: 0,
+      column: 0,
+    });
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitDoStatement(this);
+  // TODO: implement
+  override getChildNodeIterable(): IterableIterator<AbstractNode> {
+    throw new Error("Method not implemented.");
+  }
+
+  // TODO: implement
+  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    throw new Error("Method not implemented.");
   }
 }
 

@@ -1,10 +1,9 @@
-import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractLeafNode from "./AbstractLeafNode.ts";
 import NodeKind from "./enum/node_kind.ts";
 import StringLiteralKind from "./enum/string_literal_kind.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
-class StringLiteral extends AbstractNode {
+class StringLiteral extends AbstractLeafNode {
   constructor(
     public readonly stringLiteralKind: StringLiteralKind,
     public readonly value: string,
@@ -14,8 +13,8 @@ class StringLiteral extends AbstractNode {
     super(NodeKind.STRING_LITERAL, stringLiteralTokens[0].location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitStringLiteral(this);
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield* this.stringLiteralTokens;
   }
 }
 

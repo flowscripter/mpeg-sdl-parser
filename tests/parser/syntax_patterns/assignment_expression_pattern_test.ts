@@ -1,5 +1,4 @@
 import ArrayElementAccess from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
-import AssignmentExpression from "../../../src/abstract_syntax_tree/node/AssignmentExpression.ts";
 import BinaryExpression from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
 import ClassMemberAccess from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
 import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
@@ -16,7 +15,7 @@ Deno.test("Test assignment expression pattern", () => {
   testSyntaxPattern(
     ASSIGNMENT_EXPRESSION_RULE,
     "i=1*2",
-    new AssignmentExpression(
+    new BinaryExpression(
       new Identifier(
         "i",
         new SyntaxToken(
@@ -31,6 +30,7 @@ Deno.test("Test assignment expression pattern", () => {
           [],
         ),
       ),
+      BinaryOperatorKind.ASSIGNMENT,
       new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
@@ -98,7 +98,7 @@ Deno.test("Test assignment expression pattern - class member and array element a
   testSyntaxPattern(
     ASSIGNMENT_EXPRESSION_RULE,
     "a.b=c[1]",
-    new AssignmentExpression(
+    new BinaryExpression(
       new PostfixExpression(
         new Identifier(
           "a",
@@ -145,6 +145,7 @@ Deno.test("Test assignment expression pattern - class member and array element a
         undefined,
         undefined,
       ),
+      BinaryOperatorKind.ASSIGNMENT,
       new PostfixExpression(
         new Identifier(
           "c",

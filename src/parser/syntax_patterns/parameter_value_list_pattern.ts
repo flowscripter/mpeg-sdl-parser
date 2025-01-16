@@ -1,5 +1,5 @@
 import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ParameterValueList from "../../abstract_syntax_tree/node/ParameterValueList.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
@@ -10,23 +10,23 @@ import { EXPRESSION_RULE } from "../syntax_rules.ts";
 function getParameterValueList(
   values: [
     SyntaxToken,
-    [AbstractExpression, SyntaxToken][],
-    AbstractExpression | undefined,
+    [AbstractNode, SyntaxToken][],
+    AbstractNode | undefined,
     SyntaxToken,
   ],
 ): ParameterValueList {
   const [
     openParenthesisToken,
-    leadingValueExpressionAndCommaArray,
-    finalValueExpression,
+    leadingValueAndCommaArray,
+    finalValue,
     closeParenthesisToken,
   ] = values;
 
-  const valueExpressions: AbstractExpression[] = [];
+  const parameterValues: AbstractNode[] = [];
   let commaTokens: SyntaxToken[] | undefined;
 
-  if (leadingValueExpressionAndCommaArray.length === 0) {
-    if (finalValueExpression === undefined) {
+  if (leadingValueAndCommaArray.length === 0) {
+    if (finalValue === undefined) {
       throw new SyntacticParserError(
         "Empty parameter value list",
         openParenthesisToken,
@@ -35,12 +35,12 @@ function getParameterValueList(
   } else {
     commaTokens = [];
 
-    leadingValueExpressionAndCommaArray.forEach((valueExpressionAndComma) => {
-      valueExpressions.push(valueExpressionAndComma[0]);
+    leadingValueAndCommaArray.forEach((valueExpressionAndComma) => {
+      parameterValues.push(valueExpressionAndComma[0]);
       commaTokens!.push(valueExpressionAndComma[1]);
     });
 
-    if (finalValueExpression === undefined) {
+    if (finalValue === undefined) {
       throw new SyntacticParserError(
         "Trailing comma in parameter value list",
         commaTokens[commaTokens.length - 1],
@@ -48,10 +48,10 @@ function getParameterValueList(
     }
   }
 
-  valueExpressions.push(finalValueExpression);
+  parameterValues.push(finalValue);
 
   return new ParameterValueList(
-    valueExpressions,
+    parameterValues,
     openParenthesisToken,
     commaTokens,
     closeParenthesisToken,

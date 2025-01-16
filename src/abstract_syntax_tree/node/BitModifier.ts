@@ -1,16 +1,16 @@
-import AbstractNode from "./AbstractNode.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import NodeKind from "./enum/node_kind.ts";
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import NumberLiteral from "./NumberLiteral.ts";
-import Identifier from "./Identifier.ts";
 import AbstractClassId from "./AbstractClassId.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import AbstractNode from "./AbstractNode.ts";
+import NodeKind from "./enum/node_kind.ts";
+import Identifier from "./Identifier.ts";
+import NumberLiteral from "./NumberLiteral.ts";
 
-class BitModifier extends AbstractNode {
+class BitModifier extends AbstractCompositeNode {
   constructor(
     public readonly length: NumberLiteral,
     public readonly identifier: Identifier | undefined,
-    public readonly classId: AbstractClassId | undefined,
+    public readonly classId: AbstractClassId,
     public readonly colonToken: SyntaxToken,
     public readonly bitKeywordToken: SyntaxToken,
     public readonly openParenthesisToken: SyntaxToken,
@@ -20,8 +20,28 @@ class BitModifier extends AbstractNode {
     super(NodeKind.BIT_MODIFIER, colonToken.location);
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitBitModifier(this);
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.length;
+
+    if (this.identifier) {
+      yield this.identifier;
+    }
+
+    yield this.classId;
+  }
+
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.colonToken;
+    yield this.bitKeywordToken;
+    yield this.openParenthesisToken;
+    yield* this.length.getSyntaxTokenIterable();
+    yield this.closeParenthesisToken;
+
+    if (this.identifier) {
+      yield* this.identifier.getSyntaxTokenIterable();
+      yield this.assignmentToken!;
+    }
+    yield* this.classId.getSyntaxTokenIterable();
   }
 }
 

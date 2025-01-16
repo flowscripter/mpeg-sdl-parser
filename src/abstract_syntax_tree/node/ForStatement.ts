@@ -1,22 +1,26 @@
-import NodeVisitor from "../visitor/NodeVisitor.ts";
-import Location from "../../tokenizer/token/Location.ts";
-import NodeKind from "./enum/node_kind.ts";
+import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
+import StatementKind from "./enum/statement_kind.ts";
 
 class ForStatement extends AbstractStatement {
   // TODO: implement
-  //   readonly for_statement ::= for open_parenthesis (assignment_expression | computed_elementary_type_definition )? semicolon expression? semicolon (assignment_expression | expression)? close_parenthesis compound_statement
-  //   readonly expression1: AssignmentExpression | ComputedVariableDefinition;
-  //   readonly expression2: Expression;
-  //   readonly expression3: AssignmentExpression | Expression;
-  //   readonly compoundStatement: CompoundStatement;
-  constructor(location: Location, _name: string) {
-    super(NodeKind.FOR_STATEMENT, location);
-    // this.name = name;
+  constructor() {
+    super(StatementKind.FOR, {
+      position: 0,
+      row: 0,
+      column: 0,
+    });
   }
 
-  public accept(visitor: NodeVisitor) {
-    visitor.visitForStatement(this);
+  // TODO: implement
+  override getChildNodeIterable(): IterableIterator<AbstractNode> {
+    throw new Error("Method not implemented.");
+  }
+
+  // TODO: implement
+  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    throw new Error("Method not implemented.");
   }
 }
 
