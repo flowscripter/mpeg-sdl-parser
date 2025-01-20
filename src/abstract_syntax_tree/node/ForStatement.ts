@@ -1,26 +1,66 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import AbstractExpression from "./AbstractExpression.ts";
 import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
+import CompoundStatement from "./CompoundStatement.ts";
+import ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class ForStatement extends AbstractStatement {
-  // TODO: implement
-  constructor() {
-    super(StatementKind.FOR, {
-      position: 0,
-      row: 0,
-      column: 0,
-    });
+  constructor(
+    // either ((assignment_expression semicolon) | computed_elementary_type_definition | semicolon)
+    public readonly expression1: AbstractExpression | undefined,
+    public readonly computedElementaryDefinition:
+      | ComputedElementaryTypeDefinition
+      | undefined,
+    public readonly expression2: AbstractExpression | undefined,
+    public readonly expression3: AbstractExpression | undefined,
+    public readonly compoundStatement: CompoundStatement,
+    public readonly forKeywordToken: SyntaxToken,
+    public readonly openParenthesisToken: SyntaxToken,
+    public readonly semicolonToken1: SyntaxToken | undefined,
+    public readonly semicolonToken2: SyntaxToken,
+    public readonly closeParenthesisToken: SyntaxToken,
+  ) {
+    super(StatementKind.FOR, forKeywordToken.location);
   }
 
-  // TODO: implement
-  override getChildNodeIterable(): IterableIterator<AbstractNode> {
-    throw new Error("Method not implemented.");
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    if (this.expression1) {
+      yield this.expression1;
+    }
+    if (this.computedElementaryDefinition) {
+      yield this.computedElementaryDefinition;
+    }
+    if (this.expression2) {
+      yield this.expression2;
+    }
+    if (this.expression3) {
+      yield this.expression3;
+    }
   }
 
-  // TODO: implement
-  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    throw new Error("Method not implemented.");
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.forKeywordToken;
+    yield this.openParenthesisToken;
+    if (this.expression1) {
+      yield* this.expression1.getSyntaxTokenIterable();
+    }
+    if (this.computedElementaryDefinition) {
+      yield* this.computedElementaryDefinition.getSyntaxTokenIterable();
+    }
+    if (this.semicolonToken1) {
+      yield this.semicolonToken1;
+    }
+    if (this.expression2) {
+      yield* this.expression2.getSyntaxTokenIterable();
+    }
+    yield this.semicolonToken2;
+    if (this.expression3) {
+      yield* this.expression3.getSyntaxTokenIterable();
+    }
+    yield this.closeParenthesisToken;
+    yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }
 

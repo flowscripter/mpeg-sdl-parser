@@ -24,10 +24,15 @@ interface MatchResult {
   columnEnd: number;
 }
 
+interface TokenPattern {
+  tokenKind: TokenKind;
+  regex: RegExp;
+}
+
 class Tokenizer implements Lexer<TokenKind> {
-  readonly syntaxTokenPatterns: [TokenKind, RegExp][] = [];
-  readonly leadingTriviaTokenPatterns: [TokenKind, RegExp][] = [];
-  readonly trailingTriviaTokenPatterns: [TokenKind, RegExp][] = [];
+  readonly syntaxTokenPatterns: TokenPattern[] = [];
+  readonly leadingTriviaTokenPatterns: TokenPattern[] = [];
+  readonly trailingTriviaTokenPatterns: TokenPattern[] = [];
 
   private addTokenPattern(
     tokenKind: TokenKind,
@@ -35,13 +40,13 @@ class Tokenizer implements Lexer<TokenKind> {
     matchKind: MatchKind = MatchKind.SYNTAX,
   ) {
     const regex = new RegExp("^" + pattern, "gu");
-    const tokenPattern: [TokenKind, RegExp] = [tokenKind, regex];
+    const tokenPattern: TokenPattern = { regex, tokenKind };
 
     logger.debug(
       "adding %s token pattern: %s => %s",
       MatchKind[matchKind],
-      TokenKind[tokenPattern[0]],
-      tokenPattern[1].toString(),
+      TokenKind[tokenPattern.tokenKind],
+      tokenPattern.regex.toString(),
     );
 
     if (matchKind === MatchKind.SYNTAX) {
@@ -585,7 +590,7 @@ class Tokenizer implements Lexer<TokenKind> {
    * @param position The current parsing position in the input string
    * @param row The current parsing row in the input string
    * @param column The current parsing column in the total input string
-   * @param matchTriviaToken true to match trivia tokens, false to match syntax tokens
+   * @param matchKind the type of token to match
    *
    * @returns The next token found in the input string, undefined if no token is found or EOF token if end of the input is reached
    */
@@ -621,7 +626,7 @@ class Tokenizer implements Lexer<TokenKind> {
     // start matching from the specified position
     const subString = input.substring(position);
 
-    let matchResult: MatchResult | undefined;
+    let matchResult: MatchResult | undefined = undefined;
 
     // search for the longest match from the trivia token patterns
     let tokenPatterns;
@@ -634,11 +639,11 @@ class Tokenizer implements Lexer<TokenKind> {
       tokenPatterns = this.trailingTriviaTokenPatterns;
     }
 
-    for (const [tokenKind, regExp] of tokenPatterns) {
-      regExp.lastIndex = 0;
+    for (const { tokenKind, regex } of tokenPatterns) {
+      regex.lastIndex = 0;
 
-      if (regExp.test(subString)) {
-        const text = subString.substring(0, regExp.lastIndex);
+      if (regex.test(subString)) {
+        const text = subString.substring(0, regex.lastIndex);
 
         let rowEnd = row;
         let columnEnd = column;

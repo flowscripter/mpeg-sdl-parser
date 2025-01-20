@@ -20,7 +20,7 @@ class VerbatimPrintingNodeVisitor implements NodeVisitor {
   }
 }
 
-Deno.test("Test traversing visitor - specification", async () => {
+Deno.test("Test traversing visitor  specification", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
@@ -79,6 +79,15 @@ Deno.test("Test traversing visitor - specification", async () => {
       "IDENTIFIER",
       "NUMBER_LITERAL",
       "STATEMENT",
+      "EXPRESSION",
+      "EXPRESSION",
+      "IDENTIFIER",
+      "NUMBER_LITERAL",
+      "EXPRESSION",
+      "IDENTIFIER",
+      "NUMBER_LITERAL",
+      "STATEMENT",
+      "STATEMENT",
       "IDENTIFIER",
       "IDENTIFIER",
       "STATEMENT",
@@ -93,6 +102,15 @@ Deno.test("Test traversing visitor - specification", async () => {
       "CLASS_MEMBER_ACCESS",
       "IDENTIFIER",
       "STATEMENT",
+      "EXPRESSION",
+      "EXPRESSION",
+      "IDENTIFIER",
+      "NUMBER_LITERAL",
+      "EXPRESSION",
+      "IDENTIFIER",
+      "NUMBER_LITERAL",
+      "STATEMENT",
+      "STATEMENT",
       "ARRAY_ELEMENT_TYPE",
       "ELEMENTARY_TYPE",
       "LENGTH_ATTRIBUTE",
@@ -104,7 +122,7 @@ Deno.test("Test traversing visitor - specification", async () => {
   );
 });
 
-Deno.test("Test traversing visitor - child node", async () => {
+Deno.test("Test traversing visitor  child node", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),

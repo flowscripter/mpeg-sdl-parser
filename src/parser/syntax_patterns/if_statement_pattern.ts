@@ -1,15 +1,46 @@
-import { apply } from "../../../deps.ts";
+import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import IfClause from "../../abstract_syntax_tree/node/IfClause.ts";
 import IfStatement from "../../abstract_syntax_tree/node/IfStatement.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
-import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
+import {
+  ELSE_CLAUSE_RULE,
+  ELSE_IF_CLAUSE_RULE,
+  IF_CLAUSE_RULE,
+} from "../syntax_rules.ts";
 
-function getIfStatement(): IfStatement {
-  return new IfStatement();
+function getIfStatement(
+  values: [
+    IfClause,
+    IfClause[],
+    IfClause | undefined,
+  ],
+): IfStatement {
+  const [ifClause, elseIfClauses, elseClause] = values;
+
+  const ifClauses = [ifClause];
+
+  if (elseIfClauses.length > 0) {
+    ifClauses.push(...elseIfClauses);
+  }
+
+  if (elseClause) {
+    ifClauses.push(elseClause);
+  }
+  return new IfStatement(
+    ifClauses,
+  );
 }
 
 function getIfStatementPattern() {
   return apply(
-    getToken(TokenKind.KEYWORD_IF_TOKEN),
+    seq(
+      IF_CLAUSE_RULE,
+      rep_sc(
+        ELSE_IF_CLAUSE_RULE,
+      ),
+      opt_sc(
+        ELSE_CLAUSE_RULE,
+      ),
+    ),
     getIfStatement,
   );
 }

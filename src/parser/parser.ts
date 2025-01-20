@@ -1,6 +1,5 @@
 import { expectEOF, expectSingleResult, TokenError } from "../../deps.ts";
 import Specification from "../abstract_syntax_tree/node/Specification.ts";
-import SyntaxToken from "../tokenizer/token/SyntaxToken.ts";
 import Tokenizer from "../tokenizer/Tokenizer.ts";
 import {
   InternalParserError,
@@ -9,8 +8,6 @@ import {
 import * as rules from "./syntax_rules.ts";
 
 class Parser {
-  readonly tokens: SyntaxToken[] = [];
-
   private tokenizer: Tokenizer;
 
   constructor() {

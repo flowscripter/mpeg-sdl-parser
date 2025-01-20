@@ -5,7 +5,6 @@ import ExpressionStatement from "../../../src/abstract_syntax_tree/node/Expressi
 import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
 import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
 import StringDefinition from "../../../src/abstract_syntax_tree/node/StringDefinition.ts";
-import UnaryExpression from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
 import { STATEMENT_RULE } from "../../../src/parser/syntax_rules.ts";
 import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
 import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";

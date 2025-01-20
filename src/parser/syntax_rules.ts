@@ -22,6 +22,7 @@ import ExtendedClassIdRange from "../abstract_syntax_tree/node/ExtendedClassIdRa
 import ExtendsModifier from "../abstract_syntax_tree/node/ExtendsModifier.ts";
 import ForStatement from "../abstract_syntax_tree/node/ForStatement.ts";
 import Identifier from "../abstract_syntax_tree/node/Identifier.ts";
+import IfClause from "../abstract_syntax_tree/node/IfClause.ts";
 import IfStatement from "../abstract_syntax_tree/node/IfStatement.ts";
 import ImplicitArrayDimension from "../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
 import LengthAttribute from "../abstract_syntax_tree/node/LengthAttribute.ts";
@@ -61,6 +62,8 @@ import getComputedElementaryTypeDefinitionPattern from "./syntax_patterns/comput
 import getDoStatementPattern from "./syntax_patterns/do_statement_pattern.ts";
 import getElementaryTypeDefinitionPattern from "./syntax_patterns/elementary_type_definition_pattern.ts";
 import getElementaryTypePattern from "./syntax_patterns/elementary_type_pattern.ts";
+import getElseClausePattern from "./syntax_patterns/else_clause_pattern.ts";
+import getElseIfClausePattern from "./syntax_patterns/else_if_clause_pattern.ts";
 import getEqualityExpressionPattern from "./syntax_patterns/equality_expression_pattern.ts";
 import getExpandableModifierPattern from "./syntax_patterns/expandable_modifier_pattern.ts";
 import getExplicitArrayDimensionPattern from "./syntax_patterns/explicit_array_dimension_pattern.ts";
@@ -70,6 +73,7 @@ import getExtendedClassIdRangePattern from "./syntax_patterns/extended_class_id_
 import getExtendsModifierPattern from "./syntax_patterns/extends_modifier_pattern.ts";
 import getForStatementPattern from "./syntax_patterns/for_statement_pattern.ts";
 import getIdentifierPattern from "./syntax_patterns/identifier_pattern.ts";
+import getIfClausePattern from "./syntax_patterns/if_clause_pattern.ts";
 import getIfStatementPattern from "./syntax_patterns/if_statement_pattern.ts";
 import getImplicitArrayDimensionPattern from "./syntax_patterns/implicit_array_dimension_pattern.ts";
 import getLengthAttributePattern from "./syntax_patterns/length_attribute_pattern.ts";
@@ -132,6 +136,8 @@ export const ELEMENTARY_TYPE_DEFINITION_RULE = rule<
   AbstractStatement
 >();
 export const ELEMENTARY_TYPE_RULE = rule<TokenKind, ElementaryType>();
+export const ELSE_CLAUSE_RULE = rule<TokenKind, IfClause>();
+export const ELSE_IF_CLAUSE_RULE = rule<TokenKind, IfClause>();
 export const EQUALITY_EXPRESSION_RULE = rule<TokenKind, AbstractNode>();
 export const EXPANDABLE_MODIFIER_RULE = rule<TokenKind, ExpandableModifier>();
 export const EXPLICIT_ARRAY_DIMENSION_RULE = rule<
@@ -148,6 +154,7 @@ export const EXTENDS_MODIFIER_RULE = rule<TokenKind, ExtendsModifier>();
 export const FOR_STATEMENT_RULE = rule<TokenKind, ForStatement>();
 export const IDENTIFIER_RULE = rule<TokenKind, Identifier>();
 export const IF_STATEMENT_RULE = rule<TokenKind, IfStatement>();
+export const IF_CLAUSE_RULE = rule<TokenKind, IfClause>();
 export const IMPLICIT_ARRAY_DIMENSION_RULE = rule<
   TokenKind,
   ImplicitArrayDimension
@@ -215,6 +222,8 @@ export function initRules() {
     getElementaryTypeDefinitionPattern(),
   );
   ELEMENTARY_TYPE_RULE.setPattern(getElementaryTypePattern());
+  ELSE_CLAUSE_RULE.setPattern(getElseClausePattern());
+  ELSE_IF_CLAUSE_RULE.setPattern(getElseIfClausePattern());
   EQUALITY_EXPRESSION_RULE.setPattern(getEqualityExpressionPattern());
   EXPANDABLE_MODIFIER_RULE.setPattern(getExpandableModifierPattern());
   EXPLICIT_ARRAY_DIMENSION_RULE.setPattern(getExplicitArrayDimensionPattern());
@@ -224,6 +233,7 @@ export function initRules() {
   EXTENDS_MODIFIER_RULE.setPattern(getExtendsModifierPattern());
   FOR_STATEMENT_RULE.setPattern(getForStatementPattern());
   IDENTIFIER_RULE.setPattern(getIdentifierPattern());
+  IF_CLAUSE_RULE.setPattern(getIfClausePattern());
   IF_STATEMENT_RULE.setPattern(getIfStatementPattern());
   IMPLICIT_ARRAY_DIMENSION_RULE.setPattern(getImplicitArrayDimensionPattern());
   LENGTH_ATTRIBUTE_RULE.setPattern(getLengthAttributePattern());

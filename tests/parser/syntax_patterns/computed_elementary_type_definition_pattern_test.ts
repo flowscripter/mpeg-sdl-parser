@@ -1,4 +1,4 @@
-import ComputedElementaryDefinition from "../../../src/abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
+import ComputedElementaryTypeDefinition from "../../../src/abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
 import ElementaryType from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
 import ElementaryTypeKind from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
 import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
@@ -14,7 +14,7 @@ Deno.test("Test computed elementary type definition pattern", () => {
   testSyntaxPattern(
     COMPUTED_ELEMENTARY_TYPE_DEFINITION_RULE,
     "computed int a;",
-    new ComputedElementaryDefinition(
+    new ComputedElementaryTypeDefinition(
       false,
       new ElementaryType(
         ElementaryTypeKind.INTEGER,
@@ -74,7 +74,7 @@ Deno.test("Test computed elementary type definition pattern - const and value", 
   testSyntaxPattern(
     COMPUTED_ELEMENTARY_TYPE_DEFINITION_RULE,
     "computed const int a=3;",
-    new ComputedElementaryDefinition(
+    new ComputedElementaryTypeDefinition(
       true,
       new ElementaryType(
         ElementaryTypeKind.INTEGER,

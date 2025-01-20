@@ -5,7 +5,8 @@ import ElementaryType from "./ElementaryType.ts";
 import StatementKind from "./enum/statement_kind.ts";
 import Identifier from "./Identifier.ts";
 
-class ComputedElementaryDefinition extends AbstractElementaryTypeDefinition {
+class ComputedElementaryTypeDefinition
+  extends AbstractElementaryTypeDefinition {
   constructor(
     isConst: boolean,
     elementaryType: ElementaryType,
@@ -52,4 +53,4 @@ class ComputedElementaryDefinition extends AbstractElementaryTypeDefinition {
   }
 }
 
-export default ComputedElementaryDefinition;
+export default ComputedElementaryTypeDefinition;

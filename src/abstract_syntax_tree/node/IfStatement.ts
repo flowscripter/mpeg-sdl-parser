@@ -2,25 +2,43 @@ import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
 import StatementKind from "./enum/statement_kind.ts";
+import IfClause from "./IfClause.ts";
 
 class IfStatement extends AbstractStatement {
-  // TODO: implement
-  constructor() {
-    super(StatementKind.IF, {
-      position: 0,
-      row: 0,
-      column: 0,
-    });
+  constructor(
+    public readonly clauses: IfClause[],
+  ) {
+    super(StatementKind.IF, clauses[0].ifToken!.location);
   }
 
-  // TODO: implement
-  override getChildNodeIterable(): IterableIterator<AbstractNode> {
-    throw new Error("Method not implemented.");
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    for (const clause of this.clauses) {
+      if (clause.condition) {
+        yield clause.condition;
+      }
+      yield clause.statement;
+    }
   }
 
-  // TODO: implement
-  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    throw new Error("Method not implemented.");
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    for (const clause of this.clauses) {
+      if (clause.ifToken) {
+        yield clause.ifToken;
+      }
+      if (clause.elseToken) {
+        yield clause.elseToken;
+      }
+      if (clause.openParenthesisToken) {
+        yield clause.openParenthesisToken;
+      }
+      if (clause.condition) {
+        yield* clause.condition.getSyntaxTokenIterable();
+      }
+      if (clause.closeParenthesisToken) {
+        yield clause.closeParenthesisToken;
+      }
+      yield* clause.statement.getSyntaxTokenIterable();
+    }
   }
 }
 

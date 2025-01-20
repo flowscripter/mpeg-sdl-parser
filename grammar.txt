@@ -379,9 +379,9 @@ computed_array_definition ::= computed elementary_type identifier (explicit_arra
 
 /* Rule FC.1: Flow control using if-then-else */
 
-if_statement ::= if open_parenthesis expression close_parenthesis compound_statement
-    (else if open_parenthesis expression open_parenthesis compound_statement)*
-    (else compound_statement)*
+if_statement ::= if open_parenthesis expression close_parenthesis statement
+    (else if open_parenthesis expression open_parenthesis statement)*
+    (else statement)?
 
 /* Rule FC.2: Flow control using switch */
 
@@ -396,7 +396,7 @@ switch_statement ::= switch open_parenthesis expression close_parenthesis open_b
 
 /* Rule FC.3: Flow control using for */
 
-for_statement ::= for open_parenthesis (assignment_expression | computed_elementary_type_definition)? semicolon
+for_statement ::= for open_parenthesis ((assignment_expression semicolon) | computed_elementary_type_definition | semicolon)
     expression? semicolon (assignment_expression | expression)? close_parenthesis compound_statement
 
 /* Rule FC.4: Flow control using do */
