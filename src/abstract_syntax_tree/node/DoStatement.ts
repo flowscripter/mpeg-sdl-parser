@@ -1,26 +1,35 @@
 import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
+import CompoundStatement from "./CompoundStatement.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class DoStatement extends AbstractStatement {
-  // TODO: implement
-  constructor() {
-    super(StatementKind.DO, {
-      position: 0,
-      row: 0,
-      column: 0,
-    });
+  constructor(
+    public readonly compoundStatement: CompoundStatement,
+    public readonly conditionExpression: AbstractNode,
+    public readonly doKeywordToken: SyntaxToken,
+    public readonly whileKeywordToken: SyntaxToken,
+    public readonly openParenthesisToken: SyntaxToken,
+    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly semicolonToken: SyntaxToken,
+  ) {
+    super(StatementKind.DO, doKeywordToken.location);
   }
 
-  // TODO: implement
-  override getChildNodeIterable(): IterableIterator<AbstractNode> {
-    throw new Error("Method not implemented.");
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.compoundStatement;
+    yield this.conditionExpression;
   }
 
-  // TODO: implement
-  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    throw new Error("Method not implemented.");
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.doKeywordToken;
+    yield* this.compoundStatement.getSyntaxTokenIterable();
+    yield this.whileKeywordToken;
+    yield this.openParenthesisToken;
+    yield* this.conditionExpression.getSyntaxTokenIterable();
+    yield this.closeParenthesisToken;
+    yield this.semicolonToken;
   }
 }
 
