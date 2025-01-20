@@ -6,17 +6,16 @@
 **NOTE: Under development**
 
 - fix GitHub workflows
-- implement control flow parsing: `do`, `for`, `if`, `switch`, `while`
+- implement control flow parsing: `for`, `if`, `switch`, `while`
 - publish to registry
-- provide separate CLI module: 
-    - test library module exports
-    - implement pretty printer
-    - implement syntax highlighter
+- provide separate CLI module:
+  - test library module exports
+  - implement pretty printer
+  - implement syntax highlighter
 - update this readme with:
-    - import location for module
-    - updated UML diagram
-    - link to API documentation
-    - link to CLI
+  - import location for module
+  - link to API documentation
+  - link to CLI
 - implement semantic checks
 
 ## Development
@@ -57,7 +56,6 @@ const traversingVisitor = new TraversingVisitor(myNodeVisitor);
 // Traverse the AST
 
 ast.accept(traversingVisitor);
-
 ```
 
 ## Documentation
@@ -73,22 +71,91 @@ this repository: [grammar.txt](grammar.txt)
 Parsing an SDL definition results in an abstract syntax tree output which can
 then be used for further processing in consuming applications.
 
-**NOTE: TODO: diagram below updating soon!**
-
 ```mermaid
 classDiagram
-    
-    class Parser {
-        parse(specificationString) Specification
-    }
+  class Location {
+    position: number
+    row: number
+    column: number
+  }
 
-    Tokenizer ..> TokenKind
+  class AbstractToken {
+    tokenKind: TokenKind
+    text: string
+  }
 
-    Parser --> Tokenizer : uses
-    
-    Parser --> "*" Rule : uses
-    
-    Parser --> Definition : produces
+  class SyntaxToken {
+  }
+
+  class TriviaToken {
+  }
+
+  class ParsecTokenWrapper {
+    getSyntaxToken() SyntaxToken
+  }
+
+  class TokenPattern {
+    tokenKind: TokenKind
+    regex: RegExp
+  }
+
+  class Tokenizer {
+    parse(input: string) ParsecTokenWrapper
+  }
+
+  class AbstractNode {
+    nodeKind: NodeKind
+    accept(visitor: NodeVisitor): boolean
+    getSyntaxTokenIterable(): IterableIterator
+  }
+
+  class AbstractLeafNode {
+    isCompositeNode = false
+  }
+
+  class AbstractCompositeNode {
+    isCompositeNode = true
+    getChildNodeIterable() IterableIterator
+  }
+
+  class Rule {
+    tokenKind: TokenKind
+    setPattern(): Parser
+  }
+  
+  class Parser {
+    parse(specificationString: string) Specification
+  }
+
+  TriviaToken --|> AbstractToken
+  SyntaxToken --|> AbstractToken
+
+  AbstractToken --> Location : location
+  SyntaxToken --> "*" TriviaToken : leadingTrivia
+  SyntaxToken --> "*" TriviaToken : trailingTrivia
+
+  AbstractNode --> Location : location
+  AbstractNode --> "*" SyntaxToken : syntaxTokens
+  AbstractLeafNode --|> AbstractNode
+  AbstractCompositeNode --|> AbstractNode
+
+  ComponentNodeX "*" --|> AbstractCompositeNode
+  LeafNodeX "*" --|> AbstractLeafNode
+
+  AbstractCompositeNode --> "*" AbstractNode : childNodes
+
+  Specification --|> AbstractCompositeNode
+
+  Tokenizer --> "*" TokenPattern: syntaxTokenPatterns
+  Tokenizer --> "*" TokenPattern: leadingTriviaTokenPatterns
+  Tokenizer --> "*" TokenPattern: trailingTriviaTokenPatterns
+  Tokenizer ..> ParsecTokenWrapper: produces
+
+  ParsecTokenWrapper ..> AbstractToken: provides
+
+  Parser --> Tokenizer : uses
+  Parser --> "*" Rule : uses
+  Parser ..> Specification : produces
 ```
 
 ### API
