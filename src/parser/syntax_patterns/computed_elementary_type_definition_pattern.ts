@@ -1,12 +1,11 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ComputedElementaryTypeDefinition from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
-import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   ELEMENTARY_TYPE_RULE,
   EXPRESSION_RULE,

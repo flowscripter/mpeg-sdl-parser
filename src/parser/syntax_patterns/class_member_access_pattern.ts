@@ -1,10 +1,10 @@
 import { apply, seq } from "../../../deps.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import ClassMemberAccess from "../../abstract_syntax_tree/node/ClassMemberAccess.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { IDENTIFIER_RULE } from "../syntax_rules.ts";
 
 function getClassMemberAccess(

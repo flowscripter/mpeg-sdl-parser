@@ -1,9 +1,9 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
-import AbstractNode from "./AbstractNode.ts";
-import ElementaryType from "./ElementaryType.ts";
-import ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
-import Identifier from "./Identifier.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ElementaryType from "./ElementaryType.ts";
+import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
+import type Identifier from "./Identifier.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class ComputedArrayDefinition extends AbstractArrayDefinition {

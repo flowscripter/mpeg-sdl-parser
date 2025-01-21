@@ -1,5 +1,5 @@
-import TokenKind from "../enum/token_kind.ts";
-import Location from "./Location.ts";
+import type TokenKind from "../enum/token_kind.ts";
+import type Location from "./Location.ts";
 
 abstract class AbstractToken {
   constructor(

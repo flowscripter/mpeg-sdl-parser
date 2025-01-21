@@ -1,6 +1,6 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractMapOutputValue from "./AbstractMapOutputValue.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import MapOutputValueKind from "./enum/map_output_value_kind.ts";
 
 class AggregateMapOutputValue extends AbstractMapOutputValue {

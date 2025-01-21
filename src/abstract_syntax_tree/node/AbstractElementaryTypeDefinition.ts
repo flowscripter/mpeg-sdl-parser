@@ -1,10 +1,10 @@
-import Location from "../../tokenizer/token/Location.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type Location from "../../tokenizer/token/Location.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-import ElementaryType from "./ElementaryType.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import Identifier from "./Identifier.ts";
+import type ElementaryType from "./ElementaryType.ts";
+import type StatementKind from "./enum/statement_kind.ts";
+import type Identifier from "./Identifier.ts";
 
 abstract class AbstractElementaryTypeDefinition extends AbstractStatement {
   constructor(

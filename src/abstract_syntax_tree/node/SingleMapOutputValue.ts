@@ -1,10 +1,10 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractMapOutputValue from "./AbstractMapOutputValue.ts";
-import AbstractNode from "./AbstractNode.ts";
-import ElementaryType from "./ElementaryType.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ElementaryType from "./ElementaryType.ts";
 import MapOutputValueKind from "./enum/map_output_value_kind.ts";
-import LengthAttribute from "./LengthAttribute.ts";
-import NumberLiteral from "./NumberLiteral.ts";
+import type LengthAttribute from "./LengthAttribute.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
 class SingleMapOutputValue extends AbstractMapOutputValue {
   constructor(

@@ -1,9 +1,9 @@
 import { alt_sc, apply, rep_sc, seq } from "../../../deps.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import Specification from "../../abstract_syntax_tree/node/Specification.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import {
   CLASS_DECLARATION_RULE,

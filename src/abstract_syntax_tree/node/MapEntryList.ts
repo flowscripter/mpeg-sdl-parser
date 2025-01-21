@@ -1,8 +1,8 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import NodeKind from "./enum/node_kind.ts";
-import MapEntry from "./MapEntry.ts";
+import type MapEntry from "./MapEntry.ts";
 
 class MapEntryList extends AbstractCompositeNode {
   constructor(

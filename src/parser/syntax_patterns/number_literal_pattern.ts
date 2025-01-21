@@ -3,7 +3,7 @@ import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_liter
 import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 
 const DOT_SEPARATOR_REGEX = /\./g;

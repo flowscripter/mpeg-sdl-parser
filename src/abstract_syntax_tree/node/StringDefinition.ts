@@ -1,11 +1,11 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-import AlignedModifier from "./AlignedModifier.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import StringVariableKind from "./enum/string_variable_kind.ts";
-import Identifier from "./Identifier.ts";
-import StringLiteral from "./StringLiteral.ts";
+import type StringVariableKind from "./enum/string_variable_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type StringLiteral from "./StringLiteral.ts";
 
 class StringDefinition extends AbstractStatement {
   constructor(

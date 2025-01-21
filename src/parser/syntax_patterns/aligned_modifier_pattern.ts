@@ -1,10 +1,10 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
 import AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,

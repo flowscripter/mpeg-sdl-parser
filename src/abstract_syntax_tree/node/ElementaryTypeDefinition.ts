@@ -1,10 +1,10 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
-import AbstractNode from "./AbstractNode.ts";
-import AlignedModifier from "./AlignedModifier.ts";
-import ElementaryType from "./ElementaryType.ts";
-import Identifier from "./Identifier.ts";
-import LengthAttribute from "./LengthAttribute.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
+import type ElementaryType from "./ElementaryType.ts";
+import type Identifier from "./Identifier.ts";
+import type LengthAttribute from "./LengthAttribute.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class ElementaryTypeDefinition extends AbstractElementaryTypeDefinition {

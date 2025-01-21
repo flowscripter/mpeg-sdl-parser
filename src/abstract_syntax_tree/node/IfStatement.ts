@@ -1,8 +1,8 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import IfClause from "./IfClause.ts";
+import type IfClause from "./IfClause.ts";
 
 class IfStatement extends AbstractStatement {
   constructor(

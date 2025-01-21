@@ -1,13 +1,13 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
-import AbstractNode from "./AbstractNode.ts";
-import AlignedModifier from "./AlignedModifier.ts";
-import ArrayElementType from "./ArrayElementType.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
+import type ArrayElementType from "./ArrayElementType.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
-import Identifier from "./Identifier.ts";
-import ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
-import PartialArrayDimension from "./PartialArrayDimension.ts";
+import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
+import type Identifier from "./Identifier.ts";
+import type ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
+import type PartialArrayDimension from "./PartialArrayDimension.ts";
 
 class ArrayDefinition extends AbstractArrayDefinition {
   constructor(

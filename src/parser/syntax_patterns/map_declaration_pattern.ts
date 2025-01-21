@@ -1,12 +1,12 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import NodeKind from "../../abstract_syntax_tree/node/enum/node_kind.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
 import MapDeclaration from "../../abstract_syntax_tree/node/MapDeclaration.ts";
-import MapEntryList from "../../abstract_syntax_tree/node/MapEntryList.ts";
+import type MapEntryList from "../../abstract_syntax_tree/node/MapEntryList.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   ELEMENTARY_TYPE_RULE,
   IDENTIFIER_RULE,

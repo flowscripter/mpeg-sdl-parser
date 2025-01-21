@@ -1,4 +1,4 @@
-import AbstractNode from "../node/AbstractNode.ts";
+import type AbstractNode from "../node/AbstractNode.ts";
 
 interface NodeVisitor {
   visitBefore(

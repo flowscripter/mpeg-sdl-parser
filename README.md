@@ -19,7 +19,7 @@
 
 Install [Deno](https://docs.deno.com/runtime/getting_started/installation/)
 
-Lint: `deno fmt`
+Lint: `deno fmt && deno lint mod.ts deps.ts src/ tests/`
 
 Test: `deno test -A`
 

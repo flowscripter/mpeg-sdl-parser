@@ -1,5 +1,5 @@
-import { expectEOF, expectSingleResult, TokenError } from "../../deps.ts";
-import Specification from "../abstract_syntax_tree/node/Specification.ts";
+import { expectEOF, expectSingleResult, type TokenError } from "../../deps.ts";
+import type Specification from "../abstract_syntax_tree/node/Specification.ts";
 import Tokenizer from "../tokenizer/Tokenizer.ts";
 import {
   InternalParserError,

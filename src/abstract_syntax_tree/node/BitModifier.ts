@@ -1,10 +1,10 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractClassId from "./AbstractClassId.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractClassId from "./AbstractClassId.ts";
 import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import NodeKind from "./enum/node_kind.ts";
-import Identifier from "./Identifier.ts";
-import NumberLiteral from "./NumberLiteral.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
 class BitModifier extends AbstractCompositeNode {
   constructor(

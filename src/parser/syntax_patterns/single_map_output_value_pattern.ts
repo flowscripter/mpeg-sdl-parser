@@ -1,8 +1,8 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
-import LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
+import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import type LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
 import SingleMapOutputValue from "../../abstract_syntax_tree/node/SingleMapOutputValue.ts";
-import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import {
   ELEMENTARY_TYPE_RULE,
   LENGTH_ATTRIBUTE_RULE,

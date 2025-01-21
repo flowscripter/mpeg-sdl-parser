@@ -1,9 +1,9 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractExpression from "./AbstractExpression.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import ExpressionKind from "./enum/expression_kind.ts";
-import Identifier from "./Identifier.ts";
-import NumberLiteral from "./NumberLiteral.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
 class PrimaryExpression extends AbstractExpression {
   constructor(
