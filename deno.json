@@ -1,1 +1,5 @@
-{}
+{
+  "name": "@flowscripter/mpeg-sdl-parser",
+  "version": "1.0.0",
+  "exports": "./mod.ts"
+}
