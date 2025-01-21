@@ -6,15 +6,12 @@
 **NOTE: Under development**
 
 - fix GitHub workflows
-- implement control flow parsing: `for`, `if`, `switch`, `while`
-- publish to registry
+- implement control flow parsing: `switch`, `while`
 - provide separate CLI module:
   - test library module exports
   - implement pretty printer
   - implement syntax highlighter
 - update this readme with:
-  - import location for module
-  - link to API documentation
   - link to CLI
 - implement semantic checks
 
@@ -29,8 +26,7 @@ Test: `deno test -A`
 ## Usage
 
 ```typescript
-// TODO: location pending
-// import * from "https://deno.land/x/flowscripter_mped_sdl_parser_library/mod.ts";
+import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";
 
 const parser = new Parser();
 
@@ -162,8 +158,7 @@ classDiagram
 
 Link to auto-generated API docs for the library:
 
-**NOTE: TODO: coming soon!**
-[API Documentation](https://doc.deno.land/https://deno.land/x/flowscripter_mpeg_sdl_parser/mod.ts)
+[API Documentation](https://jsr.io/@flowscripter/mpeg-sdl-parser/doc)
 
 ### Debug Logging
 
