@@ -53,6 +53,13 @@ async function setupLogger() {
   return log.getLogger();
 }
 
+/**
+ * Retrieves a logger instance with the specified name. If the name length exceeds the current maximum logger name length,
+ * it updates the padding for all existing logger names to ensure consistent formatting.
+ *
+ * @param name - The name of the logger to retrieve.
+ * @returns A logger instance with the specified name.
+ */
 export default function getLogger(name: string): log.Logger {
   if (name.length > maxLoggerNameLength) {
     maxLoggerNameLength = name.length;

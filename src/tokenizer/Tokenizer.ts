@@ -8,27 +8,75 @@ import * as patterns from "./token_patterns.ts";
 
 const logger = getLogger("Tokenizer");
 
+/**
+ * Enum representing the different kinds of matches that can be identified by the tokenizer.
+ */
 enum MatchKind {
   SYNTAX,
   LEADING_TRIVIA,
   TRAILING_TRIVIA,
 }
 
+/**
+ * Represents the result of a token match operation.
+ */
 interface MatchResult {
+  /**
+   * The kind of token that was matched.
+   */
   tokenKind: TokenKind;
+
+  /**
+   * The text of the matched token.
+   */
   text: string;
+
+  /**
+   * The position in the input where the token starts.
+   */
   position: number;
+
+  /**
+   * The row in the input where the token starts.
+   */
   row: number;
+
+  /**
+   * The column in the input where the token starts.
+   */
   column: number;
+
+  /**
+   * The row in the input where the token ends.
+   */
   rowEnd: number;
+
+  /**
+   * The column in the input where the token ends.
+   */
   columnEnd: number;
 }
 
+/**
+ * Represents a pattern used to identify tokens in the tokenizer.
+ *
+ * @interface TokenPattern
+ *
+ * @property {TokenKind} tokenKind - The kind of token that this pattern matches.
+ * @property {RegExp} regex - The regular expression used to match the token.
+ */
 interface TokenPattern {
   tokenKind: TokenKind;
   regex: RegExp;
 }
 
+/**
+ * The `Tokenizer` class implements the `Lexer` interface for tokenizing input strings
+ * into a sequence of tokens based on predefined patterns. It supports syntax tokens,
+ * leading trivia tokens, and trailing trivia tokens.
+ *
+ * @template TokenKind - The type of tokens used by the lexer.
+ */
 class Tokenizer implements Lexer<TokenKind> {
   readonly syntaxTokenPatterns: TokenPattern[] = [];
   readonly leadingTriviaTokenPatterns: TokenPattern[] = [];

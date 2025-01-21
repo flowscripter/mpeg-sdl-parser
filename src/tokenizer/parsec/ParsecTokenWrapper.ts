@@ -92,6 +92,12 @@ function unwrapToken(parsecToken: ParsecToken<TokenKind>): SyntaxToken {
   return (parsecToken as ParsecTokenWrapper).getSyntaxToken();
 }
 
+/**
+ * Creates a parser that matches a specific token kind and applies a transformation to the matched token.
+ *
+ * @param toMatch - The kind of token to match.
+ * @returns A parser that matches the specified token kind and returns a transformed syntax token.
+ */
 export function getToken(toMatch: TokenKind): Parser<TokenKind, SyntaxToken> {
   return apply(
     tok(toMatch),

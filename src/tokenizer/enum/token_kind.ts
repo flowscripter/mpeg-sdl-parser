@@ -1,3 +1,9 @@
+/**
+ * Enum representing the different kinds of tokens that can be identified by the tokenizer.
+ *
+ * @enum {number}
+ * @readonly
+ */
 enum TokenKind {
   EOF_TOKEN,
   WHITESPACE_TOKEN,

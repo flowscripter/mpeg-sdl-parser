@@ -9,6 +9,17 @@ const logger = getLogger("TraversingVisitor");
 class TraversingVisitor implements NodeVisitor {
   constructor(public readonly operationVisitor?: NodeVisitor) {}
 
+  /**
+   * Visits a node before traversing its children.
+   *
+   * This method is called before the traversal of the children of the given node.
+   * It performs specific actions based on the type of the node.
+   *
+   * @param node - The node to visit.
+   * @returns A boolean indicating whether to continue the traversal.
+   *
+   * @throws {InternalParserError} If an unhandled node kind is encountered.
+   */
   visitBefore(node: AbstractNode): boolean {
     const nodeKind = node.nodeKind;
 
@@ -51,6 +62,19 @@ class TraversingVisitor implements NodeVisitor {
     }
   }
 
+  /**
+   * Visits a node after its children have been visited.
+   *
+   * @param node - The node to visit.
+   * @returns A boolean indicating whether the visit was successful.
+   *
+   * This method logs the kind of node being visited and performs an operation
+   * based on the node's kind. If the node kind matches one of the specified
+   * cases, it delegates the visit to the `operationVisitor` if it exists.
+   * Otherwise, it throws an `InternalParserError` for unreachable code.
+   *
+   * @throws {InternalParserError} If an unknown node kind is encountered.
+   */
   visitAfter(node: AbstractNode): boolean {
     const nodeKind = node.nodeKind;
 
