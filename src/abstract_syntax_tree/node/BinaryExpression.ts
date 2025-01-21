@@ -1,7 +1,7 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractExpression from "./AbstractExpression.ts";
-import AbstractNode from "./AbstractNode.ts";
-import BinaryOperatorKind from "./enum/binary_operator_kind.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type BinaryOperatorKind from "./enum/binary_operator_kind.ts";
 import ExpressionKind from "./enum/expression_kind.ts";
 
 class BinaryExpression extends AbstractExpression {

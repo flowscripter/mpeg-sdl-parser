@@ -1,7 +1,7 @@
-import Location from "../../tokenizer/token/Location.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
+import type Location from "../../tokenizer/token/Location.ts";
+import type NodeVisitor from "../visitor/NodeVisitor.ts";
 import AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type NodeKind from "./enum/node_kind.ts";
 
 abstract class AbstractCompositeNode extends AbstractNode {
   constructor(

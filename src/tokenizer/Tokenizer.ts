@@ -1,4 +1,4 @@
-import { Lexer } from "../../deps.ts";
+import type { Lexer } from "../../deps.ts";
 import getLogger from "../util/logger.ts";
 import { LexicalParserError } from "../util/ParserError.ts";
 import TokenKind from "./enum/token_kind.ts";

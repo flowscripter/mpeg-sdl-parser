@@ -1,9 +1,9 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import Identifier from "./Identifier.ts";
-import ParameterValueList from "./ParameterValueList.ts";
+import type Identifier from "./Identifier.ts";
+import type ParameterValueList from "./ParameterValueList.ts";
 
 class ClassDefinition extends AbstractStatement {
   constructor(

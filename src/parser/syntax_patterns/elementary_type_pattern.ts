@@ -3,7 +3,7 @@ import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import ElementaryTypeKind from "../../abstract_syntax_tree/node/enum/elementary_type_kind.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 
 function getElementaryType(
   values: [

@@ -1,8 +1,8 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractClassId from "./AbstractClassId.ts";
-import AbstractNode from "./AbstractNode.ts";
-import SingleClassId from "./SingleClassId.ts";
-import ClassIdRange from "./ClassIdRange.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type SingleClassId from "./SingleClassId.ts";
+import type ClassIdRange from "./ClassIdRange.ts";
 import ClassIdKind from "./enum/class_id_kind.ts";
 
 class ExtendedClassIdRange extends AbstractClassId {

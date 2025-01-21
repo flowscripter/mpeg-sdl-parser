@@ -1,7 +1,7 @@
-import AbstractNode from "../../../src/abstract_syntax_tree/node/AbstractNode.ts";
-import ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
+import type AbstractNode from "../../../src/abstract_syntax_tree/node/AbstractNode.ts";
+import type ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
 import NodeKind from "../../../src/abstract_syntax_tree/node/enum/node_kind.ts";
-import NodeVisitor from "../../../src/abstract_syntax_tree/visitor/NodeVisitor.ts";
+import type NodeVisitor from "../../../src/abstract_syntax_tree/visitor/NodeVisitor.ts";
 import TraversingVisitor from "../../../src/abstract_syntax_tree/visitor/TraversingVisitor.ts";
 import Parser from "../../../src/parser/Parser.ts";
 import { assertEquals, path } from "../../test_deps.ts";

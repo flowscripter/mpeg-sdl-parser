@@ -1,6 +1,6 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractLeafNode from "./AbstractLeafNode.ts";
-import ElementaryTypeKind from "./enum/elementary_type_kind.ts";
+import type ElementaryTypeKind from "./enum/elementary_type_kind.ts";
 import NodeKind from "./enum/node_kind.ts";
 
 class ElementaryType extends AbstractLeafNode {

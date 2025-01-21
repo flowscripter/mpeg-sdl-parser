@@ -1,14 +1,14 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import AbstractStatement from "../../abstract_syntax_tree/node/AbstractStatement.ts";
-import CompoundStatement from "../../abstract_syntax_tree/node/CompoundStatement.ts";
-import ComputedElementaryTypeDefinition from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
+import type AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AbstractStatement from "../../abstract_syntax_tree/node/AbstractStatement.ts";
+import type CompoundStatement from "../../abstract_syntax_tree/node/CompoundStatement.ts";
+import type ComputedElementaryTypeDefinition from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
 import NodeKind from "../../abstract_syntax_tree/node/enum/node_kind.ts";
 import ForStatement from "../../abstract_syntax_tree/node/ForStatement.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   ASSIGNMENT_EXPRESSION_RULE,
   COMPOUND_STATEMENT_RULE,

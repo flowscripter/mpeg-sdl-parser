@@ -1,6 +1,6 @@
 import TokenKind from "../enum/token_kind.ts";
-import Trivia from "./TriviaToken.ts";
-import Location from "./Location.ts";
+import type Trivia from "./TriviaToken.ts";
+import type Location from "./Location.ts";
 import getLogger from "../../util/logger.ts";
 import AbstractToken from "./AbstractToken.ts";
 

@@ -1,9 +1,9 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-import CompoundStatement from "./CompoundStatement.ts";
-import ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
+import type CompoundStatement from "./CompoundStatement.ts";
+import type ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class ForStatement extends AbstractStatement {

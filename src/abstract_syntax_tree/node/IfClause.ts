@@ -1,6 +1,6 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type AbstractStatement from "./AbstractStatement.ts";
 
 class IfClause {
   constructor(

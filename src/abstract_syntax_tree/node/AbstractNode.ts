@@ -1,7 +1,7 @@
-import Location from "../../tokenizer/token/Location.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type Location from "../../tokenizer/token/Location.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import getLogger from "../../util/logger.ts";
-import NodeVisitor from "../visitor/NodeVisitor.ts";
+import type NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 
 const logger = getLogger("AbstractNode");

@@ -1,9 +1,9 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
-import AbstractNode from "./AbstractNode.ts";
-import ElementaryType from "./ElementaryType.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ElementaryType from "./ElementaryType.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import Identifier from "./Identifier.ts";
+import type Identifier from "./Identifier.ts";
 
 class ComputedElementaryTypeDefinition
   extends AbstractElementaryTypeDefinition {

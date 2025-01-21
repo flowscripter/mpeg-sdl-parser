@@ -1,8 +1,8 @@
 import getLogger from "../../util/logger.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
-import AbstractNode from "../node/AbstractNode.ts";
+import type AbstractNode from "../node/AbstractNode.ts";
 import NodeKind from "../node/enum/node_kind.ts";
-import NodeVisitor from "./NodeVisitor.ts";
+import type NodeVisitor from "./NodeVisitor.ts";
 
 const logger = getLogger("TraversingVisitor");
 

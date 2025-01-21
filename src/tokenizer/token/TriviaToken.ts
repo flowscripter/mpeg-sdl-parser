@@ -1,4 +1,4 @@
-import Location from "./Location.ts";
+import type Location from "./Location.ts";
 
 import getLogger from "../../util/logger.ts";
 import TokenKind from "../enum/token_kind.ts";

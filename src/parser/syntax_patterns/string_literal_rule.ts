@@ -3,7 +3,7 @@ import StringLiteralKind from "../../abstract_syntax_tree/node/enum/string_liter
 import StringLiteral from "../../abstract_syntax_tree/node/StringLiteral.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,

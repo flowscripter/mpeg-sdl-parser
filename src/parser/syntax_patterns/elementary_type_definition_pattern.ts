@@ -1,13 +1,13 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
-import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
+import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import ElementaryTypeDefinition from "../../abstract_syntax_tree/node/ElementaryTypeDefinition.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
+import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import type LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import {
   ALIGNED_MODIFIER_RULE,

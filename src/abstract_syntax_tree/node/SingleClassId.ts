@@ -1,8 +1,8 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractClassId from "./AbstractClassId.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import ClassIdKind from "./enum/class_id_kind.ts";
-import NumberLiteral from "./NumberLiteral.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
 class SingleClassId extends AbstractClassId {
   constructor(

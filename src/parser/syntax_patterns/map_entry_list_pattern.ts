@@ -1,9 +1,9 @@
 import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import MapEntry from "../../abstract_syntax_tree/node/MapEntry.ts";
+import type MapEntry from "../../abstract_syntax_tree/node/MapEntry.ts";
 import MapEntryList from "../../abstract_syntax_tree/node/MapEntryList.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import { MAP_ENTRY_RULE } from "../syntax_rules.ts";
 

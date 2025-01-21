@@ -1,8 +1,8 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractExpression from "./AbstractExpression.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import ExpressionKind from "./enum/expression_kind.ts";
-import UnaryOperatorKind from "./enum/unary_operator_kind.ts";
+import type UnaryOperatorKind from "./enum/unary_operator_kind.ts";
 
 class UnaryExpression extends AbstractExpression {
   constructor(

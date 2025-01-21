@@ -1,14 +1,14 @@
 import {
   apply,
-  Parser,
+  type Parser,
   tok,
-  Token as ParsecToken,
-  TokenPosition,
+  type Token as ParsecToken,
+  type TokenPosition,
 } from "../../../deps.ts";
 import TokenKind from "../enum/token_kind.ts";
 import SyntaxToken from "../token/SyntaxToken.ts";
-import Trivia from "../token/TriviaToken.ts";
-import Tokenizer from "../Tokenizer.ts";
+import type Trivia from "../token/TriviaToken.ts";
+import type Tokenizer from "../Tokenizer.ts";
 
 /**
  * Wrapper around Parsec's Token interface to provide a SyntaxToken instance

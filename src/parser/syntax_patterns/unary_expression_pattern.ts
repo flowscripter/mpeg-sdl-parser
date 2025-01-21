@@ -1,10 +1,10 @@
 import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
-import AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import UnaryOperatorKind from "../../abstract_syntax_tree/node/enum/unary_operator_kind.ts";
 import UnaryExpression from "../../abstract_syntax_tree/node/UnaryExpression.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import {
   LENGTHOF_EXPRESSION_RULE,

@@ -1,9 +1,9 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import AbstractMapOutputValue from "../../abstract_syntax_tree/node/AbstractMapOutputValue.ts";
+import type AbstractMapOutputValue from "../../abstract_syntax_tree/node/AbstractMapOutputValue.ts";
 import AggregateMapOutputValue from "../../abstract_syntax_tree/node/AggregateMapOutputValue.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import {
   AGGREGATE_MAP_OUTPUT_VALUE_RULE,

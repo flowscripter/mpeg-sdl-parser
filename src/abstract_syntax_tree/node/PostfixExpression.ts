@@ -1,10 +1,10 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import AbstractExpression from "./AbstractExpression.ts";
-import AbstractNode from "./AbstractNode.ts";
-import ArrayElementAccess from "./ArrayElementAccess.ts";
-import ClassMemberAccess from "./ClassMemberAccess.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ArrayElementAccess from "./ArrayElementAccess.ts";
+import type ClassMemberAccess from "./ClassMemberAccess.ts";
 import ExpressionKind from "./enum/expression_kind.ts";
-import PostfixOperatorKind from "./enum/postfix_operator_kind.ts";
+import type PostfixOperatorKind from "./enum/postfix_operator_kind.ts";
 
 class PostfixExpression extends AbstractExpression {
   constructor(

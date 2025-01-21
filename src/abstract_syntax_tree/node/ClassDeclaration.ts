@@ -1,13 +1,13 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-import AlignedModifier from "./AlignedModifier.ts";
-import BitModifier from "./BitModifier.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
+import type BitModifier from "./BitModifier.ts";
 import StatementKind from "./enum/statement_kind.ts";
-import ExpandableModifier from "./ExpandableModifier.ts";
-import ExtendsModifier from "./ExtendsModifier.ts";
-import Identifier from "./Identifier.ts";
-import ParameterList from "./ParameterList.ts";
+import type ExpandableModifier from "./ExpandableModifier.ts";
+import type ExtendsModifier from "./ExtendsModifier.ts";
+import type Identifier from "./Identifier.ts";
+import type ParameterList from "./ParameterList.ts";
 
 class ClassDeclaration extends AbstractStatement {
   constructor(

@@ -1,5 +1,5 @@
 import { apply } from "../../../deps.ts";
-import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";

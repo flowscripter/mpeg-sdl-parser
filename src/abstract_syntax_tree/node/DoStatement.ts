@@ -1,7 +1,7 @@
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractNode from "./AbstractNode.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
-import CompoundStatement from "./CompoundStatement.ts";
+import type CompoundStatement from "./CompoundStatement.ts";
 import StatementKind from "./enum/statement_kind.ts";
 
 class DoStatement extends AbstractStatement {

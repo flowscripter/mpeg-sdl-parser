@@ -1,14 +1,14 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
+import type AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import ArrayDefinition from "../../abstract_syntax_tree/node/ArrayDefinition.ts";
-import ArrayElementType from "../../abstract_syntax_tree/node/ArrayElementType.ts";
-import ExplicitArrayDimension from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import ImplicitArrayDimension from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
-import PartialArrayDimension from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
+import type ArrayElementType from "../../abstract_syntax_tree/node/ArrayElementType.ts";
+import type ExplicitArrayDimension from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";
+import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
+import type ImplicitArrayDimension from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
+import type PartialArrayDimension from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
 import TokenKind from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
