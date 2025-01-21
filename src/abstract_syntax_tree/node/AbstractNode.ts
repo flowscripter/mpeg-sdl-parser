@@ -21,7 +21,13 @@ abstract class AbstractNode {
     );
   }
 
-  abstract accept(visitor: NodeVisitor): boolean;
+  accept(visitor: NodeVisitor): boolean {
+    if (!visitor.visitBefore(this)) {
+      return false;
+    }
+
+    return visitor.visitAfter(this);
+  }
 
   abstract getSyntaxTokenIterable(): IterableIterator<SyntaxToken>;
 }

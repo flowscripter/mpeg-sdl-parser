@@ -1,5 +1,6 @@
 import getLogger from "../../util/logger.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
+import type AbstractCompositeNode from "../node/AbstractCompositeNode.ts";
 import type AbstractNode from "../node/AbstractNode.ts";
 import NodeKind from "../node/enum/node_kind.ts";
 import type NodeVisitor from "./NodeVisitor.ts";
@@ -50,7 +51,19 @@ class TraversingVisitor implements NodeVisitor {
       case NodeKind.STATEMENT:
       case NodeKind.STRING_LITERAL:
         if (this.operationVisitor) {
-          return this.operationVisitor.visitBefore(node);
+          if (!this.operationVisitor.visitBefore(node)) {
+            return false;
+          }
+          if (node.isComposite) {
+            for (
+              const child of (node as AbstractCompositeNode)
+                .getChildNodeIterable()
+            ) {
+              if (!child.accept(this)) {
+                return false;
+              }
+            }
+          }
         }
         return true;
       default: {
