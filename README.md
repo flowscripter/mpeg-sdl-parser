@@ -5,7 +5,6 @@
 
 **NOTE: Under development**
 
-- fix GitHub workflows
 - implement control flow parsing: `switch`, `while`
 - provide separate CLI module:
   - test library module exports
@@ -25,6 +24,8 @@ Test: `deno test -A`
 
 ## Usage
 
+Grab with your preferred package manager from https://jsr.io/@flowscripter/mpeg-sdl-parser
+
 ```typescript
 import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";
 
@@ -37,21 +38,24 @@ const ast = parser.parse("computed int i;");
 console.log(JSON.stringify(ast));
 
 class MyNodeVisitor implements NodeVisitor {
-  visitBefore(node: AbstractNode): boolean {
-    return true;
+  beforeVisit(node: AbstractCompositeNode): VisitResult {
+    return VisitResult.CONTINUE;
   }
 
-  visitAfter(_node: AbstractNode): boolean {
-    return true;
+  visit(node: AbstractNode): VisitResult {
+    return VisitResult.CONTINUE;
+  }
+
+  afterVisit(_node: AbstractCompositeNode): VisitResult {
+    return VisitResult.CONTINUE;
   }
 }
 
 const myNodeVisitor = new MyNodeVisitor();
-const traversingVisitor = new TraversingVisitor(myNodeVisitor);
 
 // Traverse the AST
 
-ast.accept(traversingVisitor);
+dispatch(ast, myNodeVisitor);
 ```
 
 ## Documentation
@@ -123,6 +127,15 @@ classDiagram
     parse(specificationString: string) Specification
   }
 
+  class NodeVisitor {
+    beforeVisit(node: AbstractCompositeNode): VisitResult
+    visit(node: AbstractNode): VisitResult
+    afterVisit(node: AbstractCompositeNode): VisitResult
+  }
+
+  class TraversingVisitor {
+  }
+
   TriviaToken --|> AbstractToken
   SyntaxToken --|> AbstractToken
 
@@ -152,6 +165,10 @@ classDiagram
   Parser --> Tokenizer : uses
   Parser --> "*" Rule : uses
   Parser ..> Specification : produces
+
+  TraversingVisitor --|> NodeVisitor
+
+  NodeVisitor ..> AbstractNode : visits
 ```
 
 ### API

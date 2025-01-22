@@ -1,39 +1,64 @@
+import type AbstractCompositeNode from "../../../src/abstract_syntax_tree/node/AbstractCompositeNode.ts";
 import type AbstractNode from "../../../src/abstract_syntax_tree/node/AbstractNode.ts";
 import type ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
 import NodeKind from "../../../src/abstract_syntax_tree/node/enum/node_kind.ts";
+import dispatch from "../../../src/abstract_syntax_tree/visitor/dispatch.ts";
 import type NodeVisitor from "../../../src/abstract_syntax_tree/visitor/NodeVisitor.ts";
-import TraversingVisitor from "../../../src/abstract_syntax_tree/visitor/TraversingVisitor.ts";
+import VisitResult from "../../../src/abstract_syntax_tree/visitor/visit_result.ts";
 import Parser from "../../../src/parser/Parser.ts";
 import { assertEquals, path } from "../../test_deps.ts";
 
-class VerbatimPrintingNodeVisitor implements NodeVisitor {
+class HistoryRecordingNodeVisitor implements NodeVisitor {
   nodeHistory: string[] = [];
 
-  visitBefore(node: AbstractNode): boolean {
+  beforeVisit(node: AbstractCompositeNode): VisitResult {
     this.nodeHistory.push(NodeKind[node.nodeKind]);
 
-    return true;
+    return VisitResult.CONTINUE;
   }
 
-  visitAfter(_node: AbstractNode): boolean {
-    return true;
+  visit(node: AbstractNode): VisitResult {
+    this.nodeHistory.push(NodeKind[node.nodeKind]);
+
+    return VisitResult.CONTINUE;
+  }
+
+  afterVisit(_node: AbstractCompositeNode): VisitResult {
+    return VisitResult.CONTINUE;
   }
 }
 
-Deno.test("Test traversing visitor  specification", async () => {
+class IdentifierNodeVisitor extends HistoryRecordingNodeVisitor {
+  override beforeVisit(_node: AbstractCompositeNode): VisitResult {
+    return VisitResult.CONTINUE;
+  }
+
+  override visit(node: AbstractNode): VisitResult {
+    if (node.nodeKind === NodeKind.IDENTIFIER) {
+      return super.visit(node);
+    }
+
+    return VisitResult.CONTINUE;
+  }
+
+  override afterVisit(node: AbstractCompositeNode): VisitResult {
+    return super.afterVisit(node);
+  }
+}
+
+Deno.test("Test dispatch - full specification traversal", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
   );
   const parser = new Parser();
   const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const verbatimPrintingNodeVisitor = new VerbatimPrintingNodeVisitor();
-  const traversingVisitor = new TraversingVisitor(verbatimPrintingNodeVisitor);
+  const historyRecordingNodeProcessor = new HistoryRecordingNodeVisitor();
 
-  parsedSpecification.accept(traversingVisitor);
+  dispatch(parsedSpecification, historyRecordingNodeProcessor);
 
   assertEquals(
-    verbatimPrintingNodeVisitor.nodeHistory,
+    historyRecordingNodeProcessor.nodeHistory,
     [
       "SPECIFICATION",
       "STATEMENT",
@@ -122,27 +147,66 @@ Deno.test("Test traversing visitor  specification", async () => {
   );
 });
 
-Deno.test("Test traversing visitor  child node", async () => {
+Deno.test("Test dispatch - child node traversal", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
   );
   const parser = new Parser();
   const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const verbatimPrintingNodeVisitor = new VerbatimPrintingNodeVisitor();
-  const traversingVisitor = new TraversingVisitor(verbatimPrintingNodeVisitor);
+  const historyRecordingNodeProcessor = new HistoryRecordingNodeVisitor();
 
-  (parsedSpecification.globals[0] as ClassDeclaration).statements[2].accept(
-    traversingVisitor,
+  dispatch(
+    (parsedSpecification.globals[0] as ClassDeclaration).statements[2],
+    historyRecordingNodeProcessor,
   );
 
   assertEquals(
-    verbatimPrintingNodeVisitor.nodeHistory,
+    historyRecordingNodeProcessor.nodeHistory,
     [
       "STATEMENT",
       "ELEMENTARY_TYPE",
       "LENGTH_ATTRIBUTE",
       "NUMBER_LITERAL",
+      "IDENTIFIER",
+    ],
+  );
+});
+
+Deno.test("Test dispatch - filtered traversal", async () => {
+  const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
+  const originalSampleSdlSpecification = await Deno.readTextFile(
+    path.join(__dirname, "../../sample_specifications/sample.sdl"),
+  );
+  const parser = new Parser();
+  const parsedSpecification = parser.parse(originalSampleSdlSpecification);
+  const identifierNodeVisitor = new IdentifierNodeVisitor();
+
+  dispatch(parsedSpecification, identifierNodeVisitor);
+
+  assertEquals(
+    identifierNodeVisitor.nodeHistory,
+    [
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
+      "IDENTIFIER",
       "IDENTIFIER",
     ],
   );

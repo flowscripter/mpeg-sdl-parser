@@ -1,7 +1,6 @@
 import type Location from "../../tokenizer/token/Location.ts";
 import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
 import getLogger from "../../util/logger.ts";
-import type NodeVisitor from "../visitor/NodeVisitor.ts";
 import NodeKind from "./enum/node_kind.ts";
 
 const logger = getLogger("AbstractNode");
@@ -19,14 +18,6 @@ abstract class AbstractNode {
       location.column,
       location.position,
     );
-  }
-
-  accept(visitor: NodeVisitor): boolean {
-    if (!visitor.visitBefore(this)) {
-      return false;
-    }
-
-    return visitor.visitAfter(this);
   }
 
   abstract getSyntaxTokenIterable(): IterableIterator<SyntaxToken>;

@@ -1,25 +1,31 @@
+import type AbstractCompositeNode from "../node/AbstractCompositeNode.ts";
 import type AbstractNode from "../node/AbstractNode.ts";
+import type VisitResult from "./visit_result.ts";
 
 /**
- * Interface representing a visitor for nodes in an abstract syntax tree.
- * Implementations of this interface can define actions to be taken before and after visiting a node.
+ * Interface representing a visitor for nodes.
  */
 interface NodeVisitor {
   /**
-   * Method to be called before visiting a node.
-   *
-   * @param node - The node to be visited.
-   * @returns A boolean indicating whether to continue visiting child nodes.
+   * Called before visiting a composite node.
+   * @param node The composite node to visit.
+   * @returns The result of the visit operation.
    */
-  visitBefore(node: AbstractNode): boolean;
+  beforeVisit(node: AbstractCompositeNode): VisitResult;
 
   /**
-   * Method to be called after visiting a node.
-   *
-   * @param node - The node that was visited.
-   * @returns A boolean indicating whether to continue visiting sibling nodes.
+   * Called when visiting a node.
+   * @param node The node to visit.
+   * @returns The result of the visit operation.
    */
-  visitAfter(node: AbstractNode): boolean;
+  visit(node: AbstractNode): VisitResult;
+
+  /**
+   * Called after visiting a composite node.
+   * @param node The composite node to visit.
+   * @returns The result of the visit operation.
+   */
+  afterVisit(node: AbstractCompositeNode): VisitResult;
 }
 
 export default NodeVisitor;
