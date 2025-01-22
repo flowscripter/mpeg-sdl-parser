@@ -24,7 +24,8 @@ Test: `deno test -A`
 
 ## Usage
 
-Grab with your preferred package manager from https://jsr.io/@flowscripter/mpeg-sdl-parser
+Grab with your preferred package manager from
+https://jsr.io/@flowscripter/mpeg-sdl-parser
 
 ```typescript
 import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";

@@ -46,6 +46,32 @@ class IdentifierNodeVisitor extends HistoryRecordingNodeVisitor {
   }
 }
 
+class FirstIdentifierNodeVisitor implements NodeVisitor {
+  constructor(private readonly identifierNodeVisitor: IdentifierNodeVisitor) {}
+
+  beforeVisit(node: AbstractCompositeNode): VisitResult {
+    return this.identifierNodeVisitor.beforeVisit(node);
+  }
+
+  visit(node: AbstractNode): VisitResult {
+    const result = this.identifierNodeVisitor.visit(node);
+
+    if (node.nodeKind === NodeKind.IDENTIFIER) {
+      return VisitResult.STOP;
+    }
+
+    return result;
+  }
+
+  afterVisit(node: AbstractCompositeNode): VisitResult {
+    return this.identifierNodeVisitor.afterVisit(node);
+  }
+
+  get nodeHistory() {
+    return this.identifierNodeVisitor.nodeHistory;
+  }
+}
+
 Deno.test("Test dispatch - full specification traversal", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
@@ -207,6 +233,27 @@ Deno.test("Test dispatch - filtered traversal", async () => {
       "IDENTIFIER",
       "IDENTIFIER",
       "IDENTIFIER",
+      "IDENTIFIER",
+    ],
+  );
+});
+
+Deno.test("Test dispatch - first identified", async () => {
+  const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
+  const originalSampleSdlSpecification = await Deno.readTextFile(
+    path.join(__dirname, "../../sample_specifications/sample.sdl"),
+  );
+  const parser = new Parser();
+  const parsedSpecification = parser.parse(originalSampleSdlSpecification);
+  const firstIdentifierNodeVisitor = new FirstIdentifierNodeVisitor(
+    new IdentifierNodeVisitor(),
+  );
+
+  dispatch(parsedSpecification, firstIdentifierNodeVisitor);
+
+  assertEquals(
+    firstIdentifierNodeVisitor.nodeHistory,
+    [
       "IDENTIFIER",
     ],
   );
