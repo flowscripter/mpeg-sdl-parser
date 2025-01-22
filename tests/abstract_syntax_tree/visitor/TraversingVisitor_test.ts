@@ -4,6 +4,7 @@ import type ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassD
 import NodeKind from "../../../src/abstract_syntax_tree/node/enum/node_kind.ts";
 import dispatch from "../../../src/abstract_syntax_tree/visitor/dispatch.ts";
 import type NodeVisitor from "../../../src/abstract_syntax_tree/visitor/NodeVisitor.ts";
+import TraversingVisitor from "../../../src/abstract_syntax_tree/visitor/TraversingVisitor.ts";
 import VisitResult from "../../../src/abstract_syntax_tree/visitor/visit_result.ts";
 import Parser from "../../../src/parser/Parser.ts";
 import { assertEquals, path } from "../../test_deps.ts";
@@ -72,7 +73,19 @@ class FirstIdentifierNodeVisitor implements NodeVisitor {
   }
 }
 
-Deno.test("Test dispatch - full specification traversal", async () => {
+Deno.test("Test traversing visitor", async () => {
+  const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
+  const originalSampleSdlSpecification = await Deno.readTextFile(
+    path.join(__dirname, "../../sample_specifications/sample.sdl"),
+  );
+  const parser = new Parser();
+  const parsedSpecification = parser.parse(originalSampleSdlSpecification);
+  const traversingVisitor = new TraversingVisitor();
+
+  traversingVisitor.visit(parsedSpecification);
+});
+
+Deno.test("Test traversing visitor - dispatch on full specification with operation visitor", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
@@ -173,7 +186,7 @@ Deno.test("Test dispatch - full specification traversal", async () => {
   );
 });
 
-Deno.test("Test dispatch - child node traversal", async () => {
+Deno.test("Test traversing visitor - dispatch on child node with operation visitor", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
@@ -199,7 +212,7 @@ Deno.test("Test dispatch - child node traversal", async () => {
   );
 });
 
-Deno.test("Test dispatch - filtered traversal", async () => {
+Deno.test("Test traversing visitor - dispatch on full specification with filtering visitor", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
@@ -238,7 +251,7 @@ Deno.test("Test dispatch - filtered traversal", async () => {
   );
 });
 
-Deno.test("Test dispatch - first identified", async () => {
+Deno.test("Test traversing visitor - dispatch on full specification with early stop visitor", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
