@@ -1,14 +1,14 @@
 import type AbstractNode from "../node/AbstractNode.ts";
-import type NodeVisitor from "./NodeVisitor.ts";
+import type NodeHandler from "./NodeHandler.ts";
 import TraversingVisitor from "./TraversingVisitor.ts";
 
 /**
  * Dispatches a node to a visitor for traversal.
  * @param node The node to dispatch.
- * @param operationVisitor The visitor to perform operations on the node.
+ * @param nodeHandler The handler to perform operations on the node.
  */
-function dispatch(node: AbstractNode, operationVisitor: NodeVisitor): void {
-  const traversingVisitor = new TraversingVisitor(operationVisitor);
+function dispatch(node: AbstractNode, nodeHandler: NodeHandler): void {
+  const traversingVisitor = new TraversingVisitor(nodeHandler);
 
   traversingVisitor.visit(node);
 }
