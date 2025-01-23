@@ -1,4 +1,4 @@
-import { alt_sc, apply, seq } from "../../../deps.ts";
+import { alt_sc, apply, seq } from "typescript-parsec";
 import type { AbstractExpression } from "../../abstract_syntax_tree/node/AbstractExpression.ts";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import type { AbstractStatement } from "../../abstract_syntax_tree/node/AbstractStatement.ts";

@@ -1,4 +1,4 @@
-import { apply, rep_sc, seq } from "../../../deps.ts";
+import { apply, rep_sc, seq } from "typescript-parsec";
 import type { AbstractStatement } from "../../abstract_syntax_tree/node/AbstractStatement.ts";
 import { CompoundStatement } from "../../abstract_syntax_tree/node/CompoundStatement.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

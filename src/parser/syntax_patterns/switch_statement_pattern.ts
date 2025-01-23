@@ -1,4 +1,4 @@
-import { apply } from "../../../deps.ts";
+import { apply } from "typescript-parsec";
 import { SwitchStatement } from "../../abstract_syntax_tree/node/SwitchStatement.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";

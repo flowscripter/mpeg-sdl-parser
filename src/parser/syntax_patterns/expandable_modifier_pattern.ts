@@ -1,4 +1,4 @@
-import { apply, opt_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, seq } from "typescript-parsec";
 import { ExpandableModifier } from "../../abstract_syntax_tree/node/ExpandableModifier.ts";
 import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

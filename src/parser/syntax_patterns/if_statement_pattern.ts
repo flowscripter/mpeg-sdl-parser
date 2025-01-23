@@ -1,4 +1,4 @@
-import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { IfClause } from "../../abstract_syntax_tree/node/IfClause.ts";
 import { IfStatement } from "../../abstract_syntax_tree/node/IfStatement.ts";
 import {

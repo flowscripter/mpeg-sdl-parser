@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import { ClassIdRange } from "../../abstract_syntax_tree/node/ClassIdRange.ts";
 import type { SingleClassId } from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

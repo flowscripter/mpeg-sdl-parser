@@ -1,4 +1,4 @@
-import { alt_sc, apply, rep_sc } from "../../../deps.ts";
+import { alt_sc, apply, rep_sc } from "typescript-parsec";
 import { StringLiteralKind } from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
 import { StringLiteral } from "../../abstract_syntax_tree/node/StringLiteral.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

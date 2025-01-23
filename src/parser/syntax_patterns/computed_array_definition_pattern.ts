@@ -1,4 +1,4 @@
-import { apply, rep_sc, seq } from "../../../deps.ts";
+import { apply, rep_sc, seq } from "typescript-parsec";
 import { ComputedArrayDefinition } from "../../abstract_syntax_tree/node/ComputedArrayDefinition.ts";
 import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import type { ExplicitArrayDimension } from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";

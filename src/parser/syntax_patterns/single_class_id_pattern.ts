@@ -1,4 +1,4 @@
-import { apply } from "../../../deps.ts";
+import { apply } from "typescript-parsec";
 import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import { SingleClassId } from "../../abstract_syntax_tree/node/SingleClassId.ts";
 import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";

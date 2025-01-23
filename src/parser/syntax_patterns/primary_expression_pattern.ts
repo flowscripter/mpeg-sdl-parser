@@ -1,4 +1,4 @@
-import { alt_sc, apply, seq } from "../../../deps.ts";
+import { alt_sc, apply, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
 import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";

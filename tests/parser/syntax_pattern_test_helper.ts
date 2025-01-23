@@ -1,16 +1,16 @@
+import { assertEquals } from "@std/assert";
 import {
   expectEOF,
   expectSingleResult,
   kleft,
   type Rule,
   rule,
-} from "../../deps.ts";
+} from "typescript-parsec";
 import type { AbstractNode } from "../../src/abstract_syntax_tree/node/AbstractNode.ts";
 import { initRules } from "../../src/parser/syntax_rules.ts";
 import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
 import { getToken } from "../../src/tokenizer/parsec/ParsecTokenWrapper.ts";
 import { Tokenizer } from "../../src/tokenizer/Tokenizer.ts";
-import { assertEquals } from "../test_deps.ts";
 
 function testSyntaxPattern(
   patternToTest: Rule<TokenKind, AbstractNode>,

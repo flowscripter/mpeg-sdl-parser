@@ -1,4 +1,4 @@
-import { apply, opt_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, seq } from "typescript-parsec";
 import { ClassDefinition } from "../../abstract_syntax_tree/node/ClassDefinition.ts";
 import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
 import type { ParameterValueList } from "../../abstract_syntax_tree/node/ParameterValueList.ts";

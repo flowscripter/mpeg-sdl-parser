@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, seq } from "typescript-parsec";
 import type { AbstractClassId } from "../../abstract_syntax_tree/node/AbstractClassId.ts";
 import { BitModifier } from "../../abstract_syntax_tree/node/BitModifier.ts";
 import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";

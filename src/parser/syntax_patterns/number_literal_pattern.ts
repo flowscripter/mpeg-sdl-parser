@@ -1,4 +1,4 @@
-import { alt_sc, apply, rep_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, rep_sc, seq } from "typescript-parsec";
 import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, seq } from "typescript-parsec";
 import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import { StringLiteralKind } from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
 import { StringVariableKind } from "../../abstract_syntax_tree/node/enum/string_variable_kind.ts";

@@ -1,4 +1,4 @@
-import { apply, opt_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, seq } from "typescript-parsec";
 import { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";

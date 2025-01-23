@@ -1,4 +1,4 @@
-import { alt_sc, apply, seq } from "../../../deps.ts";
+import { alt_sc, apply, seq } from "typescript-parsec";
 import { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import { ElementaryTypeKind } from "../../abstract_syntax_tree/node/enum/elementary_type_kind.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

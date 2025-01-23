@@ -1,3 +1,5 @@
+import { assertEquals } from "@std/assert";
+import * as path from "@std/path";
 import {
   type AbstractCompositeNode,
   type AbstractLeafNode,
@@ -7,7 +9,6 @@ import {
   Parser,
   TraversingVisitor,
 } from "../../../mod.ts";
-import { assertEquals, path } from "../../test_deps.ts";
 
 const expectedHistory = [
   "SPECIFICATION",
