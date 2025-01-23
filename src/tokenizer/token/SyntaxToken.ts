@@ -6,7 +6,21 @@ import AbstractToken from "./AbstractToken.ts";
 
 const logger = getLogger("SyntaxToken");
 
+/**
+ * Represents a syntax token in the tokenizer.
+ *
+ * @extends AbstractToken
+ */
 class SyntaxToken extends AbstractToken {
+  /**
+   * Creates an instance of SyntaxToken.
+   *
+   * @param tokenKind - The kind of token.
+   * @param location - The location of the token in the source.
+   * @param text - The text of the token.
+   * @param leadingTrivia - An array of trivia tokens that appear before this token.
+   * @param trailingTrivia - An array of trivia tokens that appear after this token.
+   */
   constructor(
     tokenKind: TokenKind,
     location: Location,
@@ -24,6 +38,11 @@ class SyntaxToken extends AbstractToken {
     );
   }
 
+  /**
+   * Converts the token to a string representation, including leading and trailing trivia.
+   *
+   * @returns The string representation of the token.
+   */
   public override toString(): string {
     return this.leadingTrivia.join("") +
       this.text +

@@ -1,149 +1,144 @@
-import type AbstractNode from "../../../src/abstract_syntax_tree/node/AbstractNode.ts";
-import type ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
+import type AbstractCompositeNode from "../../../src/abstract_syntax_tree/node/AbstractCompositeNode.ts";
+import type AbstractLeafNode from "../../../src/abstract_syntax_tree/node/AbstractLeafNode.ts";
 import NodeKind from "../../../src/abstract_syntax_tree/node/enum/node_kind.ts";
-import type NodeVisitor from "../../../src/abstract_syntax_tree/visitor/NodeVisitor.ts";
+import dispatch from "../../../src/abstract_syntax_tree/visitor/dispatch.ts";
+import type NodeHandler from "../../../src/abstract_syntax_tree/visitor/NodeHandler.ts";
 import TraversingVisitor from "../../../src/abstract_syntax_tree/visitor/TraversingVisitor.ts";
 import Parser from "../../../src/parser/Parser.ts";
 import { assertEquals, path } from "../../test_deps.ts";
 
-class VerbatimPrintingNodeVisitor implements NodeVisitor {
+const expectedHistory = [
+  "SPECIFICATION",
+  "STATEMENT",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "STATEMENT",
+  "ELEMENTARY_TYPE",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "STATEMENT",
+  "EXPRESSION",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "STATEMENT",
+  "STATEMENT",
+  "IDENTIFIER",
+  "IDENTIFIER",
+  "STATEMENT",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "EXPRESSION",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "CLASS_MEMBER_ACCESS",
+  "IDENTIFIER",
+  "STATEMENT",
+  "EXPRESSION",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "EXPRESSION",
+  "IDENTIFIER",
+  "NUMBER_LITERAL",
+  "STATEMENT",
+  "STATEMENT",
+  "ARRAY_ELEMENT_TYPE",
+  "ELEMENTARY_TYPE",
+  "LENGTH_ATTRIBUTE",
+  "NUMBER_LITERAL",
+  "IDENTIFIER",
+  "ARRAY_DIMENSION",
+  "IDENTIFIER",
+];
+
+class HistoryRecordingNodeHandler implements NodeHandler {
   nodeHistory: string[] = [];
 
-  visitBefore(node: AbstractNode): boolean {
+  beforeVisit(node: AbstractCompositeNode): void {
     this.nodeHistory.push(NodeKind[node.nodeKind]);
-
-    return true;
   }
 
-  visitAfter(_node: AbstractNode): boolean {
-    return true;
+  visit(node: AbstractLeafNode): void {
+    this.nodeHistory.push(NodeKind[node.nodeKind]);
+  }
+
+  afterVisit(_node: AbstractCompositeNode): void {
   }
 }
 
-Deno.test("Test traversing visitor  specification", async () => {
+Deno.test("Test traversing visitor", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
   );
   const parser = new Parser();
   const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const verbatimPrintingNodeVisitor = new VerbatimPrintingNodeVisitor();
-  const traversingVisitor = new TraversingVisitor(verbatimPrintingNodeVisitor);
+  const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
+  const traversingVisitor = new TraversingVisitor(historyRecordingNodeHandler);
 
-  parsedSpecification.accept(traversingVisitor);
+  traversingVisitor.visit(parsedSpecification);
 
   assertEquals(
-    verbatimPrintingNodeVisitor.nodeHistory,
-    [
-      "SPECIFICATION",
-      "STATEMENT",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "STATEMENT",
-      "EXPRESSION",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "STATEMENT",
-      "STATEMENT",
-      "IDENTIFIER",
-      "IDENTIFIER",
-      "STATEMENT",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "EXPRESSION",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "CLASS_MEMBER_ACCESS",
-      "IDENTIFIER",
-      "STATEMENT",
-      "EXPRESSION",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "EXPRESSION",
-      "IDENTIFIER",
-      "NUMBER_LITERAL",
-      "STATEMENT",
-      "STATEMENT",
-      "ARRAY_ELEMENT_TYPE",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-      "ARRAY_DIMENSION",
-      "IDENTIFIER",
-    ],
+    historyRecordingNodeHandler.nodeHistory,
+    expectedHistory,
   );
 });
 
-Deno.test("Test traversing visitor  child node", async () => {
+Deno.test("Test traversing visitor - dispatch", async () => {
   const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
   const originalSampleSdlSpecification = await Deno.readTextFile(
     path.join(__dirname, "../../sample_specifications/sample.sdl"),
   );
   const parser = new Parser();
   const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const verbatimPrintingNodeVisitor = new VerbatimPrintingNodeVisitor();
-  const traversingVisitor = new TraversingVisitor(verbatimPrintingNodeVisitor);
+  const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
 
-  (parsedSpecification.globals[0] as ClassDeclaration).statements[2].accept(
-    traversingVisitor,
-  );
+  dispatch(parsedSpecification, historyRecordingNodeHandler);
 
   assertEquals(
-    verbatimPrintingNodeVisitor.nodeHistory,
-    [
-      "STATEMENT",
-      "ELEMENTARY_TYPE",
-      "LENGTH_ATTRIBUTE",
-      "NUMBER_LITERAL",
-      "IDENTIFIER",
-    ],
+    historyRecordingNodeHandler.nodeHistory,
+    expectedHistory,
   );
 });
