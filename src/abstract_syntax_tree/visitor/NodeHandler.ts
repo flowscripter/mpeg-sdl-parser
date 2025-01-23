@@ -3,7 +3,7 @@ import type AbstractLeafNode from "../node/AbstractLeafNode.ts";
 
 /**
  * Interface representing a handler for nodes in an abstract syntax tree.
- * 
+ *
  * @interface NodeHandler
  */
 interface NodeHandler {
