@@ -3,6 +3,12 @@
 > ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) parser implemented
 > in TypeScript
 
+[![version](https://img.shields.io/github/v/release/flowscripter/mpeg-sdl-parser?sort=semver)](https://github.com/flowscripter/mpeg-sdl-parser/releases)
+[![build](https://img.shields.io/github/actions/workflow/status/flowscripter/mpeg-sdl-parser/release-deno-library.yml)](https://github.com/flowscripter/mpeg-sdl-parser/actions/workflows/release-deno-library.yml)
+[![coverage](https://codecov.io/gh/flowscripter/mpeg-sdl-parser/branch/main/graph/badge.svg?token=EMFT2938ZF)](https://codecov.io/gh/flowscripter/mpeg-sdl-parser)
+[![deno doc](https://doc.deno.land/badge.svg)](https://jsr.io/@flowscripter/mpeg-sdl-parser/doc)
+[![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-parser)](https://github.com/flowscripter/mpeg-sdl-parser/blob/main/LICENSE)
+
 **NOTE: Under development**
 
 - implement control flow parsing: `switch`, `while`
