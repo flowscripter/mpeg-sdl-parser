@@ -1,15 +1,15 @@
-import ArrayElementAccess from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
-import ClassMemberAccess from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import PostfixOperatorKind from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
-import PrimaryExpression from "../../../src/abstract_syntax_tree/node/PrimaryExpression.ts";
+import { ArrayElementAccess } from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
+import { ClassMemberAccess } from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { PostfixOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { PrimaryExpression } from "../../../src/abstract_syntax_tree/node/PrimaryExpression.ts";
 import { POSTFIX_EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test expression pattern - postfix operator", () => {

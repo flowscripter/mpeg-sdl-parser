@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractClassId from "./AbstractClassId.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import ClassIdKind from "./enum/class_id_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractClassId } from "./AbstractClassId.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { ClassIdKind } from "./enum/class_id_kind.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-class SingleClassId extends AbstractClassId {
+export class SingleClassId extends AbstractClassId {
   constructor(
     public readonly value: NumberLiteral,
   ) {
@@ -19,5 +19,3 @@ class SingleClassId extends AbstractClassId {
     yield* this.value.getSyntaxTokenIterable();
   }
 }
-
-export default SingleClassId;

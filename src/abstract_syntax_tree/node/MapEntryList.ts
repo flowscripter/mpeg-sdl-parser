@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type MapEntry from "./MapEntry.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { MapEntry } from "./MapEntry.ts";
 
-class MapEntryList extends AbstractCompositeNode {
+export class MapEntryList extends AbstractCompositeNode {
   constructor(
     public readonly mapEntries: MapEntry[],
     public readonly openBraceToken: SyntaxToken,
@@ -31,5 +31,3 @@ class MapEntryList extends AbstractCompositeNode {
     yield this.closeBraceToken;
   }
 }
-
-export default MapEntryList;

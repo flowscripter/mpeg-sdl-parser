@@ -1,9 +1,9 @@
 import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import type MapEntry from "../../abstract_syntax_tree/node/MapEntry.ts";
-import MapEntryList from "../../abstract_syntax_tree/node/MapEntryList.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { MapEntry } from "../../abstract_syntax_tree/node/MapEntry.ts";
+import { MapEntryList } from "../../abstract_syntax_tree/node/MapEntryList.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import { MAP_ENTRY_RULE } from "../syntax_rules.ts";
 
@@ -58,7 +58,7 @@ function getMapEntryList(
   );
 }
 
-function getMapEntryListPattern() {
+export function getMapEntryListPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN),
@@ -76,5 +76,3 @@ function getMapEntryListPattern() {
     getMapEntryList,
   );
 }
-
-export default getMapEntryListPattern;

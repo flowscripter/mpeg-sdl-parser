@@ -1,7 +1,7 @@
 /**
  * Enum representing the kinds of unary operators.
  */
-enum UnaryOperatorKind {
+export enum UnaryOperatorKind {
   /**
    * Represents the unary plus operator.
    */
@@ -11,5 +11,3 @@ enum UnaryOperatorKind {
    */
   UNARY_NEGATION,
 }
-
-export default UnaryOperatorKind;

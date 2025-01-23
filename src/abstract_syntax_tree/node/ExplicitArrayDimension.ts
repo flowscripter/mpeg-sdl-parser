@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractArrayDimension from "./AbstractArrayDimension.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import ArrayDimensionKind from "./enum/array_dimension_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractArrayDimension } from "./AbstractArrayDimension.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
 
-class ExplicitArrayDimension extends AbstractArrayDimension {
+export class ExplicitArrayDimension extends AbstractArrayDimension {
   constructor(
     public readonly size: AbstractNode,
     public readonly openBracketToken: SyntaxToken,
@@ -22,5 +22,3 @@ class ExplicitArrayDimension extends AbstractArrayDimension {
     yield this.closeBracketToken;
   }
 }
-
-export default ExplicitArrayDimension;

@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of expressions.
  */
-enum ExpressionKind {
+export enum ExpressionKind {
   /** Binary expression */
   BINARY,
   /** Length of expression */
@@ -13,5 +13,3 @@ enum ExpressionKind {
   /** Unary expression */
   UNARY,
 }
-
-export default ExpressionKind;

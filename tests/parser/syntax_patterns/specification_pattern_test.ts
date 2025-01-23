@@ -1,15 +1,15 @@
 import { expectEOF, expectSingleResult } from "../../../deps.ts";
-import ClassDeclaration from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import Specification from "../../../src/abstract_syntax_tree/node/Specification.ts";
+import { ClassDeclaration } from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { Specification } from "../../../src/abstract_syntax_tree/node/Specification.ts";
 import {
   initRules,
   SPECIFICATION_RULE,
 } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
-import Tokenizer from "../../../src/tokenizer/Tokenizer.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
+import { Tokenizer } from "../../../src/tokenizer/Tokenizer.ts";
 import { InternalParserError } from "../../../src/util/ParserError.ts";
 import { assertEquals, assertThrows } from "../../test_deps.ts";
 

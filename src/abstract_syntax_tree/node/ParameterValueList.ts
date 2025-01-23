@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-class ParameterValueList extends AbstractCompositeNode {
+export class ParameterValueList extends AbstractCompositeNode {
   constructor(
     public readonly values: AbstractNode[],
     public readonly openParenthesisToken: SyntaxToken,
@@ -33,5 +33,3 @@ class ParameterValueList extends AbstractCompositeNode {
     yield this.closeParenthesisToken;
   }
 }
-
-export default ParameterValueList;

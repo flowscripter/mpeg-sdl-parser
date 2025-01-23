@@ -1,10 +1,10 @@
 import { alt_sc, lrec_sc, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import BinaryExpression from "../../abstract_syntax_tree/node/BinaryExpression.ts";
-import BinaryOperatorKind from "../../abstract_syntax_tree/node/enum/binary_operator_kind.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { BinaryExpression } from "../../abstract_syntax_tree/node/BinaryExpression.ts";
+import { BinaryOperatorKind } from "../../abstract_syntax_tree/node/enum/binary_operator_kind.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import { UNARY_EXPRESSION_RULE } from "../syntax_rules.ts";
 
@@ -50,7 +50,7 @@ function getMultiplicativeExpression(
   );
 }
 
-function getMultiplicativeExpressionPattern() {
+export function getMultiplicativeExpressionPattern() {
   return lrec_sc(
     UNARY_EXPRESSION_RULE,
     seq(
@@ -64,5 +64,3 @@ function getMultiplicativeExpressionPattern() {
     getMultiplicativeExpression,
   );
 }
-
-export default getMultiplicativeExpressionPattern;

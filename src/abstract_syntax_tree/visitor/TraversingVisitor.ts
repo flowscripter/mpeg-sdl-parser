@@ -1,18 +1,18 @@
 import getLogger from "../../util/logger.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
-import type AbstractCompositeNode from "../node/AbstractCompositeNode.ts";
-import type AbstractLeafNode from "../node/AbstractLeafNode.ts";
-import type AbstractNode from "../node/AbstractNode.ts";
-import NodeKind from "../node/enum/node_kind.ts";
-import type NodeHandler from "./NodeHandler.ts";
-import type NodeVisitor from "./NodeVisitor.ts";
+import type { AbstractCompositeNode } from "../node/AbstractCompositeNode.ts";
+import type { AbstractLeafNode } from "../node/AbstractLeafNode.ts";
+import type { AbstractNode } from "../node/AbstractNode.ts";
+import { NodeKind } from "../node/enum/node_kind.ts";
+import type { NodeHandler } from "./NodeHandler.ts";
+import type { NodeVisitor } from "./NodeVisitor.ts";
 
 const logger = getLogger("TraversingVisitor");
 
 /**
  * A visitor that traverses nodes and delegates operations to a node handler.
  */
-class TraversingVisitor implements NodeVisitor {
+export class TraversingVisitor implements NodeVisitor {
   constructor(public readonly nodeHandler: NodeHandler) {}
 
   /**
@@ -72,5 +72,3 @@ class TraversingVisitor implements NodeVisitor {
     }
   }
 }
-
-export default TraversingVisitor;

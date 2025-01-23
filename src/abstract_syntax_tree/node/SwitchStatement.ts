@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class SwitchStatement extends AbstractStatement {
+export class SwitchStatement extends AbstractStatement {
   // TODO: implement
   constructor() {
     super(StatementKind.SWITCH, {
@@ -23,5 +23,3 @@ class SwitchStatement extends AbstractStatement {
     throw new Error("Method not implemented.");
   }
 }
-
-export default SwitchStatement;

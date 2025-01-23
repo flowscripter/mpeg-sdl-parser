@@ -1,7 +1,7 @@
 /**
  * Enum representing the kinds of string literals.
  */
-enum StringLiteralKind {
+export enum StringLiteralKind {
   /**
    * Represents a basic string literal.
    */
@@ -11,5 +11,3 @@ enum StringLiteralKind {
    */
   UTF,
 }
-
-export default StringLiteralKind;

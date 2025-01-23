@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import ExpressionKind from "./enum/expression_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { ExpressionKind } from "./enum/expression_kind.ts";
 
-class LengthOfExpression extends AbstractExpression {
+export class LengthOfExpression extends AbstractExpression {
   constructor(
     public readonly operand: AbstractNode,
     public readonly lengthOfToken: SyntaxToken,
@@ -24,5 +24,3 @@ class LengthOfExpression extends AbstractExpression {
     yield this.closeParenthesisPunctuatorToken;
   }
 }
-
-export default LengthOfExpression;

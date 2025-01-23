@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class WhileStatement extends AbstractStatement {
+export class WhileStatement extends AbstractStatement {
   // TODO: implement
   constructor() {
     super(StatementKind.WHILE, {
@@ -23,5 +23,3 @@ class WhileStatement extends AbstractStatement {
     throw new Error("Method not implemented.");
   }
 }
-
-export default WhileStatement;

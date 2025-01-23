@@ -2,7 +2,7 @@
  * Enum representing different kinds of class IDs.
  * This enum is used to categorize different types of class IDs.
  */
-enum ClassIdKind {
+export enum ClassIdKind {
   /** Single class ID */
   SINGLE,
   /** Range class ID */
@@ -10,5 +10,3 @@ enum ClassIdKind {
   /** Extended range class ID */
   EXTENDED_RANGE,
 }
-
-export default ClassIdKind;

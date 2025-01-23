@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class CompoundStatement extends AbstractStatement {
+export class CompoundStatement extends AbstractStatement {
   constructor(
     public readonly statements: AbstractStatement[],
     public readonly openBracePunctuatorToken: SyntaxToken,
@@ -26,5 +26,3 @@ class CompoundStatement extends AbstractStatement {
     yield this.closeBracePunctuatorToken;
   }
 }
-
-export default CompoundStatement;

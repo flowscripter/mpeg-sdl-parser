@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractLeafNode from "./AbstractLeafNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type NumberLiteralKind from "./enum/number_literal_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractLeafNode } from "./AbstractLeafNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { NumberLiteralKind } from "./enum/number_literal_kind.ts";
 
-class NumberLiteral extends AbstractLeafNode {
+export class NumberLiteral extends AbstractLeafNode {
   constructor(
     public readonly numberLiteralKind: NumberLiteralKind,
     public readonly value: number,
@@ -19,5 +19,3 @@ class NumberLiteral extends AbstractLeafNode {
     yield* this.tokens;
   }
 }
-
-export default NumberLiteral;

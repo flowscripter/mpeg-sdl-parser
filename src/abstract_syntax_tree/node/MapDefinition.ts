@@ -1,11 +1,11 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
+import type { Identifier } from "./Identifier.ts";
 
-class MapDefinition extends AbstractStatement {
+export class MapDefinition extends AbstractStatement {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,
@@ -57,5 +57,3 @@ class MapDefinition extends AbstractStatement {
     yield this.semicolonToken;
   }
 }
-
-export default MapDefinition;

@@ -1,8 +1,7 @@
-import type Location from "./Location.ts";
-
 import getLogger from "../../util/logger.ts";
-import TokenKind from "../enum/token_kind.ts";
-import AbstractToken from "./AbstractToken.ts";
+import { TokenKind } from "../enum/token_kind.ts";
+import { AbstractToken } from "./AbstractToken.ts";
+import type { Location } from "./Location.ts";
 
 const logger = getLogger("TriviaToken");
 
@@ -17,7 +16,7 @@ const logger = getLogger("TriviaToken");
  * @param location - The location of the token in the source code.
  * @param text - The text content of the token.
  */
-class Trivia extends AbstractToken {
+export class Trivia extends AbstractToken {
   constructor(
     tokenKind: TokenKind,
     location: Location,
@@ -37,5 +36,3 @@ class Trivia extends AbstractToken {
     return this.text;
   }
 }
-
-export default Trivia;

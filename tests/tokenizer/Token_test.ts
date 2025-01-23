@@ -1,6 +1,6 @@
-import TokenKind from "../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../src/tokenizer/token/TriviaToken.ts";
 import { assertEquals } from "../test_deps.ts";
 
 Deno.test("Test token", () => {

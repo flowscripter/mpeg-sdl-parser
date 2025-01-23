@@ -1,9 +1,9 @@
-import type Location from "../../tokenizer/token/Location.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type MapOutputValueKind from "./enum/map_output_value_kind.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { Location } from "../../tokenizer/token/Location.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { MapOutputValueKind } from "./enum/map_output_value_kind.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-abstract class AbstractMapOutputValue extends AbstractCompositeNode {
+export abstract class AbstractMapOutputValue extends AbstractCompositeNode {
   constructor(
     public readonly mapOutputValueKind: MapOutputValueKind,
     location: Location,
@@ -11,5 +11,3 @@ abstract class AbstractMapOutputValue extends AbstractCompositeNode {
     super(NodeKind.MAP_OUTPUT_VALUE, location);
   }
 }
-
-export default AbstractMapOutputValue;

@@ -1,11 +1,9 @@
-import { LexicalParserError } from "../../mod.ts";
-import ClassDeclaration from "../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
-import Identifier from "../../src/abstract_syntax_tree/node/Identifier.ts";
-import Specification from "../../src/abstract_syntax_tree/node/Specification.ts";
-import Parser from "../../src/parser/Parser.ts";
-import TokenKind from "../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../src/tokenizer/token/TriviaToken.ts";
+import { LexicalParserError, Parser, Specification } from "../../mod.ts";
+import { ClassDeclaration } from "../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
+import { Identifier } from "../../src/abstract_syntax_tree/node/Identifier.ts";
+import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../src/tokenizer/token/TriviaToken.ts";
 import { assertEquals, assertThrows, path } from "../test_deps.ts";
 
 Deno.test("Test parser", () => {

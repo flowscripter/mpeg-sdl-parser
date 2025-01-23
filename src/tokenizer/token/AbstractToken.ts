@@ -1,5 +1,5 @@
-import type TokenKind from "../enum/token_kind.ts";
-import type Location from "./Location.ts";
+import type { TokenKind } from "../enum/token_kind.ts";
+import type { Location } from "./Location.ts";
 
 /**
  * Represents an abstract base class for tokens.
@@ -7,7 +7,7 @@ import type Location from "./Location.ts";
  *
  * @abstract
  */
-abstract class AbstractToken {
+export abstract class AbstractToken {
   constructor(
     public readonly tokenKind: TokenKind,
     public readonly location: Location,
@@ -15,5 +15,3 @@ abstract class AbstractToken {
   ) {
   }
 }
-
-export default AbstractToken;

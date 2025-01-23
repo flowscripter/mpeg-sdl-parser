@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of array dimensions.
  */
-enum ArrayDimensionKind {
+export enum ArrayDimensionKind {
   /** Explicit array dimension */
   EXPLICIT,
   /** Partial array dimension */
@@ -9,5 +9,3 @@ enum ArrayDimensionKind {
   /** Implicit array dimension */
   IMPLICIT,
 }
-
-export default ArrayDimensionKind;

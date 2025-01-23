@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type CompoundStatement from "./CompoundStatement.ts";
-import type ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { CompoundStatement } from "./CompoundStatement.ts";
+import type { ComputedElementaryTypeDefinition } from "./ComputedElementaryTypeDefinition.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class ForStatement extends AbstractStatement {
+export class ForStatement extends AbstractStatement {
   constructor(
     // either ((assignment_expression semicolon) | computed_elementary_type_definition | semicolon)
     public readonly expression1: AbstractExpression | undefined,
@@ -63,5 +63,3 @@ class ForStatement extends AbstractStatement {
     yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }
-
-export default ForStatement;

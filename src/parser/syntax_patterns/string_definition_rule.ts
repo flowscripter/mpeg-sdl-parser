@@ -1,13 +1,13 @@
 import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
-import type AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
-import StringLiteralKind from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
-import StringVariableKind from "../../abstract_syntax_tree/node/enum/string_variable_kind.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import StringDefinition from "../../abstract_syntax_tree/node/StringDefinition.ts";
-import type StringLiteral from "../../abstract_syntax_tree/node/StringLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
+import { StringLiteralKind } from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
+import { StringVariableKind } from "../../abstract_syntax_tree/node/enum/string_variable_kind.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import { StringDefinition } from "../../abstract_syntax_tree/node/StringDefinition.ts";
+import type { StringLiteral } from "../../abstract_syntax_tree/node/StringLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
@@ -114,7 +114,7 @@ function getStringDefinition(values: [
   );
 }
 
-function getStringDefinitionPattern() {
+export function getStringDefinitionPattern() {
   return apply(
     seq(
       opt_sc(
@@ -148,5 +148,3 @@ function getStringDefinitionPattern() {
     getStringDefinition,
   );
 }
-
-export default getStringDefinitionPattern;

@@ -1,11 +1,11 @@
 import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
-import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
-import NodeKind from "../../abstract_syntax_tree/node/enum/node_kind.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import MapDefinition from "../../abstract_syntax_tree/node/MapDefinition.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import { NodeKind } from "../../abstract_syntax_tree/node/enum/node_kind.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import { MapDefinition } from "../../abstract_syntax_tree/node/MapDefinition.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { ELEMENTARY_TYPE_RULE, IDENTIFIER_RULE } from "../syntax_rules.ts";
 
 function getMapDefinition(
@@ -54,7 +54,7 @@ function getMapDefinition(
   );
 }
 
-function getMapDefinitionPattern() {
+export function getMapDefinitionPattern() {
   return apply(
     seq(
       opt_sc(
@@ -76,5 +76,3 @@ function getMapDefinitionPattern() {
     getMapDefinition,
   );
 }
-
-export default getMapDefinitionPattern;

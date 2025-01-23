@@ -32,31 +32,31 @@ import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";
 
 const parser = new Parser();
 
-// Parse SDL and produce an AST (abstract syntax tree)
+// Parse SDL and produce an abstract syntax tree (AST)
 
 const ast = parser.parse("computed int i;");
 
 console.log(JSON.stringify(ast));
 
-class MyNodeVisitor implements NodeVisitor {
-  beforeVisit(node: AbstractCompositeNode): VisitResult {
-    return VisitResult.CONTINUE;
+// Traverse the AST
+
+class MyNodeHandler implements NodeHandler {
+  beforeVisit(node: AbstractCompositeNode) {
+    console.log("About to visit child nodes");
   }
 
-  visit(node: AbstractNode): VisitResult {
-    return VisitResult.CONTINUE;
+  visit(node: AbstractLeafNode) {
+    console.log("Visiting leaf node");
   }
 
-  afterVisit(_node: AbstractCompositeNode): VisitResult {
-    return VisitResult.CONTINUE;
+  afterVisit(node: AbstractCompositeNode) {
+    console.log("Finished visiting child nodes");
   }
 }
 
-const myNodeVisitor = new MyNodeVisitor();
+const myNodeHandler = new MyNodeHandler();
 
-// Traverse the AST
-
-dispatch(ast, myNodeVisitor);
+dispatch(ast, myNodeHandler);
 ```
 
 ## Documentation
@@ -129,12 +129,13 @@ classDiagram
   }
 
   class NodeVisitor {
-    beforeVisit(node: AbstractCompositeNode): VisitResult
-    visit(node: AbstractNode): VisitResult
-    afterVisit(node: AbstractCompositeNode): VisitResult
+    visit(node: AbstractNode)
   }
 
   class TraversingVisitor {
+  }
+
+  class NodeHandler {
   }
 
   TriviaToken --|> AbstractToken

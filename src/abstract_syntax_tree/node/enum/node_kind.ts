@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of nodes.
  */
-enum NodeKind {
+export enum NodeKind {
   /** Aligned modifier node */
   ALIGNED_MODIFIER,
   /** Array dimension node */
@@ -49,5 +49,3 @@ enum NodeKind {
   /** String literal node */
   STRING_LITERAL,
 }
-
-export default NodeKind;

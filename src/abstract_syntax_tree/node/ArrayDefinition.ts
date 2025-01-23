@@ -1,15 +1,15 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AlignedModifier from "./AlignedModifier.ts";
-import type ArrayElementType from "./ArrayElementType.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
-import type Identifier from "./Identifier.ts";
-import type ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
-import type PartialArrayDimension from "./PartialArrayDimension.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractArrayDefinition } from "./AbstractArrayDefinition.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AlignedModifier } from "./AlignedModifier.ts";
+import type { ArrayElementType } from "./ArrayElementType.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
+import type { ExplicitArrayDimension } from "./ExplicitArrayDimension.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { ImplicitArrayDimension } from "./ImplicitArrayDimension.ts";
+import type { PartialArrayDimension } from "./PartialArrayDimension.ts";
 
-class ArrayDefinition extends AbstractArrayDefinition {
+export class ArrayDefinition extends AbstractArrayDefinition {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,
@@ -82,5 +82,3 @@ class ArrayDefinition extends AbstractArrayDefinition {
     yield this.semicolonPunctuatorToken;
   }
 }
-
-export default ArrayDefinition;

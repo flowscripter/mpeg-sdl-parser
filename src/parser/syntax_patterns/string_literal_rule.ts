@@ -1,9 +1,9 @@
 import { alt_sc, apply, rep_sc } from "../../../deps.ts";
-import StringLiteralKind from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
-import StringLiteral from "../../abstract_syntax_tree/node/StringLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { StringLiteralKind } from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
+import { StringLiteral } from "../../abstract_syntax_tree/node/StringLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
@@ -162,7 +162,7 @@ function getStringLiteral(
   );
 }
 
-function getStringLiteralPattern() {
+export function getStringLiteralPattern() {
   return apply(
     // the token types should be all the same but we allow a sequence of alternates here
     // this allows us to provide a better error message if the token types are different
@@ -175,5 +175,3 @@ function getStringLiteralPattern() {
     getStringLiteral,
   );
 }
-
-export default getStringLiteralPattern;

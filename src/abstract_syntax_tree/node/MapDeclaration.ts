@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type MapEntryList from "./MapEntryList.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { MapEntryList } from "./MapEntryList.ts";
 
-class MapDeclaration extends AbstractStatement {
+export class MapDeclaration extends AbstractStatement {
   constructor(
     public readonly identifier: Identifier,
     public readonly outputElementaryType: ElementaryType | undefined,
@@ -42,5 +42,3 @@ class MapDeclaration extends AbstractStatement {
     yield this.closeParenthesisToken;
   }
 }
-
-export default MapDeclaration;

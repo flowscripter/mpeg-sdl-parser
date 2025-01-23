@@ -1,10 +1,12 @@
-import type AbstractCompositeNode from "../../../src/abstract_syntax_tree/node/AbstractCompositeNode.ts";
-import type AbstractLeafNode from "../../../src/abstract_syntax_tree/node/AbstractLeafNode.ts";
-import NodeKind from "../../../src/abstract_syntax_tree/node/enum/node_kind.ts";
-import dispatch from "../../../src/abstract_syntax_tree/visitor/dispatch.ts";
-import type NodeHandler from "../../../src/abstract_syntax_tree/visitor/NodeHandler.ts";
-import TraversingVisitor from "../../../src/abstract_syntax_tree/visitor/TraversingVisitor.ts";
-import Parser from "../../../src/parser/Parser.ts";
+import {
+  type AbstractCompositeNode,
+  type AbstractLeafNode,
+  dispatch,
+  type NodeHandler,
+  NodeKind,
+  Parser,
+  TraversingVisitor,
+} from "../../../mod.ts";
 import { assertEquals, path } from "../../test_deps.ts";
 
 const expectedHistory = [

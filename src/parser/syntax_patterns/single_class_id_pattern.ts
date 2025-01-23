@@ -1,7 +1,7 @@
 import { apply } from "../../../deps.ts";
-import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
-import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { SingleClassId } from "../../abstract_syntax_tree/node/SingleClassId.ts";
+import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import { NUMBER_LITERAL_RULE } from "../syntax_rules.ts";
 
@@ -30,11 +30,9 @@ function getSingleClassId(
   return new SingleClassId(numberLiteral);
 }
 
-function getSingleClassIdPattern() {
+export function getSingleClassIdPattern() {
   return apply(
     NUMBER_LITERAL_RULE,
     getSingleClassId,
   );
 }
-
-export default getSingleClassIdPattern;

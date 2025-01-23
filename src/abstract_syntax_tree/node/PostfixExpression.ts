@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ArrayElementAccess from "./ArrayElementAccess.ts";
-import type ClassMemberAccess from "./ClassMemberAccess.ts";
-import ExpressionKind from "./enum/expression_kind.ts";
-import type PostfixOperatorKind from "./enum/postfix_operator_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ArrayElementAccess } from "./ArrayElementAccess.ts";
+import type { ClassMemberAccess } from "./ClassMemberAccess.ts";
+import { ExpressionKind } from "./enum/expression_kind.ts";
+import type { PostfixOperatorKind } from "./enum/postfix_operator_kind.ts";
 
-class PostfixExpression extends AbstractExpression {
+export class PostfixExpression extends AbstractExpression {
   constructor(
     public readonly operand: AbstractNode,
     public readonly arrayElementAccess: ArrayElementAccess | undefined,
@@ -40,5 +40,3 @@ class PostfixExpression extends AbstractExpression {
     }
   }
 }
-
-export default PostfixExpression;

@@ -1,12 +1,12 @@
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import UnaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/unary_operator_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import LengthOfExpression from "../../../src/abstract_syntax_tree/node/LengthOfExpression.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import UnaryExpression from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { UnaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/unary_operator_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { LengthOfExpression } from "../../../src/abstract_syntax_tree/node/LengthOfExpression.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { UnaryExpression } from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
 import { UNARY_EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test unary expression pattern - number literal with unary plus operator", () => {

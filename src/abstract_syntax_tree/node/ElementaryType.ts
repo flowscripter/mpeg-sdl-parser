@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractLeafNode from "./AbstractLeafNode.ts";
-import type ElementaryTypeKind from "./enum/elementary_type_kind.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractLeafNode } from "./AbstractLeafNode.ts";
+import type { ElementaryTypeKind } from "./enum/elementary_type_kind.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-class ElementaryType extends AbstractLeafNode {
+export class ElementaryType extends AbstractLeafNode {
   constructor(
     public readonly elementaryTypeKind: ElementaryTypeKind,
     public readonly unsignedQualifierToken: SyntaxToken | undefined,
@@ -22,5 +22,3 @@ class ElementaryType extends AbstractLeafNode {
     yield this.typeToken;
   }
 }
-
-export default ElementaryType;

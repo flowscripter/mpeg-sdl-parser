@@ -1,14 +1,14 @@
-import ComputedArrayDefinition from "../../../src/abstract_syntax_tree/node/ComputedArrayDefinition.ts";
-import ElementaryType from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
-import ElementaryTypeKind from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import ExplicitArrayDimension from "../../../src/abstract_syntax_tree/node/ExplicitArrayDimension.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { ComputedArrayDefinition } from "../../../src/abstract_syntax_tree/node/ComputedArrayDefinition.ts";
+import { ElementaryType } from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
+import { ElementaryTypeKind } from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { ExplicitArrayDimension } from "../../../src/abstract_syntax_tree/node/ExplicitArrayDimension.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
 import { COMPUTED_ARRAY_DEFINITION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test computed array definition pattern", () => {

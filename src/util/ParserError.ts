@@ -1,5 +1,5 @@
-import type SyntaxToken from "../tokenizer/token/SyntaxToken.ts";
-import type Location from "../tokenizer/token/Location.ts";
+import type { SyntaxToken } from "../tokenizer/token/SyntaxToken.ts";
+import type { Location } from "../tokenizer/token/Location.ts";
 
 /**
  * Base error class.

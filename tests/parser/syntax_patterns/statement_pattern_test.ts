@@ -1,14 +1,14 @@
-import CompoundStatement from "../../../src/abstract_syntax_tree/node/CompoundStatement.ts";
-import PostfixOperatorKind from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
-import StringVariableKind from "../../../src/abstract_syntax_tree/node/enum/string_variable_kind.ts";
-import ExpressionStatement from "../../../src/abstract_syntax_tree/node/ExpressionStatement.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
-import StringDefinition from "../../../src/abstract_syntax_tree/node/StringDefinition.ts";
+import { CompoundStatement } from "../../../src/abstract_syntax_tree/node/CompoundStatement.ts";
+import { PostfixOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
+import { StringVariableKind } from "../../../src/abstract_syntax_tree/node/enum/string_variable_kind.ts";
+import { ExpressionStatement } from "../../../src/abstract_syntax_tree/node/ExpressionStatement.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { StringDefinition } from "../../../src/abstract_syntax_tree/node/StringDefinition.ts";
 import { STATEMENT_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test statement pattern - string definition", () => {

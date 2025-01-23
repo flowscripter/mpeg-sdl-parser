@@ -1,10 +1,10 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import type ClassIdRange from "../../abstract_syntax_tree/node/ClassIdRange.ts";
-import ExtendedClassIdRange from "../../abstract_syntax_tree/node/ExtendedClassIdRange.ts";
-import type SingleClassId from "../../abstract_syntax_tree/node/SingleClassId.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { ClassIdRange } from "../../abstract_syntax_tree/node/ClassIdRange.ts";
+import { ExtendedClassIdRange } from "../../abstract_syntax_tree/node/ExtendedClassIdRange.ts";
+import type { SingleClassId } from "../../abstract_syntax_tree/node/SingleClassId.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
@@ -53,7 +53,7 @@ function getExtendedClassIdRange(
   );
 }
 
-function getExtendedClassIdRangePattern() {
+export function getExtendedClassIdRangePattern() {
   return apply(
     seq(
       rep_sc(
@@ -75,5 +75,3 @@ function getExtendedClassIdRangePattern() {
     getExtendedClassIdRange,
   );
 }
-
-export default getExtendedClassIdRangePattern;

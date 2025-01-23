@@ -1,8 +1,8 @@
-import TokenKind from "../enum/token_kind.ts";
-import type Trivia from "./TriviaToken.ts";
-import type Location from "./Location.ts";
+import { TokenKind } from "../enum/token_kind.ts";
+import type { Trivia } from "./TriviaToken.ts";
+import type { Location } from "./Location.ts";
 import getLogger from "../../util/logger.ts";
-import AbstractToken from "./AbstractToken.ts";
+import { AbstractToken } from "./AbstractToken.ts";
 
 const logger = getLogger("SyntaxToken");
 
@@ -11,7 +11,7 @@ const logger = getLogger("SyntaxToken");
  *
  * @extends AbstractToken
  */
-class SyntaxToken extends AbstractToken {
+export class SyntaxToken extends AbstractToken {
   /**
    * Creates an instance of SyntaxToken.
    *
@@ -49,5 +49,3 @@ class SyntaxToken extends AbstractToken {
       this.trailingTrivia.join("");
   }
 }
-
-export default SyntaxToken;

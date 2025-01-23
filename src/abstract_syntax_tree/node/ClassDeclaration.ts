@@ -1,15 +1,15 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type AlignedModifier from "./AlignedModifier.ts";
-import type BitModifier from "./BitModifier.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import type ExpandableModifier from "./ExpandableModifier.ts";
-import type ExtendsModifier from "./ExtendsModifier.ts";
-import type Identifier from "./Identifier.ts";
-import type ParameterList from "./ParameterList.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { AlignedModifier } from "./AlignedModifier.ts";
+import type { BitModifier } from "./BitModifier.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
+import type { ExpandableModifier } from "./ExpandableModifier.ts";
+import type { ExtendsModifier } from "./ExtendsModifier.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { ParameterList } from "./ParameterList.ts";
 
-class ClassDeclaration extends AbstractStatement {
+export class ClassDeclaration extends AbstractStatement {
   constructor(
     public readonly alignedModifier: AlignedModifier | undefined,
     public readonly expandableModifier: ExpandableModifier | undefined,
@@ -96,5 +96,3 @@ class ClassDeclaration extends AbstractStatement {
     yield this.closeBraceToken;
   }
 }
-
-export default ClassDeclaration;

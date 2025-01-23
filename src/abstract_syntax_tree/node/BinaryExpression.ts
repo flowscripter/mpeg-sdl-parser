@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type BinaryOperatorKind from "./enum/binary_operator_kind.ts";
-import ExpressionKind from "./enum/expression_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { BinaryOperatorKind } from "./enum/binary_operator_kind.ts";
+import { ExpressionKind } from "./enum/expression_kind.ts";
 
-class BinaryExpression extends AbstractExpression {
+export class BinaryExpression extends AbstractExpression {
   constructor(
     public readonly leftOperand: AbstractNode,
     public readonly binaryOperatorKind: BinaryOperatorKind,
@@ -25,5 +25,3 @@ class BinaryExpression extends AbstractExpression {
     yield* this.rightOperand.getSyntaxTokenIterable();
   }
 }
-
-export default BinaryExpression;

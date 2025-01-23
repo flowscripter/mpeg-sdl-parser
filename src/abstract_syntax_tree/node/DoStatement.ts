@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type CompoundStatement from "./CompoundStatement.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { CompoundStatement } from "./CompoundStatement.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class DoStatement extends AbstractStatement {
+export class DoStatement extends AbstractStatement {
   constructor(
     public readonly compoundStatement: CompoundStatement,
     public readonly conditionExpression: AbstractNode,
@@ -32,5 +32,3 @@ class DoStatement extends AbstractStatement {
     yield this.semicolonToken;
   }
 }
-
-export default DoStatement;

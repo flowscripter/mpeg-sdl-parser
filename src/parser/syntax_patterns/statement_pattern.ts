@@ -18,7 +18,7 @@ import {
   WHILE_STATEMENT_RULE,
 } from "../syntax_rules.ts";
 
-function getStatementPattern() {
+export function getStatementPattern() {
   return alt_sc(
     EXPRESSION_STATEMENT_RULE,
     COMPOUND_STATEMENT_RULE,
@@ -38,5 +38,3 @@ function getStatementPattern() {
     WHILE_STATEMENT_RULE,
   );
 }
-
-export default getStatementPattern;

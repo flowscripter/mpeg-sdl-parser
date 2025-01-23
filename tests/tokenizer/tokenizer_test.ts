@@ -1,4 +1,4 @@
-import TokenKind from "../../src/tokenizer/enum/token_kind.ts";
+import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
 import { assertThrows } from "../test_deps.ts";
 import testTokenizer from "./tokenizer_test_helper.ts";
 

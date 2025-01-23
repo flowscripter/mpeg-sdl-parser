@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractClassId from "./AbstractClassId.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type SingleClassId from "./SingleClassId.ts";
-import ClassIdKind from "./enum/class_id_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractClassId } from "./AbstractClassId.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { SingleClassId } from "./SingleClassId.ts";
+import { ClassIdKind } from "./enum/class_id_kind.ts";
 
-class ClassIdRange extends AbstractClassId {
+export class ClassIdRange extends AbstractClassId {
   constructor(
     public readonly startClassId: SingleClassId,
     public readonly endClassId: SingleClassId,
@@ -24,5 +24,3 @@ class ClassIdRange extends AbstractClassId {
     yield* this.endClassId.getSyntaxTokenIterable();
   }
 }
-
-export default ClassIdRange;
