@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-class AlignedModifier extends AbstractCompositeNode {
+export class AlignedModifier extends AbstractCompositeNode {
   constructor(
     public readonly bitCount: number,
     public readonly isDefault8BitCount: boolean,
@@ -32,5 +32,3 @@ class AlignedModifier extends AbstractCompositeNode {
     }
   }
 }
-
-export default AlignedModifier;

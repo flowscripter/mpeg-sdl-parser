@@ -1,14 +1,14 @@
-import ArrayElementAccess from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
-import BinaryExpression from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
-import ClassMemberAccess from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
-import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { ArrayElementAccess } from "../../../src/abstract_syntax_tree/node/ArrayElementAccess.ts";
+import { BinaryExpression } from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
+import { ClassMemberAccess } from "../../../src/abstract_syntax_tree/node/ClassMemberAccess.ts";
+import { BinaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
 import { ASSIGNMENT_EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test assignment expression pattern", () => {

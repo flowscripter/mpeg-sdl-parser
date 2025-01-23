@@ -1,9 +1,9 @@
 import { apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import PartialArrayDimension from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { PartialArrayDimension } from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getPartialArrayDimension(
@@ -32,7 +32,7 @@ function getPartialArrayDimension(
   );
 }
 
-function getPartialArrayDimensionPattern() {
+export function getPartialArrayDimensionPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN),
@@ -44,5 +44,3 @@ function getPartialArrayDimensionPattern() {
     getPartialArrayDimension,
   );
 }
-
-export default getPartialArrayDimensionPattern;

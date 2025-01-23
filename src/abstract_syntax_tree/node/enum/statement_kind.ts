@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of statements.
  */
-enum StatementKind {
+export enum StatementKind {
   /** Array definition statement */
   ARRAY_DEFINITION,
   /** Computed array definition statement */
@@ -35,5 +35,3 @@ enum StatementKind {
   /** While statement */
   WHILE,
 }
-
-export default StatementKind;

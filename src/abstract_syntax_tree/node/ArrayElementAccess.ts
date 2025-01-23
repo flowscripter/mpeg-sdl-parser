@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-class ArrayElementAccess extends AbstractCompositeNode {
+export class ArrayElementAccess extends AbstractCompositeNode {
   constructor(
     public readonly index: AbstractNode,
     public readonly openBracketToken: SyntaxToken,
@@ -25,5 +25,3 @@ class ArrayElementAccess extends AbstractCompositeNode {
     yield this.closeBracketToken;
   }
 }
-
-export default ArrayElementAccess;

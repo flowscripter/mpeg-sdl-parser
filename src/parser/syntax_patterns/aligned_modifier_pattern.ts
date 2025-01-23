@@ -1,10 +1,10 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
-import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
+import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
@@ -66,7 +66,7 @@ function getAlignedModifier(
   );
 }
 
-function getAlignedModifierPattern() {
+export function getAlignedModifierPattern() {
   return apply(
     seq(
       getToken(TokenKind.KEYWORD_ALIGNED_TOKEN),
@@ -83,5 +83,3 @@ function getAlignedModifierPattern() {
     getAlignedModifier,
   );
 }
-
-export default getAlignedModifierPattern;

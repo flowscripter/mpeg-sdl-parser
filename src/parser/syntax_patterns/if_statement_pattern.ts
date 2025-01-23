@@ -1,6 +1,6 @@
 import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import type IfClause from "../../abstract_syntax_tree/node/IfClause.ts";
-import IfStatement from "../../abstract_syntax_tree/node/IfStatement.ts";
+import type { IfClause } from "../../abstract_syntax_tree/node/IfClause.ts";
+import { IfStatement } from "../../abstract_syntax_tree/node/IfStatement.ts";
 import {
   ELSE_CLAUSE_RULE,
   ELSE_IF_CLAUSE_RULE,
@@ -30,7 +30,7 @@ function getIfStatement(
   );
 }
 
-function getIfStatementPattern() {
+export function getIfStatementPattern() {
   return apply(
     seq(
       IF_CLAUSE_RULE,
@@ -44,5 +44,3 @@ function getIfStatementPattern() {
     getIfStatement,
   );
 }
-
-export default getIfStatementPattern;

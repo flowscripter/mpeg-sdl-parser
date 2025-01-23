@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of elementary types.
  */
-enum ElementaryTypeKind {
+export enum ElementaryTypeKind {
   /** Integer type */
   INTEGER,
   /** Unsigned integer type */
@@ -11,5 +11,3 @@ enum ElementaryTypeKind {
   /** Bit type */
   BIT,
 }
-
-export default ElementaryTypeKind;

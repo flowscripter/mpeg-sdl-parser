@@ -5,15 +5,15 @@ import {
   type Token as ParsecToken,
   type TokenPosition,
 } from "../../../deps.ts";
-import TokenKind from "../enum/token_kind.ts";
-import SyntaxToken from "../token/SyntaxToken.ts";
-import type Trivia from "../token/TriviaToken.ts";
-import type Tokenizer from "../Tokenizer.ts";
+import { TokenKind } from "../enum/token_kind.ts";
+import { SyntaxToken } from "../token/SyntaxToken.ts";
+import type { Trivia } from "../token/TriviaToken.ts";
+import type { Tokenizer } from "../Tokenizer.ts";
 
 /**
  * Wrapper around Parsec's Token interface to provide a SyntaxToken instance
  */
-class ParsecTokenWrapper implements ParsecToken<TokenKind> {
+export class ParsecTokenWrapper implements ParsecToken<TokenKind> {
   private nextToken: ParsecTokenWrapper | undefined | null;
   private syntaxToken: SyntaxToken | undefined;
 
@@ -47,7 +47,10 @@ class ParsecTokenWrapper implements ParsecToken<TokenKind> {
       this.nextToken = this.tokenizer.getNextSyntaxToken(
         this.input,
         this.pos.index + this.text.length +
-          this.trailingTrivia.reduce((acc, t) => acc + t.text.length, 0),
+          this.trailingTrivia.reduce<number>(
+            (acc, t) => acc + t.text.length,
+            0,
+          ),
         // note that the Tokenizer uses 0-based row and column values
         this.pos.rowEnd - 1,
         this.pos.columnEnd - 1,
@@ -104,5 +107,3 @@ export function getToken(toMatch: TokenKind): Parser<TokenKind, SyntaxToken> {
     unwrapToken,
   );
 }
-
-export default ParsecTokenWrapper;

@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type LengthAttribute from "./LengthAttribute.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { LengthAttribute } from "./LengthAttribute.ts";
 
-class ArrayElementType extends AbstractCompositeNode {
+export class ArrayElementType extends AbstractCompositeNode {
   constructor(
     public readonly elementaryType: ElementaryType | undefined,
     public readonly lengthAttribute: LengthAttribute | undefined,
@@ -36,5 +36,3 @@ class ArrayElementType extends AbstractCompositeNode {
     }
   }
 }
-
-export default ArrayElementType;

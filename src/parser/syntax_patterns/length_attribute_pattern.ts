@@ -1,9 +1,9 @@
 import { apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import LengthAttribute from "../../abstract_syntax_tree/node/LengthAttribute.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { LengthAttribute } from "../../abstract_syntax_tree/node/LengthAttribute.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getLengthAttribute(
@@ -18,7 +18,7 @@ function getLengthAttribute(
   );
 }
 
-function getLengthAttributePattern() {
+export function getLengthAttributePattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN),
@@ -28,5 +28,3 @@ function getLengthAttributePattern() {
     getLengthAttribute,
   );
 }
-
-export default getLengthAttributePattern;

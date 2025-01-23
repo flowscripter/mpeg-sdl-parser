@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractClassId from "./AbstractClassId.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractClassId } from "./AbstractClassId.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-class BitModifier extends AbstractCompositeNode {
+export class BitModifier extends AbstractCompositeNode {
   constructor(
     public readonly length: NumberLiteral,
     public readonly identifier: Identifier | undefined,
@@ -44,5 +44,3 @@ class BitModifier extends AbstractCompositeNode {
     yield* this.classId.getSyntaxTokenIterable();
   }
 }
-
-export default BitModifier;

@@ -1,9 +1,9 @@
 import { apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import ArrayElementAccess from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { ArrayElementAccess } from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getArrayElementAccess(
@@ -18,7 +18,7 @@ function getArrayElementAccess(
   );
 }
 
-function getArrayElementAccessPattern() {
+export function getArrayElementAccessPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN),
@@ -28,5 +28,3 @@ function getArrayElementAccessPattern() {
     getArrayElementAccess,
   );
 }
-
-export default getArrayElementAccessPattern;

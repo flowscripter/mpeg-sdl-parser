@@ -6,10 +6,8 @@
  * @property {number} row - The zero-based row number in the text document.
  * @property {number} column - The zero-based column number in the text document.
  */
-interface Location {
+export interface Location {
   readonly position: number;
   readonly row: number;
   readonly column: number;
 }
-
-export default Location;

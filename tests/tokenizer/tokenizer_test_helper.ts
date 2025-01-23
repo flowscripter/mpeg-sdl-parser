@@ -1,5 +1,5 @@
-import TokenKind from "../../src/tokenizer/enum/token_kind.ts";
-import Tokenizer from "../../src/tokenizer/Tokenizer.ts";
+import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
+import { Tokenizer } from "../../src/tokenizer/Tokenizer.ts";
 import { assertEquals, assertNotEquals } from "../test_deps.ts";
 
 function testTokenizer(

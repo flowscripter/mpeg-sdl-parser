@@ -1,13 +1,13 @@
 import { SyntacticParserError } from "../../../mod.ts";
-import ClassDefinition from "../../../src/abstract_syntax_tree/node/ClassDefinition.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import ParameterValueList from "../../../src/abstract_syntax_tree/node/ParameterValueList.ts";
+import { ClassDefinition } from "../../../src/abstract_syntax_tree/node/ClassDefinition.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { ParameterValueList } from "../../../src/abstract_syntax_tree/node/ParameterValueList.ts";
 import { CLASS_DEFINITION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import { assertThrows } from "../../test_deps.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 

@@ -1,8 +1,8 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AbstractStatement from "./AbstractStatement.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AbstractStatement } from "./AbstractStatement.ts";
 
-class IfClause {
+export class IfClause {
   constructor(
     public readonly condition: AbstractNode | undefined,
     public readonly statement: AbstractStatement,
@@ -12,5 +12,3 @@ class IfClause {
     public readonly closeParenthesisToken: SyntaxToken | undefined,
   ) {}
 }
-
-export default IfClause;

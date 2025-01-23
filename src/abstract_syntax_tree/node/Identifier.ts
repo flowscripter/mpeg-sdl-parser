@@ -1,8 +1,8 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractLeafNode from "./AbstractLeafNode.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractLeafNode } from "./AbstractLeafNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-class Identifier extends AbstractLeafNode {
+export class Identifier extends AbstractLeafNode {
   constructor(
     public readonly name: string,
     public readonly token: SyntaxToken,
@@ -14,5 +14,3 @@ class Identifier extends AbstractLeafNode {
     yield this.token;
   }
 }
-
-export default Identifier;

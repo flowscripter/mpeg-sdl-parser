@@ -1,10 +1,10 @@
 import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import UnaryOperatorKind from "../../abstract_syntax_tree/node/enum/unary_operator_kind.ts";
-import UnaryExpression from "../../abstract_syntax_tree/node/UnaryExpression.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { UnaryOperatorKind } from "../../abstract_syntax_tree/node/enum/unary_operator_kind.ts";
+import { UnaryExpression } from "../../abstract_syntax_tree/node/UnaryExpression.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import {
   LENGTHOF_EXPRESSION_RULE,
@@ -45,7 +45,7 @@ function getUnaryExpression(
   );
 }
 
-function getUnaryExpressionPattern() {
+export function getUnaryExpressionPattern() {
   return apply(
     seq(
       opt_sc(
@@ -62,4 +62,3 @@ function getUnaryExpressionPattern() {
     getUnaryExpression,
   );
 }
-export default getUnaryExpressionPattern;

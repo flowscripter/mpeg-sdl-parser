@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of binary operators.
  */
-enum BinaryOperatorKind {
+export enum BinaryOperatorKind {
   /** Assignment operator */
   ASSIGNMENT,
   /** Multiplication operator */
@@ -39,5 +39,3 @@ enum BinaryOperatorKind {
   /** Logical OR operator */
   LOGICAL_OR,
 }
-
-export default BinaryOperatorKind;

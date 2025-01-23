@@ -1,7 +1,7 @@
 /**
  * Enum representing different kinds of number literals.
  */
-enum NumberLiteralKind {
+export enum NumberLiteralKind {
   /** Binary number literal */
   BINARY,
   /** Hexadecimal number literal */
@@ -15,5 +15,3 @@ enum NumberLiteralKind {
   /** Floating point number literal */
   FLOATING_POINT,
 }
-
-export default NumberLiteralKind;

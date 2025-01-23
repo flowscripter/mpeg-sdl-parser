@@ -1,14 +1,14 @@
-import BinaryExpression from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
-import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import PostfixOperatorKind from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
-import ExpressionStatement from "../../../src/abstract_syntax_tree/node/ExpressionStatement.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { BinaryExpression } from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
+import { BinaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { PostfixOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
+import { ExpressionStatement } from "../../../src/abstract_syntax_tree/node/ExpressionStatement.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
 import { EXPRESSION_STATEMENT_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test expression statement pattern - expression", () => {

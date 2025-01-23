@@ -1,11 +1,11 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import StatementKind from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractElementaryTypeDefinition } from "./AbstractElementaryTypeDefinition.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
+import type { Identifier } from "./Identifier.ts";
 
-class ComputedElementaryTypeDefinition
+export class ComputedElementaryTypeDefinition
   extends AbstractElementaryTypeDefinition {
   constructor(
     isConst: boolean,
@@ -52,5 +52,3 @@ class ComputedElementaryTypeDefinition
     yield this.semicolonPunctuatorToken;
   }
 }
-
-export default ComputedElementaryTypeDefinition;

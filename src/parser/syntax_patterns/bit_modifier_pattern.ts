@@ -1,11 +1,11 @@
 import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
-import type AbstractClassId from "../../abstract_syntax_tree/node/AbstractClassId.ts";
-import BitModifier from "../../abstract_syntax_tree/node/BitModifier.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractClassId } from "../../abstract_syntax_tree/node/AbstractClassId.ts";
+import { BitModifier } from "../../abstract_syntax_tree/node/BitModifier.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   CLASS_ID_RANGE_RULE,
   EXTENDED_CLASS_ID_RANGE_RULE,
@@ -49,7 +49,7 @@ function getBitModifier(
   );
 }
 
-function getBitModifierPattern() {
+export function getBitModifierPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_COLON_TOKEN),
@@ -72,5 +72,3 @@ function getBitModifierPattern() {
     getBitModifier,
   );
 }
-
-export default getBitModifierPattern;

@@ -1,7 +1,7 @@
 /**
  * Enum representing the kinds of string variables.
  */
-enum StringVariableKind {
+export enum StringVariableKind {
   /**
    * Represents a UTF-8 string variable.
    */
@@ -23,5 +23,3 @@ enum StringVariableKind {
    */
   BASE64,
 }
-
-export default StringVariableKind;

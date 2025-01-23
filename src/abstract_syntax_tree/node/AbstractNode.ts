@@ -1,11 +1,11 @@
-import type Location from "../../tokenizer/token/Location.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { Location } from "../../tokenizer/token/Location.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import getLogger from "../../util/logger.ts";
-import NodeKind from "./enum/node_kind.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
 const logger = getLogger("AbstractNode");
 
-abstract class AbstractNode {
+export abstract class AbstractNode {
   constructor(
     public readonly nodeKind: NodeKind,
     public readonly location: Location,
@@ -22,5 +22,3 @@ abstract class AbstractNode {
 
   abstract getSyntaxTokenIterable(): IterableIterator<SyntaxToken>;
 }
-
-export default AbstractNode;

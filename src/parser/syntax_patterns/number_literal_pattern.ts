@@ -1,9 +1,9 @@
 import { alt_sc, apply, rep_sc, seq } from "../../../deps.ts";
-import NumberLiteralKind from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { NumberLiteralKind } from "../../abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 
 const DOT_SEPARATOR_REGEX = /\./g;
@@ -210,7 +210,7 @@ function getNumberLiteral(
   );
 }
 
-function getNumberLiteralPattern() {
+export function getNumberLiteralPattern() {
   return apply(
     alt_sc(
       getToken(TokenKind.LITERAL_BINARY_TOKEN),
@@ -228,5 +228,3 @@ function getNumberLiteralPattern() {
     getNumberLiteral,
   );
 }
-
-export default getNumberLiteralPattern;

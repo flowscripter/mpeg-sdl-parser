@@ -1,9 +1,9 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import ImplicitArrayDimension from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { ImplicitArrayDimension } from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getImplicitArrayDimension(
@@ -38,7 +38,7 @@ function getImplicitArrayDimension(
   );
 }
 
-function getImplicitArrayDimensionPattern() {
+export function getImplicitArrayDimensionPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN),
@@ -54,5 +54,3 @@ function getImplicitArrayDimensionPattern() {
     getImplicitArrayDimension,
   );
 }
-
-export default getImplicitArrayDimensionPattern;

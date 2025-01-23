@@ -1,8 +1,8 @@
 import { apply } from "../../../deps.ts";
-import Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 
 function getIdentifier(
   identifierToken: SyntaxToken,
@@ -10,8 +10,6 @@ function getIdentifier(
   return new Identifier(identifierToken.text, identifierToken);
 }
 
-function getIdentifierPattern() {
+export function getIdentifierPattern() {
   return apply(getToken(TokenKind.IDENTIFIER_TOKEN), getIdentifier);
 }
-
-export default getIdentifierPattern;

@@ -1,11 +1,11 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { Identifier } from "./Identifier.ts";
 
-class Parameter extends AbstractCompositeNode {
+export class Parameter extends AbstractCompositeNode {
   constructor(
     public readonly classIdentifier: Identifier | undefined,
     public readonly elementaryType: ElementaryType | undefined,
@@ -35,5 +35,3 @@ class Parameter extends AbstractCompositeNode {
     yield* this.identifier.getSyntaxTokenIterable();
   }
 }
-
-export default Parameter;

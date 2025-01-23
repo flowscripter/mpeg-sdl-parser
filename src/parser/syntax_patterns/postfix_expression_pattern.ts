@@ -1,14 +1,14 @@
 import { alt_sc, lrec_sc } from "../../../deps.ts";
-import type AbstractExpression from "../../abstract_syntax_tree/node/AbstractExpression.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import type ArrayElementAccess from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
-import type ClassMemberAccess from "../../abstract_syntax_tree/node/ClassMemberAccess.ts";
-import NodeKind from "../../abstract_syntax_tree/node/enum/node_kind.ts";
-import PostfixOperatorKind from "../../abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
-import PostfixExpression from "../../abstract_syntax_tree/node/PostfixExpression.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractExpression } from "../../abstract_syntax_tree/node/AbstractExpression.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type { ArrayElementAccess } from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
+import type { ClassMemberAccess } from "../../abstract_syntax_tree/node/ClassMemberAccess.ts";
+import { NodeKind } from "../../abstract_syntax_tree/node/enum/node_kind.ts";
+import { PostfixOperatorKind } from "../../abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
+import { PostfixExpression } from "../../abstract_syntax_tree/node/PostfixExpression.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import {
   ARRAY_ELEMENT_ACCESS_RULE,
@@ -77,7 +77,7 @@ function getPostfixExpression(
   );
 }
 
-function getPostfixExpressionPattern() {
+export function getPostfixExpressionPattern() {
   return alt_sc(
     lrec_sc(
       PRIMARY_EXPRESSION_RULE,
@@ -94,5 +94,3 @@ function getPostfixExpressionPattern() {
     PRIMARY_EXPRESSION_RULE,
   );
 }
-
-export default getPostfixExpressionPattern;

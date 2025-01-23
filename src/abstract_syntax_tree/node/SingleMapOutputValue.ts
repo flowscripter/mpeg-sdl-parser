@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractMapOutputValue from "./AbstractMapOutputValue.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import MapOutputValueKind from "./enum/map_output_value_kind.ts";
-import type LengthAttribute from "./LengthAttribute.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractMapOutputValue } from "./AbstractMapOutputValue.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import { MapOutputValueKind } from "./enum/map_output_value_kind.ts";
+import type { LengthAttribute } from "./LengthAttribute.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-class SingleMapOutputValue extends AbstractMapOutputValue {
+export class SingleMapOutputValue extends AbstractMapOutputValue {
   constructor(
     public readonly numberLiteralValue: NumberLiteral | undefined,
     public readonly elementaryType: ElementaryType | undefined,
@@ -38,5 +38,3 @@ class SingleMapOutputValue extends AbstractMapOutputValue {
     }
   }
 }
-
-export default SingleMapOutputValue;

@@ -1,18 +1,18 @@
-import ArrayDefinition from "../../../src/abstract_syntax_tree/node/ArrayDefinition.ts";
-import ArrayElementType from "../../../src/abstract_syntax_tree/node/ArrayElementType.ts";
-import ElementaryType from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
-import ElementaryTypeKind from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import ExplicitArrayDimension from "../../../src/abstract_syntax_tree/node/ExplicitArrayDimension.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import ImplicitArrayDimension from "../../../src/abstract_syntax_tree/node/ImplicitArrayDimension.ts";
-import LengthAttribute from "../../../src/abstract_syntax_tree/node/LengthAttribute.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import PartialArrayDimension from "../../../src/abstract_syntax_tree/node/PartialArrayDimension.ts";
+import { ArrayDefinition } from "../../../src/abstract_syntax_tree/node/ArrayDefinition.ts";
+import { ArrayElementType } from "../../../src/abstract_syntax_tree/node/ArrayElementType.ts";
+import { ElementaryType } from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
+import { ElementaryTypeKind } from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { ExplicitArrayDimension } from "../../../src/abstract_syntax_tree/node/ExplicitArrayDimension.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { ImplicitArrayDimension } from "../../../src/abstract_syntax_tree/node/ImplicitArrayDimension.ts";
+import { LengthAttribute } from "../../../src/abstract_syntax_tree/node/LengthAttribute.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { PartialArrayDimension } from "../../../src/abstract_syntax_tree/node/PartialArrayDimension.ts";
 import { ARRAY_DEFINITION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test array definition pattern", () => {

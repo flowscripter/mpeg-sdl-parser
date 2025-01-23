@@ -1,9 +1,9 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
-import ElementaryTypeKind from "../../abstract_syntax_tree/node/enum/elementary_type_kind.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import { ElementaryTypeKind } from "../../abstract_syntax_tree/node/enum/elementary_type_kind.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 
 function getElementaryType(
   values: [
@@ -37,7 +37,7 @@ function getElementaryType(
   );
 }
 
-function getElementaryTypePattern() {
+export function getElementaryTypePattern() {
   return apply(
     alt_sc(
       seq(
@@ -51,5 +51,3 @@ function getElementaryTypePattern() {
     getElementaryType,
   );
 }
-
-export default getElementaryTypePattern;

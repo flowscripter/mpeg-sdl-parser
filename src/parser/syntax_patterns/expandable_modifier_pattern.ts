@@ -1,9 +1,9 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import ExpandableModifier from "../../abstract_syntax_tree/node/ExpandableModifier.ts";
-import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import { ExpandableModifier } from "../../abstract_syntax_tree/node/ExpandableModifier.ts";
+import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { NUMBER_LITERAL_RULE } from "../syntax_rules.ts";
 
 function getExpandableModifier(
@@ -34,7 +34,7 @@ function getExpandableModifier(
   );
 }
 
-function getExpandableModifierPattern() {
+export function getExpandableModifierPattern() {
   return apply(
     seq(
       getToken(TokenKind.KEYWORD_EXPANDABLE_TOKEN),
@@ -49,5 +49,3 @@ function getExpandableModifierPattern() {
     getExpandableModifier,
   );
 }
-
-export default getExpandableModifierPattern;

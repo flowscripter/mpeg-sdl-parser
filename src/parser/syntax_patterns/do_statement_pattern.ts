@@ -1,10 +1,10 @@
 import { apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import type CompoundStatement from "../../abstract_syntax_tree/node/CompoundStatement.ts";
-import DoStatement from "../../abstract_syntax_tree/node/DoStatement.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type { CompoundStatement } from "../../abstract_syntax_tree/node/CompoundStatement.ts";
+import { DoStatement } from "../../abstract_syntax_tree/node/DoStatement.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { COMPOUND_STATEMENT_RULE, EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getDoStatement(
@@ -38,7 +38,7 @@ function getDoStatement(
   );
 }
 
-function getDoStatementPattern() {
+export function getDoStatementPattern() {
   return apply(
     seq(
       getToken(TokenKind.KEYWORD_DO_TOKEN),
@@ -52,5 +52,3 @@ function getDoStatementPattern() {
     getDoStatement,
   );
 }
-
-export default getDoStatementPattern;

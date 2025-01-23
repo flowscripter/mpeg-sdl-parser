@@ -1,9 +1,9 @@
 import type { Lexer } from "../../deps.ts";
 import getLogger from "../util/logger.ts";
 import { LexicalParserError } from "../util/ParserError.ts";
-import TokenKind from "./enum/token_kind.ts";
-import ParsecTokenWrapper from "./parsec/ParsecTokenWrapper.ts";
-import Trivia from "./token/TriviaToken.ts";
+import { TokenKind } from "./enum/token_kind.ts";
+import { ParsecTokenWrapper } from "./parsec/ParsecTokenWrapper.ts";
+import { Trivia } from "./token/TriviaToken.ts";
 import * as patterns from "./token_patterns.ts";
 
 const logger = getLogger("Tokenizer");
@@ -77,7 +77,7 @@ interface TokenPattern {
  *
  * @template TokenKind - The type of tokens used by the lexer.
  */
-class Tokenizer implements Lexer<TokenKind> {
+export class Tokenizer implements Lexer<TokenKind> {
   readonly syntaxTokenPatterns: TokenPattern[] = [];
   readonly leadingTriviaTokenPatterns: TokenPattern[] = [];
   readonly trailingTriviaTokenPatterns: TokenPattern[] = [];
@@ -740,5 +740,3 @@ class Tokenizer implements Lexer<TokenKind> {
     return matchResult;
   }
 }
-
-export default Tokenizer;

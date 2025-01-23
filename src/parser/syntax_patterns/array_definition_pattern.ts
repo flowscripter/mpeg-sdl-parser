@@ -1,14 +1,14 @@
 import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import type AlignedModifier from "../../abstract_syntax_tree/node/AlignedModifier.ts";
-import ArrayDefinition from "../../abstract_syntax_tree/node/ArrayDefinition.ts";
-import type ArrayElementType from "../../abstract_syntax_tree/node/ArrayElementType.ts";
-import type ExplicitArrayDimension from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import type ImplicitArrayDimension from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
-import type PartialArrayDimension from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
+import { ArrayDefinition } from "../../abstract_syntax_tree/node/ArrayDefinition.ts";
+import type { ArrayElementType } from "../../abstract_syntax_tree/node/ArrayElementType.ts";
+import type { ExplicitArrayDimension } from "../../abstract_syntax_tree/node/ExplicitArrayDimension.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import type { ImplicitArrayDimension } from "../../abstract_syntax_tree/node/ImplicitArrayDimension.ts";
+import type { PartialArrayDimension } from "../../abstract_syntax_tree/node/PartialArrayDimension.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   InternalParserError,
   SyntacticParserError,
@@ -73,7 +73,7 @@ function getArrayDefinition(
   );
 }
 
-function getArrayDefinitionPattern() {
+export function getArrayDefinitionPattern() {
   return apply(
     seq(
       opt_sc(
@@ -102,5 +102,3 @@ function getArrayDefinitionPattern() {
     getArrayDefinition,
   );
 }
-
-export default getArrayDefinitionPattern;

@@ -1,9 +1,9 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import ExpressionStatement from "../../abstract_syntax_tree/node/ExpressionStatement.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { ExpressionStatement } from "../../abstract_syntax_tree/node/ExpressionStatement.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   ASSIGNMENT_EXPRESSION_RULE,
   EXPRESSION_RULE,
@@ -22,7 +22,7 @@ function getExpressionStatement(
   );
 }
 
-function getExpressionStatementPattern() {
+export function getExpressionStatementPattern() {
   return apply(
     seq(
       alt_sc(
@@ -34,5 +34,3 @@ function getExpressionStatementPattern() {
     getExpressionStatement,
   );
 }
-
-export default getExpressionStatementPattern;

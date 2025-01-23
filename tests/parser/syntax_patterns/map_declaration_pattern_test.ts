@@ -1,18 +1,18 @@
-import AggregateMapOutputValue from "../../../src/abstract_syntax_tree/node/AggregateMapOutputValue.ts";
-import ElementaryType from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
-import ElementaryTypeKind from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import LengthAttribute from "../../../src/abstract_syntax_tree/node/LengthAttribute.ts";
-import MapDeclaration from "../../../src/abstract_syntax_tree/node/MapDeclaration.ts";
-import MapEntry from "../../../src/abstract_syntax_tree/node/MapEntry.ts";
-import MapEntryList from "../../../src/abstract_syntax_tree/node/MapEntryList.ts";
-import SingleMapOutputValue from "../../../src/abstract_syntax_tree/node/SingleMapOutputValue.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { AggregateMapOutputValue } from "../../../src/abstract_syntax_tree/node/AggregateMapOutputValue.ts";
+import { ElementaryType } from "../../../src/abstract_syntax_tree/node/ElementaryType.ts";
+import { ElementaryTypeKind } from "../../../src/abstract_syntax_tree/node/enum/elementary_type_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { LengthAttribute } from "../../../src/abstract_syntax_tree/node/LengthAttribute.ts";
+import { MapDeclaration } from "../../../src/abstract_syntax_tree/node/MapDeclaration.ts";
+import { MapEntry } from "../../../src/abstract_syntax_tree/node/MapEntry.ts";
+import { MapEntryList } from "../../../src/abstract_syntax_tree/node/MapEntryList.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { SingleMapOutputValue } from "../../../src/abstract_syntax_tree/node/SingleMapOutputValue.ts";
 import { MAP_DECLARATION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test map declaration pattern - elementary type output", () => {

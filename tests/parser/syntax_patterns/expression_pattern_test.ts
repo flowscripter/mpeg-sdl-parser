@@ -1,28 +1,25 @@
-import {
-  default as BinaryExpression,
-  default as Expression,
-} from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
-import BinaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
-import NumberLiteralKind from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
-import PostfixOperatorKind from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
-import UnaryOperatorKind from "../../../src/abstract_syntax_tree/node/enum/unary_operator_kind.ts";
-import Identifier from "../../../src/abstract_syntax_tree/node/Identifier.ts";
-import LengthOfExpression from "../../../src/abstract_syntax_tree/node/LengthOfExpression.ts";
-import NumberLiteral from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
-import PostfixExpression from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
-import PrimaryExpression from "../../../src/abstract_syntax_tree/node/PrimaryExpression.ts";
-import UnaryExpression from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
+import { BinaryExpression } from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
+import { BinaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind.ts";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
+import { PostfixOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind.ts";
+import { UnaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/unary_operator_kind.ts";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
+import { LengthOfExpression } from "../../../src/abstract_syntax_tree/node/LengthOfExpression.ts";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression.ts";
+import { PrimaryExpression } from "../../../src/abstract_syntax_tree/node/PrimaryExpression.ts";
+import { UnaryExpression } from "../../../src/abstract_syntax_tree/node/UnaryExpression.ts";
 import { EXPRESSION_RULE } from "../../../src/parser/syntax_rules.ts";
-import TokenKind from "../../../src/tokenizer/enum/token_kind.ts";
-import SyntaxToken from "../../../src/tokenizer/token/SyntaxToken.ts";
-import Trivia from "../../../src/tokenizer/token/TriviaToken.ts";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test binary expression pattern - multiplication of two literals", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1*2",
-    new Expression(
+    new BinaryExpression(
       new NumberLiteral(
         NumberLiteralKind.INTEGER,
         1,
@@ -77,7 +74,7 @@ Deno.test("Test binary expression pattern - multiplication of two literals with 
   testSyntaxPattern(
     EXPRESSION_RULE,
     "+1*-2",
-    new Expression(
+    new BinaryExpression(
       new UnaryExpression(
         UnaryOperatorKind.UNARY_PLUS,
         new NumberLiteral(
@@ -160,8 +157,8 @@ Deno.test("Test binary expression pattern - multiplication of three literals", (
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1*2*3",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
           1,
@@ -247,7 +244,7 @@ Deno.test("Test binary expression pattern - binary expression in parenthesis", (
     EXPRESSION_RULE,
     "(1*2)",
     new PrimaryExpression(
-      new Expression(
+      new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
           1,
@@ -420,8 +417,8 @@ Deno.test("Test binary expression pattern - multiplicative operators - left-to-r
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1/2*3",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
           1,
@@ -506,7 +503,7 @@ Deno.test("Test binary expression pattern - multiplicative and additive operator
   testSyntaxPattern(
     EXPRESSION_RULE,
     "1+2*3",
-    new Expression(
+    new BinaryExpression(
       new NumberLiteral(
         NumberLiteralKind.INTEGER,
         1,
@@ -525,7 +522,7 @@ Deno.test("Test binary expression pattern - multiplicative and additive operator
         ],
       ),
       BinaryOperatorKind.ADD,
-      new Expression(
+      new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
           2,
@@ -592,9 +589,9 @@ Deno.test("Test binary expression pattern - multiplicative and additive operator
   testSyntaxPattern(
     EXPRESSION_RULE,
     "(1+2)*3",
-    new Expression(
+    new BinaryExpression(
       new PrimaryExpression(
-        new Expression(
+        new BinaryExpression(
           new NumberLiteral(
             NumberLiteralKind.INTEGER,
             1,
@@ -702,8 +699,8 @@ Deno.test("Test binary expression pattern - logical operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i||j && k",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -799,8 +796,8 @@ Deno.test("Test binary expression pattern - additive operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i+j - k",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -896,8 +893,8 @@ Deno.test("Test binary expression pattern - shift operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i<<j >> k",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -985,10 +982,10 @@ Deno.test("Test binary expression pattern - relational operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i<j<=k>l>=m",
-    new Expression(
-      new Expression(
-        new Expression(
-          new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
+        new BinaryExpression(
+          new BinaryExpression(
             new Identifier(
               "i",
               new SyntaxToken(
@@ -1118,8 +1115,8 @@ Deno.test("Test binary expression pattern - equality operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i==j != k",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -1215,8 +1212,8 @@ Deno.test("Test binary expression pattern - bitwise operators", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "i&j | k",
-    new Expression(
-      new Expression(
+    new BinaryExpression(
+      new BinaryExpression(
         new Identifier(
           "i",
           new SyntaxToken(
@@ -1312,7 +1309,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
   testSyntaxPattern(
     EXPRESSION_RULE,
     "8&&7|6==5>4>>3+2*1",
-    new Expression(
+    new BinaryExpression(
       new NumberLiteral(
         NumberLiteralKind.INTEGER,
         8,
@@ -1331,7 +1328,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
         ],
       ),
       BinaryOperatorKind.LOGICAL_AND,
-      new Expression(
+      new BinaryExpression(
         new NumberLiteral(
           NumberLiteralKind.INTEGER,
           7,
@@ -1350,7 +1347,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
           ],
         ),
         BinaryOperatorKind.BITWISE_OR,
-        new Expression(
+        new BinaryExpression(
           new NumberLiteral(
             NumberLiteralKind.INTEGER,
             6,
@@ -1369,7 +1366,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
             ],
           ),
           BinaryOperatorKind.EQUAL,
-          new Expression(
+          new BinaryExpression(
             new NumberLiteral(
               NumberLiteralKind.INTEGER,
               5,
@@ -1388,7 +1385,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
               ],
             ),
             BinaryOperatorKind.GREATER_THAN,
-            new Expression(
+            new BinaryExpression(
               new NumberLiteral(
                 NumberLiteralKind.INTEGER,
                 4,
@@ -1407,7 +1404,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
                 ],
               ),
               BinaryOperatorKind.SHIFT_RIGHT,
-              new Expression(
+              new BinaryExpression(
                 new NumberLiteral(
                   NumberLiteralKind.INTEGER,
                   3,
@@ -1426,7 +1423,7 @@ Deno.test("Test binary expression pattern - all precedence rules", () => {
                   ],
                 ),
                 BinaryOperatorKind.ADD,
-                new Expression(
+                new BinaryExpression(
                   new NumberLiteral(
                     NumberLiteralKind.INTEGER,
                     2,

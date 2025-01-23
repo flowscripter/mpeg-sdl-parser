@@ -1,9 +1,9 @@
 import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
-import type Parameter from "../../abstract_syntax_tree/node/Parameter.ts";
-import ParameterList from "../../abstract_syntax_tree/node/ParameterList.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { Parameter } from "../../abstract_syntax_tree/node/Parameter.ts";
+import { ParameterList } from "../../abstract_syntax_tree/node/ParameterList.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { SyntacticParserError } from "../../util/ParserError.ts";
 import { PARAMETER_RULE } from "../syntax_rules.ts";
 
@@ -58,7 +58,7 @@ function getParameterList(
   );
 }
 
-function getParameterListPattern() {
+export function getParameterListPattern() {
   return apply(
     seq(
       getToken(TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN),
@@ -76,5 +76,3 @@ function getParameterListPattern() {
     getParameterList,
   );
 }
-
-export default getParameterListPattern;

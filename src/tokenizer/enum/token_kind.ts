@@ -4,7 +4,7 @@
  * @enum {number}
  * @readonly
  */
-enum TokenKind {
+export enum TokenKind {
   EOF_TOKEN,
   WHITESPACE_TOKEN,
   COMMENT_TOKEN,
@@ -78,5 +78,3 @@ enum TokenKind {
   LITERAL_STRING_BASIC_TOKEN,
   LITERAL_STRING_UTF_TOKEN,
 }
-
-export default TokenKind;

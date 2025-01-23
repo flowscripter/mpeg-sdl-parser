@@ -1,6 +1,6 @@
 import { expectEOF, expectSingleResult, type TokenError } from "../../deps.ts";
-import type Specification from "../abstract_syntax_tree/node/Specification.ts";
-import Tokenizer from "../tokenizer/Tokenizer.ts";
+import type { Specification } from "../abstract_syntax_tree/node/Specification.ts";
+import { Tokenizer } from "../tokenizer/Tokenizer.ts";
 import {
   InternalParserError,
   LexicalParserError,
@@ -12,7 +12,7 @@ import * as rules from "./syntax_rules.ts";
  * into a `Specification` object. It utilizes a `Tokenizer` to tokenize the input
  * string and applies parsing rules to generate the final specification.
  */
-class Parser {
+export class Parser {
   private tokenizer: Tokenizer;
 
   /**
@@ -74,5 +74,3 @@ class Parser {
     }
   }
 }
-
-export default Parser;

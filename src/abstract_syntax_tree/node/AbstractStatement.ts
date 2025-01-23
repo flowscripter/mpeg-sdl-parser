@@ -1,9 +1,9 @@
-import type Location from "../../tokenizer/token/Location.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type StatementKind from "./enum/statement_kind.ts";
+import type { Location } from "../../tokenizer/token/Location.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { StatementKind } from "./enum/statement_kind.ts";
 
-abstract class AbstractStatement extends AbstractCompositeNode {
+export abstract class AbstractStatement extends AbstractCompositeNode {
   constructor(
     public readonly statementKind: StatementKind,
     location: Location,
@@ -11,5 +11,3 @@ abstract class AbstractStatement extends AbstractCompositeNode {
     super(NodeKind.STATEMENT, location);
   }
 }
-
-export default AbstractStatement;

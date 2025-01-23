@@ -1,12 +1,12 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
-import type Identifier from "./Identifier.ts";
-import StatementKind from "./enum/statement_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractArrayDefinition } from "./AbstractArrayDefinition.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import type { ExplicitArrayDimension } from "./ExplicitArrayDimension.ts";
+import type { Identifier } from "./Identifier.ts";
+import { StatementKind } from "./enum/statement_kind.ts";
 
-class ComputedArrayDefinition extends AbstractArrayDefinition {
+export class ComputedArrayDefinition extends AbstractArrayDefinition {
   constructor(
     public readonly elementaryType: ElementaryType,
     identifier: Identifier,
@@ -40,5 +40,3 @@ class ComputedArrayDefinition extends AbstractArrayDefinition {
     yield this.semicolonPunctuatorToken;
   }
 }
-
-export default ComputedArrayDefinition;

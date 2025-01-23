@@ -1,11 +1,11 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AggregateMapOutputValue from "./AggregateMapOutputValue.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AggregateMapOutputValue } from "./AggregateMapOutputValue.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-class MapEntry extends AbstractCompositeNode {
+export class MapEntry extends AbstractCompositeNode {
   constructor(
     public readonly inputValue: NumberLiteral,
     public readonly outputValue: AggregateMapOutputValue,
@@ -25,5 +25,3 @@ class MapEntry extends AbstractCompositeNode {
     yield* this.outputValue.getSyntaxTokenIterable();
   }
 }
-
-export default MapEntry;

@@ -1,10 +1,10 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
+import type { Identifier } from "./Identifier.ts";
 
-class ClassMemberAccess extends AbstractCompositeNode {
+export class ClassMemberAccess extends AbstractCompositeNode {
   constructor(
     public readonly memberIdentifier: Identifier,
     public readonly classMemberAccessOperatorToken: SyntaxToken,
@@ -24,5 +24,3 @@ class ClassMemberAccess extends AbstractCompositeNode {
     yield* this.memberIdentifier.getSyntaxTokenIterable();
   }
 }
-
-export default ClassMemberAccess;

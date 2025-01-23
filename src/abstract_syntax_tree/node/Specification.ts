@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import NodeKind from "./enum/node_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { NodeKind } from "./enum/node_kind.ts";
 
-class Specification extends AbstractCompositeNode {
+export class Specification extends AbstractCompositeNode {
   constructor(
     public readonly globals: Array<AbstractNode>,
     public readonly eofToken: SyntaxToken,
@@ -25,5 +25,3 @@ class Specification extends AbstractCompositeNode {
     yield this.eofToken;
   }
 }
-
-export default Specification;

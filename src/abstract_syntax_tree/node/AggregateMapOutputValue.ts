@@ -1,9 +1,9 @@
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
-import AbstractMapOutputValue from "./AbstractMapOutputValue.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import MapOutputValueKind from "./enum/map_output_value_kind.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import { AbstractMapOutputValue } from "./AbstractMapOutputValue.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { MapOutputValueKind } from "./enum/map_output_value_kind.ts";
 
-class AggregateMapOutputValue extends AbstractMapOutputValue {
+export class AggregateMapOutputValue extends AbstractMapOutputValue {
   constructor(
     public readonly outputValues: AbstractMapOutputValue[],
     public readonly openBraceToken: SyntaxToken,
@@ -33,5 +33,3 @@ class AggregateMapOutputValue extends AbstractMapOutputValue {
     yield this.closeBraceToken;
   }
 }
-
-export default AggregateMapOutputValue;

@@ -1,11 +1,11 @@
 import { alt_sc, apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import type NumberLiteral from "../../abstract_syntax_tree/node/NumberLiteral.ts";
-import PrimaryExpression from "../../abstract_syntax_tree/node/PrimaryExpression.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";
+import { PrimaryExpression } from "../../abstract_syntax_tree/node/PrimaryExpression.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { InternalParserError } from "../../util/ParserError.ts";
 import {
   EXPRESSION_RULE,
@@ -54,7 +54,7 @@ function getPrimaryExpression(
   );
 }
 
-function getPrimaryExpressionPattern() {
+export function getPrimaryExpressionPattern() {
   return apply(
     alt_sc(
       IDENTIFIER_RULE,
@@ -68,5 +68,3 @@ function getPrimaryExpressionPattern() {
     getPrimaryExpression,
   );
 }
-
-export default getPrimaryExpressionPattern;

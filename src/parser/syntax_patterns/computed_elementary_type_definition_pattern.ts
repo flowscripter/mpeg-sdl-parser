@@ -1,11 +1,11 @@
 import { apply, opt_sc, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import ComputedElementaryTypeDefinition from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
-import type ElementaryType from "../../abstract_syntax_tree/node/ElementaryType.ts";
-import type Identifier from "../../abstract_syntax_tree/node/Identifier.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { ComputedElementaryTypeDefinition } from "../../abstract_syntax_tree/node/ComputedElementaryTypeDefinition.ts";
+import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
+import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import {
   ELEMENTARY_TYPE_RULE,
   EXPRESSION_RULE,
@@ -51,7 +51,7 @@ function getComputedElementaryTypeDefinition(
   );
 }
 
-function getComputedElementaryTypeDefinitionPattern() {
+export function getComputedElementaryTypeDefinitionPattern() {
   return apply(
     seq(
       getToken(TokenKind.KEYWORD_COMPUTED_TOKEN),
@@ -71,5 +71,3 @@ function getComputedElementaryTypeDefinitionPattern() {
     getComputedElementaryTypeDefinition,
   );
 }
-
-export default getComputedElementaryTypeDefinitionPattern;

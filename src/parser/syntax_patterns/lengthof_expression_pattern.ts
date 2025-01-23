@@ -1,9 +1,9 @@
 import { apply, seq } from "../../../deps.ts";
-import type AbstractNode from "../../abstract_syntax_tree/node/AbstractNode.ts";
-import LengthOfExpression from "../../abstract_syntax_tree/node/LengthOfExpression.ts";
-import TokenKind from "../../tokenizer/enum/token_kind.ts";
+import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
+import { LengthOfExpression } from "../../abstract_syntax_tree/node/LengthOfExpression.ts";
+import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
 import { getToken } from "../../tokenizer/parsec/ParsecTokenWrapper.ts";
-import type SyntaxToken from "../../tokenizer/token/SyntaxToken.ts";
+import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { EXPRESSION_RULE } from "../syntax_rules.ts";
 
 function getLengthofExpression(
@@ -28,7 +28,7 @@ function getLengthofExpression(
   );
 }
 
-function getLengthofExpressionPattern() {
+export function getLengthofExpressionPattern() {
   return apply(
     seq(
       getToken(TokenKind.KEYWORD_LENGTHOF_TOKEN),
@@ -39,5 +39,3 @@ function getLengthofExpressionPattern() {
     getLengthofExpression,
   );
 }
-
-export default getLengthofExpressionPattern;
