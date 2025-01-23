@@ -1,4 +1,4 @@
-import type { Lexer } from "../../deps.ts";
+import type { Lexer } from "typescript-parsec";
 import getLogger from "../util/logger.ts";
 import { LexicalParserError } from "../util/ParserError.ts";
 import { TokenKind } from "./enum/token_kind.ts";

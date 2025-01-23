@@ -1,4 +1,4 @@
-import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { MapEntry } from "../../abstract_syntax_tree/node/MapEntry.ts";
 import { MapEntryList } from "../../abstract_syntax_tree/node/MapEntryList.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

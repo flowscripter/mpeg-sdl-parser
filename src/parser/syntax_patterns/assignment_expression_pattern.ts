@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import { BinaryExpression } from "../../abstract_syntax_tree/node/BinaryExpression.ts";
 import { BinaryOperatorKind } from "../../abstract_syntax_tree/node/enum/binary_operator_kind.ts";

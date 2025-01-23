@@ -1,7 +1,7 @@
 import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
 import { SyntaxToken } from "../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../src/tokenizer/token/TriviaToken.ts";
-import { assertEquals } from "../test_deps.ts";
+import { assertEquals } from "@std/assert";
 
 Deno.test("Test token", () => {
   const token = new SyntaxToken(

@@ -1,4 +1,5 @@
-import { expectEOF, expectSingleResult } from "../../../deps.ts";
+import { assertEquals, assertThrows } from "@std/assert";
+import { expectEOF, expectSingleResult } from "typescript-parsec";
 import { ClassDeclaration } from "../../../src/abstract_syntax_tree/node/ClassDeclaration.ts";
 import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier.ts";
 import { Specification } from "../../../src/abstract_syntax_tree/node/Specification.ts";
@@ -11,7 +12,6 @@ import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import { Tokenizer } from "../../../src/tokenizer/Tokenizer.ts";
 import { InternalParserError } from "../../../src/util/ParserError.ts";
-import { assertEquals, assertThrows } from "../../test_deps.ts";
 
 Deno.test("Test specification pattern - no declarations fails to parse ", () => {
   const tokenizer = new Tokenizer();

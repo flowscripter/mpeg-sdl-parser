@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import { ArrayDefinition } from "../../abstract_syntax_tree/node/ArrayDefinition.ts";
 import type { ArrayElementType } from "../../abstract_syntax_tree/node/ArrayElementType.ts";

@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import { ArrayElementAccess } from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

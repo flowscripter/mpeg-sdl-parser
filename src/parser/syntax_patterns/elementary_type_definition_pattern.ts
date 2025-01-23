@@ -1,4 +1,4 @@
-import { apply, opt_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";

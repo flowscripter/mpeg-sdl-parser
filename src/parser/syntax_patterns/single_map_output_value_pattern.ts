@@ -1,4 +1,4 @@
-import { alt_sc, apply, seq } from "../../../deps.ts";
+import { alt_sc, apply, seq } from "typescript-parsec";
 import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import type { LengthAttribute } from "../../abstract_syntax_tree/node/LengthAttribute.ts";
 import { SingleMapOutputValue } from "../../abstract_syntax_tree/node/SingleMapOutputValue.ts";

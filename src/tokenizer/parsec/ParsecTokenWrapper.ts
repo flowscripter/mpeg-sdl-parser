@@ -4,7 +4,7 @@ import {
   tok,
   type Token as ParsecToken,
   type TokenPosition,
-} from "../../../deps.ts";
+} from "typescript-parsec";
 import { TokenKind } from "../enum/token_kind.ts";
 import { SyntaxToken } from "../token/SyntaxToken.ts";
 import type { Trivia } from "../token/TriviaToken.ts";

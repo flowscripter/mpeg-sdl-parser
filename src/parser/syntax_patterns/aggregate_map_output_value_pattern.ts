@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { AbstractMapOutputValue } from "../../abstract_syntax_tree/node/AbstractMapOutputValue.ts";
 import { AggregateMapOutputValue } from "../../abstract_syntax_tree/node/AggregateMapOutputValue.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";

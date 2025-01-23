@@ -1,16 +1,24 @@
 {
   "version": "4",
   "specifiers": {
+    "jsr:@std/assert@^1.0.11": "1.0.11",
     "jsr:@std/fmt@0.224": "0.224.0",
-    "jsr:@std/fmt@1": "1.0.4",
+    "jsr:@std/fmt@1.0.4": "1.0.4",
     "jsr:@std/fmt@^1.0.4": "1.0.4",
     "jsr:@std/fs@^1.0.9": "1.0.9",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "jsr:@std/io@0.225": "0.225.0",
-    "jsr:@std/log@*": "0.224.13",
-    "jsr:@std/log@0.224.13": "0.224.13",
-    "npm:typescript-parsec@0.3.4": "0.3.4"
+    "jsr:@std/log@~0.224.13": "0.224.13",
+    "jsr:@std/path@^1.0.8": "1.0.8",
+    "npm:typescript-parsec@~0.3.4": "0.3.4"
   },
   "jsr": {
+    "@std/assert@1.0.11": {
+      "integrity": "2461ef3c368fe88bc60e186e7744a93112f16fd110022e113a0849e94d1c83c1",
+      "dependencies": [
+        "jsr:@std/internal"
+      ]
+    },
     "@std/fmt@0.224.0": {
       "integrity": "e20e9a2312a8b5393272c26191c0a68eda8d2c4b08b046bad1673148f1d69851"
     },
@@ -19,6 +27,9 @@
     },
     "@std/fs@1.0.9": {
       "integrity": "3eef7e3ed3d317b29432c7dcb3b20122820dbc574263f721cb0248ad91bad890"
+    },
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     },
     "@std/io@0.225.0": {
       "integrity": "c1db7c5e5a231629b32d64b9a53139445b2ca640d828c26bf23e1c55f8c079b3"
@@ -30,6 +41,9 @@
         "jsr:@std/fs",
         "jsr:@std/io"
       ]
+    },
+    "@std/path@1.0.8": {
+      "integrity": "548fa456bb6a04d3c1a1e7477986b6cffbce95102d0bb447c67c4ee70e0364be"
     }
   },
   "npm": {
@@ -150,5 +164,14 @@
     "https://deno.land/std@0.224.0/log/rotating_file_handler.ts": "a6e7c712e568b618303273ff95483f6ab86dec0a485c73c2e399765f752b5aa8",
     "https://deno.land/std@0.224.0/log/setup.ts": "42425c550da52c7def7f63a4fcc1ac01a4aec6c73336697a640978d6a324e7a6",
     "https://deno.land/std@0.224.0/log/warn.ts": "f1a6bc33a481f231a0257e6d66e26c2e695b931d5e917d8de4f2b825778dfd4e"
+  },
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@^1.0.11",
+      "jsr:@std/fmt@^1.0.4",
+      "jsr:@std/log@~0.224.13",
+      "jsr:@std/path@^1.0.8",
+      "npm:typescript-parsec@~0.3.4"
+    ]
   }
 }

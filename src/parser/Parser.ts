@@ -1,4 +1,8 @@
-import { expectEOF, expectSingleResult, type TokenError } from "../../deps.ts";
+import {
+  expectEOF,
+  expectSingleResult,
+  type TokenError,
+} from "typescript-parsec";
 import type { Specification } from "../abstract_syntax_tree/node/Specification.ts";
 import { Tokenizer } from "../tokenizer/Tokenizer.ts";
 import {

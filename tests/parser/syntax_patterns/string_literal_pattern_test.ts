@@ -1,3 +1,4 @@
+import { assertThrows } from "@std/assert";
 import { StringLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/string_literal_kind.ts";
 import { StringLiteral } from "../../../src/abstract_syntax_tree/node/StringLiteral.ts";
 import { STRING_LITERAL_RULE } from "../../../src/parser/syntax_rules.ts";
@@ -5,7 +6,6 @@ import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
 import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import { SyntacticParserError } from "../../../src/util/ParserError.ts";
-import { assertThrows } from "../../test_deps.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test string literal pattern", () => {

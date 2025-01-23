@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { ClassIdRange } from "../../abstract_syntax_tree/node/ClassIdRange.ts";
 import { ExtendedClassIdRange } from "../../abstract_syntax_tree/node/ExtendedClassIdRange.ts";
 import type { SingleClassId } from "../../abstract_syntax_tree/node/SingleClassId.ts";

@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import { UnaryOperatorKind } from "../../abstract_syntax_tree/node/enum/unary_operator_kind.ts";
 import { UnaryExpression } from "../../abstract_syntax_tree/node/UnaryExpression.ts";

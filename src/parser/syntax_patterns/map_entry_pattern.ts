@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import type { AggregateMapOutputValue } from "../../abstract_syntax_tree/node/AggregateMapOutputValue.ts";
 import { MapEntry } from "../../abstract_syntax_tree/node/MapEntry.ts";
 import type { NumberLiteral } from "../../abstract_syntax_tree/node/NumberLiteral.ts";

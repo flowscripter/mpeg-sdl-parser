@@ -1,4 +1,5 @@
-import { log, sprintf } from "../../deps.ts";
+import * as log from "@std/log";
+import { sprintf } from "@std/fmt/printf";
 import { getEnvVarIfPermitted } from "./envVarHelper.ts";
 
 let defaultLogger: log.Logger | undefined;

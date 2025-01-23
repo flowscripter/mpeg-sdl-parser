@@ -1,3 +1,4 @@
+import { assertThrows } from "@std/assert";
 import { SyntacticParserError } from "../../../mod.ts";
 import { AlignedModifier } from "../../../src/abstract_syntax_tree/node/AlignedModifier.ts";
 import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
@@ -11,7 +12,6 @@ import { STRING_DEFINITION_RULE } from "../../../src/parser/syntax_rules.ts";
 import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
 import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
-import { assertThrows } from "../../test_deps.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test string definition pattern", () => {

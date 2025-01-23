@@ -1,4 +1,4 @@
-import { alt_sc, apply, opt_sc, seq } from "../../../deps.ts";
+import { alt_sc, apply, opt_sc, seq } from "typescript-parsec";
 import type { ElementaryType } from "../../abstract_syntax_tree/node/ElementaryType.ts";
 import { NodeKind } from "../../abstract_syntax_tree/node/enum/node_kind.ts";
 import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";

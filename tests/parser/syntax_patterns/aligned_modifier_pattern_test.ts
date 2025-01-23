@@ -1,3 +1,4 @@
+import { assertThrows } from "@std/assert";
 import { AlignedModifier } from "../../../src/abstract_syntax_tree/node/AlignedModifier.ts";
 import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind.ts";
 import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral.ts";
@@ -6,7 +7,6 @@ import { TokenKind } from "../../../src/tokenizer/enum/token_kind.ts";
 import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import { SyntacticParserError } from "../../../src/util/ParserError.ts";
-import { assertThrows } from "../../test_deps.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
 Deno.test("Test aligned modifier pattern - default", () => {

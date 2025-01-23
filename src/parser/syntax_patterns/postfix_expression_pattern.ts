@@ -1,4 +1,4 @@
-import { alt_sc, lrec_sc } from "../../../deps.ts";
+import { alt_sc, lrec_sc } from "typescript-parsec";
 import type { AbstractExpression } from "../../abstract_syntax_tree/node/AbstractExpression.ts";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import type { ArrayElementAccess } from "../../abstract_syntax_tree/node/ArrayElementAccess.ts";

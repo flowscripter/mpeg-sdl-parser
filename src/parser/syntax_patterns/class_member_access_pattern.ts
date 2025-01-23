@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import { ClassMemberAccess } from "../../abstract_syntax_tree/node/ClassMemberAccess.ts";
 import type { Identifier } from "../../abstract_syntax_tree/node/Identifier.ts";

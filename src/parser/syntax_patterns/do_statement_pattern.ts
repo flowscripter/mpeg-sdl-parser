@@ -1,4 +1,4 @@
-import { apply, seq } from "../../../deps.ts";
+import { apply, seq } from "typescript-parsec";
 import type { AbstractNode } from "../../abstract_syntax_tree/node/AbstractNode.ts";
 import type { CompoundStatement } from "../../abstract_syntax_tree/node/CompoundStatement.ts";
 import { DoStatement } from "../../abstract_syntax_tree/node/DoStatement.ts";

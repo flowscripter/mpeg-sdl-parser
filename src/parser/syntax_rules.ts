@@ -1,4 +1,4 @@
-import { rule } from "../../deps.ts";
+import { rule } from "typescript-parsec";
 import type { AbstractNode, Specification } from "../../mod.ts";
 import type { AbstractExpression } from "../abstract_syntax_tree/node/AbstractExpression.ts";
 import type { AbstractStatement } from "../abstract_syntax_tree/node/AbstractStatement.ts";

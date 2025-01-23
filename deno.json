@@ -1,5 +1,12 @@
 {
   "name": "@flowscripter/mpeg-sdl-parser",
   "version": "1.0.0",
-  "exports": "./mod.ts"
+  "exports": "./mod.ts",
+  "imports": {
+    "@std/assert": "jsr:@std/assert@^1.0.11",
+    "@std/fmt": "jsr:@std/fmt@^1.0.4",
+    "@std/log": "jsr:@std/log@^0.224.13",
+    "@std/path": "jsr:@std/path@^1.0.8",
+    "typescript-parsec": "npm:typescript-parsec@^0.3.4"
+  }
 }

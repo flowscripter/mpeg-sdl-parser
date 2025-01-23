@@ -1,4 +1,4 @@
-import { apply, opt_sc, rep_sc, seq } from "../../../deps.ts";
+import { apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { AbstractStatement } from "../../abstract_syntax_tree/node/AbstractStatement.ts";
 import type { AlignedModifier } from "../../abstract_syntax_tree/node/AlignedModifier.ts";
 import type { BitModifier } from "../../abstract_syntax_tree/node/BitModifier.ts";

@@ -1,4 +1,4 @@
-import { alt_sc } from "../../../deps.ts";
+import { alt_sc } from "typescript-parsec";
 import {
   ARRAY_DEFINITION_RULE,
   CLASS_DECLARATION_RULE,
