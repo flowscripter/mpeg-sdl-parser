@@ -198,7 +198,7 @@ describe("String Literal Pattern Tests", () => {
             ),
           ],
         ),
-      ),
+      )
     ).toThrow(
       "SYNTACTIC ERROR: Unexpected UTF prefix",
     );
