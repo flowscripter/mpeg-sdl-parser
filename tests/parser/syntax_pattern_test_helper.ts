@@ -1,4 +1,4 @@
-import { assertEquals } from "@std/assert";
+import { expect } from "bun:test";
 import {
   expectEOF,
   expectSingleResult,
@@ -36,7 +36,7 @@ function testSyntaxPattern(
     ),
   );
 
-  assertEquals(actual, expected);
+  expect(actual).toEqual(expected);
 }
 
 export default testSyntaxPattern;

@@ -1,0 +1,18 @@
+{
+  "name": "@flowscripter/mpeg-sdl-parser",
+  "module": "index.ts",
+  "type": "module",
+  "version": "1.0.4",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.2.4"
+  },
+  "peerDependencies": {
+    "typescript": "^5.8.2"
+  },
+  "dependencies": {
+    "typescript-parsec": "^0.3.4"
+  }
+}

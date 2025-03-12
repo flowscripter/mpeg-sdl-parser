@@ -1,82 +1,84 @@
-import * as log from "@std/log";
-import { sprintf } from "@std/fmt/printf";
-import { getEnvVarIfPermitted } from "./envVarHelper.ts";
+import process from "node:process";
+type LoggerFunction = (
+  message: object | (() => string) | string,
+  ...optionalParams: unknown[]
+) => void;
 
-let defaultLogger: log.Logger | undefined;
-
-if (defaultLogger === undefined) {
-  defaultLogger = await setupLogger();
+export interface Logger {
+  trace: LoggerFunction;
+  debug: LoggerFunction;
+  info: LoggerFunction;
+  warn: LoggerFunction;
+  error: LoggerFunction;
 }
 
-const LEVEL_PADDINGS: Record<string, string> = {
-  DEBUG: "    ",
-  INFO: "     ",
-  WARN: "     ",
-  ERROR: "    ",
-  CRITICAL: " ",
-};
+const debugEnabled = process.env["CLI_DEBUG"] !== undefined;
 
-let maxLoggerNameLength = 0;
-
-const LOGGER_NAME_PADDINGS: Record<string, string> = {};
-
-async function setupLogger() {
-  log.setup({
-    handlers: {
-      console: new log.ConsoleHandler(
-        (await getEnvVarIfPermitted("MPEG_SDL_PARSER_DEBUG") !== undefined)
-          ? "DEBUG"
-          : "ERROR",
-        {
-          formatter: (logRecord) => {
-            const { msg, args, levelName, loggerName } = logRecord;
-
-            if (args.length === 0) {
-              return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${
-                LOGGER_NAME_PADDINGS[loggerName]
-              } ${msg}`;
-            }
-            return `${levelName}${LEVEL_PADDINGS[levelName]} [${loggerName}]${
-              LOGGER_NAME_PADDINGS[loggerName]
-            } ${sprintf(msg, ...args)}`;
-          },
-        },
-      ),
-    },
-
-    loggers: {
-      default: {
-        handlers: ["console"],
+function getDefaultLogger(): Logger {
+  if (debugEnabled) {
+    return {
+      trace: () => {},
+      debug: (message, ...optionalParams) => {
+        console.debug(message, optionalParams);
       },
+      info: (message, ...optionalParams) => {
+        console.info(message, optionalParams);
+      },
+      warn: (message, ...optionalParams) => {
+        console.warn(message, optionalParams);
+      },
+      error: (message, ...optionalParams) => {
+        console.error(message, optionalParams);
+      },
+    };
+  }
+  return {
+    trace: () => {},
+    debug: () => {},
+    info: () => {},
+    warn: () => {},
+    error: (message, ...optionalParams) => {
+      console.error(message, optionalParams);
     },
-  });
-
-  return log.getLogger();
+  };
 }
 
-/**
- * Retrieves a logger instance with the specified name. If the name length exceeds the current maximum logger name length,
- * it updates the padding for all existing logger names to ensure consistent formatting.
- *
- * @param name - The name of the logger to retrieve.
- * @returns A logger instance with the specified name.
- */
-export default function getLogger(name: string): log.Logger {
-  if (name.length > maxLoggerNameLength) {
-    maxLoggerNameLength = name.length;
-
-    for (const key of Object.keys(LOGGER_NAME_PADDINGS)) {
-      LOGGER_NAME_PADDINGS[key] = " ".repeat(maxLoggerNameLength - key.length);
+function wrapWithLoggerName(
+  loggerName: string,
+  loggerFunction: LoggerFunction,
+): LoggerFunction {
+  return (message, ...optionalParams) => {
+    if (message instanceof Object) {
+      message.loggerName = loggerName;
+      loggerFunction(message, optionalParams);
+      return;
     }
+    if (message instanceof Function) {
+      loggerFunction(`${loggerName} ${message()}`, optionalParams);
+      return;
+    }
+    loggerFunction(`${loggerName} ${message}`, optionalParams);
+  };
+}
 
-    LOGGER_NAME_PADDINGS[name] = "";
-  } else if (LOGGER_NAME_PADDINGS[name] === undefined) {
-    LOGGER_NAME_PADDINGS[name] = " ".repeat(maxLoggerNameLength - name.length);
+export default function getLogger(loggerName: string): Logger {
+  if (globalThis.defaultLogger === undefined) {
+    globalThis.defaultLogger = getDefaultLogger();
   }
-
-  const logger = log.getLogger(name);
-  logger.level = log.LogLevels.DEBUG;
-  logger.handlers.push(...log.getLogger().handlers);
-
-  return logger;
+  if (debugEnabled) {
+    return {
+      trace: () => {},
+      debug: wrapWithLoggerName(loggerName, globalThis.defaultLogger.debug),
+      info: wrapWithLoggerName(loggerName, globalThis.defaultLogger.info),
+      warn: wrapWithLoggerName(loggerName, globalThis.defaultLogger.warn),
+      error: wrapWithLoggerName(loggerName, globalThis.defaultLogger.error),
+    };
+  }
+  return {
+    trace: () => {},
+    debug: () => {},
+    info: () => {},
+    warn: () => {},
+    error: wrapWithLoggerName(loggerName, globalThis.defaultLogger.error),
+  };
 }

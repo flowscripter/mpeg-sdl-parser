@@ -1,6 +1,6 @@
+import { expect } from "bun:test";
 import { TokenKind } from "../../src/tokenizer/enum/token_kind.ts";
 import { Tokenizer } from "../../src/tokenizer/Tokenizer.ts";
-import { assertEquals, assertNotEquals } from "@std/assert";
 
 function testTokenizer(
   input: string,
@@ -26,108 +26,118 @@ function testTokenizer(
       trailingTriviaTexts,
     ] = expectedToken;
 
-    assertNotEquals(parsecTokenWrapper, undefined);
+    expect(parsecTokenWrapper).not.toBeUndefined();
 
     const syntaxToken = parsecTokenWrapper!.getSyntaxToken();
 
-    assertEquals(
+    expect(
       syntaxToken.tokenKind,
-      tokenKind,
       `token.tokenKind: ${TokenKind[syntaxToken.tokenKind]} != ${
         TokenKind[expectedToken[0]]
       }, text: ${syntaxToken.text} for text: ${syntaxToken.text}`,
+    ).toEqual(
+      tokenKind,
     );
-    assertEquals(
+    expect(
       syntaxToken.text,
-      text,
       `token.text: ${syntaxToken.text} != ${expectedToken[1]} for tokenKind: ${
         TokenKind[syntaxToken.tokenKind]
       }`,
+    ).toEqual(
+      text,
     );
 
-    assertEquals(
+    expect(
       syntaxToken.leadingTrivia.length,
-      leadingTriviaTokenKinds.length,
       `token.leadingTrivia.length: ${syntaxToken.leadingTrivia.length} != ${leadingTriviaTokenKinds.length} for tokenKind: ${
         TokenKind[syntaxToken.tokenKind]
       } with text: ${syntaxToken.text}`,
+    ).toEqual(
+      leadingTriviaTokenKinds.length,
     );
 
     for (let i = 0; i < leadingTriviaTokenKinds.length; i++) {
       const actual = syntaxToken.leadingTrivia[i].tokenKind;
       const expected = leadingTriviaTokenKinds[i];
-      assertEquals(
+      expect(
         actual,
-        expected,
         `token.leadingTrivia[${i}].tokenKind: ${actual} != ${expected} for tokenKind: ${
           TokenKind[syntaxToken.tokenKind]
         } with text: ${syntaxToken.text}`,
+      ).toEqual(
+        expected,
       );
     }
 
-    assertEquals(
+    expect(
       syntaxToken.leadingTrivia.length,
-      leadingTriviaTexts.length,
       `token.leadingTrivia.length: ${syntaxToken.leadingTrivia.length} != ${leadingTriviaTexts.length} for tokenKind: ${
         TokenKind[syntaxToken.tokenKind]
       } with text: ${syntaxToken.text}`,
+    ).toEqual(
+      leadingTriviaTexts.length,
     );
 
     for (let i = 0; i < leadingTriviaTexts.length; i++) {
       const actual = syntaxToken.leadingTrivia[i].text;
       const expected = leadingTriviaTexts[i];
-      assertEquals(
+      expect(
         actual,
-        expected,
         `token.leadingTrivia[${i}].text: ${actual} != ${expected} for tokenKind: ${
           TokenKind[syntaxToken.tokenKind]
         } with text: ${syntaxToken.text}`,
+      ).toEqual(
+        expected,
       );
     }
 
-    assertEquals(
+    expect(
       syntaxToken.trailingTrivia.length,
-      trailingTriviaTokenKinds.length,
       `token.trailingTrivia.length: ${syntaxToken.trailingTrivia.length} != ${trailingTriviaTokenKinds.length} for tokenKind: ${
         TokenKind[syntaxToken.tokenKind]
       } with text: ${syntaxToken.text}`,
+    ).toEqual(
+      trailingTriviaTokenKinds.length,
     );
 
     for (let i = 0; i < trailingTriviaTokenKinds.length; i++) {
       const actual = syntaxToken.trailingTrivia[i].tokenKind;
       const expected = trailingTriviaTokenKinds[i];
-      assertEquals(
+      expect(
         actual,
-        expected,
         `token.trailingTrivia[${i}].tokenKind: ${actual} != ${expected} for tokenKind: ${
           TokenKind[syntaxToken.tokenKind]
         } with text: ${syntaxToken.text}`,
+      ).toEqual(
+        expected,
       );
     }
 
-    assertEquals(
+    expect(
       syntaxToken.trailingTrivia.length,
-      trailingTriviaTexts.length,
       `token.trailingTrivia.length: ${syntaxToken.trailingTrivia.length} != ${trailingTriviaTexts.length} for tokenKind: ${
         TokenKind[syntaxToken.tokenKind]
       } with text: ${syntaxToken.text}`,
+    ).toEqual(
+      trailingTriviaTexts.length,
     );
 
     for (let i = 0; i < trailingTriviaTexts.length; i++) {
       const actual = syntaxToken.trailingTrivia[i].text;
       const expected = trailingTriviaTexts[i];
-      assertEquals(
+      expect(
         actual,
-        expected,
         `token.trailingTrivia[${i}].text: ${actual} != ${expected} for tokenKind: ${
           TokenKind[syntaxToken.tokenKind]
         } with text: ${syntaxToken.text}`,
+      ).toEqual(
+        expected,
       );
     }
 
     parsecTokenWrapper = parsecTokenWrapper!.next;
   }
-  assertEquals(parsecTokenWrapper, undefined);
+  expect(parsecTokenWrapper).toBeUndefined();
 }
 
 export default testTokenizer;

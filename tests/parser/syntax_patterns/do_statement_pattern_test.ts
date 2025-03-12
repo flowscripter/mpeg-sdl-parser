@@ -1,3 +1,4 @@
+import { describe, test } from "bun:test";
 import { BinaryExpression } from "../../../src/abstract_syntax_tree/node/BinaryExpression.ts";
 import { CompoundStatement } from "../../../src/abstract_syntax_tree/node/CompoundStatement.ts";
 import { DoStatement } from "../../../src/abstract_syntax_tree/node/DoStatement.ts";
@@ -14,146 +15,148 @@ import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken.ts";
 import { Trivia } from "../../../src/tokenizer/token/TriviaToken.ts";
 import testSyntaxPattern from "../syntax_pattern_test_helper.ts";
 
-Deno.test("Test do statement pattern", () => {
-  testSyntaxPattern(
-    DO_STATEMENT_RULE,
-    "do {i++;} while (i<3);",
-    new DoStatement(
-      new CompoundStatement(
-        [
-          new ExpressionStatement(
-            new PostfixExpression(
-              new Identifier(
-                "i",
-                new SyntaxToken(
-                  TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 4, position: 4 },
+describe("Do Statement Pattern Tests", () => {
+  test("Test do statement pattern", () => {
+    testSyntaxPattern(
+      DO_STATEMENT_RULE,
+      "do {i++;} while (i<3);",
+      new DoStatement(
+        new CompoundStatement(
+          [
+            new ExpressionStatement(
+              new PostfixExpression(
+                new Identifier(
                   "i",
+                  new SyntaxToken(
+                    TokenKind.IDENTIFIER_TOKEN,
+                    { row: 0, column: 4, position: 4 },
+                    "i",
+                    [],
+                    [],
+                  ),
+                ),
+                undefined,
+                undefined,
+                PostfixOperatorKind.POSTFIX_INCREMENT,
+                new SyntaxToken(
+                  TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
+                  { row: 0, column: 5, position: 5 },
+                  "++",
                   [],
                   [],
                 ),
               ),
-              undefined,
-              undefined,
-              PostfixOperatorKind.POSTFIX_INCREMENT,
               new SyntaxToken(
-                TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-                { row: 0, column: 5, position: 5 },
-                "++",
+                TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
+                { row: 0, column: 7, position: 7 },
+                ";",
                 [],
                 [],
               ),
             ),
+          ],
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
+            { row: 0, column: 3, position: 3 },
+            "{",
+            [],
+            [],
+          ),
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
+            { row: 0, column: 8, position: 8 },
+            "}",
+            [],
+            [
+              new Trivia(TokenKind.WHITESPACE_TOKEN, {
+                row: 0,
+                column: 9,
+                position: 9,
+              }, " "),
+            ],
+          ),
+        ),
+        new BinaryExpression(
+          new Identifier(
+            "i",
             new SyntaxToken(
-              TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-              { row: 0, column: 7, position: 7 },
-              ";",
+              TokenKind.IDENTIFIER_TOKEN,
+              { row: 0, column: 17, position: 17 },
+              "i",
               [],
               [],
             ),
           ),
-        ],
-        new SyntaxToken(
-          TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-          { row: 0, column: 3, position: 3 },
-          "{",
-          [],
-          [],
+          BinaryOperatorKind.LESS_THAN,
+          new NumberLiteral(
+            NumberLiteralKind.INTEGER,
+            3,
+            [
+              new SyntaxToken(
+                TokenKind.LITERAL_INTEGER_TOKEN,
+                { row: 0, column: 19, position: 19 },
+                "3",
+                [],
+                [],
+              ),
+            ],
+          ),
+          new SyntaxToken(
+            TokenKind.OPERATOR_LESS_THAN_TOKEN,
+            { row: 0, column: 18, position: 18 },
+            "<",
+            [],
+            [],
+          ),
         ),
         new SyntaxToken(
-          TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-          { row: 0, column: 8, position: 8 },
-          "}",
+          TokenKind.KEYWORD_DO_TOKEN,
+          { row: 0, column: 0, position: 0 },
+          "do",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
               row: 0,
-              column: 9,
-              position: 9,
+              column: 2,
+              position: 2,
             }, " "),
           ],
         ),
-      ),
-      new BinaryExpression(
-        new Identifier(
-          "i",
-          new SyntaxToken(
-            TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 17, position: 17 },
-            "i",
-            [],
-            [],
-          ),
-        ),
-        BinaryOperatorKind.LESS_THAN,
-        new NumberLiteral(
-          NumberLiteralKind.INTEGER,
-          3,
+        new SyntaxToken(
+          TokenKind.KEYWORD_WHILE_TOKEN,
+          { row: 0, column: 10, position: 10 },
+          "while",
+          [],
           [
-            new SyntaxToken(
-              TokenKind.LITERAL_INTEGER_TOKEN,
-              { row: 0, column: 19, position: 19 },
-              "3",
-              [],
-              [],
-            ),
+            new Trivia(TokenKind.WHITESPACE_TOKEN, {
+              row: 0,
+              column: 15,
+              position: 15,
+            }, " "),
           ],
         ),
         new SyntaxToken(
-          TokenKind.OPERATOR_LESS_THAN_TOKEN,
-          { row: 0, column: 18, position: 18 },
-          "<",
+          TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
+          { row: 0, column: 16, position: 16 },
+          "(",
+          [],
+          [],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
+          { row: 0, column: 20, position: 20 },
+          ")",
+          [],
+          [],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
+          { row: 0, column: 21, position: 21 },
+          ";",
           [],
           [],
         ),
       ),
-      new SyntaxToken(
-        TokenKind.KEYWORD_DO_TOKEN,
-        { row: 0, column: 0, position: 0 },
-        "do",
-        [],
-        [
-          new Trivia(TokenKind.WHITESPACE_TOKEN, {
-            row: 0,
-            column: 2,
-            position: 2,
-          }, " "),
-        ],
-      ),
-      new SyntaxToken(
-        TokenKind.KEYWORD_WHILE_TOKEN,
-        { row: 0, column: 10, position: 10 },
-        "while",
-        [],
-        [
-          new Trivia(TokenKind.WHITESPACE_TOKEN, {
-            row: 0,
-            column: 15,
-            position: 15,
-          }, " "),
-        ],
-      ),
-      new SyntaxToken(
-        TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-        { row: 0, column: 16, position: 16 },
-        "(",
-        [],
-        [],
-      ),
-      new SyntaxToken(
-        TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-        { row: 0, column: 20, position: 20 },
-        ")",
-        [],
-        [],
-      ),
-      new SyntaxToken(
-        TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-        { row: 0, column: 21, position: 21 },
-        ";",
-        [],
-        [],
-      ),
-    ),
-  );
+    );
+  });
 });

@@ -4,9 +4,9 @@
 > in TypeScript
 
 [![version](https://img.shields.io/github/v/release/flowscripter/mpeg-sdl-parser?sort=semver)](https://github.com/flowscripter/mpeg-sdl-parser/releases)
-[![build](https://img.shields.io/github/actions/workflow/status/flowscripter/mpeg-sdl-parser/release-deno-library.yml)](https://github.com/flowscripter/mpeg-sdl-parser/actions/workflows/release-deno-library.yml)
+[![build](https://img.shields.io/github/actions/workflow/status/flowscripter/mpeg-sdl-parser/release-bun-library.yml)](https://github.com/flowscripter/mpeg-sdl-parser/actions/workflows/release-bun-library.yml)
 [![coverage](https://codecov.io/gh/flowscripter/mpeg-sdl-parser/branch/main/graph/badge.svg?token=EMFT2938ZF)](https://codecov.io/gh/flowscripter/mpeg-sdl-parser)
-[![deno doc](https://doc.deno.land/badge.svg)](https://jsr.io/@flowscripter/mpeg-sdl-parser/doc)
+[![docs](https://img.shields.io/badge/docs-API-blue)](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
 [![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-parser)](https://github.com/flowscripter/mpeg-sdl-parser/blob/main/LICENSE)
 
 **NOTE: Under development**
@@ -20,18 +20,11 @@
   - link to CLI
 - implement semantic checks
 
-## Development
+## Bun Module Usage
 
-Install [Deno](https://docs.deno.com/runtime/getting_started/installation/)
+Add the module:
 
-Lint: `deno fmt && deno lint mod.ts deps.ts src/ tests/`
-
-Test: `deno test -A`
-
-## Usage
-
-Grab with your preferred package manager from
-https://jsr.io/@flowscripter/mpeg-sdl-parser
+`bun add @flowscripter/mpeg-sdl-parser`
 
 ```typescript
 import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";
@@ -64,6 +57,31 @@ const myNodeHandler = new MyNodeHandler();
 
 dispatch(ast, myNodeHandler);
 ```
+
+## Development
+
+Install dependencies:
+
+`bun install`
+
+Test:
+
+`bun test`
+
+**NOTE**: The following tasks use Deno as it excels at these and Bun does not
+currently provide such functionality:
+
+Format:
+
+`deno fmt`
+
+Lint:
+
+`deno lint index.ts src/ tests/`
+
+Generate HTML API Documentation:
+
+`deno doc --html --name=mpeg-sdl-parser index.ts`
 
 ## Documentation
 
@@ -181,19 +199,18 @@ classDiagram
 
 ### API
 
-Link to auto-generated API docs for the library:
+Link to auto-generated API docs:
 
-[API Documentation](https://jsr.io/@flowscripter/mpeg-sdl-parser/doc)
+[API Documentation](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
 
 ### Debug Logging
 
 Internal framework logging can be enabled by setting the `MPEG_SDL_PARSER_DEBUG`
-environment variable. (Permission will need to be granted to the CLI to access
-the environment to look for this environment variable i.e. `--allow-env`.)
+environment variable.
 
-The `logger` implementation will detect this and define a default Deno
-`ConsoleHandler` logger with `DEBUG` level which is used by internal
-implementation classes such as the `parser` and `tokenizer`.
+The logging implementation will look for an object conforming to the `Logger`
+interface and use it if found. If not found, a simple logging implementation
+using the `console` object will be used.
 
 ## License
 

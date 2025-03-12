@@ -65,9 +65,9 @@ function validateAndStripMultipleCharacterLiteral(
     );
   }
   stringValue = stringValue.substring(1, stringValue.length - 1);
-  stringValue = stringValue.replaceAll(ESCAPED_BACKSLASH_REGEX, "\\");
+  stringValue = stringValue.replaceAll(ESCAPED_SINGLE_QUOTE_REGEX, "'");
 
-  return stringValue.replaceAll(ESCAPED_SINGLE_QUOTE_REGEX, "'");
+  return stringValue.replaceAll(ESCAPED_BACKSLASH_REGEX, "\\");
 }
 
 function getNumberLiteral(
