@@ -1,5 +1,6 @@
-import { assertEquals } from "@std/assert";
-import * as path from "@std/path";
+import { describe, expect, test } from "bun:test";
+import path from "node:path";
+import fs from "node:fs/promises";
 import {
   type AbstractCompositeNode,
   type AbstractLeafNode,
@@ -8,7 +9,7 @@ import {
   NodeKind,
   Parser,
   TraversingVisitor,
-} from "../../../mod.ts";
+} from "../../../index.ts";
 
 const expectedHistory = [
   "SPECIFICATION",
@@ -111,37 +112,41 @@ class HistoryRecordingNodeHandler implements NodeHandler {
   }
 }
 
-Deno.test("Test traversing visitor", async () => {
-  const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
-  const originalSampleSdlSpecification = await Deno.readTextFile(
-    path.join(__dirname, "../../sample_specifications/sample.sdl"),
-  );
-  const parser = new Parser();
-  const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
-  const traversingVisitor = new TraversingVisitor(historyRecordingNodeHandler);
+describe("TraversingVisitor Tests", () => {
+  test("Test traversing visitor", async () => {
+    const originalSampleSdlSpecification = await fs.readFile(
+      path.join(__dirname, "../../sample_specifications/sample.sdl"),
+    ).then((buffer) => buffer.toString());
+    const parser = new Parser();
+    const parsedSpecification = parser.parse(originalSampleSdlSpecification);
+    const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
+    const traversingVisitor = new TraversingVisitor(
+      historyRecordingNodeHandler,
+    );
 
-  traversingVisitor.visit(parsedSpecification);
+    traversingVisitor.visit(parsedSpecification);
 
-  assertEquals(
-    historyRecordingNodeHandler.nodeHistory,
-    expectedHistory,
-  );
-});
+    expect(
+      historyRecordingNodeHandler.nodeHistory,
+    ).toEqual(
+      expectedHistory,
+    );
+  });
 
-Deno.test("Test traversing visitor - dispatch", async () => {
-  const __dirname = path.dirname(path.fromFileUrl(import.meta.url));
-  const originalSampleSdlSpecification = await Deno.readTextFile(
-    path.join(__dirname, "../../sample_specifications/sample.sdl"),
-  );
-  const parser = new Parser();
-  const parsedSpecification = parser.parse(originalSampleSdlSpecification);
-  const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
+  test("Test traversing visitor - dispatch", async () => {
+    const originalSampleSdlSpecification = await fs.readFile(
+      path.join(__dirname, "../../sample_specifications/sample.sdl"),
+    ).then((buffer) => buffer.toString());
+    const parser = new Parser();
+    const parsedSpecification = parser.parse(originalSampleSdlSpecification);
+    const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
 
-  dispatch(parsedSpecification, historyRecordingNodeHandler);
+    dispatch(parsedSpecification, historyRecordingNodeHandler);
 
-  assertEquals(
-    historyRecordingNodeHandler.nodeHistory,
-    expectedHistory,
-  );
+    expect(
+      historyRecordingNodeHandler.nodeHistory,
+    ).toEqual(
+      expectedHistory,
+    );
+  });
 });

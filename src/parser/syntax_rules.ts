@@ -1,5 +1,5 @@
 import { rule } from "typescript-parsec";
-import type { AbstractNode, Specification } from "../../mod.ts";
+import type { AbstractNode, Specification } from "../../index.ts";
 import type { AbstractExpression } from "../abstract_syntax_tree/node/AbstractExpression.ts";
 import type { AbstractStatement } from "../abstract_syntax_tree/node/AbstractStatement.ts";
 import type { AggregateMapOutputValue } from "../abstract_syntax_tree/node/AggregateMapOutputValue.ts";

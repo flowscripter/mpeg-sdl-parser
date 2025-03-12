@@ -67,8 +67,8 @@ function validateAndStripStringLiteral(
   }
 
   text = text.substring(1, text.length - 1);
-  text = text.replaceAll(ESCAPED_BACKSLASH_REGEX, "\\");
   text = text.replaceAll(ESCAPED_DOUBLE_QUOTE_REGEX, '"');
+  text = text.replaceAll(ESCAPED_BACKSLASH_REGEX, "\\");
 
   // convert UTF characters
   if (stringLiteralKind === StringLiteralKind.UTF) {
