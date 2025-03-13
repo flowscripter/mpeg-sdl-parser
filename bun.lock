@@ -4,13 +4,13 @@
     "": {
       "name": "@flowscripter/mpeg-sdl-parser",
       "dependencies": {
-        "typescript-parsec": "^0.3.4",
+        "typescript-parsec": "latest",
       },
       "devDependencies": {
-        "@types/bun": "^1.2.4",
+        "@types/bun": "latest",
       },
       "peerDependencies": {
-        "typescript": "^5.8.2",
+        "typescript": "latest",
       },
     },
   },
