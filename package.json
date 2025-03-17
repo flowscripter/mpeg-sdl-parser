@@ -1,5 +1,18 @@
 {
   "name": "@flowscripter/mpeg-sdl-parser",
+  "description": "ISO/IEC 14496-34 Syntactic Description Language (MPEG SDL) parser implemented in TypeScript",
+  "homepage": "https://github.com/flowscripter/mpeg-sdl-parser#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/flowscripter/mpeg-sdl-parser.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "bun",
+    "mpeg",
+    "sdl",
+    "parser"
+  ],
   "module": "index.ts",
   "type": "module",
   "version": "1.1.0",

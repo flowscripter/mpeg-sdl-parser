@@ -195,6 +195,8 @@ classDiagram
   TraversingVisitor --|> NodeVisitor
 
   NodeVisitor ..> AbstractNode : visits
+
+  TraversingVisitor --> NodeHandler : invokes
 ```
 
 ### API
