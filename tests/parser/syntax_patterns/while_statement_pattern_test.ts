@@ -1,6 +1,142 @@
 import { describe, test } from "bun:test";
+import testSyntaxPattern from "../syntax_pattern_test_helper";
+import { WHILE_STATEMENT_RULE } from "../../../src/parser/syntax_rules";
+import { WhileStatement } from "../../../src/abstract_syntax_tree/node/WhileStatement";
+import { BinaryExpression } from "../../../src/abstract_syntax_tree/node/BinaryExpression";
+import { Identifier } from "../../../src/abstract_syntax_tree/node/Identifier";
+import { SyntaxToken } from "../../../src/tokenizer/token/SyntaxToken";
+import { TokenKind } from "../../../src/tokenizer/enum/token_kind";
+import { BinaryOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/binary_operator_kind";
+import { NumberLiteral } from "../../../src/abstract_syntax_tree/node/NumberLiteral";
+import { NumberLiteralKind } from "../../../src/abstract_syntax_tree/node/enum/number_literal_kind";
+import { CompoundStatement } from "../../../src/abstract_syntax_tree/node/CompoundStatement";
+import { ExpressionStatement } from "../../../src/abstract_syntax_tree/node/ExpressionStatement";
+import { PostfixExpression } from "../../../src/abstract_syntax_tree/node/PostfixExpression";
+import { PostfixOperatorKind } from "../../../src/abstract_syntax_tree/node/enum/postfix_operator_kind";
+import { Trivia } from "../../../src/tokenizer/token/TriviaToken";
+
 describe("While Statement Pattern Tests", () => {
   test("Test while statement pattern", () => {
-    // TODO: implement
+    testSyntaxPattern(
+      WHILE_STATEMENT_RULE,
+      "while (i<9) {i++;}",
+      new WhileStatement(
+        new BinaryExpression(
+          new Identifier(
+            "i",
+            new SyntaxToken(
+              TokenKind.IDENTIFIER_TOKEN,
+              { row: 0, column: 7, position: 7 },
+              "i",
+              [],
+              [],
+            ),
+          ),
+          BinaryOperatorKind.LESS_THAN,
+          new NumberLiteral(
+            NumberLiteralKind.INTEGER,
+            9,
+            [
+              new SyntaxToken(
+                TokenKind.LITERAL_INTEGER_TOKEN,
+                { row: 0, column: 9, position: 9 },
+                "9",
+                [],
+                [],
+              ),
+            ],
+          ),
+          new SyntaxToken(
+            TokenKind.OPERATOR_LESS_THAN_TOKEN,
+            { row: 0, column: 8, position: 8 },
+            "<",
+            [],
+            [],
+          ),
+        ),
+        new CompoundStatement(
+          [
+            new ExpressionStatement(
+              new PostfixExpression(
+                new Identifier(
+                  "i",
+                  new SyntaxToken(
+                    TokenKind.IDENTIFIER_TOKEN,
+                    { row: 0, column: 13, position: 13 },
+                    "i",
+                    [],
+                    [],
+                  ),
+                ),
+                undefined,
+                undefined,
+                PostfixOperatorKind.POSTFIX_INCREMENT,
+                new SyntaxToken(
+                  TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
+                  { row: 0, column: 14, position: 14 },
+                  "++",
+                  [],
+                  [],
+                ),
+              ),
+              new SyntaxToken(
+                TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
+                { row: 0, column: 16, position: 16 },
+                ";",
+                [],
+                [],
+              ),
+            ),
+          ],
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
+            { row: 0, column: 12, position: 12 },
+            "{",
+            [],
+            [],
+          ),
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
+            { row: 0, column: 17, position: 17 },
+            "}",
+            [],
+            [],
+          ),
+        ),
+        new SyntaxToken(
+          TokenKind.KEYWORD_WHILE_TOKEN,
+          { row: 0, column: 0, position: 0 },
+          "while",
+          [],
+          [
+            new Trivia(TokenKind.WHITESPACE_TOKEN, {
+              row: 0,
+              column: 5,
+              position: 5,
+            }, " "),
+          ],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
+          { row: 0, column: 6, position: 6 },
+          "(",
+          [],
+          [],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
+          { row: 0, column: 10, position: 10 },
+          ")",
+          [],
+          [
+            new Trivia(TokenKind.WHITESPACE_TOKEN, {
+              row: 0,
+              column: 11,
+              position: 11,
+            }, " "),
+          ],
+        ),
+      ),
+    );
   });
 });
