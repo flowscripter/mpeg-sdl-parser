@@ -9,16 +9,18 @@
 [![docs](https://img.shields.io/badge/docs-API-blue)](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
 [![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-parser)](https://github.com/flowscripter/mpeg-sdl-parser/blob/main/LICENSE)
 
-**NOTE: Under development**
+## TODO
 
-- implement control flow parsing: `switch`, `while`
-- provide separate CLI module:
-  - test library module exports
-  - implement pretty printer
-  - implement syntax highlighter
-- update this readme with:
-  - link to CLI
-- implement semantic checks
+- implement pretty printer
+- support robust parsing e.g. skipped token and missing token reporting
+- implement semantic checks e.g. referencing undefined identifiers
+- implement undefined behaviour checks e.g. accessing an uninitialised value
+- implement runtime correctness checks e.g. number limits
+- support versioned SDL grammars and extensions
+
+## CLI
+
+A CLI tool using this module is available at https://github.com/flowscripter/mpeg-sdl-tool
 
 ## Bun Module Usage
 
@@ -203,7 +205,7 @@ classDiagram
 
 Link to auto-generated API docs:
 
-[API Documentation](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
+[API Documentation](https://flowscripter.github.io/mpeg-sdl-parser/~/Parser.html)
 
 ### Debug Logging
 
