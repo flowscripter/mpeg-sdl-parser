@@ -38,6 +38,7 @@ export class ForStatement extends AbstractStatement {
     if (this.expression3) {
       yield this.expression3;
     }
+    yield this.compoundStatement;
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {

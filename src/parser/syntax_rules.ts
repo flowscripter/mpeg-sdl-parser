@@ -39,6 +39,8 @@ import type { SingleClassId } from "../abstract_syntax_tree/node/SingleClassId.t
 import type { SingleMapOutputValue } from "../abstract_syntax_tree/node/SingleMapOutputValue.ts";
 import type { StringDefinition } from "../abstract_syntax_tree/node/StringDefinition.ts";
 import type { StringLiteral } from "../abstract_syntax_tree/node/StringLiteral.ts";
+import type { SwitchCaseClause } from "../abstract_syntax_tree/node/SwitchCaseClause.ts";
+import type { SwitchDefaultClause } from "../abstract_syntax_tree/node/SwitchDefaultClause.ts";
 import type { SwitchStatement } from "../abstract_syntax_tree/node/SwitchStatement.ts";
 import type { WhileStatement } from "../abstract_syntax_tree/node/WhileStatement.ts";
 import type { TokenKind } from "../tokenizer/enum/token_kind.ts";
@@ -97,6 +99,8 @@ import { getSpecificationPattern } from "./syntax_patterns/specification_pattern
 import { getStatementPattern } from "./syntax_patterns/statement_pattern.ts";
 import { getStringDefinitionPattern } from "./syntax_patterns/string_definition_rule.ts";
 import { getStringLiteralPattern } from "./syntax_patterns/string_literal_rule.ts";
+import { getSwitchCaseClausePattern } from "./syntax_patterns/switch_case_clause_pattern.ts";
+import { getSwitchDefaultClausePattern } from "./syntax_patterns/switch_default_clause_pattern.ts";
 import { getSwitchStatementPattern } from "./syntax_patterns/switch_statement_pattern.ts";
 import { getUnaryExpressionPattern } from "./syntax_patterns/unary_expression_pattern.ts";
 import { getWhileStatementPattern } from "./syntax_patterns/while_statement_pattern.ts";
@@ -189,6 +193,11 @@ export const SPECIFICATION_RULE = rule<TokenKind, Specification>();
 export const STATEMENT_RULE = rule<TokenKind, AbstractStatement>();
 export const STRING_DEFINITION_RULE = rule<TokenKind, StringDefinition>();
 export const STRING_LITERAL_RULE = rule<TokenKind, StringLiteral>();
+export const SWITCH_CASE_CLAUSE_RULE = rule<TokenKind, SwitchCaseClause>();
+export const SWITCH_DEFAULT_CLAUSE_RULE = rule<
+  TokenKind,
+  SwitchDefaultClause
+>();
 export const SWITCH_STATEMENT_RULE = rule<TokenKind, SwitchStatement>();
 export const UNARY_EXPRESSION_RULE = rule<TokenKind, AbstractNode>();
 export const WHILE_STATEMENT_RULE = rule<TokenKind, WhileStatement>();
@@ -259,6 +268,8 @@ export function initRules() {
   STATEMENT_RULE.setPattern(getStatementPattern());
   STRING_DEFINITION_RULE.setPattern(getStringDefinitionPattern());
   STRING_LITERAL_RULE.setPattern(getStringLiteralPattern());
+  SWITCH_CASE_CLAUSE_RULE.setPattern(getSwitchCaseClausePattern());
+  SWITCH_DEFAULT_CLAUSE_RULE.setPattern(getSwitchDefaultClausePattern());
   SWITCH_STATEMENT_RULE.setPattern(getSwitchStatementPattern());
   UNARY_EXPRESSION_RULE.setPattern(getUnaryExpressionPattern());
   WHILE_STATEMENT_RULE.setPattern(getWhileStatementPattern());

@@ -1,25 +1,31 @@
 import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
 import type { AbstractNode } from "./AbstractNode.ts";
 import { AbstractStatement } from "./AbstractStatement.ts";
+import type { CompoundStatement } from "./CompoundStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
 export class WhileStatement extends AbstractStatement {
-  // TODO: implement
-  constructor() {
-    super(StatementKind.WHILE, {
-      position: 0,
-      row: 0,
-      column: 0,
-    });
+  constructor(
+    public readonly expression: AbstractExpression,
+    public readonly compoundStatement: CompoundStatement,
+    public readonly whileKeywordToken: SyntaxToken,
+    public readonly openParenthesisToken: SyntaxToken,
+    public readonly closeParenthesisToken: SyntaxToken,
+  ) {
+    super(StatementKind.WHILE, whileKeywordToken.location);
   }
 
-  // TODO: implement
-  override getChildNodeIterable(): IterableIterator<AbstractNode> {
-    throw new Error("Method not implemented.");
+  override *getChildNodeIterable(): IterableIterator<AbstractNode> {
+    yield this.expression;
+    yield this.compoundStatement;
   }
 
-  // TODO: implement
-  override getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    throw new Error("Method not implemented.");
+  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
+    yield this.whileKeywordToken;
+    yield this.openParenthesisToken;
+    yield* this.expression.getSyntaxTokenIterable();
+    yield this.closeParenthesisToken;
+    yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }
