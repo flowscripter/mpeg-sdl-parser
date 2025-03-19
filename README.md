@@ -20,7 +20,8 @@
 
 ## CLI
 
-A CLI tool using this module is available at https://github.com/flowscripter/mpeg-sdl-tool
+A CLI tool using this module is available at
+https://github.com/flowscripter/mpeg-sdl-tool
 
 ## Bun Module Usage
 
