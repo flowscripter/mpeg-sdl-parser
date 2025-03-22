@@ -11,7 +11,6 @@
 
 ## TODO
 
-- implement pretty printer
 - support robust parsing e.g. skipped token and missing token reporting
 - implement semantic checks e.g. referencing undefined identifiers
 - implement undefined behaviour checks e.g. accessing an uninitialised value
