@@ -26,6 +26,8 @@ export enum NodeKind {
   EXTENDS_MODIFIER,
   /** Identifier node */
   IDENTIFIER,
+  /** If clause node */
+  IF_CLAUSE,
   /** Length attribute node */
   LENGTH_ATTRIBUTE,
   /** Map entry node */
@@ -48,4 +50,8 @@ export enum NodeKind {
   STATEMENT,
   /** String literal node */
   STRING_LITERAL,
+  /** Switch case clause node */
+  SWITCH_CASE_CLAUSE,
+  /** Switch default clause node */
+  SWITCH_DEFAULT_CLAUSE,
 }

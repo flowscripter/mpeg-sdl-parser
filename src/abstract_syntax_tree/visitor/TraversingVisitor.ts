@@ -37,6 +37,7 @@ export class TraversingVisitor implements NodeVisitor {
       case NodeKind.EXPANDABLE_MODIFIER:
       case NodeKind.EXTENDS_MODIFIER:
       case NodeKind.IDENTIFIER:
+      case NodeKind.IF_CLAUSE:
       case NodeKind.LENGTH_ATTRIBUTE:
       case NodeKind.MAP_ENTRY:
       case NodeKind.MAP_ENTRY_LIST:
@@ -48,6 +49,8 @@ export class TraversingVisitor implements NodeVisitor {
       case NodeKind.SPECIFICATION:
       case NodeKind.STATEMENT:
       case NodeKind.STRING_LITERAL:
+      case NodeKind.SWITCH_CASE_CLAUSE:
+      case NodeKind.SWITCH_DEFAULT_CLAUSE:
         // composite node behavior
         if (node.isComposite) {
           const compositeNode = node as AbstractCompositeNode;

@@ -8,36 +8,18 @@ export class IfStatement extends AbstractStatement {
   constructor(
     public readonly clauses: IfClause[],
   ) {
-    super(StatementKind.IF, clauses[0].ifToken!.location);
+    super(StatementKind.IF, clauses[0].location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     for (const clause of this.clauses) {
-      if (clause.condition) {
-        yield clause.condition;
-      }
-      yield clause.statement;
+      yield clause;
     }
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     for (const clause of this.clauses) {
-      if (clause.ifToken) {
-        yield clause.ifToken;
-      }
-      if (clause.elseToken) {
-        yield clause.elseToken;
-      }
-      if (clause.openParenthesisToken) {
-        yield clause.openParenthesisToken;
-      }
-      if (clause.condition) {
-        yield* clause.condition.getSyntaxTokenIterable();
-      }
-      if (clause.closeParenthesisToken) {
-        yield clause.closeParenthesisToken;
-      }
-      yield* clause.statement.getSyntaxTokenIterable();
+      yield* clause.getSyntaxTokenIterable();
     }
   }
 }
