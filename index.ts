@@ -66,6 +66,8 @@ export * from "./src/abstract_syntax_tree/node/SingleMapOutputValue.ts";
 export * from "./src/abstract_syntax_tree/node/Specification.ts";
 export * from "./src/abstract_syntax_tree/node/StringDefinition.ts";
 export * from "./src/abstract_syntax_tree/node/StringLiteral.ts";
+export * from "./src/abstract_syntax_tree/node/SwitchCaseClause.ts";
+export * from "./src/abstract_syntax_tree/node/SwitchDefaultClause.ts";
 export * from "./src/abstract_syntax_tree/node/SwitchStatement.ts";
 export * from "./src/abstract_syntax_tree/node/UnaryExpression.ts";
 export * from "./src/abstract_syntax_tree/node/WhileStatement.ts";
