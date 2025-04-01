@@ -28,28 +28,17 @@ let maxLoggerNameLength = 0;
 const LOGGER_NAME_PADDINGS: Record<string, string> = {};
 
 function getDefaultLogger(): Logger {
-  if (debugEnabled) {
-    return {
-      trace: () => {},
-      debug: (message, ...optionalParams) => {
-        console.debug(message, ...optionalParams);
-      },
-      info: (message, ...optionalParams) => {
-        console.info(message, ...optionalParams);
-      },
-      warn: (message, ...optionalParams) => {
-        console.warn(message, ...optionalParams);
-      },
-      error: (message, ...optionalParams) => {
-        console.error(message, ...optionalParams);
-      },
-    };
-  }
   return {
     trace: () => {},
-    debug: () => {},
-    info: () => {},
-    warn: () => {},
+    debug: (message, ...optionalParams) => {
+      console.debug(message, ...optionalParams);
+    },
+    info: (message, ...optionalParams) => {
+      console.info(message, ...optionalParams);
+    },
+    warn: (message, ...optionalParams) => {
+      console.warn(message, ...optionalParams);
+    },
     error: (message, ...optionalParams) => {
       console.error(message, ...optionalParams);
     },
