@@ -13,7 +13,7 @@ abstract class ParserError extends Error {
     super(
       errorMessage +
         (location
-          ? ` => { row: ${location.row}, column: ${location.position}, position: ${location.position} }`
+          ? ` => { row: ${location.row}, column: ${location.column}, position: ${location.position} }`
           : "") +
         (token ? ` => ${token}` : ""),
     );
