@@ -67,10 +67,9 @@ export class Parser {
         );
       }
 
-      // note that the Parsec position has 1-based row and column values
       const location = {
-        row: tokenError.pos.rowBegin - 1,
-        column: tokenError.pos.columnBegin - 1,
+        row: tokenError.pos.rowBegin,
+        column: tokenError.pos.columnBegin,
         position: tokenError.pos.index,
       };
 

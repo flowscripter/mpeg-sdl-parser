@@ -18,7 +18,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_INTEGER_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "123",
             [],
             [],
@@ -38,7 +38,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_DECIMAL_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "123.1",
             [],
             [],
@@ -58,7 +58,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_FLOATING_POINT_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "123.1e123",
             [],
             [],
@@ -78,7 +78,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_BINARY_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "0b11",
             [],
             [],
@@ -98,7 +98,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_BINARY_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "0b0000.101",
             [],
             [],
@@ -118,7 +118,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_HEXADECIMAL_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "0x0F",
             [],
             [],
@@ -138,7 +138,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_HEXADECIMAL_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "0x0000.FF",
             [],
             [],
@@ -158,14 +158,14 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_HEXADECIMAL_TOKEN,
-            { row: 0, column: 1, position: 1 },
+            { row: 1, column: 2, position: 1 },
             "0x0000.FF",
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 },
                 " ",
@@ -175,8 +175,8 @@ describe("Number Literal Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 10,
+                  row: 1,
+                  column: 11,
                   position: 10,
                 },
                 " ",
@@ -198,7 +198,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_MULTIPLE_CHARACTER_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "'pasp'",
             [],
             [],
@@ -218,7 +218,7 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_MULTIPLE_CHARACTER_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "'pasp\\\\'",
             [],
             [],
@@ -238,15 +238,15 @@ describe("Number Literal Pattern Tests", () => {
         [
           new SyntaxToken(
             TokenKind.LITERAL_MULTIPLE_CHARACTER_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "'pa'",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 4,
+                  row: 1,
+                  column: 5,
                   position: 4,
                 },
                 " ",
@@ -255,7 +255,7 @@ describe("Number Literal Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.LITERAL_MULTIPLE_CHARACTER_TOKEN,
-            { row: 0, column: 5, position: 5 },
+            { row: 1, column: 6, position: 5 },
             "'sp'",
             [],
             [],

@@ -24,7 +24,6 @@ export class ParsecTokenWrapper implements ParsecToken<TokenKind> {
     public text: string,
     public leadingTrivia: Trivia[] = [],
     public trailingTrivia: Trivia[] = [],
-    // note that the Parsec token position has 1-based row and column values
     public pos: TokenPosition,
   ) {
   }
@@ -51,9 +50,8 @@ export class ParsecTokenWrapper implements ParsecToken<TokenKind> {
             (acc, t) => acc + t.text.length,
             0,
           ),
-        // note that the Tokenizer uses 0-based row and column values
-        this.pos.rowEnd - 1,
-        this.pos.columnEnd - 1,
+        this.pos.rowEnd,
+        this.pos.columnEnd,
       );
 
       // if no more tokens are found, set nextToken to null to indicate that there are no more tokens
@@ -72,9 +70,8 @@ export class ParsecTokenWrapper implements ParsecToken<TokenKind> {
         this.kind,
         {
           position: this.pos.index,
-          // note that the SyntaxToken location has 0-based row and column values
-          row: this.pos.rowBegin - 1,
-          column: this.pos.columnBegin - 1,
+          row: this.pos.rowBegin,
+          column: this.pos.columnBegin,
         },
         this.text,
         this.leadingTrivia,

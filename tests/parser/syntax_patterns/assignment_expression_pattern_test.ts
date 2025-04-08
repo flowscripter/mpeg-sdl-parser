@@ -23,8 +23,8 @@ describe("Assignment Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "i",
@@ -41,8 +41,8 @@ describe("Assignment Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "1",
@@ -59,8 +59,8 @@ describe("Assignment Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 4,
+                  row: 1,
+                  column: 5,
                   position: 4,
                 },
                 "2",
@@ -72,8 +72,8 @@ describe("Assignment Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_MULTIPLY_TOKEN,
             {
-              row: 0,
-              column: 3,
+              row: 1,
+              column: 4,
               position: 3,
             },
             "*",
@@ -84,8 +84,8 @@ describe("Assignment Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "=",
@@ -107,8 +107,8 @@ describe("Assignment Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -123,8 +123,8 @@ describe("Assignment Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "b",
@@ -135,8 +135,8 @@ describe("Assignment Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               ".",
@@ -154,8 +154,8 @@ describe("Assignment Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 4,
+                row: 1,
+                column: 5,
                 position: 4,
               },
               "c",
@@ -171,8 +171,8 @@ describe("Assignment Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 6,
+                    row: 1,
+                    column: 7,
                     position: 6,
                   },
                   "1",
@@ -184,8 +184,8 @@ describe("Assignment Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               "[",
@@ -195,8 +195,8 @@ describe("Assignment Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               "]",
@@ -211,8 +211,8 @@ describe("Assignment Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           "=",

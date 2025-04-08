@@ -24,8 +24,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "i",
@@ -39,8 +39,8 @@ describe("Postfix Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "++",
@@ -61,8 +61,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "a",
@@ -77,8 +77,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "b",
@@ -89,8 +89,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             ".",
@@ -115,8 +115,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -131,8 +131,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "b",
@@ -143,8 +143,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               ".",
@@ -162,8 +162,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 4,
+                row: 1,
+                column: 5,
                 position: 4,
               },
               "c",
@@ -174,8 +174,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
             {
-              row: 0,
-              column: 3,
+              row: 1,
+              column: 4,
               position: 3,
             },
             ".",
@@ -199,8 +199,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "a",
@@ -216,8 +216,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "1",
@@ -229,8 +229,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "[",
@@ -240,8 +240,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
             {
-              row: 0,
-              column: 3,
+              row: 1,
+              column: 4,
               position: 3,
             },
             "]",
@@ -267,8 +267,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -284,8 +284,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "1",
@@ -297,8 +297,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "[",
@@ -308,8 +308,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "]",
@@ -329,8 +329,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 5,
+                  row: 1,
+                  column: 6,
                   position: 5,
                 },
                 "2",
@@ -342,8 +342,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             "[",
@@ -353,8 +353,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             "]",
@@ -380,8 +380,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -396,8 +396,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "b",
@@ -408,8 +408,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               ".",
@@ -426,8 +426,8 @@ describe("Postfix Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           "++",
@@ -449,8 +449,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -466,8 +466,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "1",
@@ -479,8 +479,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "[",
@@ -490,8 +490,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "]",
@@ -509,8 +509,8 @@ describe("Postfix Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
           {
-            row: 0,
-            column: 4,
+            row: 1,
+            column: 5,
             position: 4,
           },
           "++",
@@ -532,8 +532,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "a",
@@ -549,8 +549,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "1",
@@ -562,8 +562,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "[",
@@ -573,8 +573,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "]",
@@ -593,8 +593,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               "b",
@@ -605,8 +605,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             ".",
@@ -633,8 +633,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
                   {
-                    row: 0,
-                    column: 0,
+                    row: 1,
+                    column: 1,
                     position: 0,
                   },
                   "a",
@@ -650,8 +650,8 @@ describe("Postfix Expression Pattern Tests", () => {
                     new SyntaxToken(
                       TokenKind.LITERAL_INTEGER_TOKEN,
                       {
-                        row: 0,
-                        column: 2,
+                        row: 1,
+                        column: 3,
                         position: 2,
                       },
                       "1",
@@ -663,8 +663,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
                   {
-                    row: 0,
-                    column: 1,
+                    row: 1,
+                    column: 2,
                     position: 1,
                   },
                   "[",
@@ -674,8 +674,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   "]",
@@ -695,8 +695,8 @@ describe("Postfix Expression Pattern Tests", () => {
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
                     {
-                      row: 0,
-                      column: 5,
+                      row: 1,
+                      column: 6,
                       position: 5,
                     },
                     "2",
@@ -708,8 +708,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
                 {
-                  row: 0,
-                  column: 4,
+                  row: 1,
+                  column: 5,
                   position: 4,
                 },
                 "[",
@@ -719,8 +719,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
                 {
-                  row: 0,
-                  column: 6,
+                  row: 1,
+                  column: 7,
                   position: 6,
                 },
                 "]",
@@ -739,8 +739,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 8,
+                  row: 1,
+                  column: 9,
                   position: 8,
                 },
                 "b",
@@ -751,8 +751,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               ".",
@@ -770,8 +770,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 10,
+                row: 1,
+                column: 11,
                 position: 10,
               },
               "c",
@@ -782,8 +782,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_CLASS_MEMBER_ACCESS_TOKEN,
             {
-              row: 0,
-              column: 9,
+              row: 1,
+              column: 10,
               position: 9,
             },
             ".",
@@ -808,8 +808,8 @@ describe("Postfix Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "i",
@@ -818,8 +818,8 @@ describe("Postfix Expression Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   " ",
@@ -830,8 +830,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "(",
@@ -840,8 +840,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 1,
+                  row: 1,
+                  column: 2,
                   position: 1,
                 },
                 " ",
@@ -851,8 +851,8 @@ describe("Postfix Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             ")",
@@ -861,8 +861,8 @@ describe("Postfix Expression Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 5,
+                  row: 1,
+                  column: 6,
                   position: 5,
                 },
                 " ",
@@ -876,8 +876,8 @@ describe("Postfix Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
           {
-            row: 0,
-            column: 6,
+            row: 1,
+            column: 7,
             position: 6,
           },
           "++",

@@ -19,8 +19,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello"',
@@ -43,8 +43,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello \\"world\\""',
@@ -67,8 +67,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello \\\\world\\\\"',
@@ -91,8 +91,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_UTF_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             'u"hello πό"',
@@ -115,8 +115,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_UTF_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             'u"hello \\u1234"',
@@ -139,8 +139,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_UTF_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             'u"hello \\U00001234"',
@@ -163,8 +163,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello\\n"',
@@ -188,8 +188,8 @@ describe("String Literal Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_STRING_BASIC_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               '"hello\\n"',
@@ -215,8 +215,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello"',
@@ -225,8 +225,8 @@ describe("String Literal Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 7,
+                  row: 1,
+                  column: 8,
                   position: 7,
                 },
                 " ",
@@ -236,8 +236,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             '" world"',
@@ -260,8 +260,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             '"hello"',
@@ -271,8 +271,8 @@ describe("String Literal Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.LITERAL_STRING_BASIC_TOKEN,
             {
-              row: 2,
-              column: 0,
+              row: 3,
+              column: 1,
               position: 9,
             },
             '" world"',
@@ -280,8 +280,8 @@ describe("String Literal Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 7,
+                  row: 1,
+                  column: 8,
                   position: 7,
                 },
                 "\n\n",

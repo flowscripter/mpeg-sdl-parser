@@ -17,8 +17,8 @@ describe("Lengthof Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 9,
+              row: 1,
+              column: 10,
               position: 9,
             },
             "i",
@@ -29,8 +29,8 @@ describe("Lengthof Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_LENGTHOF_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "lengthof",
@@ -40,8 +40,8 @@ describe("Lengthof Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 8,
+            row: 1,
+            column: 9,
             position: 8,
           },
           "(",
@@ -51,8 +51,8 @@ describe("Lengthof Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 10,
+            row: 1,
+            column: 11,
             position: 10,
           },
           ")",

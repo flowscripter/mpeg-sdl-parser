@@ -29,8 +29,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 11,
+              row: 1,
+              column: 12,
               position: 11,
             },
             "foo",
@@ -45,8 +45,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTF8STRING_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "utf8string",
@@ -55,8 +55,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 10,
+                row: 1,
+                column: 11,
                 position: 10,
               },
               " ",
@@ -67,8 +67,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 14,
+            row: 1,
+            column: 15,
             position: 14,
           },
           ";",
@@ -94,8 +94,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 18,
+              row: 1,
+              column: 19,
               position: 18,
             },
             "foo",
@@ -109,8 +109,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "const",
@@ -119,8 +119,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               " ",
@@ -130,8 +130,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTF16STRING_TOKEN,
           {
-            row: 0,
-            column: 6,
+            row: 1,
+            column: 7,
             position: 6,
           },
           "utf16string",
@@ -140,8 +140,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 17,
+                row: 1,
+                column: 18,
                 position: 17,
               },
               " ",
@@ -152,8 +152,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 21,
+            row: 1,
+            column: 22,
             position: 21,
           },
           ";",
@@ -179,8 +179,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             "aligned",
@@ -189,8 +189,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 13,
+                  row: 1,
+                  column: 14,
                   position: 13,
                 },
                 " ",
@@ -204,8 +204,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 24,
+              row: 1,
+              column: 25,
               position: 24,
             },
             "foo",
@@ -219,8 +219,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "const",
@@ -229,8 +229,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               " ",
@@ -240,8 +240,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTFSTRING_TOKEN,
           {
-            row: 0,
-            column: 14,
+            row: 1,
+            column: 15,
             position: 14,
           },
           "utfstring",
@@ -250,8 +250,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 23,
+                row: 1,
+                column: 24,
                 position: 23,
               },
               " ",
@@ -262,8 +262,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 27,
+            row: 1,
+            column: 28,
             position: 27,
           },
           ";",
@@ -292,8 +292,8 @@ describe("String Definition Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 9,
+                  row: 1,
+                  column: 10,
                   position: 9,
                 },
                 "16",
@@ -305,8 +305,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "aligned",
@@ -315,8 +315,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 7,
+                  row: 1,
+                  column: 8,
                   position: 7,
                 },
                 " ",
@@ -326,8 +326,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             "(",
@@ -337,8 +337,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 11,
+              row: 1,
+              column: 12,
               position: 11,
             },
             ")",
@@ -347,8 +347,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 12,
+                  row: 1,
+                  column: 13,
                   position: 12,
                 },
                 " ",
@@ -362,8 +362,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 23,
+              row: 1,
+              column: 24,
               position: 23,
             },
             "foo",
@@ -378,8 +378,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTFSTRING_TOKEN,
           {
-            row: 0,
-            column: 13,
+            row: 1,
+            column: 14,
             position: 13,
           },
           "utfstring",
@@ -388,8 +388,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 22,
+                row: 1,
+                column: 23,
                 position: 22,
               },
               " ",
@@ -400,8 +400,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 26,
+            row: 1,
+            column: 27,
             position: 26,
           },
           ";",
@@ -427,8 +427,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
             {
-              row: 0,
-              column: 15,
+              row: 1,
+              column: 16,
               position: 15,
             },
             "aligned",
@@ -437,8 +437,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 22,
+                  row: 1,
+                  column: 23,
                   position: 22,
                 },
                 " ",
@@ -452,8 +452,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 33,
+              row: 1,
+              column: 34,
               position: 33,
             },
             "foo",
@@ -465,8 +465,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_RESERVED_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "reserved",
@@ -475,8 +475,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               " ",
@@ -487,8 +487,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
           {
-            row: 0,
-            column: 9,
+            row: 1,
+            column: 10,
             position: 9,
           },
           "const",
@@ -497,8 +497,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 14,
+                row: 1,
+                column: 15,
                 position: 14,
               },
               " ",
@@ -508,8 +508,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTFSTRING_TOKEN,
           {
-            row: 0,
-            column: 23,
+            row: 1,
+            column: 24,
             position: 23,
           },
           "utfstring",
@@ -518,8 +518,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 32,
+                row: 1,
+                column: 33,
                 position: 32,
               },
               " ",
@@ -530,8 +530,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 36,
+            row: 1,
+            column: 37,
             position: 36,
           },
           ";",
@@ -557,8 +557,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
             {
-              row: 0,
-              column: 13,
+              row: 1,
+              column: 14,
               position: 13,
             },
             "aligned",
@@ -567,8 +567,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 20,
+                  row: 1,
+                  column: 21,
                   position: 20,
                 },
                 " ",
@@ -582,8 +582,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 31,
+              row: 1,
+              column: 32,
               position: 31,
             },
             "foo",
@@ -596,8 +596,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_LEGACY_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "legacy",
@@ -606,8 +606,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 6,
+                row: 1,
+                column: 7,
                 position: 6,
               },
               " ",
@@ -617,8 +617,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
           {
-            row: 0,
-            column: 7,
+            row: 1,
+            column: 8,
             position: 7,
           },
           "const",
@@ -627,8 +627,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 12,
+                row: 1,
+                column: 13,
                 position: 12,
               },
               " ",
@@ -638,8 +638,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTFSTRING_TOKEN,
           {
-            row: 0,
-            column: 21,
+            row: 1,
+            column: 22,
             position: 21,
           },
           "utfstring",
@@ -648,8 +648,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 30,
+                row: 1,
+                column: 31,
                 position: 30,
               },
               " ",
@@ -660,8 +660,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 34,
+            row: 1,
+            column: 35,
             position: 34,
           },
           ";",
@@ -688,8 +688,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 24,
+                row: 1,
+                column: 25,
                 position: 24,
               },
               "foo",
@@ -704,8 +704,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_UTFSTRING_TOKEN,
             {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             },
             "utfstring",
@@ -714,8 +714,8 @@ describe("String Definition Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 23,
+                  row: 1,
+                  column: 24,
                   position: 23,
                 },
                 " ",
@@ -726,8 +726,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
             {
-              row: 0,
-              column: 27,
+              row: 1,
+              column: 28,
               position: 27,
             },
             ";",
@@ -756,8 +756,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 10,
+              row: 1,
+              column: 11,
               position: 10,
             },
             "foo",
@@ -772,8 +772,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_STRING_UTF_TOKEN,
               {
-                row: 0,
-                column: 14,
+                row: 1,
+                column: 15,
                 position: 14,
               },
               'u"hello"',
@@ -788,8 +788,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTFSTRING_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "utfstring",
@@ -798,8 +798,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 9,
+                row: 1,
+                column: 10,
                 position: 9,
               },
               " ",
@@ -809,8 +809,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 13,
+            row: 1,
+            column: 14,
             position: 13,
           },
           "=",
@@ -820,8 +820,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 22,
+            row: 1,
+            column: 23,
             position: 22,
           },
           ";",
@@ -847,8 +847,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 12,
+              row: 1,
+              column: 13,
               position: 12,
             },
             "foo",
@@ -863,8 +863,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_STRING_UTF_TOKEN,
               {
-                row: 0,
-                column: 16,
+                row: 1,
+                column: 17,
                 position: 16,
               },
               'u"hello"',
@@ -879,8 +879,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTF16STRING_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "utf16string",
@@ -889,8 +889,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 11,
+                row: 1,
+                column: 12,
                 position: 11,
               },
               " ",
@@ -900,8 +900,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 15,
+            row: 1,
+            column: 16,
             position: 15,
           },
           "=",
@@ -911,8 +911,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 24,
+            row: 1,
+            column: 25,
             position: 24,
           },
           ";",
@@ -938,8 +938,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 9,
+              row: 1,
+              column: 10,
               position: 9,
             },
             "foo",
@@ -954,8 +954,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_STRING_UTF_TOKEN,
               {
-                row: 0,
-                column: 13,
+                row: 1,
+                column: 14,
                 position: 13,
               },
               'u"hello world"',
@@ -970,8 +970,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTF8LIST_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "utf8list",
@@ -980,8 +980,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               " ",
@@ -991,8 +991,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 12,
+            row: 1,
+            column: 13,
             position: 12,
           },
           "=",
@@ -1002,8 +1002,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 27,
+            row: 1,
+            column: 28,
             position: 27,
           },
           ";",
@@ -1029,8 +1029,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 13,
+              row: 1,
+              column: 14,
               position: 13,
             },
             "foo",
@@ -1045,8 +1045,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_STRING_BASIC_TOKEN,
               {
-                row: 0,
-                column: 17,
+                row: 1,
+                column: 18,
                 position: 17,
               },
               '"aGVsbG8K"',
@@ -1061,8 +1061,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_BASE64STRING_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "base64string",
@@ -1071,8 +1071,8 @@ describe("String Definition Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 12,
+                row: 1,
+                column: 13,
                 position: 12,
               },
               " ",
@@ -1082,8 +1082,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
           {
-            row: 0,
-            column: 16,
+            row: 1,
+            column: 17,
             position: 16,
           },
           "=",
@@ -1093,8 +1093,8 @@ describe("String Definition Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 27,
+            row: 1,
+            column: 28,
             position: 27,
           },
           ";",
@@ -1121,8 +1121,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "foo",
@@ -1137,8 +1137,8 @@ describe("String Definition Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_STRING_UTF_TOKEN,
                 {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 },
                 'u"aGVsbG8K"',
@@ -1153,8 +1153,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_BASE64STRING_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "base64string",
@@ -1164,8 +1164,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
             {
-              row: 0,
-              column: 17,
+              row: 1,
+              column: 18,
               position: 17,
             },
             "=",
@@ -1175,8 +1175,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             ";",
@@ -1206,8 +1206,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 11,
+                row: 1,
+                column: 12,
                 position: 11,
               },
               "foo",
@@ -1222,8 +1222,8 @@ describe("String Definition Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_STRING_BASIC_TOKEN,
                 {
-                  row: 0,
-                  column: 17,
+                  row: 1,
+                  column: 18,
                   position: 17,
                 },
                 '"hello"',
@@ -1238,8 +1238,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_UTF8STRING_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "utf8string",
@@ -1249,8 +1249,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
             {
-              row: 0,
-              column: 15,
+              row: 1,
+              column: 16,
               position: 15,
             },
             "=",
@@ -1260,8 +1260,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             ";",
@@ -1291,8 +1291,8 @@ describe("String Definition Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 11,
+                row: 1,
+                column: 12,
                 position: 11,
               },
               "foo",
@@ -1307,8 +1307,8 @@ describe("String Definition Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_STRING_BASIC_TOKEN,
                 {
-                  row: 0,
-                  column: 18,
+                  row: 1,
+                  column: 19,
                   position: 18,
                 },
                 '"hello"',
@@ -1323,8 +1323,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_UTF8STRING_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "utf8string",
@@ -1334,8 +1334,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
             {
-              row: 0,
-              column: 15,
+              row: 1,
+              column: 16,
               position: 15,
             },
             "=",
@@ -1345,8 +1345,8 @@ describe("String Definition Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             ";",

@@ -34,13 +34,13 @@ describe("Class Declararation Pattern Tests", () => {
           "A",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 6, position: 6 },
+            { row: 1, column: 7, position: 6 },
             "A",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 7, position: 7 },
+                { row: 1, column: 8, position: 7 },
                 " ",
               ),
             ],
@@ -53,27 +53,135 @@ describe("Class Declararation Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.KEYWORD_CLASS_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "class",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 5, position: 5 },
+              { row: 1, column: 6, position: 5 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-          { row: 0, column: 8, position: 8 },
+          { row: 1, column: 9, position: 8 },
           "{",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-          { row: 0, column: 9, position: 9 },
+          { row: 1, column: 10, position: 9 },
+          "}",
+          [],
+          [],
+        ),
+      ),
+    );
+  });
+
+  test("Test class declaration pattern - single parameter with single id", () => {
+    testSyntaxPattern(
+      CLASS_DECLARATION_RULE,
+      "class A(int a) {}",
+      new ClassDeclaration(
+        undefined,
+        undefined,
+        false,
+        new Identifier(
+          "A",
+          new SyntaxToken(
+            TokenKind.IDENTIFIER_TOKEN,
+            { row: 1, column: 7, position: 6 },
+            "A",
+            [],
+            [],
+          ),
+        ),
+        new ParameterList(
+          [
+            new Parameter(
+              undefined,
+              new ElementaryType(
+                ElementaryTypeKind.INTEGER,
+                undefined,
+                new SyntaxToken(
+                  TokenKind.KEYWORD_INT_TOKEN,
+                  { row: 1, column: 9, position: 8 },
+                  "int",
+                  [],
+                  [
+                    new Trivia(
+                      TokenKind.WHITESPACE_TOKEN,
+                      { row: 1, column: 12, position: 11 },
+                      " ",
+                    ),
+                  ],
+                ),
+              ),
+              new Identifier(
+                "a",
+                new SyntaxToken(
+                  TokenKind.IDENTIFIER_TOKEN,
+                  { row: 1, column: 13, position: 12 },
+                  "a",
+                  [],
+                  [],
+                ),
+              ),
+            ),
+          ],
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
+            { row: 1, column: 8, position: 7 },
+            "(",
+            [],
+            [],
+          ),
+          undefined,
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
+            { row: 1, column: 14, position: 13 },
+            ")",
+            [],
+            [
+              new Trivia(
+                TokenKind.WHITESPACE_TOKEN,
+                { row: 1, column: 15, position: 14 },
+                " ",
+              ),
+            ],
+          ),
+        ),
+        undefined,
+        undefined,
+        [],
+        undefined,
+        new SyntaxToken(
+          TokenKind.KEYWORD_CLASS_TOKEN,
+          { row: 1, column: 1, position: 0 },
+          "class",
+          [],
+          [
+            new Trivia(
+              TokenKind.WHITESPACE_TOKEN,
+              { row: 1, column: 6, position: 5 },
+              " ",
+            ),
+          ],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
+          { row: 1, column: 16, position: 15 },
+          "{",
+          [],
+          [],
+        ),
+        new SyntaxToken(
+          TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
+          { row: 1, column: 17, position: 16 },
           "}",
           [],
           [],
@@ -96,7 +204,7 @@ describe("Class Declararation Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 8, position: 8 },
+                { row: 1, column: 9, position: 8 },
                 "8",
                 [],
                 [],
@@ -105,27 +213,27 @@ describe("Class Declararation Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "aligned",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 7, position: 7 },
+            { row: 1, column: 8, position: 7 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 9, position: 9 },
+            { row: 1, column: 10, position: 9 },
             ")",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 10, position: 10 },
+                { row: 1, column: 11, position: 10 },
                 " ",
               ),
             ],
@@ -138,7 +246,7 @@ describe("Class Declararation Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 22, position: 22 },
+                { row: 1, column: 23, position: 22 },
                 "20",
                 [],
                 [],
@@ -147,27 +255,27 @@ describe("Class Declararation Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_EXPANDABLE_TOKEN,
-            { row: 0, column: 11, position: 11 },
+            { row: 1, column: 12, position: 11 },
             "expandable",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 21, position: 21 },
+            { row: 1, column: 22, position: 21 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 24, position: 24 },
+            { row: 1, column: 25, position: 24 },
             ")",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 25, position: 25 },
+                { row: 1, column: 26, position: 25 },
                 " ",
               ),
             ],
@@ -178,13 +286,13 @@ describe("Class Declararation Pattern Tests", () => {
           "A",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 41, position: 41 },
+            { row: 1, column: 42, position: 41 },
             "A",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 42, position: 42 },
+                { row: 1, column: 43, position: 42 },
                 " ",
               ),
             ],
@@ -199,13 +307,13 @@ describe("Class Declararation Pattern Tests", () => {
                 undefined,
                 new SyntaxToken(
                   TokenKind.KEYWORD_INT_TOKEN,
-                  { row: 0, column: 44, position: 44 },
+                  { row: 1, column: 45, position: 44 },
                   "int",
                   [],
                   [
                     new Trivia(
                       TokenKind.WHITESPACE_TOKEN,
-                      { row: 0, column: 47, position: 47 },
+                      { row: 1, column: 48, position: 47 },
                       " ",
                     ),
                   ],
@@ -215,7 +323,7 @@ describe("Class Declararation Pattern Tests", () => {
                 "a",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 48, position: 48 },
+                  { row: 1, column: 49, position: 48 },
                   "a",
                   [],
                   [],
@@ -227,13 +335,13 @@ describe("Class Declararation Pattern Tests", () => {
                 "B",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 51, position: 51 },
+                  { row: 1, column: 52, position: 51 },
                   "B",
                   [],
                   [
                     new Trivia(
                       TokenKind.WHITESPACE_TOKEN,
-                      { row: 0, column: 52, position: 52 },
+                      { row: 1, column: 53, position: 52 },
                       " ",
                     ),
                   ],
@@ -244,7 +352,7 @@ describe("Class Declararation Pattern Tests", () => {
                 "b",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 53, position: 53 },
+                  { row: 1, column: 54, position: 53 },
                   "b",
                   [],
                   [],
@@ -254,7 +362,7 @@ describe("Class Declararation Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 43, position: 43 },
+            { row: 1, column: 44, position: 43 },
             "(",
             [],
             [],
@@ -262,13 +370,13 @@ describe("Class Declararation Pattern Tests", () => {
           [
             new SyntaxToken(
               TokenKind.PUNCTUATOR_COMMA_TOKEN,
-              { row: 0, column: 49, position: 49 },
+              { row: 1, column: 50, position: 49 },
               ",",
               [],
               [
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
-                  { row: 0, column: 50, position: 50 },
+                  { row: 1, column: 51, position: 50 },
                   " ",
                 ),
               ],
@@ -276,13 +384,13 @@ describe("Class Declararation Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 54, position: 54 },
+            { row: 1, column: 55, position: 54 },
             ")",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 55, position: 55 },
+                { row: 1, column: 56, position: 55 },
                 " ",
               ),
             ],
@@ -293,7 +401,7 @@ describe("Class Declararation Pattern Tests", () => {
             "C",
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
-              { row: 0, column: 64, position: 64 },
+              { row: 1, column: 65, position: 64 },
               "C",
               [],
               [],
@@ -307,7 +415,7 @@ describe("Class Declararation Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
-                    { row: 0, column: 66, position: 66 },
+                    { row: 1, column: 67, position: 66 },
                     "1",
                     [],
                     [],
@@ -318,7 +426,7 @@ describe("Class Declararation Pattern Tests", () => {
                 "d",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 69, position: 69 },
+                  { row: 1, column: 70, position: 69 },
                   "d",
                   [],
                   [],
@@ -327,7 +435,7 @@ describe("Class Declararation Pattern Tests", () => {
             ],
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-              { row: 0, column: 65, position: 65 },
+              { row: 1, column: 66, position: 65 },
               "(",
               [],
               [],
@@ -335,13 +443,13 @@ describe("Class Declararation Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 67, position: 67 },
+                { row: 1, column: 68, position: 67 },
                 ",",
                 [],
                 [
                   new Trivia(
                     TokenKind.WHITESPACE_TOKEN,
-                    { row: 0, column: 68, position: 68 },
+                    { row: 1, column: 69, position: 68 },
                     " ",
                   ),
                 ],
@@ -349,13 +457,13 @@ describe("Class Declararation Pattern Tests", () => {
             ],
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-              { row: 0, column: 70, position: 70 },
+              { row: 1, column: 71, position: 70 },
               ")",
               [],
               [
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
-                  { row: 0, column: 71, position: 71 },
+                  { row: 1, column: 72, position: 71 },
                   " ",
                 ),
               ],
@@ -363,13 +471,13 @@ describe("Class Declararation Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_EXTENDS_TOKEN,
-            { row: 0, column: 56, position: 56 },
+            { row: 1, column: 57, position: 56 },
             "extends",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 63, position: 63 },
+                { row: 1, column: 64, position: 63 },
                 " ",
               ),
             ],
@@ -382,7 +490,7 @@ describe("Class Declararation Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 78, position: 78 },
+                { row: 1, column: 79, position: 78 },
                 "3",
                 [],
                 [],
@@ -393,7 +501,7 @@ describe("Class Declararation Pattern Tests", () => {
             "id",
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
-              { row: 0, column: 81, position: 81 },
+              { row: 1, column: 82, position: 81 },
               "id",
               [],
               [],
@@ -409,7 +517,7 @@ describe("Class Declararation Pattern Tests", () => {
                     [
                       new SyntaxToken(
                         TokenKind.LITERAL_INTEGER_TOKEN,
-                        { row: 0, column: 84, position: 84 },
+                        { row: 1, column: 85, position: 84 },
                         "1",
                         [],
                         [],
@@ -424,7 +532,7 @@ describe("Class Declararation Pattern Tests", () => {
                     [
                       new SyntaxToken(
                         TokenKind.LITERAL_INTEGER_TOKEN,
-                        { row: 0, column: 87, position: 87 },
+                        { row: 1, column: 88, position: 87 },
                         "2",
                         [],
                         [],
@@ -434,7 +542,7 @@ describe("Class Declararation Pattern Tests", () => {
                 ),
                 new SyntaxToken(
                   TokenKind.OPERATOR_RANGE_TOKEN,
-                  { row: 0, column: 85, position: 85 },
+                  { row: 1, column: 86, position: 85 },
                   "..",
                   [],
                   [],
@@ -447,13 +555,13 @@ describe("Class Declararation Pattern Tests", () => {
                   [
                     new SyntaxToken(
                       TokenKind.LITERAL_INTEGER_TOKEN,
-                      { row: 0, column: 89, position: 89 },
+                      { row: 1, column: 90, position: 89 },
                       "5",
                       [],
                       [
                         new Trivia(
                           TokenKind.WHITESPACE_TOKEN,
-                          { row: 0, column: 90, position: 90 },
+                          { row: 1, column: 91, position: 90 },
                           " ",
                         ),
                       ],
@@ -465,7 +573,7 @@ describe("Class Declararation Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 88, position: 88 },
+                { row: 1, column: 89, position: 88 },
                 ",",
                 [],
                 [],
@@ -474,47 +582,47 @@ describe("Class Declararation Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_COLON_TOKEN,
-            { row: 0, column: 72, position: 72 },
+            { row: 1, column: 73, position: 72 },
             ":",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 73, position: 73 },
+                { row: 1, column: 74, position: 73 },
                 " ",
               ),
             ],
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_BIT_TOKEN,
-            { row: 0, column: 74, position: 74 },
+            { row: 1, column: 75, position: 74 },
             "bit",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 77, position: 77 },
+            { row: 1, column: 78, position: 77 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 79, position: 79 },
+            { row: 1, column: 80, position: 79 },
             ")",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 80, position: 80 },
+                { row: 1, column: 81, position: 80 },
                 " ",
               ),
             ],
           ),
           new SyntaxToken(
             TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
-            { row: 0, column: 83, position: 83 },
+            { row: 1, column: 84, position: 83 },
             "=",
             [],
             [],
@@ -523,40 +631,40 @@ describe("Class Declararation Pattern Tests", () => {
         [],
         new SyntaxToken(
           TokenKind.KEYWORD_ABSTRACT_TOKEN,
-          { row: 0, column: 26, position: 26 },
+          { row: 1, column: 27, position: 26 },
           "abstract",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 34, position: 34 },
+              { row: 1, column: 35, position: 34 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_CLASS_TOKEN,
-          { row: 0, column: 35, position: 35 },
+          { row: 1, column: 36, position: 35 },
           "class",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 40, position: 40 },
+              { row: 1, column: 41, position: 40 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-          { row: 0, column: 91, position: 91 },
+          { row: 1, column: 92, position: 91 },
           "{",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-          { row: 0, column: 92, position: 92 },
+          { row: 1, column: 93, position: 92 },
           "}",
           [],
           [],

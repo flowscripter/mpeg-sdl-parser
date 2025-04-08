@@ -29,7 +29,7 @@ describe("If Statement Pattern Tests", () => {
                 "i",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 3, position: 3 },
+                  { row: 1, column: 4, position: 3 },
                   "i",
                   [],
                   [],
@@ -42,7 +42,7 @@ describe("If Statement Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
-                    { row: 0, column: 6, position: 6 },
+                    { row: 1, column: 7, position: 6 },
                     "1",
                     [],
                     [],
@@ -51,7 +51,7 @@ describe("If Statement Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.OPERATOR_EQUAL_TOKEN,
-                { row: 0, column: 4, position: 4 },
+                { row: 1, column: 5, position: 4 },
                 "==",
                 [],
                 [],
@@ -65,7 +65,7 @@ describe("If Statement Pattern Tests", () => {
                       "i",
                       new SyntaxToken(
                         TokenKind.IDENTIFIER_TOKEN,
-                        { row: 0, column: 9, position: 9 },
+                        { row: 1, column: 10, position: 9 },
                         "i",
                         [],
                         [],
@@ -76,7 +76,7 @@ describe("If Statement Pattern Tests", () => {
                     PostfixOperatorKind.POSTFIX_INCREMENT,
                     new SyntaxToken(
                       TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-                      { row: 0, column: 10, position: 10 },
+                      { row: 1, column: 11, position: 10 },
                       "++",
                       [],
                       [],
@@ -84,7 +84,7 @@ describe("If Statement Pattern Tests", () => {
                   ),
                   new SyntaxToken(
                     TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-                    { row: 0, column: 12, position: 12 },
+                    { row: 1, column: 13, position: 12 },
                     ";",
                     [],
                     [],
@@ -93,14 +93,14 @@ describe("If Statement Pattern Tests", () => {
               ],
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                { row: 0, column: 8, position: 8 },
+                { row: 1, column: 9, position: 8 },
                 "{",
                 [],
                 [],
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                { row: 0, column: 13, position: 13 },
+                { row: 1, column: 14, position: 13 },
                 "}",
                 [],
                 [],
@@ -108,7 +108,7 @@ describe("If Statement Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.KEYWORD_IF_TOKEN,
-              { row: 0, column: 0, position: 0 },
+              { row: 1, column: 1, position: 0 },
               "if",
               [],
               [],
@@ -116,14 +116,14 @@ describe("If Statement Pattern Tests", () => {
             undefined,
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-              { row: 0, column: 2, position: 2 },
+              { row: 1, column: 3, position: 2 },
               "(",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-              { row: 0, column: 7, position: 7 },
+              { row: 1, column: 8, position: 7 },
               ")",
               [],
               [],
@@ -135,7 +135,7 @@ describe("If Statement Pattern Tests", () => {
                 "i",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 22, position: 22 },
+                  { row: 1, column: 23, position: 22 },
                   "i",
                   [],
                   [],
@@ -148,7 +148,7 @@ describe("If Statement Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
-                    { row: 0, column: 25, position: 25 },
+                    { row: 1, column: 26, position: 25 },
                     "2",
                     [],
                     [],
@@ -157,7 +157,7 @@ describe("If Statement Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.OPERATOR_EQUAL_TOKEN,
-                { row: 0, column: 23, position: 23 },
+                { row: 1, column: 24, position: 23 },
                 "==",
                 [],
                 [],
@@ -171,7 +171,7 @@ describe("If Statement Pattern Tests", () => {
                       "i",
                       new SyntaxToken(
                         TokenKind.IDENTIFIER_TOKEN,
-                        { row: 0, column: 28, position: 28 },
+                        { row: 1, column: 29, position: 28 },
                         "i",
                         [],
                         [],
@@ -182,7 +182,7 @@ describe("If Statement Pattern Tests", () => {
                     PostfixOperatorKind.POSTFIX_DECREMENT,
                     new SyntaxToken(
                       TokenKind.OPERATOR_POSTFIX_DECREMENT_TOKEN,
-                      { row: 0, column: 29, position: 29 },
+                      { row: 1, column: 30, position: 29 },
                       "--",
                       [],
                       [],
@@ -190,7 +190,7 @@ describe("If Statement Pattern Tests", () => {
                   ),
                   new SyntaxToken(
                     TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-                    { row: 0, column: 31, position: 31 },
+                    { row: 1, column: 32, position: 31 },
                     ";",
                     [],
                     [],
@@ -199,14 +199,14 @@ describe("If Statement Pattern Tests", () => {
               ],
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                { row: 0, column: 27, position: 27 },
+                { row: 1, column: 28, position: 27 },
                 "{",
                 [],
                 [],
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                { row: 0, column: 32, position: 32 },
+                { row: 1, column: 33, position: 32 },
                 "}",
                 [],
                 [],
@@ -214,34 +214,34 @@ describe("If Statement Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.KEYWORD_IF_TOKEN,
-              { row: 0, column: 19, position: 19 },
+              { row: 1, column: 20, position: 19 },
               "if",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.KEYWORD_ELSE_TOKEN,
-              { row: 0, column: 14, position: 14 },
+              { row: 1, column: 15, position: 14 },
               "else",
               [],
               [
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
-                  { row: 0, column: 18, position: 18 },
+                  { row: 1, column: 19, position: 18 },
                   " ",
                 ),
               ],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-              { row: 0, column: 21, position: 21 },
+              { row: 1, column: 22, position: 21 },
               "(",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-              { row: 0, column: 26, position: 26 },
+              { row: 1, column: 27, position: 26 },
               ")",
               [],
               [],
@@ -257,7 +257,7 @@ describe("If Statement Pattern Tests", () => {
                       "j",
                       new SyntaxToken(
                         TokenKind.IDENTIFIER_TOKEN,
-                        { row: 0, column: 38, position: 38 },
+                        { row: 1, column: 39, position: 38 },
                         "j",
                         [],
                         [],
@@ -268,7 +268,7 @@ describe("If Statement Pattern Tests", () => {
                     PostfixOperatorKind.POSTFIX_INCREMENT,
                     new SyntaxToken(
                       TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-                      { row: 0, column: 39, position: 39 },
+                      { row: 1, column: 40, position: 39 },
                       "++",
                       [],
                       [],
@@ -276,7 +276,7 @@ describe("If Statement Pattern Tests", () => {
                   ),
                   new SyntaxToken(
                     TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-                    { row: 0, column: 41, position: 41 },
+                    { row: 1, column: 42, position: 41 },
                     ";",
                     [],
                     [],
@@ -285,14 +285,14 @@ describe("If Statement Pattern Tests", () => {
               ],
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                { row: 0, column: 37, position: 37 },
+                { row: 1, column: 38, position: 37 },
                 "{",
                 [],
                 [],
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                { row: 0, column: 42, position: 42 },
+                { row: 1, column: 43, position: 42 },
                 "}",
                 [],
                 [],
@@ -301,7 +301,7 @@ describe("If Statement Pattern Tests", () => {
             undefined,
             new SyntaxToken(
               TokenKind.KEYWORD_ELSE_TOKEN,
-              { row: 0, column: 33, position: 33 },
+              { row: 1, column: 34, position: 33 },
               "else",
               [],
               [],
@@ -326,7 +326,7 @@ describe("If Statement Pattern Tests", () => {
                 "i",
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
-                  { row: 0, column: 3, position: 3 },
+                  { row: 1, column: 4, position: 3 },
                   "i",
                   [],
                   [],
@@ -339,7 +339,7 @@ describe("If Statement Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
-                    { row: 0, column: 6, position: 6 },
+                    { row: 1, column: 7, position: 6 },
                     "1",
                     [],
                     [],
@@ -348,7 +348,7 @@ describe("If Statement Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.OPERATOR_EQUAL_TOKEN,
-                { row: 0, column: 4, position: 4 },
+                { row: 1, column: 5, position: 4 },
                 "==",
                 [],
                 [],
@@ -360,7 +360,7 @@ describe("If Statement Pattern Tests", () => {
                   "i",
                   new SyntaxToken(
                     TokenKind.IDENTIFIER_TOKEN,
-                    { row: 0, column: 8, position: 8 },
+                    { row: 1, column: 9, position: 8 },
                     "i",
                     [],
                     [],
@@ -371,7 +371,7 @@ describe("If Statement Pattern Tests", () => {
                 PostfixOperatorKind.POSTFIX_INCREMENT,
                 new SyntaxToken(
                   TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-                  { row: 0, column: 9, position: 9 },
+                  { row: 1, column: 10, position: 9 },
                   "++",
                   [],
                   [],
@@ -379,7 +379,7 @@ describe("If Statement Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-                { row: 0, column: 11, position: 11 },
+                { row: 1, column: 12, position: 11 },
                 ";",
                 [],
                 [],
@@ -387,7 +387,7 @@ describe("If Statement Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.KEYWORD_IF_TOKEN,
-              { row: 0, column: 0, position: 0 },
+              { row: 1, column: 1, position: 0 },
               "if",
               [],
               [],
@@ -395,14 +395,14 @@ describe("If Statement Pattern Tests", () => {
             undefined,
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-              { row: 0, column: 2, position: 2 },
+              { row: 1, column: 3, position: 2 },
               "(",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-              { row: 0, column: 7, position: 7 },
+              { row: 1, column: 8, position: 7 },
               ")",
               [],
               [],
@@ -416,7 +416,7 @@ describe("If Statement Pattern Tests", () => {
                   "j",
                   new SyntaxToken(
                     TokenKind.IDENTIFIER_TOKEN,
-                    { row: 0, column: 17, position: 17 },
+                    { row: 1, column: 18, position: 17 },
                     "j",
                     [],
                     [],
@@ -427,7 +427,7 @@ describe("If Statement Pattern Tests", () => {
                 PostfixOperatorKind.POSTFIX_INCREMENT,
                 new SyntaxToken(
                   TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
-                  { row: 0, column: 18, position: 18 },
+                  { row: 1, column: 19, position: 18 },
                   "++",
                   [],
                   [],
@@ -435,7 +435,7 @@ describe("If Statement Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-                { row: 0, column: 20, position: 20 },
+                { row: 1, column: 21, position: 20 },
                 ";",
                 [],
                 [],
@@ -444,13 +444,13 @@ describe("If Statement Pattern Tests", () => {
             undefined,
             new SyntaxToken(
               TokenKind.KEYWORD_ELSE_TOKEN,
-              { row: 0, column: 12, position: 12 },
+              { row: 1, column: 13, position: 12 },
               "else",
               [],
               [
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
-                  { row: 0, column: 16, position: 16 },
+                  { row: 1, column: 17, position: 16 },
                   " ",
                 ),
               ],

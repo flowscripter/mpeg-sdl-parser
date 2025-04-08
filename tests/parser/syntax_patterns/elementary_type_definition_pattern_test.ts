@@ -28,7 +28,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 0, position: 0 },
+            { row: 1, column: 1, position: 0 },
             "int",
             [],
             [],
@@ -41,7 +41,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 4, position: 4 },
+                { row: 1, column: 5, position: 4 },
                 "3",
                 [],
                 [],
@@ -50,20 +50,20 @@ describe("Elementary Type Definition Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 3, position: 3 },
+            { row: 1, column: 4, position: 3 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 5, position: 5 },
+            { row: 1, column: 6, position: 5 },
             ")",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 6,
+                row: 1,
+                column: 7,
                 position: 6,
               }, " "),
             ],
@@ -74,7 +74,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 7, position: 7 },
+            { row: 1, column: 8, position: 7 },
             "a",
             [],
             [],
@@ -90,7 +90,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 8, position: 8 },
+          { row: 1, column: 9, position: 8 },
           ";",
           [],
           [],
@@ -116,7 +116,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 21, position: 21 },
+                { row: 1, column: 22, position: 21 },
                 "8",
                 [],
                 [],
@@ -125,27 +125,27 @@ describe("Elementary Type Definition Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
-            { row: 0, column: 13, position: 13 },
+            { row: 1, column: 14, position: 13 },
             "aligned",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 20, position: 20 },
+            { row: 1, column: 21, position: 20 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 22, position: 22 },
+            { row: 1, column: 23, position: 22 },
             ")",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 23,
+                row: 1,
+                column: 24,
                 position: 23,
               }, " "),
             ],
@@ -155,20 +155,20 @@ describe("Elementary Type Definition Pattern Tests", () => {
           ElementaryTypeKind.UNSIGNED_INTEGER,
           new SyntaxToken(
             TokenKind.KEYWORD_UNSIGNED_TOKEN,
-            { row: 0, column: 24, position: 24 },
+            { row: 1, column: 25, position: 24 },
             "unsigned",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 32,
+                row: 1,
+                column: 33,
                 position: 32,
               }, " "),
             ],
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 33, position: 33 },
+            { row: 1, column: 34, position: 33 },
             "int",
             [],
             [],
@@ -181,7 +181,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 37, position: 37 },
+                { row: 1, column: 38, position: 37 },
                 "7",
                 [],
                 [],
@@ -190,14 +190,14 @@ describe("Elementary Type Definition Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-            { row: 0, column: 36, position: 36 },
+            { row: 1, column: 37, position: 36 },
             "(",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-            { row: 0, column: 38, position: 38 },
+            { row: 1, column: 39, position: 38 },
             ")",
             [],
             [],
@@ -208,7 +208,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 41, position: 41 },
+            { row: 1, column: 42, position: 41 },
             "a",
             [],
             [],
@@ -217,7 +217,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
         new NumberLiteral(NumberLiteralKind.INTEGER, 3, [
           new SyntaxToken(
             TokenKind.LITERAL_INTEGER_TOKEN,
-            { row: 0, column: 43, position: 43 },
+            { row: 1, column: 44, position: 43 },
             "3",
             [],
             [],
@@ -227,7 +227,7 @@ describe("Elementary Type Definition Pattern Tests", () => {
           "i",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 46, position: 46 },
+            { row: 1, column: 47, position: 46 },
             "i",
             [],
             [],
@@ -236,42 +236,42 @@ describe("Elementary Type Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.KEYWORD_LEGACY_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "legacy",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
-          { row: 0, column: 7, position: 7 },
+          { row: 1, column: 8, position: 7 },
           "const",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 12,
+              row: 1,
+              column: 13,
               position: 12,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
-          { row: 0, column: 39, position: 39 },
+          { row: 1, column: 40, position: 39 },
           "*",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                column: 40,
+                column: 41,
                 position: 40,
-                row: 0,
+                row: 1,
               },
               " ",
             ),
@@ -279,21 +279,21 @@ describe("Elementary Type Definition Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
-          { row: 0, column: 42, position: 42 },
+          { row: 1, column: 43, position: 42 },
           "=",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.OPERATOR_RANGE_TOKEN,
-          { row: 0, column: 44, position: 44 },
+          { row: 1, column: 45, position: 44 },
           "..",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 47, position: 47 },
+          { row: 1, column: 48, position: 47 },
           ";",
           [],
           [],

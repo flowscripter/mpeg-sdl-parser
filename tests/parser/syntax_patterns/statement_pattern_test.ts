@@ -28,8 +28,8 @@ describe("Statement Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 11,
+              row: 1,
+              column: 12,
               position: 11,
             },
             "foo",
@@ -44,8 +44,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_UTF8STRING_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "utf8string",
@@ -54,8 +54,8 @@ describe("Statement Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 10,
+                row: 1,
+                column: 11,
                 position: 10,
               },
               " ",
@@ -66,8 +66,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 14,
+            row: 1,
+            column: 15,
             position: 14,
           },
           ";",
@@ -89,8 +89,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -104,8 +104,8 @@ describe("Statement Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "++",
@@ -116,8 +116,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           ";",
@@ -145,8 +145,8 @@ describe("Statement Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 12,
+                  row: 1,
+                  column: 13,
                   position: 12,
                 },
                 "foo",
@@ -161,8 +161,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_UTF8STRING_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "utf8string",
@@ -171,8 +171,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 11,
+                    row: 1,
+                    column: 12,
                     position: 11,
                   },
                   " ",
@@ -183,8 +183,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
               {
-                row: 0,
-                column: 15,
+                row: 1,
+                column: 16,
                 position: 15,
               },
               ";",
@@ -203,8 +203,8 @@ describe("Statement Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 27,
+                  row: 1,
+                  column: 28,
                   position: 27,
                 },
                 "bar",
@@ -219,8 +219,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_UTF8STRING_TOKEN,
               {
-                row: 0,
-                column: 16,
+                row: 1,
+                column: 17,
                 position: 16,
               },
               "utf8string",
@@ -229,8 +229,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 26,
+                    row: 1,
+                    column: 27,
                     position: 26,
                   },
                   " ",
@@ -241,8 +241,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
               {
-                row: 0,
-                column: 30,
+                row: 1,
+                column: 31,
                 position: 30,
               },
               ";",
@@ -254,8 +254,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "{",
@@ -265,8 +265,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
           {
-            row: 0,
-            column: 31,
+            row: 1,
+            column: 32,
             position: 31,
           },
           "}",
@@ -294,8 +294,8 @@ describe("Statement Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 12,
+                  row: 1,
+                  column: 13,
                   position: 12,
                 },
                 "foo",
@@ -310,8 +310,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_UTF8STRING_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "utf8string",
@@ -320,8 +320,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 11,
+                    row: 1,
+                    column: 12,
                     position: 11,
                   },
                   " ",
@@ -332,8 +332,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
               {
-                row: 0,
-                column: 15,
+                row: 1,
+                column: 16,
                 position: 15,
               },
               ";",
@@ -354,8 +354,8 @@ describe("Statement Pattern Tests", () => {
                   new SyntaxToken(
                     TokenKind.IDENTIFIER_TOKEN,
                     {
-                      row: 0,
-                      column: 29,
+                      row: 1,
+                      column: 30,
                       position: 29,
                     },
                     "bar1",
@@ -370,8 +370,8 @@ describe("Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.KEYWORD_UTF8STRING_TOKEN,
                   {
-                    row: 0,
-                    column: 18,
+                    row: 1,
+                    column: 19,
                     position: 18,
                   },
                   "utf8string",
@@ -380,8 +380,8 @@ describe("Statement Pattern Tests", () => {
                     new Trivia(
                       TokenKind.WHITESPACE_TOKEN,
                       {
-                        row: 0,
-                        column: 28,
+                        row: 1,
+                        column: 29,
                         position: 28,
                       },
                       " ",
@@ -392,8 +392,8 @@ describe("Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
                   {
-                    row: 0,
-                    column: 33,
+                    row: 1,
+                    column: 34,
                     position: 33,
                   },
                   ";",
@@ -412,8 +412,8 @@ describe("Statement Pattern Tests", () => {
                   new SyntaxToken(
                     TokenKind.IDENTIFIER_TOKEN,
                     {
-                      row: 0,
-                      column: 45,
+                      row: 1,
+                      column: 46,
                       position: 45,
                     },
                     "bar2",
@@ -428,8 +428,8 @@ describe("Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.KEYWORD_UTF8STRING_TOKEN,
                   {
-                    row: 0,
-                    column: 34,
+                    row: 1,
+                    column: 35,
                     position: 34,
                   },
                   "utf8string",
@@ -438,8 +438,8 @@ describe("Statement Pattern Tests", () => {
                     new Trivia(
                       TokenKind.WHITESPACE_TOKEN,
                       {
-                        row: 0,
-                        column: 44,
+                        row: 1,
+                        column: 45,
                         position: 44,
                       },
                       " ",
@@ -450,8 +450,8 @@ describe("Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
                   {
-                    row: 0,
-                    column: 49,
+                    row: 1,
+                    column: 50,
                     position: 49,
                   },
                   ";",
@@ -463,8 +463,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
               {
-                row: 0,
-                column: 16,
+                row: 1,
+                column: 17,
                 position: 16,
               },
               "{",
@@ -473,8 +473,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 17,
+                    row: 1,
+                    column: 18,
                     position: 17,
                   },
                   " ",
@@ -484,8 +484,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
               {
-                row: 0,
-                column: 50,
+                row: 1,
+                column: 51,
                 position: 50,
               },
               "}",
@@ -497,8 +497,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "{",
@@ -508,8 +508,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
           {
-            row: 0,
-            column: 51,
+            row: 1,
+            column: 52,
             position: 51,
           },
           "}",
@@ -537,8 +537,8 @@ describe("Statement Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 1,
-                  column: 12,
+                  row: 2,
+                  column: 13,
                   position: 15,
                 },
                 "bar",
@@ -553,8 +553,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_UTF8STRING_TOKEN,
               {
-                row: 1,
-                column: 1,
+                row: 2,
+                column: 2,
                 position: 4,
               },
               "utf8string",
@@ -562,8 +562,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "\n ",
@@ -573,8 +573,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 1,
-                    column: 11,
+                    row: 2,
+                    column: 12,
                     position: 14,
                   },
                   " ",
@@ -585,8 +585,8 @@ describe("Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
               {
-                row: 1,
-                column: 15,
+                row: 2,
+                column: 16,
                 position: 18,
               },
               ";",
@@ -595,8 +595,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 1,
-                    column: 16,
+                    row: 2,
+                    column: 17,
                     position: 19,
                   },
                   " ",
@@ -604,8 +604,8 @@ describe("Statement Pattern Tests", () => {
                 new Trivia(
                   TokenKind.COMMENT_TOKEN,
                   {
-                    row: 1,
-                    column: 17,
+                    row: 2,
+                    column: 18,
                     position: 20,
                   },
                   "// bar",
@@ -617,8 +617,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "{",
@@ -627,8 +627,8 @@ describe("Statement Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               " ",
@@ -638,8 +638,8 @@ describe("Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
           {
-            row: 2,
-            column: 1,
+            row: 3,
+            column: 2,
             position: 28,
           },
           "}",
@@ -647,8 +647,8 @@ describe("Statement Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 1,
-                column: 23,
+                row: 2,
+                column: 24,
                 position: 26,
               },
               "\n ",

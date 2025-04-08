@@ -20,8 +20,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_ALIGNED_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "aligned",
@@ -46,8 +46,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               "8",
@@ -59,8 +59,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_ALIGNED_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "aligned",
@@ -70,8 +70,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 7,
+            row: 1,
+            column: 8,
             position: 7,
           },
           "(",
@@ -81,8 +81,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 9,
+            row: 1,
+            column: 10,
             position: 9,
           },
           ")",
@@ -107,8 +107,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               "16",
@@ -120,8 +120,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_ALIGNED_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "aligned",
@@ -131,8 +131,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 7,
+            row: 1,
+            column: 8,
             position: 7,
           },
           "(",
@@ -142,8 +142,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 10,
+            row: 1,
+            column: 11,
             position: 10,
           },
           ")",
@@ -168,8 +168,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 11,
+                row: 1,
+                column: 12,
                 position: 11,
               },
               "16",
@@ -178,8 +178,8 @@ describe("Aligned Modifier Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 13,
+                    row: 1,
+                    column: 14,
                     position: 13,
                   },
                   " ",
@@ -191,8 +191,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.KEYWORD_ALIGNED_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "aligned",
@@ -200,8 +200,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               " ",
@@ -211,8 +211,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               " ",
@@ -222,8 +222,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 9,
+            row: 1,
+            column: 10,
             position: 9,
           },
           "(",
@@ -232,8 +232,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 10,
+                row: 1,
+                column: 11,
                 position: 10,
               },
               " ",
@@ -243,8 +243,8 @@ describe("Aligned Modifier Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 14,
+            row: 1,
+            column: 15,
             position: 14,
           },
           ")",
@@ -253,8 +253,8 @@ describe("Aligned Modifier Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 15,
+                row: 1,
+                column: 16,
                 position: 15,
               },
               " ",
@@ -280,8 +280,8 @@ describe("Aligned Modifier Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 11,
+                  row: 1,
+                  column: 12,
                   position: 11,
                 },
                 "17",
@@ -293,8 +293,8 @@ describe("Aligned Modifier Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_ALIGNED_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "aligned",
@@ -304,8 +304,8 @@ describe("Aligned Modifier Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 9,
+              row: 1,
+              column: 10,
               position: 9,
             },
             "(",
@@ -315,8 +315,8 @@ describe("Aligned Modifier Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             },
             ")",
