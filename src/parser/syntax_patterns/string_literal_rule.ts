@@ -1,4 +1,4 @@
-import { alt_sc, apply, rep_sc } from "typescript-parsec";
+import { alt_sc, apply, rep_sc, seq } from "typescript-parsec";
 import { StringLiteralKind } from "../../abstract_syntax_tree/node/enum/string_literal_kind.ts";
 import { StringLiteral } from "../../abstract_syntax_tree/node/StringLiteral.ts";
 import { TokenKind } from "../../tokenizer/enum/token_kind.ts";
@@ -123,10 +123,16 @@ function validateAndStripStringLiteral(
 }
 
 function getStringLiteral(
-  stringLiteralTokens: SyntaxToken[],
+  stringLiteralTokenOrTokens: SyntaxToken | [SyntaxToken, SyntaxToken[]],
 ): StringLiteral {
-  if (stringLiteralTokens.length === 0) {
-    throw new InternalParserError("Empty string literal token array");
+  let stringLiteralTokens: SyntaxToken[];
+
+  if (Array.isArray(stringLiteralTokenOrTokens)) {
+    const [stringLiteralToken, extraStringLiteralTokens] =
+      stringLiteralTokenOrTokens;
+    stringLiteralTokens = [stringLiteralToken, ...extraStringLiteralTokens];
+  } else {
+    stringLiteralTokens = [stringLiteralTokenOrTokens];
   }
 
   const tokenKind = stringLiteralTokens[0].tokenKind;
@@ -164,12 +170,19 @@ function getStringLiteral(
 
 export function getStringLiteralPattern() {
   return apply(
-    // the token types should be all the same but we allow a sequence of alternates here
-    // this allows us to provide a better error message if the token types are different
-    rep_sc(
+    seq(
+      // the token types should be all the same but we allow a sequence of alternates here
+      // this allows us to provide a better error message if the token types are different
       alt_sc(
         getToken(TokenKind.LITERAL_STRING_BASIC_TOKEN),
         getToken(TokenKind.LITERAL_STRING_UTF_TOKEN),
+      ),
+      // repeated sequence here to support concatenated string literals
+      rep_sc(
+        alt_sc(
+          getToken(TokenKind.LITERAL_STRING_BASIC_TOKEN),
+          getToken(TokenKind.LITERAL_STRING_UTF_TOKEN),
+        ),
       ),
     ),
     getStringLiteral,
