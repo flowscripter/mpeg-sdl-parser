@@ -29,8 +29,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "1",
@@ -47,8 +47,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "2",
@@ -60,8 +60,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "*",
@@ -86,8 +86,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 1,
+                  row: 1,
+                  column: 2,
                   position: 1,
                 },
                 "1",
@@ -99,8 +99,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_PLUS_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "+",
@@ -118,8 +118,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 4,
+                  row: 1,
+                  column: 5,
                   position: 4,
                 },
                 "2",
@@ -131,8 +131,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_MINUS_TOKEN,
             {
-              row: 0,
-              column: 3,
+              row: 1,
+              column: 4,
               position: 3,
             },
             "-",
@@ -143,8 +143,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 2,
+            row: 1,
+            column: 3,
             position: 2,
           },
           "*",
@@ -168,8 +168,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 },
                 "1",
@@ -186,8 +186,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "2",
@@ -199,8 +199,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_MULTIPLY_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "*",
@@ -216,8 +216,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 4,
+                row: 1,
+                column: 5,
                 position: 4,
               },
               "3",
@@ -229,8 +229,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           "*",
@@ -254,8 +254,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 1,
+                  row: 1,
+                  column: 2,
                   position: 1,
                 },
                 "1",
@@ -272,8 +272,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 3,
+                  row: 1,
+                  column: 4,
                   position: 3,
                 },
                 "2",
@@ -285,8 +285,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_MULTIPLY_TOKEN,
             {
-              row: 0,
-              column: 2,
+              row: 1,
+              column: 3,
               position: 2,
             },
             "*",
@@ -297,8 +297,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "(",
@@ -308,8 +308,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
           {
-            row: 0,
-            column: 4,
+            row: 1,
+            column: 5,
             position: 4,
           },
           ")",
@@ -334,8 +334,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 1,
+                    row: 1,
+                    column: 2,
                     position: 1,
                   },
                   "1",
@@ -352,8 +352,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   "2",
@@ -365,8 +365,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_MULTIPLY_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "*",
@@ -377,8 +377,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "(",
@@ -388,8 +388,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             ")",
@@ -403,8 +403,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           "++",
@@ -428,8 +428,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 },
                 "1",
@@ -446,8 +446,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "2",
@@ -459,8 +459,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_DIVIDE_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "/",
@@ -476,8 +476,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 4,
+                row: 1,
+                column: 5,
                 position: 4,
               },
               "3",
@@ -489,8 +489,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           "*",
@@ -513,8 +513,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "1",
@@ -532,8 +532,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 2,
+                  row: 1,
+                  column: 3,
                   position: 2,
                 },
                 "2",
@@ -550,8 +550,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 4,
+                  row: 1,
+                  column: 5,
                   position: 4,
                 },
                 "3",
@@ -563,8 +563,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_MULTIPLY_TOKEN,
             {
-              row: 0,
-              column: 3,
+              row: 1,
+              column: 4,
               position: 3,
             },
             "*",
@@ -575,8 +575,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_PLUS_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "+",
@@ -601,8 +601,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 1,
+                    row: 1,
+                    column: 2,
                     position: 1,
                   },
                   "1",
@@ -619,8 +619,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   "2",
@@ -632,8 +632,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_PLUS_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "+",
@@ -644,8 +644,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "(",
@@ -655,8 +655,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             ")",
@@ -672,8 +672,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 6,
+                row: 1,
+                column: 7,
                 position: 6,
               },
               "3",
@@ -685,8 +685,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           "*",
@@ -708,8 +708,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -723,8 +723,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "j",
@@ -733,8 +733,8 @@ describe("Expression Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 4,
+                    row: 1,
+                    column: 5,
                     position: 4,
                   },
                   " ",
@@ -745,8 +745,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_LOGICAL_OR_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "||",
@@ -760,8 +760,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             "k",
@@ -772,8 +772,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_LOGICAL_AND_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           "&&",
@@ -782,8 +782,8 @@ describe("Expression Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               " ",
@@ -805,8 +805,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -820,8 +820,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "j",
@@ -830,8 +830,8 @@ describe("Expression Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   " ",
@@ -842,8 +842,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_PLUS_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "+",
@@ -857,8 +857,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             "k",
@@ -869,8 +869,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MINUS_TOKEN,
           {
-            row: 0,
-            column: 4,
+            row: 1,
+            column: 5,
             position: 4,
           },
           "-",
@@ -879,8 +879,8 @@ describe("Expression Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               " ",
@@ -902,8 +902,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -917,17 +917,17 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "j",
               [],
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  column: 4,
+                  column: 5,
                   position: 4,
-                  row: 0,
+                  row: 1,
                 }, " "),
               ],
             ),
@@ -935,8 +935,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_SHIFT_LEFT_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "<<",
@@ -950,8 +950,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             "k",
@@ -962,17 +962,17 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_SHIFT_RIGHT_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           ">>",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              column: 7,
+              column: 8,
               position: 7,
-              row: 0,
+              row: 1,
             }, " "),
           ],
         ),
@@ -993,8 +993,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
                   {
-                    row: 0,
-                    column: 0,
+                    row: 1,
+                    column: 1,
                     position: 0,
                   },
                   "i",
@@ -1008,8 +1008,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.IDENTIFIER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "j",
@@ -1020,8 +1020,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.OPERATOR_LESS_THAN_TOKEN,
                 {
-                  row: 0,
-                  column: 1,
+                  row: 1,
+                  column: 2,
                   position: 1,
                 },
                 "<",
@@ -1035,8 +1035,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 5,
+                  row: 1,
+                  column: 6,
                   position: 5,
                 },
                 "k",
@@ -1047,8 +1047,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_LESS_THAN_OR_EQUAL_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "<=",
@@ -1062,8 +1062,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               "l",
@@ -1074,8 +1074,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_GREATER_THAN_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             ">",
@@ -1089,8 +1089,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 10,
+              row: 1,
+              column: 11,
               position: 10,
             },
             "m",
@@ -1101,8 +1101,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_GREATER_THAN_OR_EQUAL_TOKEN,
           {
-            row: 0,
-            column: 8,
+            row: 1,
+            column: 9,
             position: 8,
           },
           ">=",
@@ -1124,8 +1124,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -1139,8 +1139,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "j",
@@ -1149,8 +1149,8 @@ describe("Expression Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 4,
+                    row: 1,
+                    column: 5,
                     position: 4,
                   },
                   " ",
@@ -1161,8 +1161,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_EQUAL_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "==",
@@ -1176,8 +1176,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             "k",
@@ -1188,8 +1188,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_NOT_EQUAL_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           "!=",
@@ -1198,8 +1198,8 @@ describe("Expression Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               " ",
@@ -1221,8 +1221,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -1236,8 +1236,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 2,
+                row: 1,
+                column: 3,
                 position: 2,
               },
               "j",
@@ -1246,8 +1246,8 @@ describe("Expression Pattern Tests", () => {
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   " ",
@@ -1258,8 +1258,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_BITWISE_AND_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "&",
@@ -1273,8 +1273,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             "k",
@@ -1285,8 +1285,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_BITWISE_OR_TOKEN,
           {
-            row: 0,
-            column: 4,
+            row: 1,
+            column: 5,
             position: 4,
           },
           "|",
@@ -1295,8 +1295,8 @@ describe("Expression Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               " ",
@@ -1319,8 +1319,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "8",
@@ -1338,8 +1338,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 3,
+                  row: 1,
+                  column: 4,
                   position: 3,
                 },
                 "7",
@@ -1357,8 +1357,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 5,
+                    row: 1,
+                    column: 6,
                     position: 5,
                   },
                   "6",
@@ -1376,8 +1376,8 @@ describe("Expression Pattern Tests", () => {
                   new SyntaxToken(
                     TokenKind.LITERAL_INTEGER_TOKEN,
                     {
-                      row: 0,
-                      column: 8,
+                      row: 1,
+                      column: 9,
                       position: 8,
                     },
                     "5",
@@ -1395,8 +1395,8 @@ describe("Expression Pattern Tests", () => {
                     new SyntaxToken(
                       TokenKind.LITERAL_INTEGER_TOKEN,
                       {
-                        row: 0,
-                        column: 10,
+                        row: 1,
+                        column: 11,
                         position: 10,
                       },
                       "4",
@@ -1414,8 +1414,8 @@ describe("Expression Pattern Tests", () => {
                       new SyntaxToken(
                         TokenKind.LITERAL_INTEGER_TOKEN,
                         {
-                          row: 0,
-                          column: 13,
+                          row: 1,
+                          column: 14,
                           position: 13,
                         },
                         "3",
@@ -1433,8 +1433,8 @@ describe("Expression Pattern Tests", () => {
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
                           {
-                            row: 0,
-                            column: 15,
+                            row: 1,
+                            column: 16,
                             position: 15,
                           },
                           "2",
@@ -1451,8 +1451,8 @@ describe("Expression Pattern Tests", () => {
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
                           {
-                            row: 0,
-                            column: 17,
+                            row: 1,
+                            column: 18,
                             position: 17,
                           },
                           "1",
@@ -1464,8 +1464,8 @@ describe("Expression Pattern Tests", () => {
                     new SyntaxToken(
                       TokenKind.OPERATOR_MULTIPLY_TOKEN,
                       {
-                        row: 0,
-                        column: 16,
+                        row: 1,
+                        column: 17,
                         position: 16,
                       },
                       "*",
@@ -1476,8 +1476,8 @@ describe("Expression Pattern Tests", () => {
                   new SyntaxToken(
                     TokenKind.OPERATOR_PLUS_TOKEN,
                     {
-                      row: 0,
-                      column: 14,
+                      row: 1,
+                      column: 15,
                       position: 14,
                     },
                     "+",
@@ -1488,8 +1488,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.OPERATOR_SHIFT_RIGHT_TOKEN,
                   {
-                    row: 0,
-                    column: 11,
+                    row: 1,
+                    column: 12,
                     position: 11,
                   },
                   ">>",
@@ -1500,8 +1500,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.OPERATOR_GREATER_THAN_TOKEN,
                 {
-                  row: 0,
-                  column: 9,
+                  row: 1,
+                  column: 10,
                   position: 9,
                 },
                 ">",
@@ -1512,8 +1512,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_EQUAL_TOKEN,
               {
-                row: 0,
-                column: 6,
+                row: 1,
+                column: 7,
                 position: 6,
               },
               "==",
@@ -1524,8 +1524,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_BITWISE_OR_TOKEN,
             {
-              row: 0,
-              column: 4,
+              row: 1,
+              column: 5,
               position: 4,
             },
             "|",
@@ -1536,8 +1536,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_LOGICAL_AND_TOKEN,
           {
-            row: 0,
-            column: 1,
+            row: 1,
+            column: 2,
             position: 1,
           },
           "&&",
@@ -1559,8 +1559,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -1574,8 +1574,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "++",
@@ -1584,8 +1584,8 @@ describe("Expression Pattern Tests", () => {
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
                 {
-                  row: 0,
-                  column: 3,
+                  row: 1,
+                  column: 4,
                   position: 3,
                 },
                 " ",
@@ -1600,8 +1600,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 15,
+                row: 1,
+                column: 16,
                 position: 15,
               },
               "j",
@@ -1612,8 +1612,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_LENGTHOF_TOKEN,
             {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             },
             "lengthof",
@@ -1623,8 +1623,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             },
             "(",
@@ -1634,8 +1634,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 16,
+              row: 1,
+              column: 17,
               position: 16,
             },
             ")",
@@ -1646,8 +1646,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MULTIPLY_TOKEN,
           {
-            row: 0,
-            column: 4,
+            row: 1,
+            column: 5,
             position: 4,
           },
           "*",
@@ -1656,8 +1656,8 @@ describe("Expression Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 5,
+                row: 1,
+                column: 6,
                 position: 5,
               },
               " ",
@@ -1684,8 +1684,8 @@ describe("Expression Pattern Tests", () => {
                     new SyntaxToken(
                       TokenKind.LITERAL_INTEGER_TOKEN,
                       {
-                        row: 0,
-                        column: 2,
+                        row: 1,
+                        column: 3,
                         position: 2,
                       },
                       "1",
@@ -1702,8 +1702,8 @@ describe("Expression Pattern Tests", () => {
                     new SyntaxToken(
                       TokenKind.LITERAL_INTEGER_TOKEN,
                       {
-                        row: 0,
-                        column: 4,
+                        row: 1,
+                        column: 5,
                         position: 4,
                       },
                       "2",
@@ -1715,8 +1715,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.OPERATOR_MULTIPLY_TOKEN,
                   {
-                    row: 0,
-                    column: 3,
+                    row: 1,
+                    column: 4,
                     position: 3,
                   },
                   "*",
@@ -1727,8 +1727,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
                 {
-                  row: 0,
-                  column: 1,
+                  row: 1,
+                  column: 2,
                   position: 1,
                 },
                 "(",
@@ -1738,8 +1738,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
                 {
-                  row: 0,
-                  column: 5,
+                  row: 1,
+                  column: 6,
                   position: 5,
                 },
                 ")",
@@ -1755,8 +1755,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 7,
+                    row: 1,
+                    column: 8,
                     position: 7,
                   },
                   "3",
@@ -1768,8 +1768,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_PLUS_TOKEN,
               {
-                row: 0,
-                column: 6,
+                row: 1,
+                column: 7,
                 position: 6,
               },
               "+",
@@ -1780,8 +1780,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 0,
+              row: 1,
+              column: 1,
               position: 0,
             },
             "(",
@@ -1791,8 +1791,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             },
             ")",
@@ -1810,8 +1810,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 11,
+                    row: 1,
+                    column: 12,
                     position: 11,
                   },
                   "2",
@@ -1828,8 +1828,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 13,
+                    row: 1,
+                    column: 14,
                     position: 13,
                   },
                   "3",
@@ -1841,8 +1841,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_MULTIPLY_TOKEN,
               {
-                row: 0,
-                column: 12,
+                row: 1,
+                column: 13,
                 position: 12,
               },
               "*",
@@ -1853,8 +1853,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 10,
+              row: 1,
+              column: 11,
               position: 10,
             },
             "(",
@@ -1864,8 +1864,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             },
             ")",
@@ -1876,8 +1876,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_DIVIDE_TOKEN,
           {
-            row: 0,
-            column: 9,
+            row: 1,
+            column: 10,
             position: 9,
           },
           "/",
@@ -1901,8 +1901,8 @@ describe("Expression Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
                 {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 },
                 "1",
@@ -1920,8 +1920,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "2",
@@ -1938,8 +1938,8 @@ describe("Expression Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 4,
+                    row: 1,
+                    column: 5,
                     position: 4,
                   },
                   "3",
@@ -1951,8 +1951,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_MULTIPLY_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "*",
@@ -1963,8 +1963,8 @@ describe("Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_PLUS_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "+",
@@ -1980,8 +1980,8 @@ describe("Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               "2",
@@ -1993,8 +1993,8 @@ describe("Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_SHIFT_LEFT_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           "<<",

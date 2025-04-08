@@ -24,8 +24,8 @@ describe("Expression Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -39,8 +39,8 @@ describe("Expression Statement Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_POSTFIX_INCREMENT_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "++",
@@ -51,8 +51,8 @@ describe("Expression Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 3,
+            row: 1,
+            column: 4,
             position: 3,
           },
           ";",
@@ -74,8 +74,8 @@ describe("Expression Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "i",
@@ -92,8 +92,8 @@ describe("Expression Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 2,
+                    row: 1,
+                    column: 3,
                     position: 2,
                   },
                   "1",
@@ -110,8 +110,8 @@ describe("Expression Statement Pattern Tests", () => {
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
                   {
-                    row: 0,
-                    column: 4,
+                    row: 1,
+                    column: 5,
                     position: 4,
                   },
                   "2",
@@ -123,8 +123,8 @@ describe("Expression Statement Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.OPERATOR_MULTIPLY_TOKEN,
               {
-                row: 0,
-                column: 3,
+                row: 1,
+                column: 4,
                 position: 3,
               },
               "*",
@@ -135,8 +135,8 @@ describe("Expression Statement Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "=",
@@ -147,8 +147,8 @@ describe("Expression Statement Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
           {
-            row: 0,
-            column: 5,
+            row: 1,
+            column: 6,
             position: 5,
           },
           ";",

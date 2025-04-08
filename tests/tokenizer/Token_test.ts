@@ -8,8 +8,8 @@ describe("Token Tests", () => {
     const token = new SyntaxToken(
       TokenKind.IDENTIFIER_TOKEN,
       {
-        row: 2,
-        column: 0,
+        row: 3,
+        column: 1,
         position: 15,
       },
       "foo",
@@ -17,8 +17,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.WHITESPACE_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "  ",
@@ -26,8 +26,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.COMMENT_TOKEN,
           {
-            row: 0,
-            column: 2,
+            row: 1,
+            column: 3,
             position: 2,
           },
           "// comment1",
@@ -35,8 +35,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.WHITESPACE_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "\n\n",
@@ -46,8 +46,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.WHITESPACE_TOKEN,
           {
-            row: 2,
-            column: 3,
+            row: 3,
+            column: 4,
             position: 18,
           },
           " ",
@@ -55,8 +55,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.COMMENT_TOKEN,
           {
-            row: 2,
-            column: 4,
+            row: 3,
+            column: 5,
             position: 19,
           },
           "// comment2",
@@ -64,8 +64,8 @@ describe("Token Tests", () => {
         new Trivia(
           TokenKind.WHITESPACE_TOKEN,
           {
-            row: 2,
-            column: 15,
+            row: 3,
+            column: 16,
             position: 30,
           },
           " ",

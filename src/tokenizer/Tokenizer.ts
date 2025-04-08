@@ -128,12 +128,10 @@ export class Tokenizer implements Lexer<TokenKind> {
       trailingTriviaMatchResults.map(this.getTrivia),
       {
         index: syntaxMatchResult.position,
-        // note that the Parsec token position has 1-based row and column values
-        // note that pos row and column values are 1-based, so we need to add 1 to 0-based values
-        rowBegin: syntaxMatchResult.row + 1,
-        columnBegin: syntaxMatchResult.column + 1,
-        rowEnd: lastMatchResult.rowEnd + 1,
-        columnEnd: lastMatchResult.columnEnd + 1,
+        rowBegin: syntaxMatchResult.row,
+        columnBegin: syntaxMatchResult.column,
+        rowEnd: lastMatchResult.rowEnd,
+        columnEnd: lastMatchResult.columnEnd,
       },
     );
   }
@@ -461,16 +459,16 @@ export class Tokenizer implements Lexer<TokenKind> {
    * @throws {LexicalParserError} If the input string cannot be tokenized
    */
   parse(input: string): ParsecTokenWrapper | undefined {
-    return this.getNextSyntaxToken(input, 0, 0, 0);
+    return this.getNextSyntaxToken(input, 0, 1, 1);
   }
 
   /**
    * Parses the provided input string and returns the first syntax token found at the current position of the input string.
    *
    * @param input The input string to parse
-   * @param position The current parsing position in the input string
-   * @param row The current parsing row in the input string
-   * @param column The current parsing column in the total input string
+   * @param position The current zero-based parsing position in the input string
+   * @param row The current one-based parsing row in the input string
+   * @param column The current one-based parsing column in the total input string
    *
    * @returns The next syntax token found in the input string, undefined if no token found
    *
@@ -704,7 +702,7 @@ export class Tokenizer implements Lexer<TokenKind> {
                 break;
               case "\n":
                 rowEnd++;
-                columnEnd = 0;
+                columnEnd = 1;
                 break;
               default:
                 columnEnd++;

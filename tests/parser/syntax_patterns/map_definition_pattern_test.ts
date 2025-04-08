@@ -21,20 +21,20 @@ describe("Map Definition Pattern Tests", () => {
           ElementaryTypeKind.UNSIGNED_INTEGER,
           new SyntaxToken(
             TokenKind.KEYWORD_UNSIGNED_TOKEN,
-            { row: 0, column: 9, position: 9 },
+            { row: 1, column: 10, position: 9 },
             "unsigned",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 17,
+                row: 1,
+                column: 18,
                 position: 17,
               }, " "),
             ],
           ),
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 18, position: 18 },
+            { row: 1, column: 19, position: 18 },
             "int",
             [],
             [],
@@ -45,7 +45,7 @@ describe("Map Definition Pattern Tests", () => {
           "Offsets",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 22, position: 22 },
+            { row: 1, column: 23, position: 22 },
             "Offsets",
             [],
             [],
@@ -55,7 +55,7 @@ describe("Map Definition Pattern Tests", () => {
           "offset",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 31, position: 31 },
+            { row: 1, column: 32, position: 31 },
             "offset",
             [],
             [],
@@ -63,13 +63,13 @@ describe("Map Definition Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_RESERVED_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "reserved",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             }, " "),
           ],
@@ -77,27 +77,27 @@ describe("Map Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 21, position: 21 },
+          { row: 1, column: 22, position: 21 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 29, position: 29 },
+          { row: 1, column: 30, position: 29 },
           ")",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 30,
+              row: 1,
+              column: 31,
               position: 30,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 37, position: 37 },
+          { row: 1, column: 38, position: 37 },
           ";",
           [],
           [],
@@ -118,7 +118,7 @@ describe("Map Definition Pattern Tests", () => {
           "B",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 7, position: 7 },
+            { row: 1, column: 8, position: 7 },
             "B",
             [],
             [],
@@ -128,7 +128,7 @@ describe("Map Definition Pattern Tests", () => {
           "MapB",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 9, position: 9 },
+            { row: 1, column: 10, position: 9 },
             "MapB",
             [],
             [],
@@ -138,7 +138,7 @@ describe("Map Definition Pattern Tests", () => {
           "b",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 15, position: 15 },
+            { row: 1, column: 16, position: 15 },
             "b",
             [],
             [],
@@ -147,40 +147,40 @@ describe("Map Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.KEYWORD_LEGACY_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "legacy",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 6,
+              row: 1,
+              column: 7,
               position: 6,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 8, position: 8 },
+          { row: 1, column: 9, position: 8 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 13, position: 13 },
+          { row: 1, column: 14, position: 13 },
           ")",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 16, position: 16 },
+          { row: 1, column: 17, position: 16 },
           ";",
           [],
           [],

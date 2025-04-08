@@ -34,7 +34,7 @@ function getExtendedClassIdRange(
   } else {
     leadingClassIdAndCommaArray.forEach((classIdAndComma) => {
       classIds.push(classIdAndComma[0]);
-      commaTokens!.push(classIdAndComma[1]);
+      commaTokens.push(classIdAndComma[1]);
     });
 
     if (finalClassId === undefined) {

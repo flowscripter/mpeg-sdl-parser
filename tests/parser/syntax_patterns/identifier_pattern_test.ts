@@ -15,7 +15,7 @@ describe("Identifier Pattern Tests", () => {
         "foobar",
         new SyntaxToken(
           TokenKind.IDENTIFIER_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "foobar",
           [],
           [],
@@ -32,14 +32,14 @@ describe("Identifier Pattern Tests", () => {
         "foobar",
         new SyntaxToken(
           TokenKind.IDENTIFIER_TOKEN,
-          { row: 0, column: 1, position: 1 },
+          { row: 1, column: 2, position: 1 },
           "foobar",
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               " ",
@@ -49,8 +49,8 @@ describe("Identifier Pattern Tests", () => {
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
               {
-                row: 0,
-                column: 7,
+                row: 1,
+                column: 8,
                 position: 7,
               },
               " ",

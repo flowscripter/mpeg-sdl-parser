@@ -31,7 +31,7 @@ describe("Array Definition Pattern Tests", () => {
             undefined,
             new SyntaxToken(
               TokenKind.KEYWORD_INT_TOKEN,
-              { row: 0, column: 0, position: 0 },
+              { row: 1, column: 1, position: 0 },
               "int",
               [],
               [],
@@ -44,7 +44,7 @@ describe("Array Definition Pattern Tests", () => {
               [
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
-                  { row: 0, column: 4, position: 4 },
+                  { row: 1, column: 5, position: 4 },
                   "3",
                   [],
                   [],
@@ -53,20 +53,20 @@ describe("Array Definition Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-              { row: 0, column: 3, position: 3 },
+              { row: 1, column: 4, position: 3 },
               "(",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-              { row: 0, column: 5, position: 5 },
+              { row: 1, column: 6, position: 5 },
               ")",
               [],
               [
                 new Trivia(
                   TokenKind.WHITESPACE_TOKEN,
-                  { row: 0, column: 6, position: 6 },
+                  { row: 1, column: 7, position: 6 },
                   " ",
                 ),
               ],
@@ -78,7 +78,7 @@ describe("Array Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 7, position: 7 },
+            { row: 1, column: 8, position: 7 },
             "a",
             [],
             [],
@@ -93,7 +93,7 @@ describe("Array Definition Pattern Tests", () => {
               [
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
-                  { row: 0, column: 9, position: 9 },
+                  { row: 1, column: 10, position: 9 },
                   "3",
                   [],
                   [],
@@ -102,14 +102,14 @@ describe("Array Definition Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
-              { row: 0, column: 8, position: 8 },
+              { row: 1, column: 9, position: 8 },
               "[",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
-              { row: 0, column: 10, position: 10 },
+              { row: 1, column: 11, position: 10 },
               "]",
               [],
               [],
@@ -120,7 +120,7 @@ describe("Array Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 11, position: 11 },
+          { row: 1, column: 12, position: 11 },
           ";",
           [],
           [],
@@ -144,13 +144,13 @@ describe("Array Definition Pattern Tests", () => {
             "MyClass",
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
-              { row: 0, column: 9, position: 9 },
+              { row: 1, column: 10, position: 9 },
               "MyClass",
               [],
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 0,
-                  column: 16,
+                  row: 1,
+                  column: 17,
                   position: 16,
                 }, " "),
               ],
@@ -161,7 +161,7 @@ describe("Array Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 17, position: 17 },
+            { row: 1, column: 18, position: 17 },
             "a",
             [],
             [],
@@ -176,7 +176,7 @@ describe("Array Definition Pattern Tests", () => {
               [
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
-                  { row: 0, column: 19, position: 19 },
+                  { row: 1, column: 20, position: 19 },
                   "3",
                   [],
                   [],
@@ -185,14 +185,14 @@ describe("Array Definition Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
-              { row: 0, column: 18, position: 18 },
+              { row: 1, column: 19, position: 18 },
               "[",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
-              { row: 0, column: 20, position: 20 },
+              { row: 1, column: 21, position: 20 },
               "]",
               [],
               [],
@@ -205,7 +205,7 @@ describe("Array Definition Pattern Tests", () => {
               [
                 new SyntaxToken(
                   TokenKind.LITERAL_INTEGER_TOKEN,
-                  { row: 0, column: 23, position: 23 },
+                  { row: 1, column: 24, position: 23 },
                   "2",
                   [],
                   [],
@@ -214,28 +214,28 @@ describe("Array Definition Pattern Tests", () => {
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
-              { row: 0, column: 21, position: 21 },
+              { row: 1, column: 22, position: 21 },
               "[",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
-              { row: 0, column: 22, position: 22 },
+              { row: 1, column: 23, position: 22 },
               "[",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
-              { row: 0, column: 24, position: 24 },
+              { row: 1, column: 25, position: 24 },
               "]",
               [],
               [],
             ),
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
-              { row: 0, column: 25, position: 25 },
+              { row: 1, column: 26, position: 25 },
               "]",
               [],
               [],
@@ -244,13 +244,13 @@ describe("Array Definition Pattern Tests", () => {
         ],
         new SyntaxToken(
           TokenKind.KEYWORD_RESERVED_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "reserved",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             }, " "),
           ],
@@ -258,7 +258,7 @@ describe("Array Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 26, position: 26 },
+          { row: 1, column: 27, position: 26 },
           ";",
           [],
           [],
@@ -282,13 +282,13 @@ describe("Array Definition Pattern Tests", () => {
             "MyClass",
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
-              { row: 0, column: 0, position: 0 },
+              { row: 1, column: 1, position: 0 },
               "MyClass",
               [],
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 0,
-                  column: 7,
+                  row: 1,
+                  column: 8,
                   position: 7,
                 }, " "),
               ],
@@ -299,7 +299,7 @@ describe("Array Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 8, position: 8 },
+            { row: 1, column: 9, position: 8 },
             "a",
             [],
             [],
@@ -312,7 +312,7 @@ describe("Array Definition Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 10, position: 10 },
+                { row: 1, column: 11, position: 10 },
                 "1",
                 [],
                 [],
@@ -325,7 +325,7 @@ describe("Array Definition Pattern Tests", () => {
             [
               new SyntaxToken(
                 TokenKind.LITERAL_INTEGER_TOKEN,
-                { row: 0, column: 13, position: 13 },
+                { row: 1, column: 14, position: 13 },
                 "3",
                 [],
                 [],
@@ -334,21 +334,21 @@ describe("Array Definition Pattern Tests", () => {
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACKET_TOKEN,
-            { row: 0, column: 9, position: 9 },
+            { row: 1, column: 10, position: 9 },
             "[",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.OPERATOR_RANGE_TOKEN,
-            { row: 0, column: 11, position: 11 },
+            { row: 1, column: 12, position: 11 },
             "..",
             [],
             [],
           ),
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACKET_TOKEN,
-            { row: 0, column: 14, position: 14 },
+            { row: 1, column: 15, position: 14 },
             "]",
             [],
             [],
@@ -359,7 +359,7 @@ describe("Array Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 15, position: 15 },
+          { row: 1, column: 16, position: 15 },
           ";",
           [],
           [],

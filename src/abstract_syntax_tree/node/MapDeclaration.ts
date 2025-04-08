@@ -32,13 +32,13 @@ export class MapDeclaration extends AbstractStatement {
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield this.mapToken;
     yield* this.identifier.getSyntaxTokenIterable();
+    yield this.openParenthesisToken;
     if (this.outputElementaryType) {
       yield* this.outputElementaryType.getSyntaxTokenIterable();
     } else if (this.outputClassIdentifier) {
       yield* this.outputClassIdentifier.getSyntaxTokenIterable();
     }
-    yield this.openParenthesisToken;
-    yield* this.mapEntryList.getSyntaxTokenIterable();
     yield this.closeParenthesisToken;
+    yield* this.mapEntryList.getSyntaxTokenIterable();
   }
 }

@@ -26,13 +26,13 @@ describe("Map Declaration Pattern Tests", () => {
           "offsets",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 4, position: 4 },
+            { row: 1, column: 5, position: 4 },
             "offsets",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 11, position: 11 },
+                { row: 1, column: 12, position: 11 },
                 " ",
               ),
             ],
@@ -43,7 +43,7 @@ describe("Map Declaration Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 13, position: 13 },
+            { row: 1, column: 14, position: 13 },
             "int",
             [],
             [],
@@ -59,7 +59,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_BINARY_TOKEN,
-                    { row: 0, column: 19, position: 19 },
+                    { row: 1, column: 20, position: 19 },
                     "0b00",
                     [],
                     [],
@@ -75,7 +75,7 @@ describe("Map Declaration Pattern Tests", () => {
                       [
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
-                          { row: 0, column: 25, position: 25 },
+                          { row: 1, column: 26, position: 25 },
                           "1024",
                           [],
                           [],
@@ -88,7 +88,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                  { row: 0, column: 24, position: 24 },
+                  { row: 1, column: 25, position: 24 },
                   "{",
                   [],
                   [],
@@ -96,7 +96,7 @@ describe("Map Declaration Pattern Tests", () => {
                 undefined,
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                  { row: 0, column: 29, position: 29 },
+                  { row: 1, column: 30, position: 29 },
                   "}",
                   [],
                   [],
@@ -104,7 +104,7 @@ describe("Map Declaration Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 23, position: 23 },
+                { row: 1, column: 24, position: 23 },
                 ",",
                 [],
                 [],
@@ -117,7 +117,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_BINARY_TOKEN,
-                    { row: 0, column: 31, position: 31 },
+                    { row: 1, column: 32, position: 31 },
                     "0b01",
                     [],
                     [],
@@ -133,7 +133,7 @@ describe("Map Declaration Pattern Tests", () => {
                       [
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
-                          { row: 0, column: 37, position: 37 },
+                          { row: 1, column: 38, position: 37 },
                           "2048",
                           [],
                           [],
@@ -146,7 +146,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                  { row: 0, column: 36, position: 36 },
+                  { row: 1, column: 37, position: 36 },
                   "{",
                   [],
                   [],
@@ -154,7 +154,7 @@ describe("Map Declaration Pattern Tests", () => {
                 undefined,
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                  { row: 0, column: 41, position: 41 },
+                  { row: 1, column: 42, position: 41 },
                   "}",
                   [],
                   [],
@@ -162,7 +162,7 @@ describe("Map Declaration Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 35, position: 35 },
+                { row: 1, column: 36, position: 35 },
                 ",",
                 [],
                 [],
@@ -171,7 +171,7 @@ describe("Map Declaration Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-            { row: 0, column: 18, position: 18 },
+            { row: 1, column: 19, position: 18 },
             "{",
             [],
             [],
@@ -179,7 +179,7 @@ describe("Map Declaration Pattern Tests", () => {
           [
             new SyntaxToken(
               TokenKind.PUNCTUATOR_COMMA_TOKEN,
-              { row: 0, column: 30, position: 30 },
+              { row: 1, column: 31, position: 30 },
               ",",
               [],
               [],
@@ -187,7 +187,7 @@ describe("Map Declaration Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-            { row: 0, column: 42, position: 42 },
+            { row: 1, column: 43, position: 42 },
             "}",
             [],
             [],
@@ -195,33 +195,33 @@ describe("Map Declaration Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_MAP_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "map",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 3, position: 3 },
+              { row: 1, column: 4, position: 3 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 12, position: 12 },
+          { row: 1, column: 13, position: 12 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 16, position: 16 },
+          { row: 1, column: 17, position: 16 },
           ")",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 17, position: 17 },
+              { row: 1, column: 18, position: 17 },
               " ",
             ),
           ],
@@ -239,13 +239,13 @@ describe("Map Declaration Pattern Tests", () => {
           "barMap",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 4, position: 4 },
+            { row: 1, column: 5, position: 4 },
             "barMap",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 10, position: 10 },
+                { row: 1, column: 11, position: 10 },
                 " ",
               ),
             ],
@@ -256,7 +256,7 @@ describe("Map Declaration Pattern Tests", () => {
           "Bar",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 12, position: 12 },
+            { row: 1, column: 13, position: 12 },
             "Bar",
             [],
             [],
@@ -271,7 +271,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_BINARY_TOKEN,
-                    { row: 0, column: 18, position: 18 },
+                    { row: 1, column: 19, position: 18 },
                     "0b00",
                     [],
                     [],
@@ -287,7 +287,7 @@ describe("Map Declaration Pattern Tests", () => {
                       [
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
-                          { row: 0, column: 24, position: 24 },
+                          { row: 1, column: 25, position: 24 },
                           "1024",
                           [],
                           [],
@@ -300,7 +300,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                  { row: 0, column: 23, position: 23 },
+                  { row: 1, column: 24, position: 23 },
                   "{",
                   [],
                   [],
@@ -308,7 +308,7 @@ describe("Map Declaration Pattern Tests", () => {
                 undefined,
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                  { row: 0, column: 28, position: 28 },
+                  { row: 1, column: 29, position: 28 },
                   "}",
                   [],
                   [],
@@ -316,7 +316,7 @@ describe("Map Declaration Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 22, position: 22 },
+                { row: 1, column: 23, position: 22 },
                 ",",
                 [],
                 [],
@@ -325,7 +325,7 @@ describe("Map Declaration Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-            { row: 0, column: 17, position: 17 },
+            { row: 1, column: 18, position: 17 },
             "{",
             [],
             [],
@@ -333,7 +333,7 @@ describe("Map Declaration Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-            { row: 0, column: 29, position: 29 },
+            { row: 1, column: 30, position: 29 },
             "}",
             [],
             [],
@@ -341,33 +341,33 @@ describe("Map Declaration Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_MAP_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "map",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 3, position: 3 },
+              { row: 1, column: 4, position: 3 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 11, position: 11 },
+          { row: 1, column: 12, position: 11 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 15, position: 15 },
+          { row: 1, column: 16, position: 15 },
           ")",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 16, position: 16 },
+              { row: 1, column: 17, position: 16 },
               " ",
             ),
           ],
@@ -385,13 +385,13 @@ describe("Map Declaration Pattern Tests", () => {
           "barMap",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 4, position: 4 },
+            { row: 1, column: 5, position: 4 },
             "barMap",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 10, position: 10 },
+                { row: 1, column: 11, position: 10 },
                 " ",
               ),
             ],
@@ -402,7 +402,7 @@ describe("Map Declaration Pattern Tests", () => {
           "Bar",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 12, position: 12 },
+            { row: 1, column: 13, position: 12 },
             "Bar",
             [],
             [],
@@ -417,7 +417,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_BINARY_TOKEN,
-                    { row: 0, column: 18, position: 18 },
+                    { row: 1, column: 19, position: 18 },
                     "0b00",
                     [],
                     [],
@@ -433,7 +433,7 @@ describe("Map Declaration Pattern Tests", () => {
                       [
                         new SyntaxToken(
                           TokenKind.LITERAL_INTEGER_TOKEN,
-                          { row: 0, column: 24, position: 24 },
+                          { row: 1, column: 25, position: 24 },
                           "1024",
                           [],
                           [],
@@ -452,7 +452,7 @@ describe("Map Declaration Pattern Tests", () => {
                           [
                             new SyntaxToken(
                               TokenKind.LITERAL_INTEGER_TOKEN,
-                              { row: 0, column: 30, position: 30 },
+                              { row: 1, column: 31, position: 30 },
                               "1",
                               [],
                               [],
@@ -469,7 +469,7 @@ describe("Map Declaration Pattern Tests", () => {
                           [
                             new SyntaxToken(
                               TokenKind.LITERAL_INTEGER_TOKEN,
-                              { row: 0, column: 32, position: 32 },
+                              { row: 1, column: 33, position: 32 },
                               "2",
                               [],
                               [],
@@ -482,7 +482,7 @@ describe("Map Declaration Pattern Tests", () => {
                     ],
                     new SyntaxToken(
                       TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                      { row: 0, column: 29, position: 29 },
+                      { row: 1, column: 30, position: 29 },
                       "{",
                       [],
                       [],
@@ -490,7 +490,7 @@ describe("Map Declaration Pattern Tests", () => {
                     [
                       new SyntaxToken(
                         TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                        { row: 0, column: 31, position: 31 },
+                        { row: 1, column: 32, position: 31 },
                         ",",
                         [],
                         [],
@@ -498,7 +498,7 @@ describe("Map Declaration Pattern Tests", () => {
                     ],
                     new SyntaxToken(
                       TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                      { row: 0, column: 33, position: 33 },
+                      { row: 1, column: 34, position: 33 },
                       "}",
                       [],
                       [],
@@ -507,7 +507,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                  { row: 0, column: 23, position: 23 },
+                  { row: 1, column: 24, position: 23 },
                   "{",
                   [],
                   [],
@@ -515,7 +515,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                    { row: 0, column: 28, position: 28 },
+                    { row: 1, column: 29, position: 28 },
                     ",",
                     [],
                     [],
@@ -523,7 +523,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                  { row: 0, column: 34, position: 34 },
+                  { row: 1, column: 35, position: 34 },
                   "}",
                   [],
                   [],
@@ -531,7 +531,7 @@ describe("Map Declaration Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 22, position: 22 },
+                { row: 1, column: 23, position: 22 },
                 ",",
                 [],
                 [],
@@ -540,7 +540,7 @@ describe("Map Declaration Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-            { row: 0, column: 17, position: 17 },
+            { row: 1, column: 18, position: 17 },
             "{",
             [],
             [],
@@ -548,7 +548,7 @@ describe("Map Declaration Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-            { row: 0, column: 35, position: 35 },
+            { row: 1, column: 36, position: 35 },
             "}",
             [],
             [],
@@ -556,33 +556,33 @@ describe("Map Declaration Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_MAP_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "map",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 3, position: 3 },
+              { row: 1, column: 4, position: 3 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 11, position: 11 },
+          { row: 1, column: 12, position: 11 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 15, position: 15 },
+          { row: 1, column: 16, position: 15 },
           ")",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 16, position: 16 },
+              { row: 1, column: 17, position: 16 },
               " ",
             ),
           ],
@@ -600,13 +600,13 @@ describe("Map Declaration Pattern Tests", () => {
           "offsets",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 4, position: 4 },
+            { row: 1, column: 5, position: 4 },
             "offsets",
             [],
             [
               new Trivia(
                 TokenKind.WHITESPACE_TOKEN,
-                { row: 0, column: 11, position: 11 },
+                { row: 1, column: 12, position: 11 },
                 " ",
               ),
             ],
@@ -617,7 +617,7 @@ describe("Map Declaration Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 13, position: 13 },
+            { row: 1, column: 14, position: 13 },
             "int",
             [],
             [],
@@ -633,7 +633,7 @@ describe("Map Declaration Pattern Tests", () => {
                 [
                   new SyntaxToken(
                     TokenKind.LITERAL_BINARY_TOKEN,
-                    { row: 0, column: 19, position: 19 },
+                    { row: 1, column: 20, position: 19 },
                     "0b00",
                     [],
                     [],
@@ -649,7 +649,7 @@ describe("Map Declaration Pattern Tests", () => {
                       undefined,
                       new SyntaxToken(
                         TokenKind.KEYWORD_INT_TOKEN,
-                        { row: 0, column: 25, position: 25 },
+                        { row: 1, column: 26, position: 25 },
                         "int",
                         [],
                         [],
@@ -662,7 +662,7 @@ describe("Map Declaration Pattern Tests", () => {
                         [
                           new SyntaxToken(
                             TokenKind.LITERAL_INTEGER_TOKEN,
-                            { row: 0, column: 29, position: 29 },
+                            { row: 1, column: 30, position: 29 },
                             "6",
                             [],
                             [],
@@ -671,14 +671,14 @@ describe("Map Declaration Pattern Tests", () => {
                       ),
                       new SyntaxToken(
                         TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-                        { row: 0, column: 28, position: 28 },
+                        { row: 1, column: 29, position: 28 },
                         "(",
                         [],
                         [],
                       ),
                       new SyntaxToken(
                         TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-                        { row: 0, column: 30, position: 30 },
+                        { row: 1, column: 31, position: 30 },
                         ")",
                         [],
                         [],
@@ -688,7 +688,7 @@ describe("Map Declaration Pattern Tests", () => {
                 ],
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-                  { row: 0, column: 24, position: 24 },
+                  { row: 1, column: 25, position: 24 },
                   "{",
                   [],
                   [],
@@ -696,7 +696,7 @@ describe("Map Declaration Pattern Tests", () => {
                 undefined,
                 new SyntaxToken(
                   TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-                  { row: 0, column: 31, position: 31 },
+                  { row: 1, column: 32, position: 31 },
                   "}",
                   [],
                   [],
@@ -704,7 +704,7 @@ describe("Map Declaration Pattern Tests", () => {
               ),
               new SyntaxToken(
                 TokenKind.PUNCTUATOR_COMMA_TOKEN,
-                { row: 0, column: 23, position: 23 },
+                { row: 1, column: 24, position: 23 },
                 ",",
                 [],
                 [],
@@ -713,7 +713,7 @@ describe("Map Declaration Pattern Tests", () => {
           ],
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
-            { row: 0, column: 18, position: 18 },
+            { row: 1, column: 19, position: 18 },
             "{",
             [],
             [],
@@ -721,7 +721,7 @@ describe("Map Declaration Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
-            { row: 0, column: 32, position: 32 },
+            { row: 1, column: 33, position: 32 },
             "}",
             [],
             [],
@@ -729,33 +729,33 @@ describe("Map Declaration Pattern Tests", () => {
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_MAP_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "map",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 3, position: 3 },
+              { row: 1, column: 4, position: 3 },
               " ",
             ),
           ],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
-          { row: 0, column: 12, position: 12 },
+          { row: 1, column: 13, position: 12 },
           "(",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
-          { row: 0, column: 16, position: 16 },
+          { row: 1, column: 17, position: 16 },
           ")",
           [],
           [
             new Trivia(
               TokenKind.WHITESPACE_TOKEN,
-              { row: 0, column: 17, position: 17 },
+              { row: 1, column: 18, position: 17 },
               " ",
             ),
           ],

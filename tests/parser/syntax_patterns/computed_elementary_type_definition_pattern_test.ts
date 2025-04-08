@@ -23,13 +23,13 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 9, position: 9 },
+            { row: 1, column: 10, position: 9 },
             "int",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 12,
+                row: 1,
+                column: 13,
                 position: 12,
               }, " "),
             ],
@@ -39,7 +39,7 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 13, position: 13 },
+            { row: 1, column: 14, position: 13 },
             "a",
             [],
             [],
@@ -48,13 +48,13 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.KEYWORD_COMPUTED_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "computed",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             }, " "),
           ],
@@ -63,7 +63,7 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
         undefined,
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 14, position: 14 },
+          { row: 1, column: 15, position: 14 },
           ";",
           [],
           [],
@@ -83,13 +83,13 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
           undefined,
           new SyntaxToken(
             TokenKind.KEYWORD_INT_TOKEN,
-            { row: 0, column: 15, position: 15 },
+            { row: 1, column: 16, position: 15 },
             "int",
             [],
             [
               new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                row: 0,
-                column: 18,
+                row: 1,
+                column: 19,
                 position: 18,
               }, " "),
             ],
@@ -99,7 +99,7 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
           "a",
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
-            { row: 0, column: 19, position: 19 },
+            { row: 1, column: 20, position: 19 },
             "a",
             [],
             [],
@@ -108,7 +108,7 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
         new NumberLiteral(NumberLiteralKind.INTEGER, 3, [
           new SyntaxToken(
             TokenKind.LITERAL_INTEGER_TOKEN,
-            { row: 0, column: 21, position: 21 },
+            { row: 1, column: 22, position: 21 },
             "3",
             [],
             [],
@@ -116,40 +116,40 @@ describe("Computed Elementary Type Definition Pattern Tests", () => {
         ]),
         new SyntaxToken(
           TokenKind.KEYWORD_COMPUTED_TOKEN,
-          { row: 0, column: 0, position: 0 },
+          { row: 1, column: 1, position: 0 },
           "computed",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 8,
+              row: 1,
+              column: 9,
               position: 8,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.KEYWORD_CONST_TOKEN,
-          { row: 0, column: 9, position: 9 },
+          { row: 1, column: 10, position: 9 },
           "const",
           [],
           [
             new Trivia(TokenKind.WHITESPACE_TOKEN, {
-              row: 0,
-              column: 14,
+              row: 1,
+              column: 15,
               position: 14,
             }, " "),
           ],
         ),
         new SyntaxToken(
           TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
-          { row: 0, column: 20, position: 20 },
+          { row: 1, column: 21, position: 20 },
           "=",
           [],
           [],
         ),
         new SyntaxToken(
           TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
-          { row: 0, column: 22, position: 22 },
+          { row: 1, column: 23, position: 22 },
           ";",
           [],
           [],

@@ -24,8 +24,8 @@ describe("Unary Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.LITERAL_INTEGER_TOKEN,
               {
-                row: 0,
-                column: 1,
+                row: 1,
+                column: 2,
                 position: 1,
               },
               "1",
@@ -37,8 +37,8 @@ describe("Unary Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_PLUS_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "+",
@@ -60,8 +60,8 @@ describe("Unary Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.IDENTIFIER_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "i",
@@ -72,8 +72,8 @@ describe("Unary Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MINUS_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "-",
@@ -96,8 +96,8 @@ describe("Unary Expression Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.IDENTIFIER_TOKEN,
               {
-                row: 0,
-                column: 10,
+                row: 1,
+                column: 11,
                 position: 10,
               },
               "i",
@@ -108,8 +108,8 @@ describe("Unary Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.KEYWORD_LENGTHOF_TOKEN,
             {
-              row: 0,
-              column: 1,
+              row: 1,
+              column: 2,
               position: 1,
             },
             "lengthof",
@@ -119,8 +119,8 @@ describe("Unary Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_OPEN_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 9,
+              row: 1,
+              column: 10,
               position: 9,
             },
             "(",
@@ -130,8 +130,8 @@ describe("Unary Expression Pattern Tests", () => {
           new SyntaxToken(
             TokenKind.PUNCTUATOR_CLOSE_PARENTHESIS_TOKEN,
             {
-              row: 0,
-              column: 11,
+              row: 1,
+              column: 12,
               position: 11,
             },
             ")",
@@ -142,8 +142,8 @@ describe("Unary Expression Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.OPERATOR_MINUS_TOKEN,
           {
-            row: 0,
-            column: 0,
+            row: 1,
+            column: 1,
             position: 0,
           },
           "-",

@@ -50,16 +50,16 @@ describe("Specification Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 0,
-                  column: 6,
+                  row: 1,
+                  column: 7,
                   position: 6,
                 },
                 "A",
                 [],
                 [
                   new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                    row: 0,
-                    column: 7,
+                    row: 1,
+                    column: 8,
                     position: 7,
                   }, " "),
                 ],
@@ -73,16 +73,16 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_CLASS_TOKEN,
               {
-                row: 0,
-                column: 0,
+                row: 1,
+                column: 1,
                 position: 0,
               },
               "class",
               [],
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 0,
-                  column: 5,
+                  row: 1,
+                  column: 6,
                   position: 5,
                 }, " "),
               ],
@@ -90,8 +90,8 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
               {
-                row: 0,
-                column: 8,
+                row: 1,
+                column: 9,
                 position: 8,
               },
               "{",
@@ -101,8 +101,8 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
               {
-                row: 0,
-                column: 9,
+                row: 1,
+                column: 10,
                 position: 9,
               },
               "}",
@@ -114,8 +114,8 @@ describe("Specification Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.EOF_TOKEN,
           {
-            row: 0,
-            column: 10,
+            row: 1,
+            column: 11,
             position: 10,
           },
           "",
@@ -152,16 +152,16 @@ describe("Specification Pattern Tests", () => {
               new SyntaxToken(
                 TokenKind.IDENTIFIER_TOKEN,
                 {
-                  row: 1,
-                  column: 6,
+                  row: 2,
+                  column: 7,
                   position: 21,
                 },
                 "A",
                 [],
                 [
                   new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                    row: 1,
-                    column: 7,
+                    row: 2,
+                    column: 8,
                     position: 22,
                   }, " "),
                 ],
@@ -175,27 +175,27 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.KEYWORD_CLASS_TOKEN,
               {
-                row: 1,
-                column: 0,
+                row: 2,
+                column: 1,
                 position: 15,
               },
               "class",
               [
                 new Trivia(TokenKind.COMMENT_TOKEN, {
-                  row: 0,
-                  column: 0,
+                  row: 1,
+                  column: 1,
                   position: 0,
                 }, "// hello world"),
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 0,
-                  column: 14,
+                  row: 1,
+                  column: 15,
                   position: 14,
                 }, "\n"),
               ],
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 1,
-                  column: 5,
+                  row: 2,
+                  column: 6,
                   position: 20,
                 }, " "),
               ],
@@ -203,8 +203,8 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_OPEN_BRACE_TOKEN,
               {
-                row: 1,
-                column: 8,
+                row: 2,
+                column: 9,
                 position: 23,
               },
               "{",
@@ -214,15 +214,15 @@ describe("Specification Pattern Tests", () => {
             new SyntaxToken(
               TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN,
               {
-                row: 2,
-                column: 0,
+                row: 3,
+                column: 1,
                 position: 25,
               },
               "}",
               [
                 new Trivia(TokenKind.WHITESPACE_TOKEN, {
-                  row: 1,
-                  column: 9,
+                  row: 2,
+                  column: 10,
                   position: 24,
                 }, "\n"),
               ],
@@ -233,8 +233,8 @@ describe("Specification Pattern Tests", () => {
         new SyntaxToken(
           TokenKind.EOF_TOKEN,
           {
-            row: 2,
-            column: 1,
+            row: 3,
+            column: 2,
             position: 26,
           },
           "",

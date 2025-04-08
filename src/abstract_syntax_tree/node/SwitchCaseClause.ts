@@ -27,7 +27,6 @@ export class SwitchCaseClause extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield* this.getSyntaxTokenIterable();
     yield this.caseToken;
     yield* this.value.getSyntaxTokenIterable();
     yield this.colonToken;
@@ -37,6 +36,8 @@ export class SwitchCaseClause extends AbstractCompositeNode {
     for (const statement of this.statements) {
       yield* statement.getSyntaxTokenIterable();
     }
+    yield this.breakToken;
+    yield this.semicolonToken;
     if (this.closeBraceToken) {
       yield this.closeBraceToken;
     }
