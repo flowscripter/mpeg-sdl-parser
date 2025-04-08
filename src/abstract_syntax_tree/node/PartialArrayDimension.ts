@@ -6,12 +6,12 @@ import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
 export class PartialArrayDimension extends AbstractArrayDimension {
   constructor(
     public readonly index: AbstractNode,
-    public readonly openBracketToken: SyntaxToken,
-    public readonly innerOpenBracketToken: SyntaxToken,
-    public readonly innerCloseBracketToken: SyntaxToken,
-    public readonly closeBracketToken: SyntaxToken,
+    public readonly openBracketPunctuatorToken: SyntaxToken,
+    public readonly innerOpenBracketPunctuatorToken: SyntaxToken,
+    public readonly innerCloseBracketPunctuatorToken: SyntaxToken,
+    public readonly closeBracketPunctuatorToken: SyntaxToken,
   ) {
-    super(ArrayDimensionKind.PARTIAL, openBracketToken.location);
+    super(ArrayDimensionKind.PARTIAL, openBracketPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -19,10 +19,10 @@ export class PartialArrayDimension extends AbstractArrayDimension {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketToken;
-    yield this.innerOpenBracketToken;
+    yield this.openBracketPunctuatorToken;
+    yield this.innerOpenBracketPunctuatorToken;
     yield* this.index.getSyntaxTokenIterable();
-    yield this.innerCloseBracketToken;
-    yield this.closeBracketToken;
+    yield this.innerCloseBracketPunctuatorToken;
+    yield this.closeBracketPunctuatorToken;
   }
 }

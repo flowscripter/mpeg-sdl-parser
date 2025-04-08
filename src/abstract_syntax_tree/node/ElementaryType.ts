@@ -6,18 +6,18 @@ import { NodeKind } from "./enum/node_kind.ts";
 export class ElementaryType extends AbstractLeafNode {
   constructor(
     public readonly elementaryTypeKind: ElementaryTypeKind,
-    public readonly unsignedQualifierToken: SyntaxToken | undefined,
+    public readonly unsignedQualifierKeywordToken: SyntaxToken | undefined,
     public readonly typeToken: SyntaxToken,
   ) {
     super(
       NodeKind.ELEMENTARY_TYPE,
-      unsignedQualifierToken?.location ?? typeToken.location,
+      unsignedQualifierKeywordToken?.location ?? typeToken.location,
     );
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.unsignedQualifierToken) {
-      yield this.unsignedQualifierToken;
+    if (this.unsignedQualifierKeywordToken) {
+      yield this.unsignedQualifierKeywordToken;
     }
     yield this.typeToken;
   }

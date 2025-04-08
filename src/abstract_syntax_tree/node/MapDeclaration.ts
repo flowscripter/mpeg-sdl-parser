@@ -12,11 +12,11 @@ export class MapDeclaration extends AbstractStatement {
     public readonly outputElementaryType: ElementaryType | undefined,
     public readonly outputClassIdentifier: Identifier | undefined,
     public readonly mapEntryList: MapEntryList,
-    public readonly mapToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly mapKeywordToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
-    super(StatementKind.MAP_DECLARATION, mapToken.location);
+    super(StatementKind.MAP_DECLARATION, mapKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -30,15 +30,15 @@ export class MapDeclaration extends AbstractStatement {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.mapToken;
+    yield this.mapKeywordToken;
     yield* this.identifier.getSyntaxTokenIterable();
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     if (this.outputElementaryType) {
       yield* this.outputElementaryType.getSyntaxTokenIterable();
     } else if (this.outputClassIdentifier) {
       yield* this.outputClassIdentifier.getSyntaxTokenIterable();
     }
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
     yield* this.mapEntryList.getSyntaxTokenIterable();
   }
 }

@@ -9,14 +9,14 @@ export class SwitchCaseClause extends AbstractCompositeNode {
   constructor(
     public readonly value: NumberLiteral,
     public readonly statements: AbstractStatement[],
-    public readonly caseToken: SyntaxToken,
-    public readonly colonToken: SyntaxToken,
-    public readonly openBraceToken: SyntaxToken | undefined,
-    public readonly breakToken: SyntaxToken,
-    public readonly semicolonToken: SyntaxToken,
-    public readonly closeBraceToken: SyntaxToken | undefined,
+    public readonly caseKeywordToken: SyntaxToken,
+    public readonly colonPunctuatorToken: SyntaxToken,
+    public readonly openBracePunctuatorToken: SyntaxToken | undefined,
+    public readonly breakKeywordToken: SyntaxToken,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly closeBracePunctuatorToken: SyntaxToken | undefined,
   ) {
-    super(NodeKind.SWITCH_CASE_CLAUSE, caseToken.location);
+    super(NodeKind.SWITCH_CASE_CLAUSE, caseKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -27,19 +27,19 @@ export class SwitchCaseClause extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.caseToken;
+    yield this.caseKeywordToken;
     yield* this.value.getSyntaxTokenIterable();
-    yield this.colonToken;
-    if (this.openBraceToken) {
-      yield this.openBraceToken;
+    yield this.colonPunctuatorToken;
+    if (this.openBracePunctuatorToken) {
+      yield this.openBracePunctuatorToken;
     }
     for (const statement of this.statements) {
       yield* statement.getSyntaxTokenIterable();
     }
-    yield this.breakToken;
-    yield this.semicolonToken;
-    if (this.closeBraceToken) {
-      yield this.closeBraceToken;
+    yield this.breakKeywordToken;
+    yield this.semicolonPunctuatorToken;
+    if (this.closeBracePunctuatorToken) {
+      yield this.closeBracePunctuatorToken;
     }
   }
 }

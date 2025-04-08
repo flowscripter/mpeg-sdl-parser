@@ -8,12 +8,12 @@ import type { NumberLiteral } from "./NumberLiteral.ts";
 export class PrimaryExpression extends AbstractExpression {
   constructor(
     public readonly operand: Identifier | NumberLiteral | AbstractNode,
-    public readonly openParenthesisToken: SyntaxToken | undefined,
-    public readonly closeParenthesisToken: SyntaxToken | undefined,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken | undefined,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken | undefined,
   ) {
     super(
       ExpressionKind.PRIMARY,
-      openParenthesisToken?.location ?? operand.location,
+      openParenthesisPunctuatorToken?.location ?? operand.location,
     );
   }
 
@@ -22,12 +22,12 @@ export class PrimaryExpression extends AbstractExpression {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.openParenthesisToken) {
-      yield this.openParenthesisToken;
+    if (this.openParenthesisPunctuatorToken) {
+      yield this.openParenthesisPunctuatorToken;
     }
     yield* this.operand.getSyntaxTokenIterable();
-    if (this.closeParenthesisToken) {
-      yield this.closeParenthesisToken;
+    if (this.closeParenthesisPunctuatorToken) {
+      yield this.closeParenthesisPunctuatorToken;
     }
   }
 }

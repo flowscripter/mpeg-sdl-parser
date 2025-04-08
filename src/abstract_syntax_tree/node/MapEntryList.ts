@@ -7,11 +7,11 @@ import type { MapEntry } from "./MapEntry.ts";
 export class MapEntryList extends AbstractCompositeNode {
   constructor(
     public readonly mapEntries: MapEntry[],
-    public readonly openBraceToken: SyntaxToken,
-    public readonly commaTokens: SyntaxToken[] | undefined,
-    public readonly closeBraceToken: SyntaxToken,
+    public readonly openBracePunctuatorToken: SyntaxToken,
+    public readonly commaPunctuatorTokens: SyntaxToken[] | undefined,
+    public readonly closeBracePunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.MAP_ENTRY_LIST, openBraceToken.location);
+    super(NodeKind.MAP_ENTRY_LIST, openBracePunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -21,13 +21,13 @@ export class MapEntryList extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBraceToken;
+    yield this.openBracePunctuatorToken;
     for (let i = 0; i < this.mapEntries.length; i++) {
       yield* this.mapEntries[i].getSyntaxTokenIterable();
-      if (i < this.commaTokens!.length) {
-        yield this.commaTokens![i];
+      if (i < this.commaPunctuatorTokens!.length) {
+        yield this.commaPunctuatorTokens![i];
       }
     }
-    yield this.closeBraceToken;
+    yield this.closeBracePunctuatorToken;
   }
 }

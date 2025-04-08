@@ -6,13 +6,13 @@ import { NodeKind } from "./enum/node_kind.ts";
 export class ParameterValueList extends AbstractCompositeNode {
   constructor(
     public readonly values: AbstractNode[],
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly commaTokens: SyntaxToken[] | undefined,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly commaPunctuatorTokens: SyntaxToken[] | undefined,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
     super(
       NodeKind.PARAMETER_VALUE_LIST,
-      openParenthesisToken.location,
+      openParenthesisPunctuatorToken.location,
     );
   }
 
@@ -23,13 +23,13 @@ export class ParameterValueList extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     for (let i = 0; i < this.values.length; i++) {
       yield* this.values[i].getSyntaxTokenIterable();
-      if (i < this.commaTokens!.length) {
-        yield this.commaTokens![i];
+      if (i < this.commaPunctuatorTokens!.length) {
+        yield this.commaPunctuatorTokens![i];
       }
     }
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
   }
 }

@@ -6,12 +6,12 @@ import { NodeKind } from "./enum/node_kind.ts";
 export class ArrayElementAccess extends AbstractCompositeNode {
   constructor(
     public readonly index: AbstractNode,
-    public readonly openBracketToken: SyntaxToken,
-    public readonly closeBracketToken: SyntaxToken,
+    public readonly openBracketPunctuatorToken: SyntaxToken,
+    public readonly closeBracketPunctuatorToken: SyntaxToken,
   ) {
     super(
       NodeKind.ARRAY_ELEMENT_ACCESS,
-      openBracketToken.location,
+      openBracketPunctuatorToken.location,
     );
   }
 
@@ -20,8 +20,8 @@ export class ArrayElementAccess extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketToken;
+    yield this.openBracketPunctuatorToken;
     yield* this.index.getSyntaxTokenIterable();
-    yield this.closeBracketToken;
+    yield this.closeBracketPunctuatorToken;
   }
 }

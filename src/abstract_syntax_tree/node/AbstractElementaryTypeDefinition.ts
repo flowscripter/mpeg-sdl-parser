@@ -15,8 +15,8 @@ export abstract class AbstractElementaryTypeDefinition
     public readonly elementaryType: ElementaryType,
     public readonly identifier: Identifier,
     public readonly value: AbstractNode | undefined,
-    public readonly constToken: SyntaxToken | undefined,
-    public readonly assignmentToken: SyntaxToken | undefined,
+    public readonly constKeywordToken: SyntaxToken | undefined,
+    public readonly assignmentOperatorToken: SyntaxToken | undefined,
     public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(kind, location);

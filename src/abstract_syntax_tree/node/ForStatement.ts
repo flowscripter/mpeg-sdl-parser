@@ -17,10 +17,10 @@ export class ForStatement extends AbstractStatement {
     public readonly expression3: AbstractExpression | undefined,
     public readonly compoundStatement: CompoundStatement,
     public readonly forKeywordToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly semicolonToken1: SyntaxToken | undefined,
-    public readonly semicolonToken2: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly semicolon1PunctuatorToken: SyntaxToken | undefined,
+    public readonly semicolon2PunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
     super(StatementKind.FOR, forKeywordToken.location);
   }
@@ -43,24 +43,24 @@ export class ForStatement extends AbstractStatement {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield this.forKeywordToken;
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     if (this.expression1) {
       yield* this.expression1.getSyntaxTokenIterable();
     }
     if (this.computedElementaryDefinition) {
       yield* this.computedElementaryDefinition.getSyntaxTokenIterable();
     }
-    if (this.semicolonToken1) {
-      yield this.semicolonToken1;
+    if (this.semicolon1PunctuatorToken) {
+      yield this.semicolon1PunctuatorToken;
     }
     if (this.expression2) {
       yield* this.expression2.getSyntaxTokenIterable();
     }
-    yield this.semicolonToken2;
+    yield this.semicolon2PunctuatorToken;
     if (this.expression3) {
       yield* this.expression3.getSyntaxTokenIterable();
     }
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
     yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }

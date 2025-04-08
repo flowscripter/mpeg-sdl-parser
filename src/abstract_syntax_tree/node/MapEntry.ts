@@ -9,7 +9,7 @@ export class MapEntry extends AbstractCompositeNode {
   constructor(
     public readonly inputValue: NumberLiteral,
     public readonly outputValue: AggregateMapOutputValue,
-    public readonly commaToken: SyntaxToken,
+    public readonly commaPunctuatorToken: SyntaxToken,
   ) {
     super(NodeKind.MAP_ENTRY, inputValue.location);
   }
@@ -21,7 +21,7 @@ export class MapEntry extends AbstractCompositeNode {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield* this.inputValue.getSyntaxTokenIterable();
-    yield this.commaToken;
+    yield this.commaPunctuatorToken;
     yield* this.outputValue.getSyntaxTokenIterable();
   }
 }

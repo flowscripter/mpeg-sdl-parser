@@ -6,11 +6,11 @@ import { MapOutputValueKind } from "./enum/map_output_value_kind.ts";
 export class AggregateMapOutputValue extends AbstractMapOutputValue {
   constructor(
     public readonly outputValues: AbstractMapOutputValue[],
-    public readonly openBraceToken: SyntaxToken,
-    public readonly commaTokens: SyntaxToken[] | undefined,
-    public readonly closeBraceToken: SyntaxToken,
+    public readonly openBracePunctuatorToken: SyntaxToken,
+    public readonly commaPunctuatorTokens: SyntaxToken[] | undefined,
+    public readonly closeBracePunctuatorToken: SyntaxToken,
   ) {
-    super(MapOutputValueKind.AGGREGATE, openBraceToken.location);
+    super(MapOutputValueKind.AGGREGATE, openBracePunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -20,16 +20,16 @@ export class AggregateMapOutputValue extends AbstractMapOutputValue {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBraceToken;
+    yield this.openBracePunctuatorToken;
 
     for (let i = 0; i < this.outputValues.length; i++) {
       yield* this.outputValues[i].getSyntaxTokenIterable();
 
       if (i < this.outputValues.length - 1) {
-        yield this.commaTokens![i];
+        yield this.commaPunctuatorTokens![i];
       }
     }
 
-    yield this.closeBraceToken;
+    yield this.closeBracePunctuatorToken;
   }
 }

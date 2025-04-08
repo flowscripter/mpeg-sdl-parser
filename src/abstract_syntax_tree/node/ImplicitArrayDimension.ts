@@ -7,11 +7,11 @@ export class ImplicitArrayDimension extends AbstractArrayDimension {
   constructor(
     public readonly rangeStart: AbstractNode | undefined,
     public readonly rangeEnd: AbstractNode | undefined,
-    public readonly openBracketToken: SyntaxToken,
+    public readonly openBracketPunctuatorToken: SyntaxToken,
     public readonly rangeOperatorToken: SyntaxToken | undefined,
-    public readonly closeBracketToken: SyntaxToken,
+    public readonly closeBracketPunctuatorToken: SyntaxToken,
   ) {
-    super(ArrayDimensionKind.IMPLICIT, openBracketToken.location);
+    super(ArrayDimensionKind.IMPLICIT, openBracketPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -22,7 +22,7 @@ export class ImplicitArrayDimension extends AbstractArrayDimension {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketToken;
+    yield this.openBracketPunctuatorToken;
 
     if (this.rangeStart) {
       yield* this.rangeStart.getSyntaxTokenIterable();
@@ -32,6 +32,6 @@ export class ImplicitArrayDimension extends AbstractArrayDimension {
       yield* this.rangeEnd!.getSyntaxTokenIterable();
     }
 
-    yield this.closeBracketToken;
+    yield this.closeBracketPunctuatorToken;
   }
 }

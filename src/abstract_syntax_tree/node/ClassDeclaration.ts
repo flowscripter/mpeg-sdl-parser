@@ -19,10 +19,10 @@ export class ClassDeclaration extends AbstractStatement {
     public readonly extendsModifier: ExtendsModifier | undefined,
     public readonly bitModifier: BitModifier | undefined,
     public readonly statements: AbstractStatement[],
-    public readonly abstractToken: SyntaxToken | undefined,
-    public readonly classToken: SyntaxToken,
-    public readonly openBraceToken: SyntaxToken,
-    public readonly closeBraceToken: SyntaxToken,
+    public readonly abstractKeywordToken: SyntaxToken | undefined,
+    public readonly classKeywordToken: SyntaxToken,
+    public readonly openBracePunctuatorToken: SyntaxToken,
+    public readonly closeBracePunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.CLASS_DECLARATION,
@@ -69,10 +69,10 @@ export class ClassDeclaration extends AbstractStatement {
     }
 
     if (this.isAbstract) {
-      yield this.abstractToken!;
+      yield this.abstractKeywordToken!;
     }
 
-    yield this.classToken;
+    yield this.classKeywordToken;
     yield* this.identifier.getSyntaxTokenIterable();
 
     if (this.parameterList) {
@@ -87,12 +87,12 @@ export class ClassDeclaration extends AbstractStatement {
       yield* this.bitModifier.getSyntaxTokenIterable();
     }
 
-    yield this.openBraceToken;
+    yield this.openBracePunctuatorToken;
 
     for (const statement of this.statements) {
       yield* statement.getSyntaxTokenIterable();
     }
 
-    yield this.closeBraceToken;
+    yield this.closeBracePunctuatorToken;
   }
 }

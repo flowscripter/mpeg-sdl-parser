@@ -6,11 +6,11 @@ import { ExpressionKind } from "./enum/expression_kind.ts";
 export class LengthOfExpression extends AbstractExpression {
   constructor(
     public readonly operand: AbstractNode,
-    public readonly lengthOfToken: SyntaxToken,
+    public readonly lengthOfKeywordToken: SyntaxToken,
     public readonly openParenthesisPunctuatorToken: SyntaxToken,
     public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
-    super(ExpressionKind.LENGTH_OF, lengthOfToken.location);
+    super(ExpressionKind.LENGTH_OF, lengthOfKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -18,7 +18,7 @@ export class LengthOfExpression extends AbstractExpression {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.lengthOfToken;
+    yield this.lengthOfKeywordToken;
     yield this.openParenthesisPunctuatorToken;
     yield* this.operand.getSyntaxTokenIterable();
     yield this.closeParenthesisPunctuatorToken;

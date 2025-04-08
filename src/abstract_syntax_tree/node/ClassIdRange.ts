@@ -8,7 +8,7 @@ export class ClassIdRange extends AbstractClassId {
   constructor(
     public readonly startClassId: SingleClassId,
     public readonly endClassId: SingleClassId,
-    public readonly rangeToken: SyntaxToken,
+    public readonly rangeOperatorToken: SyntaxToken,
   ) {
     super(ClassIdKind.RANGE, startClassId.location);
   }
@@ -20,7 +20,7 @@ export class ClassIdRange extends AbstractClassId {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield* this.startClassId.getSyntaxTokenIterable();
-    yield this.rangeToken;
+    yield this.rangeOperatorToken;
     yield* this.endClassId.getSyntaxTokenIterable();
   }
 }

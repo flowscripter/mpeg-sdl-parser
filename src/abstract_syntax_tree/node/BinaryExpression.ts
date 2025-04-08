@@ -9,7 +9,7 @@ export class BinaryExpression extends AbstractExpression {
     public readonly leftOperand: AbstractNode,
     public readonly binaryOperatorKind: BinaryOperatorKind,
     public readonly rightOperand: AbstractNode,
-    public readonly binaryOperandToken: SyntaxToken,
+    public readonly binaryOperatorToken: SyntaxToken,
   ) {
     super(ExpressionKind.BINARY, leftOperand.location);
   }
@@ -21,7 +21,7 @@ export class BinaryExpression extends AbstractExpression {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield* this.leftOperand.getSyntaxTokenIterable();
-    yield this.binaryOperandToken;
+    yield this.binaryOperatorToken;
     yield* this.rightOperand.getSyntaxTokenIterable();
   }
 }

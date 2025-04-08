@@ -7,11 +7,11 @@ import type { NumberLiteral } from "./NumberLiteral.ts";
 export class ExpandableModifier extends AbstractCompositeNode {
   constructor(
     public readonly maxClassSize: NumberLiteral | undefined,
-    public readonly expandableToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken | undefined,
-    public readonly closeParenthesisToken: SyntaxToken | undefined,
+    public readonly expandableKeywordToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken | undefined,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken | undefined,
   ) {
-    super(NodeKind.EXPANDABLE_MODIFIER, expandableToken.location);
+    super(NodeKind.EXPANDABLE_MODIFIER, expandableKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -21,12 +21,12 @@ export class ExpandableModifier extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.expandableToken;
+    yield this.expandableKeywordToken;
 
-    if (this.openParenthesisToken) {
-      yield this.openParenthesisToken;
+    if (this.openParenthesisPunctuatorToken) {
+      yield this.openParenthesisPunctuatorToken;
       yield* this.maxClassSize!.getSyntaxTokenIterable();
-      yield this.closeParenthesisToken!;
+      yield this.closeParenthesisPunctuatorToken!;
     }
   }
 }

@@ -10,8 +10,8 @@ export class WhileStatement extends AbstractStatement {
     public readonly expression: AbstractExpression,
     public readonly compoundStatement: CompoundStatement,
     public readonly whileKeywordToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
     super(StatementKind.WHILE, whileKeywordToken.location);
   }
@@ -23,9 +23,9 @@ export class WhileStatement extends AbstractStatement {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     yield this.whileKeywordToken;
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     yield* this.expression.getSyntaxTokenIterable();
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
     yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }

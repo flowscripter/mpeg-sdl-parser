@@ -12,20 +12,20 @@ export class ComputedElementaryTypeDefinition
     elementaryType: ElementaryType,
     identifier: Identifier,
     value: AbstractNode | undefined,
-    public readonly computedToken: SyntaxToken,
-    constToken: SyntaxToken | undefined,
-    assignmentToken: SyntaxToken | undefined,
+    public readonly computedKeywordToken: SyntaxToken,
+    constKeywordToken: SyntaxToken | undefined,
+    assignmentOperatorToken: SyntaxToken | undefined,
     semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.COMPUTED_ELEMENTARY_TYPE_DEFINITION,
-      computedToken.location,
+      computedKeywordToken.location,
       isConst,
       elementaryType,
       identifier,
       value,
-      constToken,
-      assignmentToken,
+      constKeywordToken,
+      assignmentOperatorToken,
       semicolonPunctuatorToken,
     );
   }
@@ -39,14 +39,14 @@ export class ComputedElementaryTypeDefinition
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.computedToken;
+    yield this.computedKeywordToken;
     if (this.isConst) {
-      yield this.constToken!;
+      yield this.constKeywordToken!;
     }
     yield* this.elementaryType.getSyntaxTokenIterable();
     yield* this.identifier.getSyntaxTokenIterable();
     if (this.value) {
-      yield this.assignmentToken!;
+      yield this.assignmentOperatorToken!;
       yield* this.value.getSyntaxTokenIterable();
     }
     yield this.semicolonPunctuatorToken;
