@@ -9,9 +9,9 @@ export class ExtendsModifier extends AbstractCompositeNode {
   constructor(
     public readonly identifier: Identifier,
     public readonly parameterValueList: ParameterValueList | undefined,
-    public readonly extendsToken: SyntaxToken,
+    public readonly extendsKeywordToken: SyntaxToken,
   ) {
-    super(NodeKind.EXTENDS_MODIFIER, extendsToken.location);
+    super(NodeKind.EXTENDS_MODIFIER, extendsKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -22,7 +22,7 @@ export class ExtendsModifier extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.extendsToken;
+    yield this.extendsKeywordToken;
     yield* this.identifier.getSyntaxTokenIterable();
     if (this.parameterValueList) {
       yield* this.parameterValueList.getSyntaxTokenIterable();

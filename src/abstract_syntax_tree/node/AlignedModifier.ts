@@ -9,11 +9,11 @@ export class AlignedModifier extends AbstractCompositeNode {
     public readonly bitCount: number,
     public readonly isDefault8BitCount: boolean,
     public readonly bitCountModifier: NumberLiteral | undefined,
-    public readonly alignedToken: SyntaxToken,
-    public readonly openParenthesisToken?: SyntaxToken,
-    public readonly closeParenthesisToken?: SyntaxToken,
+    public readonly alignedKeywordToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken?: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken?: SyntaxToken,
   ) {
-    super(NodeKind.ALIGNED_MODIFIER, alignedToken.location);
+    super(NodeKind.ALIGNED_MODIFIER, alignedKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -23,12 +23,12 @@ export class AlignedModifier extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.alignedToken;
+    yield this.alignedKeywordToken;
 
     if (!this.isDefault8BitCount) {
-      yield this.openParenthesisToken!;
+      yield this.openParenthesisPunctuatorToken!;
       yield* this.bitCountModifier!.getSyntaxTokenIterable();
-      yield this.closeParenthesisToken!;
+      yield this.closeParenthesisPunctuatorToken!;
     }
   }
 }

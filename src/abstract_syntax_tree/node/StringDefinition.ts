@@ -16,18 +16,18 @@ export class StringDefinition extends AbstractStatement {
     public readonly stringVariableKind: StringVariableKind,
     public readonly identifier: Identifier,
     public readonly stringLiteral: StringLiteral | undefined,
-    public readonly reservedToken: SyntaxToken | undefined,
-    public readonly legacyToken: SyntaxToken | undefined,
-    public readonly constToken: SyntaxToken | undefined,
+    public readonly reservedKeywordToken: SyntaxToken | undefined,
+    public readonly legacyKeywordToken: SyntaxToken | undefined,
+    public readonly constKeywordToken: SyntaxToken | undefined,
     public readonly stringVariableKindToken: SyntaxToken,
     public readonly assignmentPunctuatorToken: SyntaxToken | undefined,
     public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.STRING_DEFINITION,
-      reservedToken?.location ??
-        legacyToken?.location ??
-        constToken?.location ??
+      reservedKeywordToken?.location ??
+        legacyKeywordToken?.location ??
+        constKeywordToken?.location ??
         alignedModifier?.location ??
         stringVariableKindToken.location,
     );
@@ -45,14 +45,14 @@ export class StringDefinition extends AbstractStatement {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.reservedToken) {
-      yield this.reservedToken;
+    if (this.reservedKeywordToken) {
+      yield this.reservedKeywordToken;
     }
-    if (this.legacyToken) {
-      yield this.legacyToken;
+    if (this.legacyKeywordToken) {
+      yield this.legacyKeywordToken;
     }
-    if (this.constToken) {
-      yield this.constToken;
+    if (this.constKeywordToken) {
+      yield this.constKeywordToken;
     }
     if (this.alignedModifier) {
       yield* this.alignedModifier.getSyntaxTokenIterable();

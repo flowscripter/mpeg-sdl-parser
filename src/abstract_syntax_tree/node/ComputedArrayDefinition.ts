@@ -11,12 +11,12 @@ export class ComputedArrayDefinition extends AbstractArrayDefinition {
     public readonly elementaryType: ElementaryType,
     identifier: Identifier,
     public readonly dimensions: ExplicitArrayDimension[],
-    public readonly computedToken: SyntaxToken,
+    public readonly computedKeywordToken: SyntaxToken,
     semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.COMPUTED_ARRAY_DEFINITION,
-      computedToken.location,
+      computedKeywordToken.location,
       identifier,
       semicolonPunctuatorToken,
     );
@@ -31,7 +31,7 @@ export class ComputedArrayDefinition extends AbstractArrayDefinition {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.computedToken;
+    yield this.computedKeywordToken;
     yield* this.elementaryType.getSyntaxTokenIterable();
     yield* this.identifier.getSyntaxTokenIterable();
     for (const dimension of this.dimensions) {

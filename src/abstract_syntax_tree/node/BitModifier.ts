@@ -11,13 +11,13 @@ export class BitModifier extends AbstractCompositeNode {
     public readonly length: NumberLiteral,
     public readonly identifier: Identifier | undefined,
     public readonly classId: AbstractClassId,
-    public readonly colonToken: SyntaxToken,
+    public readonly colonPunctuatorToken: SyntaxToken,
     public readonly bitKeywordToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
-    public readonly assignmentToken: SyntaxToken | undefined,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
+    public readonly assignmentOperatorToken: SyntaxToken | undefined,
   ) {
-    super(NodeKind.BIT_MODIFIER, colonToken.location);
+    super(NodeKind.BIT_MODIFIER, colonPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -31,15 +31,15 @@ export class BitModifier extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.colonToken;
+    yield this.colonPunctuatorToken;
     yield this.bitKeywordToken;
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     yield* this.length.getSyntaxTokenIterable();
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
 
     if (this.identifier) {
       yield* this.identifier.getSyntaxTokenIterable();
-      yield this.assignmentToken!;
+      yield this.assignmentOperatorToken!;
     }
     yield* this.classId.getSyntaxTokenIterable();
   }

@@ -48,7 +48,7 @@ function getArrayDefinition(
   if ((implicitArrayDimension !== undefined) && (dimensions.length > 0)) {
     throw new SyntacticParserError(
       "An array cannot define both implict and explicit dimensions",
-      implicitArrayDimension.openBracketToken,
+      implicitArrayDimension.openBracketPunctuatorToken,
     );
   }
 

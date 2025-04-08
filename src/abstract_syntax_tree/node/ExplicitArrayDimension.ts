@@ -6,10 +6,10 @@ import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
 export class ExplicitArrayDimension extends AbstractArrayDimension {
   constructor(
     public readonly size: AbstractNode,
-    public readonly openBracketToken: SyntaxToken,
-    public readonly closeBracketToken: SyntaxToken,
+    public readonly openBracketPunctuatorToken: SyntaxToken,
+    public readonly closeBracketPunctuatorToken: SyntaxToken,
   ) {
-    super(ArrayDimensionKind.EXPLICIT, openBracketToken.location);
+    super(ArrayDimensionKind.EXPLICIT, openBracketPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -17,8 +17,8 @@ export class ExplicitArrayDimension extends AbstractArrayDimension {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketToken;
+    yield this.openBracketPunctuatorToken;
     yield* this.size.getSyntaxTokenIterable();
-    yield this.closeBracketToken;
+    yield this.closeBracketPunctuatorToken;
   }
 }

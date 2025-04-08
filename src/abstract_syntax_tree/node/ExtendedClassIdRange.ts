@@ -8,7 +8,7 @@ import { ClassIdKind } from "./enum/class_id_kind.ts";
 export class ExtendedClassIdRange extends AbstractClassId {
   constructor(
     public readonly classIds: Array<(SingleClassId | ClassIdRange)>,
-    public readonly commaTokens: SyntaxToken[],
+    public readonly commaPunctuatorTokens: SyntaxToken[],
   ) {
     super(ClassIdKind.EXTENDED_RANGE, classIds[0].location);
   }
@@ -22,8 +22,8 @@ export class ExtendedClassIdRange extends AbstractClassId {
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     for (let i = 0; i < this.classIds.length; i++) {
       yield* this.classIds[i].getSyntaxTokenIterable();
-      if (i < this.commaTokens.length) {
-        yield this.commaTokens[i];
+      if (i < this.commaPunctuatorTokens.length) {
+        yield this.commaPunctuatorTokens[i];
       }
     }
   }

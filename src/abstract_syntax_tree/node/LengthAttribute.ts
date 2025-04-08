@@ -6,10 +6,10 @@ import { NodeKind } from "./enum/node_kind.ts";
 export class LengthAttribute extends AbstractCompositeNode {
   constructor(
     public readonly length: AbstractNode,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.LENGTH_ATTRIBUTE, openParenthesisToken.location);
+    super(NodeKind.LENGTH_ATTRIBUTE, openParenthesisPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -17,8 +17,8 @@ export class LengthAttribute extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     yield* this.length.getSyntaxTokenIterable();
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
   }
 }

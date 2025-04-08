@@ -8,12 +8,15 @@ export class IfClause extends AbstractCompositeNode {
   constructor(
     public readonly condition: AbstractNode | undefined,
     public readonly statement: AbstractStatement,
-    public readonly ifToken: SyntaxToken | undefined,
-    public readonly elseToken: SyntaxToken | undefined,
-    public readonly openParenthesisToken: SyntaxToken | undefined,
-    public readonly closeParenthesisToken: SyntaxToken | undefined,
+    public readonly ifKeywordToken: SyntaxToken | undefined,
+    public readonly elseKeywordToken: SyntaxToken | undefined,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken | undefined,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken | undefined,
   ) {
-    super(NodeKind.IF_CLAUSE, elseToken?.location || ifToken!.location);
+    super(
+      NodeKind.IF_CLAUSE,
+      elseKeywordToken?.location || ifKeywordToken!.location,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -24,20 +27,20 @@ export class IfClause extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.elseToken) {
-      yield this.elseToken;
+    if (this.elseKeywordToken) {
+      yield this.elseKeywordToken;
     }
-    if (this.ifToken) {
-      yield this.ifToken;
+    if (this.ifKeywordToken) {
+      yield this.ifKeywordToken;
     }
-    if (this.openParenthesisToken) {
-      yield this.openParenthesisToken;
+    if (this.openParenthesisPunctuatorToken) {
+      yield this.openParenthesisPunctuatorToken;
     }
     if (this.condition) {
       yield* this.condition.getSyntaxTokenIterable();
     }
-    if (this.closeParenthesisToken) {
-      yield this.closeParenthesisToken;
+    if (this.closeParenthesisPunctuatorToken) {
+      yield this.closeParenthesisPunctuatorToken;
     }
     yield* this.statement.getSyntaxTokenIterable();
   }

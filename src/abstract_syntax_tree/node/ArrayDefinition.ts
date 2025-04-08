@@ -20,13 +20,13 @@ export class ArrayDefinition extends AbstractArrayDefinition {
     public readonly dimensions:
       | (ExplicitArrayDimension | PartialArrayDimension)[]
       | undefined,
-    public readonly reservedToken: SyntaxToken | undefined,
-    public readonly legacyToken: SyntaxToken | undefined,
+    public readonly reservedKeywordToken: SyntaxToken | undefined,
+    public readonly legacyKeywordToken: SyntaxToken | undefined,
     semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.ARRAY_DEFINITION,
-      reservedToken?.location ?? legacyToken?.location ??
+      reservedKeywordToken?.location ?? legacyKeywordToken?.location ??
         alignedModifier?.location ??
         arrayElementType.location,
       identifier,
@@ -55,11 +55,11 @@ export class ArrayDefinition extends AbstractArrayDefinition {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     if (this.isReserved) {
-      yield this.reservedToken!;
+      yield this.reservedKeywordToken!;
     }
 
     if (this.isLegacy) {
-      yield this.legacyToken!;
+      yield this.legacyKeywordToken!;
     }
 
     if (this.alignedModifier) {

@@ -13,15 +13,15 @@ export class MapDefinition extends AbstractStatement {
     public readonly classIdentifier: Identifier | undefined,
     public readonly mapIdentifier: Identifier,
     public readonly identifier: Identifier,
-    public readonly reservedToken: SyntaxToken | undefined,
-    public readonly legacyToken: SyntaxToken | undefined,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
-    public readonly semicolonToken: SyntaxToken,
+    public readonly reservedKeywordToken: SyntaxToken | undefined,
+    public readonly legacyKeywordToken: SyntaxToken | undefined,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.MAP_DEFINITION,
-      reservedToken?.location ?? legacyToken?.location ??
+      reservedKeywordToken?.location ?? legacyKeywordToken?.location ??
         elementaryType?.location ?? classIdentifier!.location,
     );
   }
@@ -37,12 +37,12 @@ export class MapDefinition extends AbstractStatement {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.reservedToken) {
-      yield this.reservedToken;
+    if (this.reservedKeywordToken) {
+      yield this.reservedKeywordToken;
     }
 
-    if (this.legacyToken) {
-      yield this.legacyToken;
+    if (this.legacyKeywordToken) {
+      yield this.legacyKeywordToken;
     }
 
     if (this.elementaryType) {
@@ -50,10 +50,10 @@ export class MapDefinition extends AbstractStatement {
     } else {
       yield* this.classIdentifier!.getSyntaxTokenIterable();
     }
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     yield* this.mapIdentifier.getSyntaxTokenIterable();
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
     yield* this.identifier.getSyntaxTokenIterable();
-    yield this.semicolonToken;
+    yield this.semicolonPunctuatorToken;
   }
 }

@@ -7,11 +7,11 @@ import type { Parameter } from "./Parameter.ts";
 export class ParameterList extends AbstractCompositeNode {
   constructor(
     public readonly parameters: Parameter[],
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly commaTokens: SyntaxToken[] | undefined,
-    public readonly closeParenthesisToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly commaPunctuatorTokens: SyntaxToken[] | undefined,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
   ) {
-    super(NodeKind.PARAMETER_LIST, openParenthesisToken.location);
+    super(NodeKind.PARAMETER_LIST, openParenthesisPunctuatorToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -21,13 +21,13 @@ export class ParameterList extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     for (let i = 0; i < this.parameters.length; i++) {
       yield* this.parameters[i].getSyntaxTokenIterable();
-      if (i < this.commaTokens!.length) {
-        yield this.commaTokens![i];
+      if (i < this.commaPunctuatorTokens!.length) {
+        yield this.commaPunctuatorTokens![i];
       }
     }
-    yield this.closeParenthesisToken;
+    yield this.closeParenthesisPunctuatorToken;
   }
 }

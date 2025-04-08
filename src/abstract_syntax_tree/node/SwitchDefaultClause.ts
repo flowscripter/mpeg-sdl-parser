@@ -7,12 +7,12 @@ import { NodeKind } from "./enum/node_kind.ts";
 export class SwitchDefaultClause extends AbstractCompositeNode {
   constructor(
     public readonly statements: AbstractStatement[],
-    public readonly defaultToken: SyntaxToken,
-    public readonly colonToken: SyntaxToken,
-    public readonly openBraceToken: SyntaxToken | undefined,
-    public readonly closeBraceToken: SyntaxToken | undefined,
+    public readonly defaultKeywordToken: SyntaxToken,
+    public readonly colonPunctuatorToken: SyntaxToken,
+    public readonly openBracePunctuatorToken: SyntaxToken | undefined,
+    public readonly closeBracePunctuatorToken: SyntaxToken | undefined,
   ) {
-    super(NodeKind.SWITCH_DEFAULT_CLAUSE, defaultToken.location);
+    super(NodeKind.SWITCH_DEFAULT_CLAUSE, defaultKeywordToken.location);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -22,16 +22,16 @@ export class SwitchDefaultClause extends AbstractCompositeNode {
   }
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.defaultToken;
-    yield this.colonToken;
-    if (this.openBraceToken) {
-      yield this.openBraceToken;
+    yield this.defaultKeywordToken;
+    yield this.colonPunctuatorToken;
+    if (this.openBracePunctuatorToken) {
+      yield this.openBracePunctuatorToken;
     }
     for (const statement of this.statements) {
       yield* statement.getSyntaxTokenIterable();
     }
-    if (this.closeBraceToken) {
-      yield this.closeBraceToken;
+    if (this.closeBracePunctuatorToken) {
+      yield this.closeBracePunctuatorToken;
     }
   }
 }

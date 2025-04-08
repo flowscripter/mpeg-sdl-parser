@@ -10,9 +10,9 @@ export class DoStatement extends AbstractStatement {
     public readonly conditionExpression: AbstractNode,
     public readonly doKeywordToken: SyntaxToken,
     public readonly whileKeywordToken: SyntaxToken,
-    public readonly openParenthesisToken: SyntaxToken,
-    public readonly closeParenthesisToken: SyntaxToken,
-    public readonly semicolonToken: SyntaxToken,
+    public readonly openParenthesisPunctuatorToken: SyntaxToken,
+    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(StatementKind.DO, doKeywordToken.location);
   }
@@ -26,9 +26,9 @@ export class DoStatement extends AbstractStatement {
     yield this.doKeywordToken;
     yield* this.compoundStatement.getSyntaxTokenIterable();
     yield this.whileKeywordToken;
-    yield this.openParenthesisToken;
+    yield this.openParenthesisPunctuatorToken;
     yield* this.conditionExpression.getSyntaxTokenIterable();
-    yield this.closeParenthesisToken;
-    yield this.semicolonToken;
+    yield this.closeParenthesisPunctuatorToken;
+    yield this.semicolonPunctuatorToken;
   }
 }

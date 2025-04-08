@@ -19,27 +19,27 @@ export class ElementaryTypeDefinition extends AbstractElementaryTypeDefinition {
     identifier: Identifier,
     value: AbstractNode | undefined,
     public readonly endValue: AbstractNode | undefined,
-    public readonly reservedToken: SyntaxToken | undefined,
-    public readonly legacyToken: SyntaxToken | undefined,
-    constToken: SyntaxToken | undefined,
-    public readonly lookaheadToken: SyntaxToken | undefined,
-    assignmentToken: SyntaxToken | undefined,
+    public readonly reservedKeywordToken: SyntaxToken | undefined,
+    public readonly legacyKeywordToken: SyntaxToken | undefined,
+    constKeywordToken: SyntaxToken | undefined,
+    public readonly lookaheadOperatorToken: SyntaxToken | undefined,
+    assignmentOperatorToken: SyntaxToken | undefined,
     public readonly rangeOperatorToken: SyntaxToken | undefined,
     semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.ELEMENTARY_TYPE_DEFINITION,
-      reservedToken?.location ??
-        legacyToken?.location ??
-        constToken?.location ??
+      reservedKeywordToken?.location ??
+        legacyKeywordToken?.location ??
+        constKeywordToken?.location ??
         alignedModifier?.location ??
         elementaryType.location,
       isConst,
       elementaryType,
       identifier,
       value,
-      constToken,
-      assignmentToken,
+      constKeywordToken,
+      assignmentOperatorToken,
       semicolonPunctuatorToken,
     );
   }
@@ -65,15 +65,15 @@ export class ElementaryTypeDefinition extends AbstractElementaryTypeDefinition {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     if (this.isReserved) {
-      yield this.reservedToken!;
+      yield this.reservedKeywordToken!;
     }
 
     if (this.isLegacy) {
-      yield this.legacyToken!;
+      yield this.legacyKeywordToken!;
     }
 
     if (this.isConst) {
-      yield this.constToken!;
+      yield this.constKeywordToken!;
     }
 
     if (this.alignedModifier) {
@@ -82,14 +82,14 @@ export class ElementaryTypeDefinition extends AbstractElementaryTypeDefinition {
 
     yield* this.elementaryType.getSyntaxTokenIterable();
     yield* this.lengthAttribute.getSyntaxTokenIterable();
-    if (this.lookaheadToken) {
-      yield this.lookaheadToken;
+    if (this.lookaheadOperatorToken) {
+      yield this.lookaheadOperatorToken;
     }
 
     yield* this.identifier.getSyntaxTokenIterable();
 
     if (this.value) {
-      yield this.assignmentToken!;
+      yield this.assignmentOperatorToken!;
       yield* this.value.getSyntaxTokenIterable();
 
       if (this.rangeOperatorToken) {

@@ -11,12 +11,12 @@ export class ClassDefinition extends AbstractStatement {
     public readonly classIdentifier: Identifier,
     public readonly identifier: Identifier,
     public readonly parameterValueList: ParameterValueList | undefined,
-    public readonly legacyToken: SyntaxToken | undefined,
-    public readonly semicolonToken: SyntaxToken,
+    public readonly legacyKeywordToken: SyntaxToken | undefined,
+    public readonly semicolonPunctuatorToken: SyntaxToken,
   ) {
     super(
       StatementKind.CLASS_DEFINITION,
-      legacyToken?.location ?? identifier.location,
+      legacyKeywordToken?.location ?? identifier.location,
     );
   }
 
@@ -30,13 +30,13 @@ export class ClassDefinition extends AbstractStatement {
 
   override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
     if (this.isLegacy) {
-      yield this.legacyToken!;
+      yield this.legacyKeywordToken!;
     }
     yield* this.classIdentifier.getSyntaxTokenIterable();
     yield* this.identifier.getSyntaxTokenIterable();
     if (this.parameterValueList) {
       yield* this.parameterValueList.getSyntaxTokenIterable();
     }
-    yield this.semicolonToken;
+    yield this.semicolonPunctuatorToken;
   }
 }
