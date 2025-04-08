@@ -1274,4 +1274,89 @@ describe("String Definition Pattern Tests", () => {
       "Illegal string literal type",
     );
   });
+
+  test("Test string definition pattern - invalid prefix", () => {
+    expect(() =>
+      testSyntaxPattern(
+        STRING_DEFINITION_RULE,
+        'utf8string foo = u8"hello";',
+        new StringDefinition(
+          false,
+          false,
+          false,
+          undefined,
+          StringVariableKind.UTF8,
+          new Identifier(
+            "foo",
+            new SyntaxToken(
+              TokenKind.IDENTIFIER_TOKEN,
+              {
+                row: 0,
+                column: 11,
+                position: 11,
+              },
+              "foo",
+              [],
+              [],
+            ),
+          ),
+          new StringLiteral(
+            StringLiteralKind.UTF,
+            "hello",
+            [
+              new SyntaxToken(
+                TokenKind.LITERAL_STRING_BASIC_TOKEN,
+                {
+                  row: 0,
+                  column: 18,
+                  position: 18,
+                },
+                '"hello"',
+                [],
+                [],
+              ),
+            ],
+          ),
+          undefined,
+          undefined,
+          undefined,
+          new SyntaxToken(
+            TokenKind.KEYWORD_UTF8STRING_TOKEN,
+            {
+              row: 0,
+              column: 0,
+              position: 0,
+            },
+            "utf8string",
+            [],
+            [],
+          ),
+          new SyntaxToken(
+            TokenKind.OPERATOR_ASSIGNMENT_TOKEN,
+            {
+              row: 0,
+              column: 15,
+              position: 15,
+            },
+            "=",
+            [],
+            [],
+          ),
+          new SyntaxToken(
+            TokenKind.PUNCTUATOR_SEMICOLON_TOKEN,
+            {
+              row: 0,
+              column: 0,
+              position: 0,
+            },
+            ";",
+            [],
+            [],
+          ),
+        ),
+      )
+    ).toThrow(
+      "Unable to consume token: u8",
+    );
+  });
 });

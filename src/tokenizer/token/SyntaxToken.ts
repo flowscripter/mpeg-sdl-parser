@@ -30,11 +30,12 @@ export class SyntaxToken extends AbstractToken {
   ) {
     super(tokenKind, location, text);
     logger.debug(
-      "SyntaxToken: %s => position: %d, row: %d, column: %d",
+      "SyntaxToken: %s => position: %d, row: %d, column: %d => %s",
       TokenKind[this.tokenKind],
       this.location.position,
       this.location.row,
       this.location.column,
+      text,
     );
   }
 

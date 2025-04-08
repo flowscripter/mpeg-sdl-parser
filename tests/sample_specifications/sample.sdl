@@ -1,3 +1,4 @@
+// repeated packets in bitstream
 class transport_packet {
   unsigned int(8)  sync_byte = 0x47;
   bit(1)           transport_error_indicator;
@@ -10,7 +11,9 @@ class transport_packet {
   computed unsigned int N = 184;
 
   if (adaptation_field_control == 0b10 || adaptation_field_control == 0b11) {
-    adaptation_field data;
+    adaptation_field data; // previously declared class
+
+    // N is 184 minus the number of bytes in the adaptation_field
     N = N - 1 - data.adaptation_field_length;
   }
 
@@ -18,3 +21,4 @@ class transport_packet {
     bit(8) data_byte[N];
   }
 }
+// until EOF
