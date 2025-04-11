@@ -24,8 +24,10 @@ export class ParameterList extends AbstractCompositeNode {
     yield this.openParenthesisPunctuatorToken;
     for (let i = 0; i < this.parameters.length; i++) {
       yield* this.parameters[i].getSyntaxTokenIterable();
-      if (i < this.commaPunctuatorTokens!.length) {
-        yield this.commaPunctuatorTokens![i];
+      if (
+        this.commaPunctuatorTokens && (i < this.commaPunctuatorTokens.length)
+      ) {
+        yield this.commaPunctuatorTokens[i];
       }
     }
     yield this.closeParenthesisPunctuatorToken;
