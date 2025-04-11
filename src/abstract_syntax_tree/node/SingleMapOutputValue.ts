@@ -13,7 +13,7 @@ export class SingleMapOutputValue extends AbstractMapOutputValue {
     public readonly lengthAttribute: LengthAttribute | undefined,
   ) {
     super(
-      MapOutputValueKind.AGGREGATE,
+      MapOutputValueKind.SINGLE,
       numberLiteralValue?.location ?? elementaryType!.location,
     );
   }
