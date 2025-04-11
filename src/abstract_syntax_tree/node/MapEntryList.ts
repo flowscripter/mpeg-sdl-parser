@@ -24,8 +24,10 @@ export class MapEntryList extends AbstractCompositeNode {
     yield this.openBracePunctuatorToken;
     for (let i = 0; i < this.mapEntries.length; i++) {
       yield* this.mapEntries[i].getSyntaxTokenIterable();
-      if (i < this.commaPunctuatorTokens!.length) {
-        yield this.commaPunctuatorTokens![i];
+      if (
+        this.commaPunctuatorTokens && (i < this.commaPunctuatorTokens.length)
+      ) {
+        yield this.commaPunctuatorTokens[i];
       }
     }
     yield this.closeBracePunctuatorToken;

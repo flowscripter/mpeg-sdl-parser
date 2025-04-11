@@ -25,8 +25,8 @@ export class AggregateMapOutputValue extends AbstractMapOutputValue {
     for (let i = 0; i < this.outputValues.length; i++) {
       yield* this.outputValues[i].getSyntaxTokenIterable();
 
-      if (i < this.outputValues.length - 1) {
-        yield this.commaPunctuatorTokens![i];
+      if (this.commaPunctuatorTokens && (i < this.outputValues.length - 1)) {
+        yield this.commaPunctuatorTokens[i];
       }
     }
 
