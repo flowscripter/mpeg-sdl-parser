@@ -12,8 +12,8 @@ export class SwitchCaseClause extends AbstractCompositeNode {
     public readonly caseKeywordToken: SyntaxToken,
     public readonly colonPunctuatorToken: SyntaxToken,
     public readonly openBracePunctuatorToken: SyntaxToken | undefined,
-    public readonly breakKeywordToken: SyntaxToken,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly breakKeywordToken: SyntaxToken | undefined,
+    public readonly semicolonPunctuatorToken: SyntaxToken | undefined,
     public readonly closeBracePunctuatorToken: SyntaxToken | undefined,
   ) {
     super(NodeKind.SWITCH_CASE_CLAUSE, caseKeywordToken.location);
@@ -36,8 +36,12 @@ export class SwitchCaseClause extends AbstractCompositeNode {
     for (const statement of this.statements) {
       yield* statement.getSyntaxTokenIterable();
     }
-    yield this.breakKeywordToken;
-    yield this.semicolonPunctuatorToken;
+    if (this.breakKeywordToken) {
+      yield this.breakKeywordToken;
+    }
+    if (this.semicolonPunctuatorToken) {
+      yield this.semicolonPunctuatorToken;
+    }
     if (this.closeBracePunctuatorToken) {
       yield this.closeBracePunctuatorToken;
     }

@@ -1,4 +1,4 @@
-import { alt_sc, apply, rep_sc, seq } from "typescript-parsec";
+import { alt_sc, apply, opt_sc, rep_sc, seq } from "typescript-parsec";
 import type { AbstractStatement } from "../../abstract_syntax_tree/node/AbstractStatement.ts";
 import type { SyntaxToken } from "../../tokenizer/token/SyntaxToken.ts";
 import { SwitchCaseClause } from "../../abstract_syntax_tree/node/SwitchCaseClause.ts";
@@ -13,8 +13,13 @@ function getSwitchCaseClause(
     SyntaxToken,
     NumberLiteral,
     SyntaxToken,
-    | [SyntaxToken, AbstractStatement[], SyntaxToken, SyntaxToken, SyntaxToken]
-    | [AbstractStatement[], SyntaxToken, SyntaxToken],
+    | [
+      SyntaxToken,
+      AbstractStatement[],
+      [SyntaxToken, SyntaxToken] | undefined,
+      SyntaxToken,
+    ]
+    | [AbstractStatement[], [SyntaxToken, SyntaxToken] | undefined],
   ],
 ): SwitchCaseClause {
   const [
@@ -24,14 +29,20 @@ function getSwitchCaseClause(
     body,
   ] = values;
 
-  if (body.length === 5) {
+  if (body.length === 4) {
     const [
       openBraceToken,
       statements,
-      breakToken,
-      semicolonToken,
+      breakAndSemicolonTokens,
       closeBraceToken,
     ] = body;
+
+    let breakToken: SyntaxToken | undefined;
+    let semicolonToken: SyntaxToken | undefined;
+
+    if (breakAndSemicolonTokens) {
+      [breakToken, semicolonToken] = breakAndSemicolonTokens;
+    }
 
     return new SwitchCaseClause(
       value,
@@ -46,9 +57,15 @@ function getSwitchCaseClause(
   } else {
     const [
       statements,
-      breakToken,
-      semicolonToken,
+      breakAndSemicolonTokens,
     ] = body;
+
+    let breakToken: SyntaxToken | undefined;
+    let semicolonToken: SyntaxToken | undefined;
+
+    if (breakAndSemicolonTokens) {
+      [breakToken, semicolonToken] = breakAndSemicolonTokens;
+    }
 
     return new SwitchCaseClause(
       value,
@@ -75,16 +92,24 @@ export function getSwitchCaseClausePattern() {
           rep_sc(
             STATEMENT_RULE,
           ),
-          getToken(TokenKind.KEYWORD_BREAK_TOKEN),
-          getToken(TokenKind.PUNCTUATOR_SEMICOLON_TOKEN),
+          opt_sc(
+            seq(
+              getToken(TokenKind.KEYWORD_BREAK_TOKEN),
+              getToken(TokenKind.PUNCTUATOR_SEMICOLON_TOKEN),
+            ),
+          ),
           getToken(TokenKind.PUNCTUATOR_CLOSE_BRACE_TOKEN),
         ),
         seq(
           rep_sc(
             STATEMENT_RULE,
           ),
-          getToken(TokenKind.KEYWORD_BREAK_TOKEN),
-          getToken(TokenKind.PUNCTUATOR_SEMICOLON_TOKEN),
+          opt_sc(
+            seq(
+              getToken(TokenKind.KEYWORD_BREAK_TOKEN),
+              getToken(TokenKind.PUNCTUATOR_SEMICOLON_TOKEN),
+            ),
+          ),
         ),
       ),
     ),
