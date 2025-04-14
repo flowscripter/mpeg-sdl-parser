@@ -80,4 +80,5 @@ export * from "./src/tokenizer/token/AbstractToken.ts";
 export * from "./src/tokenizer/token/Location.ts";
 export * from "./src/tokenizer/token/SyntaxToken.ts";
 export * from "./src/tokenizer/token/TriviaToken.ts";
+export { TokenKind } from "./src/tokenizer/enum/token_kind";
 export * from "./src/util/ParserError.ts";
