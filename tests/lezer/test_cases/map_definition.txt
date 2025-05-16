@@ -1,0 +1,59 @@
+# Reserved with elementary type output
+
+class A {reserved unsigned int<Offsets> offset;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        MapDefinition(
+            reserved
+            Whitespace
+            ElementaryType(
+                unsigned
+                Whitespace
+                int
+            )
+            RelationalLessThan
+            Identifier
+            RelationalGreaterThan
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Legacy with class output
+
+class A {legacy B<MapB> b;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        MapDefinition(
+            legacy
+            Whitespace
+            Identifier
+            RelationalLessThan
+            Identifier
+            RelationalGreaterThan
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)

@@ -9,18 +9,15 @@
 [![docs](https://img.shields.io/badge/docs-API-blue)](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
 [![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-parser)](https://github.com/flowscripter/mpeg-sdl-parser/blob/main/LICENSE)
 
-## TODO
-
-- support robust parsing e.g. skipped token and missing token reporting
-- implement semantic checks e.g. referencing undefined identifiers
-- implement undefined behaviour checks e.g. accessing an uninitialised value
-- implement runtime correctness checks e.g. number limits
-- support versioned SDL grammars and extensions
-
 ## CLI
 
 A CLI tool using this module is available at
 https://github.com/flowscripter/mpeg-sdl-tool
+
+## Web Editor
+
+A browser based web editor using this module is available at
+https://github.com/flowscripter/mpeg-sdl-editor
 
 ## Bun Module Usage
 
@@ -28,19 +25,45 @@ Add the module:
 
 `bun add @flowscripter/mpeg-sdl-parser`
 
-```typescript
-import * as mpeg_sdl_parser from "@flowscripter/mpeg-sdl-parser";
+```javascript
+import {
+  SdlStringInput,
+  createLenientSdlParser,
+  collateParseErrors,
+  buildAst,
+  dispatchHandler,
+  prettyPrint
+} from "@flowscripter/mpeg-sdl-parser";
 
-const parser = new Parser();
+// Create a Lezer based SDL parser
+// This will create a lenient parser which recovers from parse errors and places error nodes in the parse tree.
+// A strict parser which will throw SyntacticParseError can be created with createStrictSdlParser().
+const parser = await createLenientSdlParser();
 
-// Parse SDL and produce an abstract syntax tree (AST)
+// Prepare the SDL input
+const sdlStringInput = new SdlStringInput("computed int i;");
 
-const ast = parser.parse("computed int i;");
+// Parse SDL input and produce a parse tree
+const sdlParseTree = sdlParser.parse(sdlStringInput);
 
-console.log(JSON.stringify(ast));
+// Traverse and print the parse tree
+let cursor = sdlParseTree.cursor();
+do {
+  console.log(`Node ${cursor.name} from ${cursor.from} to ${cursor.to}`)
+} while (cursor.next());
 
-// Traverse the AST
+// Print any parsing errors by collating any error nodes in the parse tree
+cursor = sdlParseTree.cursor();
 
+const parseErrors = collateParseErrors(cursor, sdlStringInput);
+
+console.log(JSON.stringify(parseErrors);
+
+// Build an Abstract Syntax Tree (AST) of the SDL specification from the parse tree
+// Note that this will throw a SyntacticParseError if the parse tree contains parsing errors.
+const specification = buildAst(sdlParseTree, sdlStringInput);
+
+// Define a simple AST Node handler
 class MyNodeHandler implements NodeHandler {
   beforeVisit(node: AbstractCompositeNode) {
     console.log("About to visit child nodes");
@@ -55,9 +78,24 @@ class MyNodeHandler implements NodeHandler {
   }
 }
 
-const myNodeHandler = new MyNodeHandler();
+// Dispatch the handler to visit all nodes in the AST
+dispatchHandler(specification, new MyNodeHandler());
 
-dispatch(ast, myNodeHandler);
+// Pretty print the specification (retaining comments)
+let prettifiedSpecification = await prettyPrint(specification)
+
+console.log(prettifiedSpecification);
+
+// A Prettier (prettier.io) plugin for SDL is also available:
+import * as prettier from "prettier/standalone.js";
+import { prettierPluginSdl } from "@flowscripter/mpeg-sdl-parser"; 
+
+prettifiedSpecification = await prettier.format("computed int i;", { 
+  parser: "sdl",
+  plugins: [prettierPluginSdl],
+});
+
+console.log(prettifiedSpecification);
 ```
 
 ## Development
@@ -89,51 +127,27 @@ Generate HTML API Documentation:
 
 ### Overview
 
-The parser is implemented using Microsoft's Typescript based parser combinator
-library [ts-parsec](https://github.com/microsoft/ts-parsec).
+The parser is implemented using [Lezer](https://lezer.codemirror.net) using the
+Lezer grammar defined in [sdl.lezer.grammar](grammar/sdl.lezer.grammar).
 
-Tokenization and parsing rules are developed referencing the SDL EBNF stored in
-this repository: [grammar.txt](grammar.txt)
+For reference purposes an SDL EBNF grammar is also provided in
+[sdl.ebnf.grammar](grammar/sdl.ebnf.grammar)
 
-Parsing an SDL definition results in an abstract syntax tree output which can
-then be used for further processing in consuming applications.
+### Abstract Syntax Tree Model
 
 ```mermaid
 classDiagram
+
   class Location {
-    position: number
     row: number
     column: number
-  }
-
-  class AbstractToken {
-    tokenKind: TokenKind
-    text: string
-  }
-
-  class SyntaxToken {
-  }
-
-  class TriviaToken {
-  }
-
-  class ParsecTokenWrapper {
-    getSyntaxToken() SyntaxToken
-  }
-
-  class TokenPattern {
-    tokenKind: TokenKind
-    regex: RegExp
-  }
-
-  class Tokenizer {
-    parse(input: string) ParsecTokenWrapper
+    position: number
   }
 
   class AbstractNode {
     nodeKind: NodeKind
-    accept(visitor: NodeVisitor): boolean
-    getSyntaxTokenIterable(): IterableIterator
+    text: string
+    accept(visitor: NodeVisitor) boolean
   }
 
   class AbstractLeafNode {
@@ -145,60 +159,26 @@ classDiagram
     getChildNodeIterable() IterableIterator
   }
 
-  class Rule {
-    tokenKind: TokenKind
-    setPattern(): Parser
-  }
-  
-  class Parser {
-    parse(specificationString: string) Specification
-  }
-
-  class NodeVisitor {
-    visit(node: AbstractNode)
-  }
-
-  class TraversingVisitor {
-  }
-
   class NodeHandler {
+    beforeVisit(node: AbstractCompositeNode)
+    visit(node: AbstractLeafNode)
+    afterVisit(node: AbstractCompositeNode)
   }
-
-  TriviaToken --|> AbstractToken
-  SyntaxToken --|> AbstractToken
-
-  AbstractToken --> Location : location
-  SyntaxToken --> "*" TriviaToken : leadingTrivia
-  SyntaxToken --> "*" TriviaToken : trailingTrivia
 
   AbstractNode --> Location : location
-  AbstractNode --> "*" SyntaxToken : syntaxTokens
   AbstractLeafNode --|> AbstractNode
+
   AbstractCompositeNode --|> AbstractNode
-
-  ComponentNodeX "*" --|> AbstractCompositeNode
-  LeafNodeX "*" --|> AbstractLeafNode
-
   AbstractCompositeNode --> "*" AbstractNode : childNodes
+
+  LeafNodeXXX "*" --|> AbstractLeafNode
+  CompositeNodeYYY "*" --|> AbstractCompositeNode
 
   Specification --|> AbstractCompositeNode
 
-  Tokenizer --> "*" TokenPattern: syntaxTokenPatterns
-  Tokenizer --> "*" TokenPattern: leadingTriviaTokenPatterns
-  Tokenizer --> "*" TokenPattern: trailingTriviaTokenPatterns
-  Tokenizer ..> ParsecTokenWrapper: produces
-
-  ParsecTokenWrapper ..> AbstractToken: provides
-
-  Parser --> Tokenizer : uses
-  Parser --> "*" Rule : uses
-  Parser ..> Specification : produces
-
-  TraversingVisitor --|> NodeVisitor
-
-  NodeVisitor ..> AbstractNode : visits
-
-  TraversingVisitor --> NodeHandler : invokes
+  NodeHandler ..> AbstractCompositeNode : beforeVisit
+  NodeHandler ..> AbstractLeafNode : visit
+  NodeHandler ..> AbstractCompositeNode : afterVisit
 ```
 
 ### API

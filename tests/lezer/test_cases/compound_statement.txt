@@ -1,0 +1,52 @@
+# Simple
+
+class A {{utf8string foo;utf8string bar;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Nested compound statements
+
+class A {{utf8string foo;{ utf8string bar1;utf8string bar2;}}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Compound statement with commented statement
+
+class A {{ 
+ utf8string bar; // bar
+ }}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)

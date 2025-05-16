@@ -1,0 +1,49 @@
+# Simple commant
+
+// hello world
+
+==>
+
+Specification(
+    Comment
+)
+
+
+# Multiple comments
+
+// hello
+// world
+
+==>
+
+Specification(
+    Comment
+    Whitespace
+    Comment
+)
+
+
+# Multiple comments and whitespace
+
+// hello
+
+// world
+
+==>
+
+Specification(
+    Comment
+    Whitespace
+    Comment
+)
+
+
+# Comment within comment
+
+// hello // world
+
+==>
+
+Specification(
+    Comment
+)

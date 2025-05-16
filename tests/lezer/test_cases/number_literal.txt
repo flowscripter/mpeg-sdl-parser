@@ -1,0 +1,253 @@
+# Integer literal
+
+computed int a=1;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            IntegerLiteral
+        )
+        Semicolon
+    )
+)
+
+# Decimal literal
+
+computed int a=123.1;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            DecimalLiteral
+        )
+        Semicolon
+    )
+)
+
+# Floating point literal
+
+computed int a=123.1e123;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            FloatingPointLiteral
+        )
+        Semicolon
+    )
+)
+
+# Binary literal
+
+computed int a=0b11;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            BinaryLiteral
+        )
+        Semicolon
+    )
+)
+
+# Binary literal with separator
+
+computed int a=0b0000.101;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            BinaryLiteral
+        )
+        Semicolon
+    )
+)
+
+# Hexadecimal literal
+
+computed int a=0x0F;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            HexadecimalLiteral
+        )
+        Semicolon
+    )
+)
+
+# Hexadecimal literal with separator
+
+computed int a=0x0000.FF;
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            HexadecimalLiteral
+        )
+        Semicolon
+    )
+)
+
+# Multiple character literal
+
+computed int a='pasp';
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            MultipleCharacterLiteral
+        )
+        Semicolon
+    )
+)
+
+# Multiple character literal with escaped slash
+
+computed int a='pasp\\';
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            MultipleCharacterLiteral
+        )
+        Semicolon
+    )
+)
+
+# Multiple character literal with escaped single quote
+
+computed int a='pasp\'';
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            MultipleCharacterLiteral
+        )
+        Semicolon
+    )
+)
+
+# Multiple character literal concatenation
+
+computed int a='pa' 'sp';
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            MultipleCharacterLiteral
+        )
+        Semicolon
+    )
+)
+

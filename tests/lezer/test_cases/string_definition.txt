@@ -1,0 +1,152 @@
+# String definition
+
+class A {utf8string foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# const aligned default
+
+class A {const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Aligned explicit
+
+class A {aligned (16) utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Reserved const aligned default
+
+class A {reserved const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Legacy const aligned default
+
+class A {legacy const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# utfstring with literal
+
+class A {utfstring foo=u"hello";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# utf16string with literal
+
+class A {utf16string foo=u"hello";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# utf8list with literal
+
+class A {utf8list foo=u"hello world";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# base64 string literal
+
+class A {base64string foo="aGVsbG8K";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)

@@ -1,0 +1,166 @@
+# Elementary type output
+
+map offsets (int) {0b00,{1024},0b00,{1024}}
+
+==>
+
+Specification(
+    MapDeclaration(
+        map
+        Whitespace
+        Identifier
+        Whitespace
+        OpenParenthesis
+        ElementaryType(
+            int
+        )
+        CloseParenthesis
+        Whitespace
+        OpenBrace
+        MapEntry(
+            BinaryLiteral
+            Comma
+            AggregateOutputValue(
+                OpenBrace
+                OutputValue(
+                    IntegerLiteral
+                )
+                CloseBrace
+            )
+        )
+        Comma
+        MapEntry(
+            BinaryLiteral
+            Comma
+            AggregateOutputValue(
+                OpenBrace
+                OutputValue(
+                    IntegerLiteral
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)
+
+# Class output
+
+map barMap (Bar) {0b00,{1024}}
+
+==>
+
+Specification(
+    MapDeclaration(
+        map
+        Whitespace
+        Identifier
+        Whitespace
+        OpenParenthesis
+        Identifier
+        CloseParenthesis
+        Whitespace
+        OpenBrace
+        MapEntry(
+            BinaryLiteral
+            Comma
+            AggregateOutputValue(
+                OpenBrace
+                OutputValue(
+                    IntegerLiteral
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)
+
+# Nested outputs
+
+map barMap (Bar) {0b00,{1024,{1,2}}}
+
+==>
+
+Specification(
+    MapDeclaration(
+        map
+        Whitespace
+        Identifier
+        Whitespace
+        OpenParenthesis
+        Identifier
+        CloseParenthesis
+        Whitespace
+        OpenBrace
+        MapEntry(
+            BinaryLiteral
+            Comma
+            AggregateOutputValue(
+                OpenBrace
+                OutputValue(
+                    IntegerLiteral
+                )
+                Comma
+                OutputValue(
+                    AggregateOutputValue(
+                        OpenBrace
+                        OutputValue(
+                            IntegerLiteral
+                        )
+                        Comma
+                        OutputValue(
+                            IntegerLiteral
+                        )
+                        CloseBrace
+                    )
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)
+
+# Escape codes
+
+map offsets (int) {0b00,{int(6)}}
+
+==>
+
+Specification(
+    MapDeclaration(
+        map
+        Whitespace
+        Identifier
+        Whitespace
+        OpenParenthesis
+        ElementaryType(
+            int
+        )
+        CloseParenthesis
+        Whitespace
+        OpenBrace
+        MapEntry(
+            BinaryLiteral
+            Comma
+            AggregateOutputValue(
+                OpenBrace
+                OutputValue(
+                    ElementaryType(
+                        int
+                    )
+                    LengthAttribute(
+                        OpenParenthesis
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        CloseParenthesis   
+                    )
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)

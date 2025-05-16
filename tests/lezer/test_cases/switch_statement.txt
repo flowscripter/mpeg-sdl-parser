@@ -1,0 +1,101 @@
+# Single case
+
+class A {utfstring foo = switch(i){case 1:break;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Single case with braces
+
+class A {utfstring foo = switch(i){case 1:{break;}}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# No cases and default
+
+class A {utfstring foo = switch(i){default:i--;};
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# No cases and default with braces
+
+class A {utfstring foo = switch(i){default:{i--;}};
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiple cases
+
+class A {utfstring foo = switch(i){case 1:break;case 2:{i++;break;}};
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiple cases and default
+
+class A {utfstring foo = switch(i){case 1:break;case 2:{i++;break;}default:i--;};
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)

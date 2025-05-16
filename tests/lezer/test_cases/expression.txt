@@ -1,0 +1,743 @@
+# Number literal with unary plus operator
+
+class A {+1;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryPlus
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Identifier with unary negation operator
+
+class A {-i;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryNegation
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Lengthof operator with unary negation
+
+class A {-lengthof(i);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryNegation
+                UnaryExpression(
+                    LengthofExpression(
+                        lengthof
+                        OpenParenthesis
+                        UnaryExpression(
+                            Identifier
+                        )
+                        CloseParenthesis
+                    )
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Postfix operator
+
+class A {i++;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                PostfixIncrement
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Class member access expression
+
+class A {a.b;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                ClassMemberAccess(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Class member access expression - multiple
+
+class A {a.b.c;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ClassMemberAccess(
+                        Identifier
+                    )
+                )
+                ClassMemberAccess(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Array element access expression
+
+class A {a[1];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                ArrayElementAccess(
+                    OpenBracket
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    CloseBracket
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Array element access expression multiple
+
+class A {a[1][2];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ArrayElementAccess(
+                        OpenBracket
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        CloseBracket
+                    )
+                )
+                ArrayElementAccess(
+                    OpenBracket
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    CloseBracket
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Class member access expression with postfix operator
+
+class A {a.b++;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ClassMemberAccess(
+                        Identifier
+                    )
+                )
+                PostfixIncrement
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Array element access expression with postfix operator
+
+class A {a[1]++;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ArrayElementAccess(
+                        OpenBracket
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        CloseBracket
+                    )
+                )
+                PostfixIncrement
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Class member and array element access expression - multiple mixed
+
+class A {a[1][2].b.c[3];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        UnaryExpression(
+                            UnaryExpression(
+                                UnaryExpression(
+                                    Identifier
+                                )
+                                ArrayElementAccess(
+                                    OpenBracket
+                                    UnaryExpression(
+                                        IntegerLiteral
+                                    )
+                                    CloseBracket
+                                )
+                            )
+                            ArrayElementAccess(
+                                OpenBracket
+                                UnaryExpression(
+                                    IntegerLiteral
+                                )
+                                CloseBracket
+                            )
+                        )
+                        ClassMemberAccess(
+                            Identifier
+                        )
+                    )
+                    ClassMemberAccess(
+                        Identifier
+                    )
+                )
+                ArrayElementAccess(
+                    OpenBracket
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    CloseBracket
+                )
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Expression in parenthesis with postfix operator and whitespace
+
+class A {( i ) ++;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    OpenParenthesis
+                    Whitespace
+                    UnaryExpression(
+                        Identifier
+                    )
+                    Whitespace
+                    CloseParenthesis
+                )
+                Whitespace
+                PostfixIncrement
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Multiplication of two literals
+
+class A {1*2;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiplication of two literals with unary operators
+
+class A {+1*-2;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiplication of three literals
+
+class A {1*2*3;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Binary expression in parenthesis
+
+class A {(1*2);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+Binary expression in parenthesis with postfix operator - invalid syntax!
+
+class A {(1*2)++;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiplicative operators - left-to-right associativity
+
+class A {1/2*3;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiplicative and additive operators - precedence
+
+class A {1+2*3;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Multiplicative and additive operators - precedence overridden by parenthesis
+
+class A {(1+2)*3;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Logical operators
+
+class A {i||j && k;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Additive operators
+
+class A {i+j - k;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Shift operators
+
+class A {i<<j >> k;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Relational operators
+
+class A {i<j<=k>l>=m;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Equality operators
+
+class A {i==j != k;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Bitwise operators
+
+class A {i&j | k;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# All precedence rules
+
+class A {8&&7|6==5>4>>3+2*1;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Mixed unary and binary expressions
+
+class A {i++ * lengthof(j);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Nested parenthesis
+
+class A {((1*2)+3)/(2*3);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Three levels of precedence
+
+class A {1+2*3<<2;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Assignment expression
+
+class A {i=1*2;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Assignment with class member and array element access expressions
+
+class A {a.b=c[1];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)

@@ -1,0 +1,38 @@
+# Simple
+
+class A {}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Line breaks
+
+// hello world
+class A {
+}
+
+==>
+
+Specification(
+    Comment
+    Whitespace
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        Whitespace
+        CloseBrace
+    )
+)

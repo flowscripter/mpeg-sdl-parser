@@ -1,0 +1,43 @@
+# Simple
+
+class A {computed int a;}
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Semicolon
+    )
+)
+
+# Const and value
+
+class A {computed const int a=3;}
+
+==>
+
+Specification(
+    ComputedElementaryTypeDefinition(
+        computed
+        Whitespace
+        const
+        Whitespace
+        ElementaryType(
+            int
+        )
+        Whitespace
+        Identifier
+        Assignment
+        UnaryExpression(
+            IntegerLiteral
+        )
+        Semicolon
+    )
+)

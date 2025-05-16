@@ -1,0 +1,16 @@
+# Simple
+
+class A {computed int a[3];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
