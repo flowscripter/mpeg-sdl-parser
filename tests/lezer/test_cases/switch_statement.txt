@@ -1,6 +1,6 @@
 # Single case
 
-class A {utfstring foo = switch(i){case 1:break;}}
+class A {switch(i){case 1:break;}}
 
 ==>
 
@@ -11,13 +11,31 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
 
 # Single case with braces
 
-class A {utfstring foo = switch(i){case 1:{break;}}}
+class A {switch(i){case 1:{break;}}}
 
 ==>
 
@@ -28,13 +46,33 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                break
+                Semicolon
+                CloseBrace
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
 
 # No cases and default
 
-class A {utfstring foo = switch(i){default:i--;};
+class A {switch(i){default:i--;}}
 
 ==>
 
@@ -45,13 +83,36 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchDefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
 
 # No cases and default with braces
 
-class A {utfstring foo = switch(i){default:{i--;}};
+class A {switch(i){default:{i--;}}}
 
 ==>
 
@@ -62,13 +123,40 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
-        CloseBrace
+         SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchDefaultClause(
+                default
+                Colon
+                CompoundStatement(
+                    OpenBrace
+                    ExpressionStatement(
+                        UnaryExpression(
+                            UnaryExpression(
+                                Identifier
+                            )
+                            PostfixDecrement
+                        )
+                        Semicolon
+                    )
+                    CloseBrace
+                )
+            )
+            CloseBrace
+        )
+       CloseBrace
     )
 )
 
 # Multiple cases
 
-class A {utfstring foo = switch(i){case 1:break;case 2:{i++;break;}};
+class A {switch(i){case 1:break;case 2:{i++;break;}}}
 
 ==>
 
@@ -79,13 +167,50 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                break
+                Semicolon
+                CloseBrace
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
 
 # Multiple cases and default
 
-class A {utfstring foo = switch(i){case 1:break;case 2:{i++;break;}default:i--;};
+class A {switch(i){case 1:break;case 2:{i++;break;}default:i--;}}
 
 ==>
 
@@ -96,6 +221,56 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            SwitchCaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                break
+                Semicolon
+                CloseBrace
+            )
+            SwitchDefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )

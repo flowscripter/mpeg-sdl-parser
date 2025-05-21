@@ -155,7 +155,7 @@ Specification(
                         UnaryExpression(
                             IntegerLiteral
                         )
-                        CloseParenthesis   
+                        CloseParenthesis
                     )
                 )
                 CloseBrace

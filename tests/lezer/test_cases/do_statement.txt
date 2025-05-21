@@ -11,6 +11,38 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        DoStatement(
+            do
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+            Whitespace
+            while
+            Whitespace
+            OpenParenthesis
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            CloseParenthesis
+            Semicolon
+        )
         CloseBrace
     )
 )

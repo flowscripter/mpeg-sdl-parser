@@ -11,6 +11,12 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utf8string
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -28,6 +34,18 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -45,6 +63,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            AlignedModifier(
+                aligned
+                Whitespace
+                OpenParenthesis
+                AlignmentBitCount
+                CloseParenthesis
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -62,6 +94,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            reserved
+            Whitespace
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -79,6 +125,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            legacy
+            Whitespace
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -96,6 +156,18 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -113,6 +185,18 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utf16string
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -130,6 +214,18 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utf8list
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -147,6 +243,17 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            base64string
+            Whitespace
+            Identifier
+            Assignment
+            Base64StringLiteral(
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )

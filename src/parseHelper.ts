@@ -1,7 +1,7 @@
 import { type Tree } from "@lezer/common";
 import type { NodeHandler } from "./ast/visitor/NodeHandler.ts";
 import type { Specification } from "./ast/node/Specification.ts";
-import { createSyntacticParseError, type ParseError } from "./ParseError.ts";
+import { createSyntacticParseError, type SyntacticParseError } from "./ParseError.ts";
 import { TraversingVisitor } from "./ast/visitor/TraversingVisitor.ts";
 import * as prettier from "prettier/standalone.js";
 import prettierPluginSdl from "./prettier/prettierPluginSdl.ts";
@@ -40,7 +40,7 @@ function getPreParsedAstPrettierPlugin(
 export function collateParseErrors(
   parseTree: Tree,
   sdlStringInput: SdlStringInput,
-): ParseError[] {
+): SyntacticParseError[] {
   const text = Text.of(
     sdlStringInput.read(0, sdlStringInput.length).split("\n"),
   );

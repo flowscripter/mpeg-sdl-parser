@@ -95,6 +95,25 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ElementaryTypeDefinition(
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -112,6 +131,28 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ElementaryTypeDefinition(
+            AlignedModifier(
+                aligned
+                OpenParenthesis
+                AlignmentBitCount
+                CloseParenthesis
+            )
+            Whitespace
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )

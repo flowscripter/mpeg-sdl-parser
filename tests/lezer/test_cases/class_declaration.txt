@@ -1,4 +1,4 @@
-# Simple class declaration 
+# Simple class declaration
 
 class A {}
 

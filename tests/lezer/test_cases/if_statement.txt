@@ -11,15 +11,86 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        IfStatement(
+            if
+            OpenParenthesis
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalEqual
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            CloseParenthesis
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+            else
+            Whitespace
+            IfStatement(
+                if
+                OpenParenthesis
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    RelationalEqual
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+                CloseParenthesis
+                CompoundStatement(
+                    OpenBrace
+                    ExpressionStatement(
+                        UnaryExpression(
+                            UnaryExpression(
+                                Identifier
+                            )
+                            PostfixDecrement
+                        )
+                        Semicolon
+                    )
+                    CloseBrace
+                )
+                else
+                CompoundStatement(
+                    OpenBrace
+                    ExpressionStatement(
+                        UnaryExpression(
+                            UnaryExpression(
+                                Identifier
+                            )
+                            PostfixIncrement
+                        )
+                        Semicolon
+                    )
+                    CloseBrace
+                )
+            )
+        )
         CloseBrace
     )
 )
 
 # No braces and no else if clause
 
-class A {if(i==1)i++;else j++}
+class A {if(i==1)i++;else j++;}
 
 ==>
+
 
 Specification(
     ClassDeclaration(
@@ -28,6 +99,40 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        IfStatement(
+            if
+            OpenParenthesis
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalEqual
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            CloseParenthesis
+            ExpressionStatement(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    PostfixIncrement
+                )
+                Semicolon
+            )
+            else
+            Whitespace
+            ExpressionStatement(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    PostfixIncrement
+                )
+                Semicolon
+            )
+        )
         CloseBrace
     )
 )

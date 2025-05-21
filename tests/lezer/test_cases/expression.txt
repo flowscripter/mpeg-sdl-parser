@@ -128,6 +128,7 @@ Specification(
                     Identifier
                 )
                 ClassMemberAccess(
+                    Period
                     Identifier
                 )
             )
@@ -157,10 +158,12 @@ Specification(
                         Identifier
                     )
                     ClassMemberAccess(
+                        Period
                         Identifier
                     )
                 )
                 ClassMemberAccess(
+                    Period
                     Identifier
                 )
             )
@@ -263,6 +266,7 @@ Specification(
                         Identifier
                     )
                     ClassMemberAccess(
+                        Period
                         Identifier
                     )
                 )
@@ -348,10 +352,12 @@ Specification(
                             )
                         )
                         ClassMemberAccess(
+                            Period
                             Identifier
                         )
                     )
                     ClassMemberAccess(
+                        Period
                         Identifier
                     )
                 )
@@ -415,6 +421,18 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                Multiplication
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -432,6 +450,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    UnaryPlus
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+                Multiplication
+                UnaryExpression(
+                    UnaryNegation
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -449,6 +485,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Multiplication
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+                Multiplication
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -466,11 +520,27 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                OpenParenthesis
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Multiplication
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+                CloseParenthesis
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
-Binary expression in parenthesis with postfix operator - invalid syntax!
+# Binary expression in parenthesis with postfix operator - invalid syntax!
 
 class A {(1*2)++;}
 
@@ -483,6 +553,25 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            UnaryExpression(
+                UnaryExpression(
+                    OpenParenthesis
+                    BinaryExpression(
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        Multiplication
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                    )
+                    CloseParenthesis
+                )
+                PostfixIncrement
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -500,6 +589,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Division
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+                Multiplication
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -517,6 +624,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                Addition
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Multiplication
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -534,6 +659,28 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    OpenParenthesis
+                    BinaryExpression(
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        Addition
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                    )
+                    CloseParenthesis
+                )
+                Multiplication
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -551,6 +698,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    LogicalOr
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                Whitespace
+                LogicalAnd
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -568,6 +735,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    Addition
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                Whitespace
+                Subtraction
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -585,6 +772,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    BitwiseShiftLeft
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                Whitespace
+                BitwiseShiftRight
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -602,6 +809,36 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    BinaryExpression(
+                        BinaryExpression(
+                            UnaryExpression(
+                                Identifier
+                            )
+                            RelationalLessThan
+                            UnaryExpression(
+                                Identifier
+                            )
+                        )
+                        RelationalLessThanOrEqual
+                        UnaryExpression(
+                            Identifier
+                        )
+                    )
+                    RelationalGreaterThan
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                RelationalGreaterThanOrEqual
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -619,6 +856,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    RelationalEqual
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                Whitespace
+                RelationalNotEqual
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -636,6 +893,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    BitwiseAnd
+                    UnaryExpression(
+                        Identifier
+                    )
+                )
+                Whitespace
+                BitwiseOr
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -653,6 +930,54 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                LogicalAnd
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    BitwiseOr
+                    BinaryExpression(
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        RelationalEqual
+                        BinaryExpression(
+                            UnaryExpression(
+                                IntegerLiteral
+                            )
+                            RelationalGreaterThan
+                            BinaryExpression(
+                                UnaryExpression(
+                                    IntegerLiteral
+                                )
+                                BitwiseShiftRight
+                                BinaryExpression(
+                                    UnaryExpression(
+                                        IntegerLiteral
+                                    )
+                                    Addition
+                                    BinaryExpression(
+                                        UnaryExpression(
+                                            IntegerLiteral
+                                        )
+                                        Multiplication
+                                        UnaryExpression(
+                                            IntegerLiteral
+                                        )
+                                    )
+                                )
+                            )
+                        )
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -670,6 +995,30 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    PostfixIncrement
+                )
+                Whitespace
+                Multiplication
+                Whitespace
+                UnaryExpression(
+                    LengthofExpression(
+                        lengthof
+                        OpenParenthesis
+                        UnaryExpression(
+                            Identifier
+                        )
+                        CloseParenthesis
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -687,6 +1036,48 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                UnaryExpression(
+                    OpenParenthesis
+                    BinaryExpression(
+                        UnaryExpression(
+                            OpenParenthesis
+                            BinaryExpression(
+                                UnaryExpression(
+                                    IntegerLiteral
+                                )
+                                Multiplication
+                                UnaryExpression(
+                                    IntegerLiteral
+                                )
+                            )
+                            CloseParenthesis
+                        )
+                        Addition
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                    )
+                    CloseParenthesis
+                )
+                Division
+                UnaryExpression(
+                    OpenParenthesis
+                    BinaryExpression(
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        Multiplication
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                    )
+                    CloseParenthesis
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -704,6 +1095,30 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            BinaryExpression(
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Addition
+                    BinaryExpression(
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        Multiplication
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                    )
+                )
+                BitwiseShiftLeft
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -721,6 +1136,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            AssignmentExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                Assignment
+                BinaryExpression(
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                    Multiplication
+                    UnaryExpression(
+                        IntegerLiteral
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -738,6 +1171,33 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ExpressionStatement(
+            AssignmentExpression(
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ClassMemberAccess(
+                        Period
+                        Identifier
+                    )
+                )
+                Assignment
+                UnaryExpression(
+                    UnaryExpression(
+                        Identifier
+                    )
+                    ArrayElementAccess(
+                        OpenBracket
+                        UnaryExpression(
+                            IntegerLiteral
+                        )
+                        CloseBracket
+                    )
+                )
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )

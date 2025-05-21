@@ -32,13 +32,21 @@ describe("Invalid Syntax Tests", () => {
     );
   });
 
-  test("Mix of concatenated stting literal types fails to parse", () => {
-    const sdlStringInput = new SdlStringInput(
+  test("Mix of concatenated string literal types fails to parse", () => {
+    let sdlStringInput = new SdlStringInput(
       'class A {utf8string d = "hello" u"world";}',
     );
 
     expect(() => sdlParser.parse(sdlStringInput)).toThrow(
-      "SYNTACTIC ERROR: Parse error => { row: 1, column: 21, position: 20}",
+      "SYNTACTIC ERROR: Parse error => { row: 1, column: 25, position: 24}",
+    );
+
+    sdlStringInput = new SdlStringInput(
+      'class A {utf8string d = u"hello" "world";}',
+    );
+
+    expect(() => sdlParser.parse(sdlStringInput)).toThrow(
+      "SYNTACTIC ERROR: Parse error => { row: 1, column: 34, position: 33}",
     );
   });
 

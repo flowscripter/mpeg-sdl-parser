@@ -11,6 +11,12 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ClassDefinition(
+            Identifier
+            Whitespace
+            Identifier
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -28,6 +34,21 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ClassDefinition(
+            legacy
+            Whitespace
+            Identifier
+            Whitespace
+            Identifier
+            ParameterValues(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -45,6 +66,24 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ClassDefinition(
+            Identifier
+            Whitespace
+            Identifier
+            ParameterValues(
+                OpenParenthesis
+                UnaryExpression(
+                    Identifier
+                )
+                Comma
+                Whitespace
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )

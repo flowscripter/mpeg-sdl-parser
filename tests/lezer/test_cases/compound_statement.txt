@@ -11,6 +11,22 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        CompoundStatement(
+            OpenBrace
+            StringDefinition(
+                utf8string
+                Whitespace
+                Identifier
+                Semicolon
+            )
+            StringDefinition(
+                utf8string
+                Whitespace
+                Identifier
+                Semicolon
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
@@ -28,13 +44,40 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        CompoundStatement(
+            OpenBrace
+            StringDefinition(
+                utf8string
+                Whitespace
+                Identifier
+                Semicolon
+            )
+            CompoundStatement(
+                OpenBrace
+                Whitespace
+                StringDefinition(
+                    utf8string
+                    Whitespace
+                    Identifier
+                    Semicolon
+                )
+                StringDefinition(
+                    utf8string
+                    Whitespace
+                    Identifier
+                    Semicolon
+                )
+                CloseBrace
+            )
+            CloseBrace
+        )
         CloseBrace
     )
 )
 
 # Compound statement with commented statement
 
-class A {{ 
+class A {{
  utf8string bar; // bar
  }}
 
@@ -47,6 +90,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        CompoundStatement(
+            OpenBrace
+            Whitespace
+            StringDefinition(
+                utf8string
+                Whitespace
+                Identifier
+                Semicolon
+            )
+            Whitespace
+            Comment
+            Whitespace
+            CloseBrace
+        )
         CloseBrace
     )
 )

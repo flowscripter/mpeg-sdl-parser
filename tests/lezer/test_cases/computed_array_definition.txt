@@ -11,6 +11,23 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        ComputedArrayDefinition(
+            computed
+            Whitespace
+            ElementaryType(
+                int
+            )
+            Whitespace
+            Identifier
+            ExplicitArrayDimension(
+                OpenBracket
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseBracket
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )

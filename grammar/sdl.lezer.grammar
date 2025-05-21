@@ -53,7 +53,7 @@
   Comma { "," }
   DoubleQuote { "\"" }
   SingleQuote { "'" }
-
+  Period { "." }
 
   // 5.8 Operators
 
@@ -215,7 +215,7 @@ ArrayElementAccess {
 }
 
 ClassMemberAccess {
-  "." Identifier
+  Period Identifier
 }
 
 
@@ -269,7 +269,7 @@ ExpressionStatement {
 // Block scoping
 
 CompoundStatement {
-  OpenBrace statement CloseBrace
+  OpenBrace statement* CloseBrace
 }
 
 statement {
@@ -298,7 +298,11 @@ number_literal { BinaryLiteral | HexadecimalLiteral | MultipleCharacterLiteral |
 
 BasicStringLiteral { DoubleQuote escaped_basic_character* DoubleQuote }
 
-UtfStringLiteral { "u" DoubleQuote (escaped_sdl_compatible_ucs_character | universal_character_name)* DoubleQuote }
+UtfPrefix {
+  "u"
+}
+
+UtfStringLiteral { UtfPrefix DoubleQuote (escaped_sdl_compatible_ucs_character | universal_character_name)* DoubleQuote }
 
 string_literal { BasicStringLiteral | UtfStringLiteral }
 
@@ -369,7 +373,7 @@ MapDefinition {
 
 // Rule E.6: String data types
 
-base64_string_literal {
+Base64StringLiteral {
   DoubleQuote base64_character* "="? "="? DoubleQuote
 }
 
@@ -389,7 +393,7 @@ utf_string_definition {
 }
 
 base64_string_definition {
-  keyword<"base64string"> Identifier (Assignment base64_string_literal+)?
+  keyword<"base64string"> Identifier (Assignment Base64StringLiteral+)?
 }
 
 string_definition {

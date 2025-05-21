@@ -1,6 +1,6 @@
 # Simple
 
-class A {utfstring foo = "hello";}
+class A {utfstring foo = u"hello";}
 
 ==>
 
@@ -11,13 +11,27 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
 # Escaped double quote
 
-class A {utfstring foo = "hello \\"world\\"";}
+class A {utfstring foo = u"hello \"world\"";}
 
 ==>
 
@@ -28,13 +42,27 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
 # Escaped backslash
 
-class A {utfstring foo = "hello \\\\world\\\\";}
+class A {utfstring foo = u"hello \\\\world\\\\";}
 
 ==>
 
@@ -45,6 +73,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -62,6 +104,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -79,6 +135,20 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
@@ -96,13 +166,27 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
 # Ignore line break escape code in literal
 
-class A {utfstring foo = "hello\\n";}
+class A {utfstring foo = u"hello\\n";}
 
 ==>
 
@@ -113,13 +197,27 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
 # Concatenated on same line
 
-class A {utfstring foo = "hello" " world";}
+class A {utfstring foo = u"hello" u" world";}
 
 ==>
 
@@ -130,15 +228,35 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )
 
 # Concatenated across multiple lines
 
-class A {utfstring foo = "hello"
+class A {utfstring foo = u"hello"
 
-" world";}
+u" world";}
 
 ==>
 
@@ -149,6 +267,26 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                DoubleQuote
+            )
+            Semicolon
+        )
         CloseBrace
     )
 )

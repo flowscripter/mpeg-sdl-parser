@@ -1,6 +1,6 @@
 # Simple
 
-class A {utfstring foo = while (i<9) {i++;}}
+class A {while (i<9) {i++;}}
 
 ==>
 
@@ -11,6 +11,35 @@ Specification(
         Identifier
         Whitespace
         OpenBrace
+        WhileStatement(
+            while
+            Whitespace
+            OpenParenthesis
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            CloseParenthesis
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+        )
         CloseBrace
     )
 )
