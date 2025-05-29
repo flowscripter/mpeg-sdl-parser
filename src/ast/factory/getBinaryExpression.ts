@@ -1,0 +1,126 @@
+import { Text } from "@codemirror/state";
+import type { SyntaxNode } from "@lezer/common";
+import { InternalParseError } from "../../ParseError";
+import {
+  assertSyntaxNodeType,
+  getChildNodesAndTokens,
+  isAbstractNode,
+} from "../../util/nodeFactoryUtils";
+import type AbstractExpression from "../node/AbstractExpression";
+import { NodeKind } from "../node/enum/node_kind";
+import type Identifier from "../node/Identifier";
+import type Token from "../token/Token";
+import type NumberLiteral from "../node/NumberLiteral";
+import { BinaryOperatorKind } from "../node/enum/binary_operator_kind";
+import BinaryExpression from "../node/BinaryExpression";
+
+export function getBinaryExpression(
+  syntaxNode: SyntaxNode,
+  text: Text,
+): BinaryExpression {
+  assertSyntaxNodeType(syntaxNode, "BinaryExpression");
+
+  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+
+  let leftOperand: AbstractExpression | Identifier | NumberLiteral | undefined;
+  let binaryOperatorKind: BinaryOperatorKind | undefined;
+  let rightOperand: AbstractExpression | Identifier | NumberLiteral | undefined;
+  let binaryOperator: Token | undefined;
+
+  for (const childNodeOrToken of childNodesAndTokens) {
+    if (isAbstractNode(childNodeOrToken)) {
+      switch (childNodeOrToken.nodeKind) {
+        case NodeKind.NUMBER_LITERAL:
+          if (leftOperand) {
+            rightOperand = childNodeOrToken as NumberLiteral;
+          } else {
+            leftOperand = childNodeOrToken as NumberLiteral;
+          }
+          break;
+        case NodeKind.EXPRESSION:
+          if (leftOperand) {
+            rightOperand = childNodeOrToken as AbstractExpression;
+          } else {
+            leftOperand = childNodeOrToken as AbstractExpression;
+          }
+          break;
+        case NodeKind.IDENTIFIER:
+          if (leftOperand) {
+            rightOperand = childNodeOrToken as Identifier;
+          } else {
+            leftOperand = childNodeOrToken as Identifier;
+          }
+          break;
+        default:
+          throw new InternalParseError(
+            `Unexpected node kind: ${NodeKind[childNodeOrToken.nodeKind]}`,
+          );
+      }
+    } else {
+      switch (childNodeOrToken.text) {
+        case "+":
+          binaryOperatorKind = BinaryOperatorKind.ADD;
+          break;
+        case "-":
+          binaryOperatorKind = BinaryOperatorKind.SUBTRACT;
+          break;
+        case "*":
+          binaryOperatorKind = BinaryOperatorKind.MULTIPLY;
+          break;
+        case "/":
+          binaryOperatorKind = BinaryOperatorKind.DIVIDE;
+          break;
+        case "%":
+          binaryOperatorKind = BinaryOperatorKind.MODULUS;
+          break;
+        case "<<":
+          binaryOperatorKind = BinaryOperatorKind.SHIFT_LEFT;
+          break;
+        case ">>":
+          binaryOperatorKind = BinaryOperatorKind.SHIFT_RIGHT;
+          break;
+        case "<":
+          binaryOperatorKind = BinaryOperatorKind.LESS_THAN;
+          break;
+        case "<=":
+          binaryOperatorKind = BinaryOperatorKind.LESS_THAN_OR_EQUAL;
+          break;
+        case ">":
+          binaryOperatorKind = BinaryOperatorKind.GREATER_THAN;
+          break;
+        case ">=":
+          binaryOperatorKind = BinaryOperatorKind.GREATER_THAN_OR_EQUAL;
+          break;
+        case "==":
+          binaryOperatorKind = BinaryOperatorKind.EQUAL;
+          break;
+        case "!=":
+          binaryOperatorKind = BinaryOperatorKind.NOT_EQUAL;
+          break;
+        case "&":
+          binaryOperatorKind = BinaryOperatorKind.BITWISE_AND;
+          break;
+        case "|":
+          binaryOperatorKind = BinaryOperatorKind.BITWISE_OR;
+          break;
+        case "&&":
+          binaryOperatorKind = BinaryOperatorKind.LOGICAL_AND;
+          break;
+        case "||":
+          binaryOperatorKind = BinaryOperatorKind.LOGICAL_OR;
+          break;
+        default:
+          throw new InternalParseError(
+            `Unexpected token: ${childNodeOrToken.text}`,
+          );
+      }
+    }
+  }
+
+  return new BinaryExpression(
+    leftOperand!,
+    binaryOperatorKind!,
+    rightOperand!,
+    binaryOperator!,
+  );
+}

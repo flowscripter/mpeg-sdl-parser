@@ -1,5 +1,9 @@
 import { AstPath, type Doc, doc } from "prettier";
-import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type AbstractStatement from "../ast/node/AbstractStatement";
+import { NodeKind } from "../ast/node/enum/node_kind";
+import { StatementKind } from "../ast/node/enum/statement_kind";
+import type Specification from "../ast/node/Specification";
 const { hardline, join } = doc.builders;
 
 export function printSpecification(
@@ -44,6 +48,5 @@ export function printSpecification(
       elements,
     ),
     hardline,
-    getDocWithTrivia(node.eofToken),
   ];
 }

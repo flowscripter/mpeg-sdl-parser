@@ -1,12 +1,13 @@
-import type { Location } from "../../Location.ts";
-import { AbstractNode } from "./AbstractNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractNode from "./AbstractNode.ts";
 import type { NodeKind } from "./enum/node_kind.ts";
 
-export abstract class AbstractLeafNode extends AbstractNode {
+export default abstract class AbstractLeafNode extends AbstractNode {
   constructor(
     nodeKind: NodeKind,
-    location: Location,
+    startToken: Token,
+    endToken: Token,
   ) {
-    super(nodeKind, location, false);
+    super(nodeKind, startToken, endToken, false);
   }
 }

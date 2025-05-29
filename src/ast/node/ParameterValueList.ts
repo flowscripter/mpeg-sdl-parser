@@ -1,17 +1,22 @@
-import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class ParameterValueList extends AbstractCompositeNode {
+export default class ParameterValueList extends AbstractCompositeNode {
   constructor(
-    public readonly values: AbstractNode[],
-    public readonly openParenthesisPunctuatorToken: SyntaxToken,
-    public readonly commaPunctuatorTokens: SyntaxToken[] | undefined,
-    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
+    public readonly values: (AbstractExpression | Identifier | NumberLiteral)[],
+    public readonly openParenthesisPunctuator: Token,
+    public readonly commaPunctuators: Token[] | undefined,
+    public readonly closeParenthesisPunctuator: Token,
   ) {
     super(
       NodeKind.PARAMETER_VALUE_LIST,
-      openParenthesisPunctuatorToken.location,
+      openParenthesisPunctuator,
+      closeParenthesisPunctuator,
     );
   }
 
@@ -19,18 +24,5 @@ export class ParameterValueList extends AbstractCompositeNode {
     for (let i = 0; i < this.values.length; i++) {
       yield this.values[i];
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openParenthesisPunctuatorToken;
-    for (let i = 0; i < this.values.length; i++) {
-      yield* this.values[i].getSyntaxTokenIterable();
-      if (
-        this.commaPunctuatorTokens && (i < this.commaPunctuatorTokens.length)
-      ) {
-        yield this.commaPunctuatorTokens[i];
-      }
-    }
-    yield this.closeParenthesisPunctuatorToken;
   }
 }

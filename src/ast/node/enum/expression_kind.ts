@@ -4,12 +4,8 @@
 export enum ExpressionKind {
   /** Binary expression */
   BINARY,
-  /** Length of expression */
-  LENGTH_OF,
-  /** Postfix expression */
-  POSTFIX,
-  /** Primary expression */
-  PRIMARY,
+  /** Lengthof expression */
+  LENGTHOF,
   /** Unary expression */
   UNARY,
 }

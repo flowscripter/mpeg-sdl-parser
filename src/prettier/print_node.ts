@@ -5,11 +5,7 @@ import {
   printArrayElementAccess,
   printClassMemberAccess,
 } from "./print_expression";
-import {
-  printAbstractMapOutputValue,
-  printMapEntry,
-  printMapEntryList,
-} from "./print_map";
+import { printAggregateOutputValue, printMapEntry } from "./print_map";
 import {
   printBitModifier,
   printClassId,
@@ -20,10 +16,7 @@ import {
   printParameterValueList,
 } from "./print_class";
 import { printSpecification } from "./print_specification";
-import {
-  printAbstractArrayDimension,
-  printArrayElementType,
-} from "./print_array";
+import { printAbstractArrayDimension } from "./print_array";
 import {
   printAlignedModifier,
   printIdentifier,
@@ -32,12 +25,36 @@ import {
 } from "./print_common";
 import { printElementaryType } from "./print_elementary_type";
 import { printStringLiteral } from "./print_string";
-import { printIfClause } from "./print_if";
 import { printStatement } from "./print_statement";
 import {
   printSwitchCaseClause,
   printSwitchDefaultClause,
 } from "./print_switch";
+import type AbstractArrayDimension from "../ast/node/AbstractArrayDimension";
+import type AbstractClassId from "../ast/node/AbstractClassId";
+import type AbstractExpression from "../ast/node/AbstractExpression";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type AbstractStatement from "../ast/node/AbstractStatement";
+import type AlignedModifier from "../ast/node/AlignedModifier";
+import type ArrayElementAccess from "../ast/node/ArrayElementAccess";
+import type BitModifier from "../ast/node/BitModifier";
+import type ClassMemberAccess from "../ast/node/ClassMemberAccess";
+import type ElementaryType from "../ast/node/ElementaryType";
+import { NodeKind } from "../ast/node/enum/node_kind";
+import type ExpandableModifier from "../ast/node/ExpandableModifier";
+import type ExtendsModifier from "../ast/node/ExtendsModifier";
+import type LengthAttribute from "../ast/node/LengthAttribute";
+import type MapEntry from "../ast/node/MapEntry";
+import type NumberLiteral from "../ast/node/NumberLiteral";
+import type Parameter from "../ast/node/Parameter";
+import type ParameterList from "../ast/node/ParameterList";
+import type ParameterValueList from "../ast/node/ParameterValueList";
+import type Specification from "../ast/node/Specification";
+import type SwitchCaseClause from "../ast/node/SwitchCaseClause";
+import type SwitchDefaultClause from "../ast/node/SwitchDefaultClause";
+import type Identifier from "../ast/node/Identifier";
+import type StringLiteral from "../ast/node/StringLiteral";
+import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
 
 export default function printNode(
   path: AstPath<AbstractNode>,
@@ -50,6 +67,11 @@ export default function printNode(
   cleanupTrivia(node);
 
   switch (nodeKind) {
+    case NodeKind.AGGREGATE_OUTPUT_VALUE:
+      return printAggregateOutputValue(
+        path as AstPath<AggregateOutputValue>,
+        print,
+      );
     case NodeKind.ALIGNED_MODIFIER:
       return printAlignedModifier(path as AstPath<AlignedModifier>, print);
     case NodeKind.ARRAY_DIMENSION:
@@ -62,8 +84,6 @@ export default function printNode(
         path as AstPath<ArrayElementAccess>,
         print,
       );
-    case NodeKind.ARRAY_ELEMENT_TYPE:
-      return printArrayElementType(path as AstPath<ArrayElementType>, print);
     case NodeKind.BIT_MODIFIER:
       return printBitModifier(path as AstPath<BitModifier>, print);
     case NodeKind.CLASS_ID:
@@ -86,19 +106,10 @@ export default function printNode(
       return printExtendsModifier(path as AstPath<ExtendsModifier>, print);
     case NodeKind.IDENTIFIER:
       return printIdentifier(path as AstPath<Identifier>);
-    case NodeKind.IF_CLAUSE:
-      return printIfClause(path as AstPath<IfClause>, print);
     case NodeKind.LENGTH_ATTRIBUTE:
       return printLengthAttribute(path as AstPath<LengthAttribute>, print);
     case NodeKind.MAP_ENTRY:
       return printMapEntry(path as AstPath<MapEntry>, print);
-    case NodeKind.MAP_ENTRY_LIST:
-      return printMapEntryList(path as AstPath<MapEntryList>, print);
-    case NodeKind.MAP_OUTPUT_VALUE:
-      return printAbstractMapOutputValue(
-        path as AstPath<AbstractMapOutputValue>,
-        print,
-      );
     case NodeKind.NUMBER_LITERAL:
       return printNumberLiteral(path as AstPath<NumberLiteral>);
     case NodeKind.PARAMETER:

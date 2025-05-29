@@ -1,5 +1,6 @@
 import type { Text } from "@codemirror/state";
-import type { Location } from "./Location.ts";
+import type Location from "./Location.ts";
+import { getLocationFromTextPosition } from "./util/locationUtils.ts";
 
 /**
  * Base error class.
@@ -52,22 +53,15 @@ export function createSyntacticParseError(
   position: number,
 ): SyntacticParseError {
   const line = text.lineAt(position);
-  const row = line.number;
-  const column = position - line.from + 1; // Convert to 1-based index
-  const location = {
-    row,
-    column,
-    position,
-  };
-
+  const location = getLocationFromTextPosition(text, position);
   const preceedingLines = [];
   // Collect up to two preceding lines if available
-  if (row > 1) {
+  if (location.row > 1) {
     // First preceding line (if exists)
-    preceedingLines.push(text.line(row - 1).text);
+    preceedingLines.push(text.line(location.row - 1).text);
     // Second preceding line (if exists)
-    if (row > 2) {
-      preceedingLines.unshift(text.line(row - 2).text);
+    if (location.row > 2) {
+      preceedingLines.unshift(text.line(location.row - 2).text);
     }
   }
 

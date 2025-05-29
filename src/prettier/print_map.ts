@@ -1,72 +1,79 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { addCommaSeparatorsToDoc, getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type MapDeclaration from "../ast/node/MapDeclaration";
+import type MapDefinition from "../ast/node/MapDefinition";
+import type MapEntry from "../ast/node/MapEntry";
+import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
 const { hardline, indent, join } = doc.builders;
 
-export function printAbstractMapOutputValue(
-  path: AstPath<AbstractMapOutputValue>,
-  print: (path: AstPath<AbstractNode>) => Doc,
+// TODO: reimplement this
+export function printAggregateOutputValue(
+  _path: AstPath<AggregateOutputValue>,
+  _print: (path: AstPath<AbstractNode>) => Doc,
 ): doc.builders.Doc {
-  const { mapOutputValueKind } = path.node;
-  switch (mapOutputValueKind) {
-    case MapOutputValueKind.SINGLE: {
-      const singleMapOutputValue = path.node as SingleMapOutputValue;
-      if (singleMapOutputValue.numberLiteralValue !== undefined) {
-        return path.call(
-          print,
-          "numberLiteralValue" as keyof SingleMapOutputValue[
-            "numberLiteralValue"
-          ],
-        );
-      }
-      return [
-        path.call(
-          print,
-          "elementaryType" as keyof SingleMapOutputValue["elementaryType"],
-        ),
-        path.call(
-          print,
-          "lengthAttribute" as keyof SingleMapOutputValue["lengthAttribute"],
-        ),
-      ];
-    }
-    case MapOutputValueKind.AGGREGATE: {
-      const aggregateMapOutputValue = path.node as AggregateMapOutputValue;
-      const elements = [];
+  return [];
+  // const { outputValueKind } = path.node;
+  // switch (outputValueKind) {
+  //   case OutputValueKind.SINGLE: {
+  //     const singleMapOutputValue = path.node as SingleMapOutputValue;
+  //     if (singleMapOutputValue.numberLiteralValue !== undefined) {
+  //       return path.call(
+  //         print,
+  //         "numberLiteralValue" as keyof SingleMapOutputValue[
+  //           "numberLiteralValue"
+  //         ],
+  //       );
+  //     }
+  //     return [
+  //       path.call(
+  //         print,
+  //         "elementaryType" as keyof SingleMapOutputValue["elementaryType"],
+  //       ),
+  //       path.call(
+  //         print,
+  //         "lengthAttribute" as keyof SingleMapOutputValue["lengthAttribute"],
+  //       ),
+  //     ];
+  //   }
+  //   case OutputValueKind.AGGREGATE: {
+  //     const aggregateOutputValue = path.node as AggregateOutputValue;
+  //     const elements = [];
 
-      elements.push(
-        getDocWithTrivia(aggregateMapOutputValue.openBracePunctuatorToken),
-      );
-      elements.push(
-        " ",
-      );
+  //     elements.push(
+  //       getDocWithTrivia(aggregateOutputValue.openBracePunctuator),
+  //     );
+  //     elements.push(
+  //       " ",
+  //     );
 
-      const outputValuesDoc = (path as AstPath<AggregateMapOutputValue>).map(
-        print,
-        "outputValues",
-      );
+  //     const outputValuesDoc = (path as AstPath<AggregateOutputValue>).map(
+  //       print,
+  //       "outputValues",
+  //     );
 
-      elements.push(
-        ...addCommaSeparatorsToDoc(
-          outputValuesDoc,
-          aggregateMapOutputValue.commaPunctuatorTokens,
-        ),
-      );
-      elements.push(
-        " ",
-      );
-      elements.push(
-        getDocWithTrivia(aggregateMapOutputValue.closeBracePunctuatorToken),
-      );
+  //     elements.push(
+  //       ...addCommaSeparatorsToDoc(
+  //         outputValuesDoc,
+  //         aggregateOutputValue.commaPunctuators,
+  //       ),
+  //     );
+  //     elements.push(
+  //       " ",
+  //     );
+  //     elements.push(
+  //       getDocWithTrivia(aggregateOutputValue.closeBracePunctuator),
+  //     );
 
-      return elements;
-    }
-    default: {
-      const exhaustiveCheck: never = mapOutputValueKind;
-      throw new Error(
-        "Unreachable code reached, mapOutputValueKind == " + exhaustiveCheck,
-      );
-    }
-  }
+  //     return elements;
+  //   }
+  //   default: {
+  //     const exhaustiveCheck: never = outputValueKind;
+  //     throw new Error(
+  //       "Unreachable code reached, outputValueKind == " + exhaustiveCheck,
+  //     );
+  //   }
+  // }
 }
 
 export function printMapDeclaration(
@@ -76,11 +83,11 @@ export function printMapDeclaration(
   const mapDeclaration = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(mapDeclaration.mapKeywordToken));
+  elements.push(getDocWithTrivia(mapDeclaration.mapKeyword));
   elements.push(path.call(print, "identifier"));
 
   const subElements: Doc[] = [
-    getDocWithTrivia(mapDeclaration.openParenthesisPunctuatorToken),
+    getDocWithTrivia(mapDeclaration.openParenthesisPunctuator),
   ];
 
   if (mapDeclaration.outputElementaryType !== undefined) {
@@ -102,17 +109,31 @@ export function printMapDeclaration(
   }
 
   subElements.push(
-    getDocWithTrivia(mapDeclaration.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(mapDeclaration.closeParenthesisPunctuator),
   );
 
   elements.push(subElements);
 
-  elements.push(
-    path.call(
-      print,
-      "mapEntryList",
+  const entrySubElements: Doc[] = [];
+  const outputValuesDoc = path.map(print, "mapEntries");
+
+  entrySubElements.push(
+    ...addCommaSeparatorsToDoc(
+      outputValuesDoc,
+      mapDeclaration.commaPunctuators,
     ),
   );
+
+  const entries: Doc[] = [
+    getDocWithTrivia(mapDeclaration.openBracePunctuator),
+    indent([
+      hardline,
+      join(hardline, entrySubElements),
+    ]),
+    hardline,
+    getDocWithTrivia(mapDeclaration.closeBracePunctuator),
+  ];
+  elements.push(entries);
 
   return join(" ", elements);
 }
@@ -125,10 +146,10 @@ export function printMapDefinition(
   const elements = [];
 
   if (mapDefinition.isReserved) {
-    elements.push(getDocWithTrivia(mapDefinition.reservedKeywordToken!));
+    elements.push(getDocWithTrivia(mapDefinition.reservedKeyword!));
   }
   if (mapDefinition.isLegacy) {
-    elements.push(getDocWithTrivia(mapDefinition.legacyKeywordToken!));
+    elements.push(getDocWithTrivia(mapDefinition.legacyKeyword!));
   }
 
   const subElements = [];
@@ -150,17 +171,17 @@ export function printMapDefinition(
   }
 
   subElements.push(
-    getDocWithTrivia(mapDefinition.openParenthesisPunctuatorToken),
+    getDocWithTrivia(mapDefinition.openParenthesisPunctuator),
   );
   subElements.push(path.call(print, "mapIdentifier"));
   subElements.push(
-    getDocWithTrivia(mapDefinition.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(mapDefinition.closeParenthesisPunctuator),
   );
 
   elements.push(subElements);
   elements.push([
     path.call(print, "identifier"),
-    getDocWithTrivia(mapDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(mapDefinition.semicolonPunctuator),
   ]);
   return join(" ", elements);
 }
@@ -173,7 +194,7 @@ export function printMapEntry(
   const elements = [];
   elements.push([
     path.call(print, "inputValue"),
-    getDocWithTrivia(mapEntry.commaPunctuatorToken),
+    getDocWithTrivia(mapEntry.commaPunctuator),
   ]);
   elements.push(
     path.call(
@@ -182,30 +203,4 @@ export function printMapEntry(
     ),
   );
   return join(" ", elements);
-}
-
-export function printMapEntryList(
-  path: AstPath<MapEntryList>,
-  print: (path: AstPath<AbstractNode>) => Doc,
-): doc.builders.Doc {
-  const mapEntryList = path.node;
-  const elements = [];
-  const outputValuesDoc = path.map(print, "mapEntries");
-
-  elements.push(
-    ...addCommaSeparatorsToDoc(
-      outputValuesDoc,
-      mapEntryList.commaPunctuatorTokens,
-    ),
-  );
-
-  return [
-    getDocWithTrivia(mapEntryList.openBracePunctuatorToken),
-    indent([
-      hardline,
-      join(hardline, elements),
-    ]),
-    hardline,
-    getDocWithTrivia(mapEntryList.closeBracePunctuatorToken),
-  ];
 }

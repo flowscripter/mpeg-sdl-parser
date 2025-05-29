@@ -1,10 +1,11 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { ElementaryType } from "./ElementaryType.ts";
+import type Token from "../token/Token.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type ElementaryType from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type { Identifier } from "./Identifier.ts";
+import type Identifier from "./Identifier.ts";
 
-export class MapDefinition extends AbstractStatement {
+export default class MapDefinition extends AbstractStatement {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,
@@ -12,16 +13,17 @@ export class MapDefinition extends AbstractStatement {
     public readonly classIdentifier: Identifier | undefined,
     public readonly mapIdentifier: Identifier,
     public readonly identifier: Identifier,
-    public readonly reservedKeywordToken: SyntaxToken | undefined,
-    public readonly legacyKeywordToken: SyntaxToken | undefined,
-    public readonly openParenthesisPunctuatorToken: SyntaxToken,
-    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly reservedKeyword: Token | undefined,
+    public readonly legacyKeyword: Token | undefined,
+    public readonly openParenthesisPunctuator: Token,
+    public readonly closeParenthesisPunctuator: Token,
+    public readonly semicolonPunctuator: Token,
   ) {
     super(
       StatementKind.MAP_DEFINITION,
-      reservedKeywordToken?.location ?? legacyKeywordToken?.location ??
-        elementaryType?.location ?? classIdentifier!.location,
+      reservedKeyword ?? legacyKeyword ??
+        elementaryType?.startToken ?? classIdentifier!.startToken,
+      semicolonPunctuator,
     );
   }
 
@@ -33,26 +35,5 @@ export class MapDefinition extends AbstractStatement {
     }
     yield this.mapIdentifier;
     yield this.identifier;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.reservedKeywordToken) {
-      yield this.reservedKeywordToken;
-    }
-
-    if (this.legacyKeywordToken) {
-      yield this.legacyKeywordToken;
-    }
-
-    if (this.elementaryType) {
-      yield* this.elementaryType.getSyntaxTokenIterable();
-    } else {
-      yield* this.classIdentifier!.getSyntaxTokenIterable();
-    }
-    yield this.openParenthesisPunctuatorToken;
-    yield* this.mapIdentifier.getSyntaxTokenIterable();
-    yield this.closeParenthesisPunctuatorToken;
-    yield* this.identifier.getSyntaxTokenIterable();
-    yield this.semicolonPunctuatorToken;
   }
 }

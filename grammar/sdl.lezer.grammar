@@ -14,16 +14,13 @@
   non_zero_digit_character { $[1-9] }
   digit_character { "0" | non_zero_digit_character }
   latin_character { $[a-zA-Z] }
-  // Not including \ or "
-  graphic_character { $[\u0020-\u0021\u0023\u0025-\u002F\u003A-\u003F\u005B\u005D-\u005F\u007B-\u007E] }
-  basic_character { digit_character | latin_character | graphic_character }
-  escaped_basic_character { basic_character | "\\\"" | "\\\\" }
 
   // Lezer only supports up to \uFFFF and not \u10FFFF
   // Not including \ or "
   sdl_compatible_ucs_character { $[\u0020-\u0021\u0023-\u005B\u005D-\u0084\u0086-\u2027\u202A-\uFEFE\uFF00-\uFFFF] }
   escaped_sdl_compatible_ucs_character { sdl_compatible_ucs_character | "\\\"" | "\\\\" }
   universal_character_name { ("\u" four_hexadecimal_characters) | ("\U" four_hexadecimal_characters four_hexadecimal_characters) }
+  // Not including \ or '
   multiple_character_literal_character { $[\u0020-\u0026\u0028-\u005B\u005D-\u007E] }
   identifier_character { digit_character | latin_character | "_" }
   base64_character { digit_character | latin_character | "+" | "/" }
@@ -114,7 +111,7 @@
 
   // One or more multiple character literals to support concatenation
 
-  MultipleCharacterLiteral { (SingleQuote escaped_multiple_character_literal_character+ SingleQuote)+ }
+  multiple_character_literal { escaped_multiple_character_literal_character+ }
 
 
   // 5.17 Integer, decimal and floating-point literal values
@@ -136,6 +133,7 @@
 
   @precedence { 
     escaped_sdl_compatible_ucs_character,
+    multiple_character_literal,
     base64_character,
     Comment,
     Division
@@ -143,6 +141,7 @@
 
   @precedence { 
     escaped_sdl_compatible_ucs_character,
+    multiple_character_literal,
     Whitespace
   }
 
@@ -291,20 +290,18 @@ statement {
 
 // 5.17 Integer, decimal and floating-point literal values
 
+MultipleCharacterLiteral { (SingleQuote multiple_character_literal SingleQuote)+ }
+
 number_literal { BinaryLiteral | HexadecimalLiteral | MultipleCharacterLiteral | IntegerLiteral | DecimalLiteral | FloatingPointLiteral }
 
 
 // 5.18 String literal values
 
-BasicStringLiteral { DoubleQuote escaped_basic_character* DoubleQuote }
-
 UtfPrefix {
   "u"
 }
 
-UtfStringLiteral { UtfPrefix DoubleQuote (escaped_sdl_compatible_ucs_character | universal_character_name)* DoubleQuote }
-
-string_literal { BasicStringLiteral | UtfStringLiteral }
+UtfStringLiteral { (UtfPrefix DoubleQuote (escaped_sdl_compatible_ucs_character | universal_character_name)* DoubleQuote)+ }
 
 
 // 5.19 Scope
@@ -349,12 +346,12 @@ ElementaryTypeDefinition {
 // Rule E.4: Mapped data types
 // Rule E.5: Maps with escape codes
 
-OutputValue {
+output_value {
   number_literal | ElementaryType LengthAttribute | AggregateOutputValue
 }
 
 AggregateOutputValue {
-  OpenBrace comma_separated<OutputValue> CloseBrace
+  OpenBrace comma_separated<output_value> CloseBrace
 }
 
 MapEntry {
@@ -374,26 +371,26 @@ MapDefinition {
 // Rule E.6: String data types
 
 Base64StringLiteral {
-  DoubleQuote base64_character* "="? "="? DoubleQuote
+  (DoubleQuote base64_character* "="? "="? DoubleQuote)+
 }
 
 // 6.7 String value
 // One or more string literals to support concatenation
 
 utf16_string_definition {
-  keyword<"utf16string"> Identifier (Assignment UtfStringLiteral+)?
+  keyword<"utf16string"> Identifier (Assignment UtfStringLiteral)?
 }
 
 utf8_string_definition {
-  (keyword<"utf8string"> | keyword<"utf8list">) Identifier (Assignment UtfStringLiteral+)?
+  (keyword<"utf8string"> | keyword<"utf8list">) Identifier (Assignment UtfStringLiteral)?
 }
 
 utf_string_definition {
-  keyword<"utfstring"> Identifier (Assignment UtfStringLiteral+)?
+  keyword<"utfstring"> Identifier (Assignment UtfStringLiteral)?
 }
 
 base64_string_definition {
-  keyword<"base64string"> Identifier (Assignment Base64StringLiteral+)?
+  keyword<"base64string"> Identifier (Assignment Base64StringLiteral)?
 }
 
 string_definition {
@@ -515,7 +512,7 @@ IfStatement {
 
 SwitchCaseClause {
   keyword<"case"> number_literal Colon
-  ((statement* keyword<"break"> Semicolon) | (OpenBrace statement* keyword<"break"> Semicolon CloseBrace))
+  ((statement* (keyword<"break"> Semicolon)?) | (OpenBrace statement* keyword<"break"> Semicolon CloseBrace))?
 }
 
 SwitchDefaultClause {

@@ -30,7 +30,6 @@
     "@lezer/common": "^1.2.3",
     "@lezer/generator": "^1.7.3",
     "@lezer/lr": "^1.4.2",
-    "prettier": "^3.5.3",
-    "typescript-parsec": "^0.3.4"
+    "prettier": "^3.5.3"
   }
 }

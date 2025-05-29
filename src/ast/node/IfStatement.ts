@@ -1,24 +1,33 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
+import type Token from "../token/Token.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type { IfClause } from "./IfClause.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class IfStatement extends AbstractStatement {
+export default class IfStatement extends AbstractStatement {
   constructor(
-    public readonly clauses: IfClause[],
+    public readonly condition: AbstractExpression | Identifier | NumberLiteral,
+    public readonly ifStatement: AbstractStatement,
+    public readonly elseStatement: AbstractStatement | undefined,
+    public readonly ifKeyword: Token,
+    public readonly openParenthesisPunctuator: Token,
+    public readonly closeParenthesisPunctuator: Token,
+    public readonly elseKeyword: Token | undefined,
   ) {
-    super(StatementKind.IF, clauses[0].location);
+    super(
+      StatementKind.IF,
+      ifStatement.startToken,
+      elseStatement?.endToken ?? ifStatement.endToken,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
-    for (const clause of this.clauses) {
-      yield clause;
-    }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    for (const clause of this.clauses) {
-      yield* clause.getSyntaxTokenIterable();
+    yield this.condition;
+    yield this.ifStatement;
+    if (this.elseStatement) {
+      yield this.elseStatement;
     }
   }
 }

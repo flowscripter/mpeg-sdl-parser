@@ -1,23 +1,24 @@
-import { AbstractArrayDefinition } from "./AbstractArrayDefinition.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import type { ElementaryType } from "./ElementaryType.ts";
-import type { ExplicitArrayDimension } from "./ExplicitArrayDimension.ts";
-import type { Identifier } from "./Identifier.ts";
+import type Token from "../token/Token.ts";
+import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ElementaryType from "./ElementaryType.ts";
+import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
+import type Identifier from "./Identifier.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export class ComputedArrayDefinition extends AbstractArrayDefinition {
+export default class ComputedArrayDefinition extends AbstractArrayDefinition {
   constructor(
     public readonly elementaryType: ElementaryType,
     identifier: Identifier,
     public readonly dimensions: ExplicitArrayDimension[],
-    public readonly computedKeywordToken: SyntaxToken,
-    semicolonPunctuatorToken: SyntaxToken,
+    public readonly computedKeyword: Token,
+    semicolonPunctuator: Token,
   ) {
     super(
       StatementKind.COMPUTED_ARRAY_DEFINITION,
-      computedKeywordToken.location,
+      computedKeyword,
       identifier,
-      semicolonPunctuatorToken,
+      semicolonPunctuator,
     );
   }
 
@@ -27,15 +28,5 @@ export class ComputedArrayDefinition extends AbstractArrayDefinition {
     for (const dimension of this.dimensions) {
       yield dimension;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.computedKeywordToken;
-    yield* this.elementaryType.getSyntaxTokenIterable();
-    yield* this.identifier.getSyntaxTokenIterable();
-    for (const dimension of this.dimensions) {
-      yield* dimension.getSyntaxTokenIterable();
-    }
-    yield this.semicolonPunctuatorToken;
   }
 }

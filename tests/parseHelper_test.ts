@@ -5,13 +5,15 @@ import HistoryRecordingNodeHandler, {
   expectedHistory,
 } from "./fixtures/HistoryRecordingNodeHandler.ts";
 import { buildAst } from "../src/ast/buildAst.ts";
-import { createLenientSdlParser, createStrictSdlParser } from "../src/lezer/createSdlParser.ts";
+import {
+  createLenientSdlParser,
+  createStrictSdlParser,
+} from "../src/lezer/createSdlParser.ts";
 import {
   collateParseErrors,
-  dispatchHandler,
+  dispatchNodeHandler,
   prettyPrint,
 } from "../src/parseHelper.ts";
-import type { ParseError } from "../src/ParseError.ts";
 import SdlStringInput from "../src/lezer/SdlStringInput.ts";
 
 const strictSdlParser = await createStrictSdlParser();
@@ -28,11 +30,19 @@ describe("Parse Helper Tests", () => {
     const parseErrors = collateParseErrors(parseTree, sdlStringInput);
 
     expect(parseErrors).toHaveLength(5);
-    expect(parseErrors[0].errorLine).toEqual("  bit           transport_priority;");
+    expect(parseErrors[0].errorLine).toEqual(
+      "  bit           transport_priority;",
+    );
     expect(parseErrors[1].errorLine).toEqual("  unsigned int N = 184;");
-    expect(parseErrors[2].errorLine).toEqual("  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {");
-    expect(parseErrors[3].errorLine).toEqual("  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {");
-    expect(parseErrors[4].errorLine).toEqual("  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {");
+    expect(parseErrors[2].errorLine).toEqual(
+      "  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {",
+    );
+    expect(parseErrors[3].errorLine).toEqual(
+      "  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {",
+    );
+    expect(parseErrors[4].errorLine).toEqual(
+      "  if (adaptation_ field_control == 0b01 || adaptation_field_control == 0b11) {",
+    );
     expect(parseErrors[0].location!.column).toEqual(17);
     expect(parseErrors[1].location!.column).toEqual(16);
     expect(parseErrors[2].location!.column).toEqual(19);
@@ -42,12 +52,12 @@ describe("Parse Helper Tests", () => {
 
   test("Test prettyPrint", async () => {
     const sdlString = await fs.readFile(
-      path.join(__dirname, "../../sample_specifications/various_elements.sdl"),
+      path.join(__dirname, "./sample_specifications/various_elements.sdl"),
     ).then((buffer) => buffer.toString());
     const expectedSdlString = await fs.readFile(
       path.join(
         __dirname,
-        "../../sample_specifications/prettified_various_elements.sdl",
+        "./sample_specifications/prettified_various_elements.sdl",
       ),
     ).then((buffer) => buffer.toString());
 
@@ -64,9 +74,9 @@ describe("Parse Helper Tests", () => {
     );
   });
 
-  test("Test dispatchHandler", async () => {
+  test("Test dispatchNodeHandler", async () => {
     const sdlString = await fs.readFile(
-      path.join(__dirname, "../../sample_specifications/sample.sdl"),
+      path.join(__dirname, "./sample_specifications/sample.sdl"),
     ).then((buffer) => buffer.toString());
 
     const sdlStringInput = new SdlStringInput(sdlString);
@@ -75,7 +85,7 @@ describe("Parse Helper Tests", () => {
 
     const historyRecordingNodeHandler = new HistoryRecordingNodeHandler();
 
-    dispatchHandler(specification, historyRecordingNodeHandler);
+    dispatchNodeHandler(specification, historyRecordingNodeHandler);
 
     expect(
       historyRecordingNodeHandler.nodeHistory,

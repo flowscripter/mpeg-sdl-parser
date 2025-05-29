@@ -1,15 +1,16 @@
-import { AbstractLeafNode } from "./AbstractLeafNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractLeafNode from "./AbstractLeafNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export class Identifier extends AbstractLeafNode {
+export default class Identifier extends AbstractLeafNode {
   constructor(
     public readonly name: string,
-    public readonly token: SyntaxToken,
+    public readonly literal: Token,
   ) {
-    super(NodeKind.IDENTIFIER, token.location);
+    super(NodeKind.IDENTIFIER, literal, literal);
   }
 
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.token;
+  toString(): string {
+    return this.name;
   }
 }

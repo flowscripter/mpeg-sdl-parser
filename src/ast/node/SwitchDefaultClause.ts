@@ -1,36 +1,28 @@
-import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import type { AbstractStatement } from "./AbstractStatement.ts";
+import type Token from "../token/Token.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type AbstractStatement from "./AbstractStatement.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export class SwitchDefaultClause extends AbstractCompositeNode {
+export default class SwitchDefaultClause extends AbstractCompositeNode {
   constructor(
     public readonly statements: AbstractStatement[],
-    public readonly defaultKeywordToken: SyntaxToken,
-    public readonly colonPunctuatorToken: SyntaxToken,
-    public readonly openBracePunctuatorToken: SyntaxToken | undefined,
-    public readonly closeBracePunctuatorToken: SyntaxToken | undefined,
+    public readonly defaultKeyword: Token,
+    public readonly colonPunctuator: Token,
+    public readonly openBracePunctuator: Token | undefined,
+    public readonly closeBracePunctuator: Token | undefined,
   ) {
-    super(NodeKind.SWITCH_DEFAULT_CLAUSE, defaultKeywordToken.location);
+    super(
+      NodeKind.SWITCH_DEFAULT_CLAUSE,
+      defaultKeyword,
+      closeBracePunctuator ?? colonPunctuator ??
+        statements[statements.length - 1]?.endToken,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     for (const statement of this.statements) {
       yield statement;
-    }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.defaultKeywordToken;
-    yield this.colonPunctuatorToken;
-    if (this.openBracePunctuatorToken) {
-      yield this.openBracePunctuatorToken;
-    }
-    for (const statement of this.statements) {
-      yield* statement.getSyntaxTokenIterable();
-    }
-    if (this.closeBracePunctuatorToken) {
-      yield this.closeBracePunctuatorToken;
     }
   }
 }

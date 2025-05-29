@@ -1,21 +1,23 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
+import type Token from "../token/Token.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type { Identifier } from "./Identifier.ts";
-import type { ParameterValueList } from "./ParameterValueList.ts";
+import type Identifier from "./Identifier.ts";
+import type ParameterValueList from "./ParameterValueList.ts";
 
-export class ClassDefinition extends AbstractStatement {
+export default class ClassDefinition extends AbstractStatement {
   constructor(
     public readonly isLegacy: boolean,
     public readonly classIdentifier: Identifier,
     public readonly identifier: Identifier,
     public readonly parameterValueList: ParameterValueList | undefined,
-    public readonly legacyKeywordToken: SyntaxToken | undefined,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly legacyKeyword: Token | undefined,
+    public readonly semicolonPunctuator: Token,
   ) {
     super(
       StatementKind.CLASS_DEFINITION,
-      legacyKeywordToken?.location ?? identifier.location,
+      legacyKeyword ?? identifier.startToken,
+      semicolonPunctuator,
     );
   }
 
@@ -25,17 +27,5 @@ export class ClassDefinition extends AbstractStatement {
     if (this.parameterValueList) {
       yield this.parameterValueList;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.isLegacy) {
-      yield this.legacyKeywordToken!;
-    }
-    yield* this.classIdentifier.getSyntaxTokenIterable();
-    yield* this.identifier.getSyntaxTokenIterable();
-    if (this.parameterValueList) {
-      yield* this.parameterValueList.getSyntaxTokenIterable();
-    }
-    yield this.semicolonPunctuatorToken;
   }
 }

@@ -1,5 +1,10 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type ComputedElementaryTypeDefinition from "../ast/node/ComputedElementaryTypeDefinition";
+import type ElementaryType from "../ast/node/ElementaryType";
+import type ElementaryTypeDefinition from "../ast/node/ElementaryTypeDefinition";
+import { ElementaryTypeKind } from "../ast/node/enum/elementary_type_kind";
 const { join } = doc.builders;
 
 export function printComputedElementaryTypeDefinition(
@@ -10,11 +15,11 @@ export function printComputedElementaryTypeDefinition(
 
   const computedElementaryTypeDefinition = path.node;
   elements.push(
-    getDocWithTrivia(computedElementaryTypeDefinition.computedKeywordToken),
+    getDocWithTrivia(computedElementaryTypeDefinition.computedKeyword),
   );
   if (computedElementaryTypeDefinition.isConst) {
     elements.push(
-      getDocWithTrivia(computedElementaryTypeDefinition.constKeywordToken!),
+      getDocWithTrivia(computedElementaryTypeDefinition.constKeyword!),
     );
   }
   elements.push(path.call(print, "elementaryType"));
@@ -22,7 +27,7 @@ export function printComputedElementaryTypeDefinition(
   if (computedElementaryTypeDefinition.value !== undefined) {
     elements.push(
       getDocWithTrivia(
-        computedElementaryTypeDefinition.assignmentOperatorToken!,
+        computedElementaryTypeDefinition.assignmentOperator!,
       ),
     );
     elements.push(
@@ -35,7 +40,7 @@ export function printComputedElementaryTypeDefinition(
 
   return [
     join(" ", elements),
-    getDocWithTrivia(computedElementaryTypeDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(computedElementaryTypeDefinition.semicolonPunctuator),
   ];
 }
 
@@ -47,11 +52,11 @@ export function printElementaryType(path: AstPath<ElementaryType>): Doc {
     case ElementaryTypeKind.BIT:
     case ElementaryTypeKind.FLOATING_POINT:
     case ElementaryTypeKind.INTEGER:
-      return getDocWithTrivia(elementaryType.typeToken);
+      return getDocWithTrivia(elementaryType.type);
     case ElementaryTypeKind.UNSIGNED_INTEGER:
       return join(" ", [
-        getDocWithTrivia(elementaryType.unsignedQualifierKeywordToken!),
-        getDocWithTrivia(elementaryType.typeToken),
+        getDocWithTrivia(elementaryType.unsignedQualifierKeyword!),
+        getDocWithTrivia(elementaryType.type),
       ]);
     default: {
       const exhaustiveCheck: never = elementaryTypeKind;
@@ -72,19 +77,19 @@ export function printElementaryTypeDefinition(
 
   if (elementaryTypeDefinition.isReserved) {
     elements.push(
-      getDocWithTrivia(elementaryTypeDefinition.reservedKeywordToken!),
+      getDocWithTrivia(elementaryTypeDefinition.reservedKeyword!),
     );
   }
 
   if (elementaryTypeDefinition.isLegacy) {
     elements.push(
-      getDocWithTrivia(elementaryTypeDefinition.legacyKeywordToken!),
+      getDocWithTrivia(elementaryTypeDefinition.legacyKeyword!),
     );
   }
 
   if (elementaryTypeDefinition.isConst) {
     elements.push(
-      getDocWithTrivia(elementaryTypeDefinition.constKeywordToken!),
+      getDocWithTrivia(elementaryTypeDefinition.constKeyword!),
     );
   }
 
@@ -104,22 +109,22 @@ export function printElementaryTypeDefinition(
 
   if (elementaryTypeDefinition.isLookahead) {
     typeClause.push(
-      getDocWithTrivia(elementaryTypeDefinition.lookaheadOperatorToken!),
+      getDocWithTrivia(elementaryTypeDefinition.lookaheadOperator!),
     );
   }
   elements.push(typeClause);
   elements.push(path.call(print, "identifier"));
 
-  if (elementaryTypeDefinition.assignmentOperatorToken !== undefined) {
+  if (elementaryTypeDefinition.assignmentOperator !== undefined) {
     elements.push(
-      getDocWithTrivia(elementaryTypeDefinition.assignmentOperatorToken!),
+      getDocWithTrivia(elementaryTypeDefinition.assignmentOperator!),
     );
     elements.push(
       path.call(print, "value" as keyof ElementaryTypeDefinition["value"]),
     );
     if (elementaryTypeDefinition.endValue !== undefined) {
       elements.push(
-        getDocWithTrivia(elementaryTypeDefinition.rangeOperatorToken!),
+        getDocWithTrivia(elementaryTypeDefinition.rangeOperator!),
       );
       elements.push(
         path.call(
@@ -132,6 +137,6 @@ export function printElementaryTypeDefinition(
 
   return [
     join(" ", elements),
-    getDocWithTrivia(elementaryTypeDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(elementaryTypeDefinition.semicolonPunctuator),
   ];
 }

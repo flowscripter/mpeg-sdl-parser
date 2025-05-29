@@ -1,35 +1,39 @@
-import { AbstractArrayDefinition } from "./AbstractArrayDefinition.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import type { AlignedModifier } from "./AlignedModifier.ts";
-import type { ArrayElementType } from "./ArrayElementType.ts";
+import type Token from "../token/Token.ts";
+import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
+import type ElementaryType from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type { ExplicitArrayDimension } from "./ExplicitArrayDimension.ts";
-import type { Identifier } from "./Identifier.ts";
-import type { ImplicitArrayDimension } from "./ImplicitArrayDimension.ts";
-import type { PartialArrayDimension } from "./PartialArrayDimension.ts";
+import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
+import type Identifier from "./Identifier.ts";
+import type ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
+import type LengthAttribute from "./LengthAttribute.ts";
+import type PartialArrayDimension from "./PartialArrayDimension.ts";
 
-export class ArrayDefinition extends AbstractArrayDefinition {
+export default class ArrayDefinition extends AbstractArrayDefinition {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,
     public readonly alignedModifier: AlignedModifier | undefined,
-    public readonly arrayElementType: ArrayElementType,
+    public readonly elementaryType: ElementaryType | undefined,
+    public readonly lengthAttribute: LengthAttribute | undefined,
+    public readonly classIdentifier: Identifier | undefined,
     identifier: Identifier,
     public readonly implicitArrayDimension: ImplicitArrayDimension | undefined,
     public readonly dimensions:
       | (ExplicitArrayDimension | PartialArrayDimension)[]
       | undefined,
-    public readonly reservedKeywordToken: SyntaxToken | undefined,
-    public readonly legacyKeywordToken: SyntaxToken | undefined,
-    semicolonPunctuatorToken: SyntaxToken,
+    public readonly reservedKeyword: Token | undefined,
+    public readonly legacyKeyword: Token | undefined,
+    semicolonPunctuator: Token,
   ) {
     super(
       StatementKind.ARRAY_DEFINITION,
-      reservedKeywordToken?.location ?? legacyKeywordToken?.location ??
-        alignedModifier?.location ??
-        arrayElementType.location,
+      reservedKeyword ?? legacyKeyword ??
+        alignedModifier?.startToken ?? elementaryType?.startToken ??
+        classIdentifier!.startToken,
       identifier,
-      semicolonPunctuatorToken,
+      semicolonPunctuator,
     );
   }
 
@@ -38,7 +42,12 @@ export class ArrayDefinition extends AbstractArrayDefinition {
       yield this.alignedModifier;
     }
 
-    yield this.arrayElementType;
+    if (this.elementaryType) {
+      yield this.elementaryType;
+      yield this.lengthAttribute!;
+    } else {
+      yield this.classIdentifier!;
+    }
     yield this.identifier;
 
     if (this.implicitArrayDimension) {
@@ -50,34 +59,5 @@ export class ArrayDefinition extends AbstractArrayDefinition {
         yield dimension;
       }
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.isReserved) {
-      yield this.reservedKeywordToken!;
-    }
-
-    if (this.isLegacy) {
-      yield this.legacyKeywordToken!;
-    }
-
-    if (this.alignedModifier) {
-      yield* this.alignedModifier.getSyntaxTokenIterable();
-    }
-
-    yield* this.arrayElementType.getSyntaxTokenIterable();
-    yield* this.identifier.getSyntaxTokenIterable();
-
-    if (this.implicitArrayDimension) {
-      yield* this.implicitArrayDimension.getSyntaxTokenIterable();
-    }
-
-    if (this.dimensions) {
-      for (const dimension of this.dimensions) {
-        yield* dimension.getSyntaxTokenIterable();
-      }
-    }
-
-    yield this.semicolonPunctuatorToken;
   }
 }

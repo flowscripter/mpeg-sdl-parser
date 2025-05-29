@@ -1,15 +1,16 @@
-import type { Location } from "../../Location.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
+import type Token from "../token/Token.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 import type { StatementKind } from "./enum/statement_kind.ts";
-import type { Identifier } from "./Identifier.ts";
+import type Identifier from "./Identifier.ts";
 
-export abstract class AbstractArrayDefinition extends AbstractStatement {
+export default abstract class AbstractArrayDefinition
+  extends AbstractStatement {
   constructor(
     kind: StatementKind,
-    location: Location,
+    startToken: Token,
     public readonly identifier: Identifier,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly semicolonPunctuator: Token,
   ) {
-    super(kind, location);
+    super(kind, startToken, semicolonPunctuator);
   }
 }

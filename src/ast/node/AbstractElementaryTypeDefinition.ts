@@ -1,23 +1,28 @@
-import type { Location } from "../../Location.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { ElementaryType } from "./ElementaryType.ts";
+import type Token from "../token/Token.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type ElementaryType from "./ElementaryType.ts";
 import type { StatementKind } from "./enum/statement_kind.ts";
-import type { Identifier } from "./Identifier.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export abstract class AbstractElementaryTypeDefinition
+export default abstract class AbstractElementaryTypeDefinition
   extends AbstractStatement {
   constructor(
     kind: StatementKind,
-    location: Location,
+    startToken: Token,
     public readonly isConst: boolean,
     public readonly elementaryType: ElementaryType,
     public readonly identifier: Identifier,
-    public readonly value: AbstractNode | undefined,
-    public readonly constKeywordToken: SyntaxToken | undefined,
-    public readonly assignmentOperatorToken: SyntaxToken | undefined,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly value:
+      | AbstractExpression
+      | NumberLiteral
+      | Identifier
+      | undefined,
+    public readonly constKeyword: Token | undefined,
+    public readonly assignmentOperator: Token | undefined,
+    public readonly semicolonPunctuator: Token,
   ) {
-    super(kind, location);
+    super(kind, startToken, semicolonPunctuator);
   }
 }

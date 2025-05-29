@@ -1,6 +1,13 @@
-// TODO: re-implement all of thse
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type PartialArrayDimension from "../ast/node/PartialArrayDimension";
+import { ArrayDimensionKind } from "../ast/node/enum/array_dimension_kind";
+import type ArrayDefinition from "../ast/node/ArrayDefinition";
+import type AbstractArrayDimension from "../ast/node/AbstractArrayDimension";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type ComputedArrayDefinition from "../ast/node/ComputedArrayDefinition";
+import type ExplicitArrayDimension from "../ast/node/ExplicitArrayDimension";
+import type ImplicitArrayDimension from "../ast/node/ImplicitArrayDimension";
 const { join } = doc.builders;
 
 export function printAbstractArrayDimension(
@@ -12,32 +19,32 @@ export function printAbstractArrayDimension(
     case ArrayDimensionKind.EXPLICIT: {
       const explicitArrayDimensionNode = path.node as ExplicitArrayDimension;
       return [
-        getDocWithTrivia(explicitArrayDimensionNode.openBracketPunctuatorToken),
+        getDocWithTrivia(explicitArrayDimensionNode.openBracketPunctuator),
         (path as AstPath<ExplicitArrayDimension>).call(print, "size"),
         getDocWithTrivia(
-          explicitArrayDimensionNode.closeBracketPunctuatorToken,
+          explicitArrayDimensionNode.closeBracketPunctuator,
         ),
       ];
     }
     case ArrayDimensionKind.PARTIAL: {
       const partialArrayDimensionNode = path.node as PartialArrayDimension;
       return [
-        getDocWithTrivia(partialArrayDimensionNode.openBracketPunctuatorToken),
+        getDocWithTrivia(partialArrayDimensionNode.openBracketPunctuator),
         getDocWithTrivia(
-          partialArrayDimensionNode.innerOpenBracketPunctuatorToken,
+          partialArrayDimensionNode.innerOpenBracketPunctuator,
         ),
         (path as AstPath<PartialArrayDimension>).call(print, "index"),
         getDocWithTrivia(
-          partialArrayDimensionNode.innerCloseBracketPunctuatorToken,
+          partialArrayDimensionNode.innerCloseBracketPunctuator,
         ),
-        getDocWithTrivia(partialArrayDimensionNode.closeBracketPunctuatorToken),
+        getDocWithTrivia(partialArrayDimensionNode.closeBracketPunctuator),
       ];
     }
     case ArrayDimensionKind.IMPLICIT: {
       const node = path.node as ImplicitArrayDimension;
       const elements = [];
 
-      elements.push(getDocWithTrivia(node.openBracketPunctuatorToken));
+      elements.push(getDocWithTrivia(node.openBracketPunctuator));
       elements.push("[");
 
       if (node.rangeStart !== undefined) {
@@ -50,7 +57,7 @@ export function printAbstractArrayDimension(
       }
 
       if (node.rangeEnd !== undefined) {
-        elements.push(getDocWithTrivia(node.rangeOperatorToken!));
+        elements.push(getDocWithTrivia(node.rangeOperator!));
         elements.push(
           path.call(
             print,
@@ -59,7 +66,7 @@ export function printAbstractArrayDimension(
         );
       }
 
-      elements.push(getDocWithTrivia(node.closeBracketPunctuatorToken));
+      elements.push(getDocWithTrivia(node.closeBracketPunctuator));
       return elements;
     }
 
@@ -81,11 +88,11 @@ export function printArrayDefinition(
   const elements = [];
 
   if (arrayDefinition.isReserved) {
-    elements.push(getDocWithTrivia(arrayDefinition.reservedKeywordToken!));
+    elements.push(getDocWithTrivia(arrayDefinition.reservedKeyword!));
   }
 
   if (arrayDefinition.isLegacy) {
-    elements.push(getDocWithTrivia(arrayDefinition.legacyKeywordToken!));
+    elements.push(getDocWithTrivia(arrayDefinition.legacyKeyword!));
   }
 
   if (arrayDefinition.alignedModifier !== undefined) {
@@ -97,7 +104,8 @@ export function printArrayDefinition(
     );
   }
 
-  elements.push(path.call(print, "arrayElementType"));
+  // TODO: inline this
+  // elements.push(path.call(print, "arrayElementType"));
 
   const identifierClause = [
     path.call(print, "identifier"),
@@ -124,7 +132,7 @@ export function printArrayDefinition(
   }
 
   identifierClause.push(
-    getDocWithTrivia(arrayDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(arrayDefinition.semicolonPunctuator),
   );
 
   elements.push(identifierClause);
@@ -132,29 +140,30 @@ export function printArrayDefinition(
   return join(" ", elements);
 }
 
-export function printArrayElementType(
-  path: AstPath<ArrayElementType>,
-  print: (path: AstPath<AbstractNode>) => Doc,
-): Doc {
-  const node = path.node;
-  if (node.elementaryType !== undefined) {
-    return [
-      path.call(
-        print,
-        "elementaryType" as keyof ArrayElementType["elementaryType"],
-      ),
-      path.call(
-        print,
-        "lengthAttribute" as keyof ArrayElementType["lengthAttribute"],
-      ),
-    ];
-  } else {
-    return path.call(
-      print,
-      "classIdentifier" as keyof ArrayElementType["classIdentifier"],
-    );
-  }
-}
+// TODO: remove this
+// export function printArrayElementType(
+//   path: AstPath<ArrayElementType>,
+//   print: (path: AstPath<AbstractNode>) => Doc,
+// ): Doc {
+//   const node = path.node;
+//   if (node.elementaryType !== undefined) {
+//     return [
+//       path.call(
+//         print,
+//         "elementaryType" as keyof ArrayElementType["elementaryType"],
+//       ),
+//       path.call(
+//         print,
+//         "lengthAttribute" as keyof ArrayElementType["lengthAttribute"],
+//       ),
+//     ];
+//   } else {
+//     return path.call(
+//       print,
+//       "classIdentifier" as keyof ArrayElementType["classIdentifier"],
+//     );
+//   }
+// }
 
 export function printComputedArrayDefinition(
   path: AstPath<ComputedArrayDefinition>,
@@ -163,7 +172,7 @@ export function printComputedArrayDefinition(
   const computedArrayDefinition = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(computedArrayDefinition.computedKeywordToken));
+  elements.push(getDocWithTrivia(computedArrayDefinition.computedKeyword));
   elements.push(path.call(print, "elementaryType"));
 
   const identifierClause = [path.call(print, "identifier")];
@@ -171,7 +180,7 @@ export function printComputedArrayDefinition(
   identifierClause.push(path.map(print, "dimensions"));
 
   identifierClause.push(
-    getDocWithTrivia(computedArrayDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(computedArrayDefinition.semicolonPunctuator),
   );
 
   elements.push(identifierClause);

@@ -7,9 +7,6 @@
 non_zero_digit_character ::= [1-9]
 digit_character ::= 0 | non_zero_digit_character
 latin_character ::= [a-zA-Z]
-graphic_character ::= ' ' | '!' | '%' | '&' | ',' | '.' | '/' | ';' | '<' | '>' | '\' | '_' | '{' | '}' |
-    '~' | '"' | '#' | "'" | '(' | ')' | '*' | '+' | '-' | ':' | '=' | '?' | '[' | ']' | '^' | '|'
-basic_character ::= digit_character | latin_character | graphic_character
 sdl_compatible_ucs_character ::= [#x0020-#x10FFFF] - #xFEFF - #x0085 - #x2028 - #x2029
 universal_character_name ::= ('\u' four_hexadecimal_characters) | ('\U' four_hexadecimal_characters four_hexadecimal_characters)
 multiple_character_literal_character ::= [#x0020-#x007E]
@@ -188,7 +185,7 @@ hexadecimal_literal ::= '0x' (period_separated_hexadecimal_character_string | he
 /* Rule S.4: Multiple character literal value */
 
 escaped_multiple_character_literal_character ::= (multiple_character_literal_character - single_quote - '\') | ('\' single_quote) | '\\'
-multiple_character_literal ::= single_quote escaped_multiple_character_literal_character+ single_quote
+multiple_character_literal ::= (single_quote escaped_multiple_character_literal_character+ single_quote)+
 
 /* 5.17 Integer, decimal and floating-point literal values */
 
@@ -200,18 +197,14 @@ floating_point_literal ::= (integer_literal | decimal_literal) 'e' (0 | (('+' | 
 
 /* One or more multiple character literals to support concatenation */
 
-number_literal ::= binary_literal | hexadecimal_literal | multiple_character_literal+ | integer_literal |
+number_literal ::= binary_literal | hexadecimal_literal | multiple_character_literal | integer_literal |
     decimal_literal | floating_point_literal
 
 /* 5.18 String literal values */
 
-escaped_basic_character ::= (basic_character - double_quote - '\') | ('\' double_quote) | '\\'
-basic_string_literal ::= double_quote escaped_basic_character* double_quote
-
 escaped_sdl_compatible_ucs_character ::= (sdl_compatible_ucs_character - double_quote - '\') | ('\' double_quote) | '\\'
-utf_string_literal ::= 'u' double_quote (escaped_sdl_compatible_ucs_character | universal_character_name)* double_quote
+utf_string_literal ::= ('u' double_quote (escaped_sdl_compatible_ucs_character | universal_character_name)* double_quote)+
 
-string_literal ::= basic_string_literal | utf_string_literal
 
 /* 5.19 Scope */
 
@@ -264,16 +257,16 @@ map_definition ::= (reserved | legacy)? (elementary_type | identifier) '<' ident
 /* Rule E.6: String data types */
 
 base64_character ::= digit_character | latin_character | '+' | '/'
-base64_string_literal ::= double_quote base64_character* '='? '='? double_quote
+base64_string_literal ::= (double_quote base64_character* '='? '='? double_quote)+
 
 /* 6.7 String value */
 
 /* One or more string literals to support concatenation */
 
-utf16_string_definition ::= utf16string identifier (assignment utf_string_literal+)?
-utf8_string_definition ::= (utf8string | utf8list) identifier (assignment utf_string_literal+)?
-utf_string_definition ::= utfstring identifier (assignment utf_string_literal+)?
-base64_string_definition ::= base64string identifier (assignment base64_string_literal+)?
+utf16_string_definition ::= utf16string identifier (assignment utf_string_literal)?
+utf8_string_definition ::= (utf8string | utf8list) identifier (assignment utf_string_literal)?
+utf_string_definition ::= utfstring identifier (assignment utf_string_literal)?
+base64_string_definition ::= base64string identifier (assignment base64_string_literal)?
 
 string_definition ::= (reserved | legacy)? const? aligned_modifier? (base64_string_definition | utf16_string_definition |
     utf8_string_definition | utf_string_definition) semicolon
@@ -382,8 +375,8 @@ if_statement ::= if open_parenthesis expression close_parenthesis statement
 
 /* Rule FC.2: Flow control using switch */
 
-switch_case_clause ::= case number_literal colon ((statement* break semicolon) |
-	(open_brace statement* break semicolon close_brace))
+switch_case_clause ::= case number_literal colon 
+    ((statement* (break semicolon)?) | (open_brace statement* break semicolon close_brace))?
 switch_default_clause ::= default colon statement*
 
 switch_statement ::= switch open_parenthesis expression close_parenthesis open_brace

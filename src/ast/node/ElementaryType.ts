@@ -1,23 +1,22 @@
-import { AbstractLeafNode } from "./AbstractLeafNode.ts";
-import type { ElementaryTypeKind } from "./enum/elementary_type_kind.ts";
+import type Token from "../token/Token.ts";
+import AbstractLeafNode from "./AbstractLeafNode.ts";
+import { ElementaryTypeKind } from "./enum/elementary_type_kind.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export class ElementaryType extends AbstractLeafNode {
+export default class ElementaryType extends AbstractLeafNode {
   constructor(
     public readonly elementaryTypeKind: ElementaryTypeKind,
-    public readonly unsignedQualifierKeywordToken: SyntaxToken | undefined,
-    public readonly typeToken: SyntaxToken,
+    public readonly unsignedQualifierKeyword: Token | undefined,
+    public readonly typeKeyword: Token,
   ) {
     super(
       NodeKind.ELEMENTARY_TYPE,
-      unsignedQualifierKeywordToken?.location ?? typeToken.location,
+      unsignedQualifierKeyword ?? typeKeyword,
+      typeKeyword,
     );
   }
 
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.unsignedQualifierKeywordToken) {
-      yield this.unsignedQualifierKeywordToken;
-    }
-    yield this.typeToken;
+  toString(): string {
+    return ElementaryTypeKind[this.elementaryTypeKind];
   }
 }

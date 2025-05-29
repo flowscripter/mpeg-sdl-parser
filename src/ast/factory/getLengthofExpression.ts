@@ -1,0 +1,67 @@
+import { Text } from "@codemirror/state";
+import type { SyntaxNode } from "@lezer/common";
+import { InternalParseError } from "../../ParseError";
+import {
+  assertSyntaxNodeType,
+  getChildNodesAndTokens,
+  isAbstractNode,
+} from "../../util/nodeFactoryUtils";
+import type AbstractExpression from "../node/AbstractExpression";
+import { NodeKind } from "../node/enum/node_kind";
+import type Identifier from "../node/Identifier";
+import type Token from "../token/Token";
+import LengthofExpression from "../node/LengthofExpression";
+
+export function getLengthofExpression(
+  syntaxNode: SyntaxNode,
+  text: Text,
+): LengthofExpression {
+  assertSyntaxNodeType(syntaxNode, "LengthofExpression");
+
+  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+
+  let operand: AbstractExpression | Identifier | undefined;
+  let lengthOfKeyword: Token | undefined;
+  let openParenthesisPunctuator: Token | undefined;
+  let closedParenthesisPunctuator: Token | undefined;
+
+  for (const childNodeOrToken of childNodesAndTokens) {
+    if (isAbstractNode(childNodeOrToken)) {
+      switch (childNodeOrToken.nodeKind) {
+        case NodeKind.EXPRESSION:
+          operand = childNodeOrToken as AbstractExpression;
+          break;
+        case NodeKind.IDENTIFIER:
+          operand = childNodeOrToken as Identifier;
+          break;
+        default:
+          throw new InternalParseError(
+            `Unexpected node kind: ${NodeKind[childNodeOrToken.nodeKind]}`,
+          );
+      }
+    } else {
+      switch (childNodeOrToken.text) {
+        case "lengthof":
+          lengthOfKeyword = childNodeOrToken;
+          break;
+        case "(":
+          openParenthesisPunctuator = childNodeOrToken;
+          break;
+        case ")":
+          closedParenthesisPunctuator = childNodeOrToken;
+          break;
+        default:
+          throw new InternalParseError(
+            `Unexpected token: ${childNodeOrToken.text}`,
+          );
+      }
+    }
+  }
+
+  return new LengthofExpression(
+    operand!,
+    lengthOfKeyword!,
+    openParenthesisPunctuator!,
+    closedParenthesisPunctuator!,
+  );
+}

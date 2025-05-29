@@ -1,5 +1,19 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { addCommaSeparatorsToDoc, getDocWithTrivia } from "./print_utils";
+import type BitModifier from "../ast/node/BitModifier";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type ClassDeclaration from "../ast/node/ClassDeclaration";
+import type ExtendedClassIdRange from "../ast/node/ExtendedClassIdRange";
+import type AbstractClassId from "../ast/node/AbstractClassId";
+import type ClassDefinition from "../ast/node/ClassDefinition";
+import type ClassIdRange from "../ast/node/ClassIdRange";
+import { ClassIdKind } from "../ast/node/enum/class_id_kind";
+import type ExpandableModifier from "../ast/node/ExpandableModifier";
+import type ExtendsModifier from "../ast/node/ExtendsModifier";
+import type Parameter from "../ast/node/Parameter";
+import type ParameterList from "../ast/node/ParameterList";
+import type ParameterValueList from "../ast/node/ParameterValueList";
+import type SingleClassId from "../ast/node/SingleClassId";
 const { hardline, indent, join } = doc.builders;
 
 export function printBitModifier(
@@ -9,17 +23,17 @@ export function printBitModifier(
   const bitModifier = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(bitModifier.colonPunctuatorToken));
+  elements.push(getDocWithTrivia(bitModifier.colonPunctuator));
 
   const subElements = [];
 
-  subElements.push(getDocWithTrivia(bitModifier.bitKeywordToken));
+  subElements.push(getDocWithTrivia(bitModifier.bitKeyword));
   subElements.push(
-    getDocWithTrivia(bitModifier.openParenthesisPunctuatorToken),
+    getDocWithTrivia(bitModifier.openParenthesisPunctuator),
   );
   subElements.push(path.call(print, "length"));
   subElements.push(
-    getDocWithTrivia(bitModifier.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(bitModifier.closeParenthesisPunctuator),
   );
 
   elements.push(subElements);
@@ -33,8 +47,8 @@ export function printBitModifier(
     );
   }
 
-  if (bitModifier.assignmentOperatorToken !== undefined) {
-    elements.push(getDocWithTrivia(bitModifier.assignmentOperatorToken!));
+  if (bitModifier.assignmentOperator !== undefined) {
+    elements.push(getDocWithTrivia(bitModifier.assignmentOperator!));
   }
 
   elements.push(
@@ -74,10 +88,10 @@ export function printClassDeclaration(
   }
 
   if (classDeclaration.isAbstract) {
-    elements.push(getDocWithTrivia(classDeclaration.abstractKeywordToken!));
+    elements.push(getDocWithTrivia(classDeclaration.abstractKeyword!));
   }
 
-  elements.push(getDocWithTrivia(classDeclaration.classKeywordToken));
+  elements.push(getDocWithTrivia(classDeclaration.classKeyword));
 
   const identifierElements = [
     path.call(print, "identifier"),
@@ -109,7 +123,7 @@ export function printClassDeclaration(
     );
   }
 
-  elements.push(getDocWithTrivia(classDeclaration.openBracePunctuatorToken));
+  elements.push(getDocWithTrivia(classDeclaration.openBracePunctuator));
 
   const parts = [];
 
@@ -122,7 +136,7 @@ export function printClassDeclaration(
     ]));
   }
   parts.push(
-    getDocWithTrivia(classDeclaration.closeBracePunctuatorToken, true),
+    getDocWithTrivia(classDeclaration.closeBracePunctuator, true),
   );
 
   return parts;
@@ -137,7 +151,7 @@ export function printClassDefinition(
   const elements = [];
 
   if (classDefinition.isLegacy) {
-    elements.push(getDocWithTrivia(classDefinition.legacyKeywordToken!));
+    elements.push(getDocWithTrivia(classDefinition.legacyKeyword!));
   }
 
   elements.push(path.call(print, "classIdentifier"));
@@ -159,7 +173,7 @@ export function printClassDefinition(
 
   return [
     join(" ", elements),
-    getDocWithTrivia(classDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(classDefinition.semicolonPunctuator),
   ];
 }
 
@@ -175,7 +189,7 @@ export function printClassId(
       const classIdRange = path.node as ClassIdRange;
       return [
         (path as AstPath<ClassIdRange>).call(print, "startClassId"),
-        getDocWithTrivia(classIdRange.rangeOperatorToken),
+        getDocWithTrivia(classIdRange.rangeOperator),
         (path as AstPath<ClassIdRange>).call(print, "endClassId"),
       ];
     }
@@ -190,7 +204,7 @@ export function printClassId(
       elements.push(
         ...addCommaSeparatorsToDoc(
           outputValuesDoc,
-          extendedClassIdRange.commaPunctuatorTokens,
+          extendedClassIdRange.commaPunctuators,
         ),
       );
 
@@ -213,11 +227,11 @@ export function printExpandableModifier(
 
   const elements = [];
 
-  elements.push(getDocWithTrivia(expandableModifier.expandableKeywordToken));
+  elements.push(getDocWithTrivia(expandableModifier.expandableKeyword));
 
   if (expandableModifier.maxClassSize !== undefined) {
     elements.push(
-      getDocWithTrivia(expandableModifier.openParenthesisPunctuatorToken!),
+      getDocWithTrivia(expandableModifier.openParenthesisPunctuator!),
     );
     elements.push(
       path.call(
@@ -226,7 +240,7 @@ export function printExpandableModifier(
       ),
     ),
       elements.push(
-        getDocWithTrivia(expandableModifier.closeParenthesisPunctuatorToken!),
+        getDocWithTrivia(expandableModifier.closeParenthesisPunctuator!),
       );
   }
 
@@ -252,7 +266,7 @@ export function printExtendsModifier(
   }
 
   return join(" ", [
-    getDocWithTrivia(mapEntryList.extendsKeywordToken),
+    getDocWithTrivia(mapEntryList.extendsKeyword),
     elements,
   ]);
 }
@@ -295,13 +309,13 @@ export function printParameterList(
 
   const elements = addCommaSeparatorsToDoc(
     outputValuesDoc,
-    parameterList.commaPunctuatorTokens,
+    parameterList.commaPunctuators,
   );
 
   return [
-    getDocWithTrivia(parameterList.openParenthesisPunctuatorToken),
+    getDocWithTrivia(parameterList.openParenthesisPunctuator),
     join(" ", elements),
-    getDocWithTrivia(parameterList.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(parameterList.closeParenthesisPunctuator),
   ];
 }
 
@@ -315,12 +329,12 @@ export function printParameterValueList(
 
   const elements = addCommaSeparatorsToDoc(
     outputValuesDoc,
-    parameterValueList.commaPunctuatorTokens,
+    parameterValueList.commaPunctuators,
   );
 
   return [
-    getDocWithTrivia(parameterValueList.openParenthesisPunctuatorToken),
+    getDocWithTrivia(parameterValueList.openParenthesisPunctuator),
     join(" ", elements),
-    getDocWithTrivia(parameterValueList.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(parameterValueList.closeParenthesisPunctuator),
   ];
 }

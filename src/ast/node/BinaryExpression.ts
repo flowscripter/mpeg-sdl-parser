@@ -1,26 +1,33 @@
-import { AbstractExpression } from "./AbstractExpression.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import type { BinaryOperatorKind } from "./enum/binary_operator_kind.ts";
+import type Token from "../token/Token.ts";
+import AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import { BinaryOperatorKind } from "./enum/binary_operator_kind.ts";
 import { ExpressionKind } from "./enum/expression_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class BinaryExpression extends AbstractExpression {
+export default class BinaryExpression extends AbstractExpression {
   constructor(
-    public readonly leftOperand: AbstractNode,
+    public readonly leftOperand:
+      | AbstractExpression
+      | Identifier
+      | NumberLiteral,
     public readonly binaryOperatorKind: BinaryOperatorKind,
-    public readonly rightOperand: AbstractNode,
-    public readonly binaryOperatorToken: SyntaxToken,
+    public readonly rightOperand:
+      | AbstractExpression
+      | Identifier
+      | NumberLiteral,
+    public readonly binaryOperator: Token,
   ) {
-    super(ExpressionKind.BINARY, leftOperand.location);
+    super(ExpressionKind.BINARY, leftOperand.startToken, rightOperand.endToken);
+  }
+
+  toString(): string {
+    return super.toString() + " " + BinaryOperatorKind[this.binaryOperatorKind];
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.leftOperand;
     yield this.rightOperand;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield* this.leftOperand.getSyntaxTokenIterable();
-    yield this.binaryOperatorToken;
-    yield* this.rightOperand.getSyntaxTokenIterable();
   }
 }

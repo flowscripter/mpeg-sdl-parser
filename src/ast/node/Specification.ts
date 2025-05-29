@@ -1,13 +1,21 @@
-import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import type ClassDeclaration from "./ClassDeclaration.ts";
+import type ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
 import { NodeKind } from "./enum/node_kind.ts";
+import type MapDeclaration from "./MapDeclaration.ts";
 
-export class Specification extends AbstractCompositeNode {
+export default class Specification extends AbstractCompositeNode {
   constructor(
-    public readonly globals: Array<AbstractNode>,
-    public readonly eofToken: SyntaxToken,
+    public readonly globals: Array<
+      ComputedElementaryTypeDefinition | MapDeclaration | ClassDeclaration
+    >,
   ) {
-    super(NodeKind.SPECIFICATION, globals[0].location);
+    super(
+      NodeKind.SPECIFICATION,
+      globals[0].startToken,
+      globals[globals.length - 1].endToken,
+    );
     this.globals = globals;
   }
 
@@ -15,12 +23,5 @@ export class Specification extends AbstractCompositeNode {
     for (const currentGlobal of this.globals) {
       yield currentGlobal;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    for (const currentGlobal of this.globals) {
-      yield* currentGlobal.getSyntaxTokenIterable();
-    }
-    yield this.eofToken;
   }
 }

@@ -1,27 +1,24 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
+import type Token from "../token/Token.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export class CompoundStatement extends AbstractStatement {
+export default class CompoundStatement extends AbstractStatement {
   constructor(
     public readonly statements: AbstractStatement[],
-    public readonly openBracePunctuatorToken: SyntaxToken,
-    public readonly closeBracePunctuatorToken: SyntaxToken,
+    public readonly openBracePunctuator: Token,
+    public readonly closeBracePunctuator: Token,
   ) {
-    super(StatementKind.COMPOUND, openBracePunctuatorToken.location);
+    super(
+      StatementKind.COMPOUND,
+      openBracePunctuator,
+      closeBracePunctuator,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     for (const statement of this.statements) {
       yield statement;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracePunctuatorToken;
-    for (const statement of this.statements) {
-      yield* statement.getSyntaxTokenIterable();
-    }
-    yield this.closeBracePunctuatorToken;
   }
 }

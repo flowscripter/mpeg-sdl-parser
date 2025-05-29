@@ -1,12 +1,13 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { AlignedModifier } from "./AlignedModifier.ts";
+import type Token from "../token/Token.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 import type { StringVariableKind } from "./enum/string_variable_kind.ts";
-import type { Identifier } from "./Identifier.ts";
-import type { StringLiteral } from "./StringLiteral.ts";
+import type Identifier from "./Identifier.ts";
+import type StringLiteral from "./StringLiteral.ts";
 
-export class StringDefinition extends AbstractStatement {
+export default class StringDefinition extends AbstractStatement {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,
@@ -15,20 +16,21 @@ export class StringDefinition extends AbstractStatement {
     public readonly stringVariableKind: StringVariableKind,
     public readonly identifier: Identifier,
     public readonly stringLiteral: StringLiteral | undefined,
-    public readonly reservedKeywordToken: SyntaxToken | undefined,
-    public readonly legacyKeywordToken: SyntaxToken | undefined,
-    public readonly constKeywordToken: SyntaxToken | undefined,
-    public readonly stringVariableKindToken: SyntaxToken,
-    public readonly assignmentPunctuatorToken: SyntaxToken | undefined,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly reservedKeyword: Token | undefined,
+    public readonly legacyKeyword: Token | undefined,
+    public readonly constKeyword: Token | undefined,
+    public readonly stringVariableKindToken: Token,
+    public readonly assignmentPunctuator: Token | undefined,
+    public readonly semicolonPunctuator: Token,
   ) {
     super(
       StatementKind.STRING_DEFINITION,
-      reservedKeywordToken?.location ??
-        legacyKeywordToken?.location ??
-        constKeywordToken?.location ??
-        alignedModifier?.location ??
-        stringVariableKindToken.location,
+      reservedKeyword ??
+        legacyKeyword ??
+        constKeyword ??
+        alignedModifier?.startToken ??
+        stringVariableKindToken,
+      semicolonPunctuator,
     );
   }
 
@@ -41,27 +43,5 @@ export class StringDefinition extends AbstractStatement {
     if (this.stringLiteral) {
       yield this.stringLiteral;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.reservedKeywordToken) {
-      yield this.reservedKeywordToken;
-    }
-    if (this.legacyKeywordToken) {
-      yield this.legacyKeywordToken;
-    }
-    if (this.constKeywordToken) {
-      yield this.constKeywordToken;
-    }
-    if (this.alignedModifier) {
-      yield* this.alignedModifier.getSyntaxTokenIterable();
-    }
-    yield this.stringVariableKindToken;
-    yield* this.identifier.getSyntaxTokenIterable();
-    if (this.assignmentPunctuatorToken) {
-      yield this.assignmentPunctuatorToken;
-      yield* this.stringLiteral!.getSyntaxTokenIterable();
-    }
-    yield this.semicolonPunctuatorToken;
   }
 }

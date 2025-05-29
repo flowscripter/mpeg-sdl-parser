@@ -1,13 +1,18 @@
-import type { Location } from "../../Location.ts";
-import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
-import type { ExpressionKind } from "./enum/expression_kind.ts";
+import type Token from "../token/Token.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import { ExpressionKind } from "./enum/expression_kind.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export abstract class AbstractExpression extends AbstractCompositeNode {
+export default abstract class AbstractExpression extends AbstractCompositeNode {
   constructor(
     public readonly expressionKind: ExpressionKind,
-    location: Location,
+    startToken: Token,
+    endToken: Token,
   ) {
-    super(NodeKind.EXPRESSION, location);
+    super(NodeKind.EXPRESSION, startToken, endToken);
+  }
+
+  toString(): string {
+    return ExpressionKind[this.expressionKind];
   }
 }

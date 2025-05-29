@@ -1,5 +1,8 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type StringDefinition from "../ast/node/StringDefinition";
+import type StringLiteral from "../ast/node/StringLiteral";
 const { join } = doc.builders;
 
 export function printStringDefinition(
@@ -11,13 +14,13 @@ export function printStringDefinition(
   const elements = [];
 
   if (stringDefinition.isReserved) {
-    elements.push(getDocWithTrivia(stringDefinition.reservedKeywordToken!));
+    elements.push(getDocWithTrivia(stringDefinition.reservedKeyword!));
   }
   if (stringDefinition.isLegacy) {
-    elements.push(getDocWithTrivia(stringDefinition.legacyKeywordToken!));
+    elements.push(getDocWithTrivia(stringDefinition.legacyKeyword!));
   }
   if (stringDefinition.isConst) {
-    elements.push(getDocWithTrivia(stringDefinition.constKeywordToken!));
+    elements.push(getDocWithTrivia(stringDefinition.constKeyword!));
   }
 
   if (stringDefinition.alignedModifier !== undefined) {
@@ -31,8 +34,8 @@ export function printStringDefinition(
   elements.push(getDocWithTrivia(stringDefinition.stringVariableKindToken));
   elements.push(path.call(print, "identifier"));
 
-  if (stringDefinition.assignmentPunctuatorToken !== undefined) {
-    elements.push(getDocWithTrivia(stringDefinition.assignmentPunctuatorToken));
+  if (stringDefinition.assignmentPunctuator !== undefined) {
+    elements.push(getDocWithTrivia(stringDefinition.assignmentPunctuator));
     elements.push(
       path.call(
         print,
@@ -43,7 +46,7 @@ export function printStringDefinition(
 
   return [
     join(" ", elements),
-    getDocWithTrivia(stringDefinition.semicolonPunctuatorToken),
+    getDocWithTrivia(stringDefinition.semicolonPunctuator),
   ];
 }
 
@@ -54,8 +57,8 @@ export function printStringLiteral(
 
   return join(
     " ",
-    stringLiteral.stringLiteralTokens.map((stringLiteralToken) =>
-      getDocWithTrivia(stringLiteralToken)
+    stringLiteral.stringLiterals.map((stringLiteral) =>
+      getDocWithTrivia(stringLiteral)
     ),
   );
 }

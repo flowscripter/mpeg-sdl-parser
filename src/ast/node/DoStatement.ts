@@ -1,33 +1,30 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { CompoundStatement } from "./CompoundStatement.ts";
+import type Token from "../token/Token.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type CompoundStatement from "./CompoundStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class DoStatement extends AbstractStatement {
+export default class DoStatement extends AbstractStatement {
   constructor(
     public readonly compoundStatement: CompoundStatement,
-    public readonly conditionExpression: AbstractNode,
-    public readonly doKeywordToken: SyntaxToken,
-    public readonly whileKeywordToken: SyntaxToken,
-    public readonly openParenthesisPunctuatorToken: SyntaxToken,
-    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
-    public readonly semicolonPunctuatorToken: SyntaxToken,
+    public readonly conditionExpression:
+      | AbstractExpression
+      | Identifier
+      | NumberLiteral,
+    public readonly doKeyword: Token,
+    public readonly whileKeyword: Token,
+    public readonly openParenthesisPunctuator: Token,
+    public readonly closeParenthesisPunctuator: Token,
+    public readonly semicolonPunctuator: Token,
   ) {
-    super(StatementKind.DO, doKeywordToken.location);
+    super(StatementKind.DO, doKeyword, semicolonPunctuator);
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.compoundStatement;
     yield this.conditionExpression;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.doKeywordToken;
-    yield* this.compoundStatement.getSyntaxTokenIterable();
-    yield this.whileKeywordToken;
-    yield this.openParenthesisPunctuatorToken;
-    yield* this.conditionExpression.getSyntaxTokenIterable();
-    yield this.closeParenthesisPunctuatorToken;
-    yield this.semicolonPunctuatorToken;
   }
 }

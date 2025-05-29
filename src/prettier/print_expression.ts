@@ -1,5 +1,15 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractExpression from "../ast/node/AbstractExpression";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type ArrayElementAccess from "../ast/node/ArrayElementAccess";
+import type ClassMemberAccess from "../ast/node/ClassMemberAccess";
+import { ExpressionKind } from "../ast/node/enum/expression_kind";
+import type LengthOfExpression from "../ast/node/LengthofExpression";
+import type PostfixExpression from "../ast/node/PostfixExpression";
+import type BinaryExpression from "../ast/node/BinaryExpression";
+import type UnaryExpression from "../ast/node/UnaryExpression";
+import type PrimaryExpression from "../ast/node/PrimaryExpression";
 const { join } = doc.builders;
 
 export function printClassMemberAccess(
@@ -8,7 +18,7 @@ export function printClassMemberAccess(
 ): Doc {
   const node = path.node;
   return [
-    getDocWithTrivia(node.classMemberAccessOperatorToken),
+    getDocWithTrivia(node.classMemberAccessOperator),
     path.call(print, "memberIdentifier"),
   ];
 }
@@ -19,9 +29,9 @@ export function printArrayElementAccess(
 ): Doc {
   const arrayElementAccess = path.node;
   return [
-    getDocWithTrivia(arrayElementAccess.openBracketPunctuatorToken),
+    getDocWithTrivia(arrayElementAccess.openBracketPunctuator),
     path.call(print, "index"),
-    getDocWithTrivia(arrayElementAccess.closeBracketPunctuatorToken),
+    getDocWithTrivia(arrayElementAccess.closeBracketPunctuator),
   ];
 }
 
@@ -53,7 +63,7 @@ function printPostfixExpression(
   }
 
   if (postfixExpression.postfixOperatorKind !== undefined) {
-    elements.push(getDocWithTrivia(postfixExpression.postfixOperatorToken!));
+    elements.push(getDocWithTrivia(postfixExpression.postfixOperator!));
   }
 
   return elements;
@@ -66,17 +76,17 @@ function printPrimaryExpression(
   const primaryExpression = path.node;
   const elements = [];
 
-  if (primaryExpression.openParenthesisPunctuatorToken !== undefined) {
+  if (primaryExpression.openParenthesisPunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(primaryExpression.openParenthesisPunctuatorToken),
+      getDocWithTrivia(primaryExpression.openParenthesisPunctuator),
     );
   }
 
   elements.push(path.call(print, "operand"));
 
-  if (primaryExpression.closeParenthesisPunctuatorToken !== undefined) {
+  if (primaryExpression.closeParenthesisPunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(primaryExpression.closeParenthesisPunctuatorToken),
+      getDocWithTrivia(primaryExpression.closeParenthesisPunctuator),
     );
   }
 
@@ -90,7 +100,7 @@ function printUnaryExpression(
   const unaryExpression = path.node;
 
   return [
-    getDocWithTrivia(unaryExpression.unaryOperatorToken),
+    getDocWithTrivia(unaryExpression.unaryOperator),
     path.call(
       print,
       "operand",
@@ -105,7 +115,7 @@ function printBinaryExpression(
   const node = path.node;
   return join(" ", [
     path.call(print, "leftOperand"),
-    getDocWithTrivia(node.binaryOperatorToken),
+    getDocWithTrivia(node.binaryOperator),
     path.call(print, "rightOperand"),
   ]);
 }
@@ -117,13 +127,13 @@ function printLengthOfExpression(
   const lengthOfExpression = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(lengthOfExpression.lengthOfKeywordToken));
+  elements.push(getDocWithTrivia(lengthOfExpression.lengthOfKeyword));
   elements.push(
-    getDocWithTrivia(lengthOfExpression.openParenthesisPunctuatorToken),
+    getDocWithTrivia(lengthOfExpression.openParenthesisPunctuator),
   );
   elements.push(path.call(print, "operand"));
   elements.push(
-    getDocWithTrivia(lengthOfExpression.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(lengthOfExpression.closeParenthesisPunctuator),
   );
 
   return elements;

@@ -1,27 +1,27 @@
-import { AbstractArrayDimension } from "./AbstractArrayDimension.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractArrayDimension from "./AbstractArrayDimension.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class PartialArrayDimension extends AbstractArrayDimension {
+export default class PartialArrayDimension extends AbstractArrayDimension {
   constructor(
-    public readonly index: AbstractNode,
-    public readonly openBracketPunctuatorToken: SyntaxToken,
-    public readonly innerOpenBracketPunctuatorToken: SyntaxToken,
-    public readonly innerCloseBracketPunctuatorToken: SyntaxToken,
-    public readonly closeBracketPunctuatorToken: SyntaxToken,
+    public readonly index: AbstractExpression | Identifier | NumberLiteral,
+    openBracketPunctuator: Token,
+    public readonly innerOpenBracketPunctuator: Token,
+    public readonly innerCloseBracketPunctuator: Token,
+    closeBracketPunctuator: Token,
   ) {
-    super(ArrayDimensionKind.PARTIAL, openBracketPunctuatorToken.location);
+    super(
+      ArrayDimensionKind.PARTIAL,
+      openBracketPunctuator,
+      closeBracketPunctuator,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.index;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketPunctuatorToken;
-    yield this.innerOpenBracketPunctuatorToken;
-    yield* this.index.getSyntaxTokenIterable();
-    yield this.innerCloseBracketPunctuatorToken;
-    yield this.closeBracketPunctuatorToken;
   }
 }

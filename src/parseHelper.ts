@@ -1,13 +1,16 @@
 import { type Tree } from "@lezer/common";
-import type { NodeHandler } from "./ast/visitor/NodeHandler.ts";
-import type { Specification } from "./ast/node/Specification.ts";
-import { createSyntacticParseError, type SyntacticParseError } from "./ParseError.ts";
-import { TraversingVisitor } from "./ast/visitor/TraversingVisitor.ts";
+import type NodeHandler from "./ast/visitor/NodeHandler.ts";
+import type Specification from "./ast/node/Specification.ts";
+import {
+  createSyntacticParseError,
+  type SyntacticParseError,
+} from "./ParseError.ts";
+import TraversingVisitor from "./ast/visitor/TraversingVisitor.ts";
 import * as prettier from "prettier/standalone.js";
 import prettierPluginSdl from "./prettier/prettierPluginSdl.ts";
 import type { Plugin } from "prettier";
 import { Text } from "@codemirror/state";
-import type { AbstractNode } from "./ast/node/AbstractNode.ts";
+import type AbstractNode from "./ast/node/AbstractNode.ts";
 import type SdlStringInput from "./lezer/SdlStringInput.ts";
 
 /**
@@ -79,7 +82,7 @@ export function prettyPrint(
  * @param specification The specification to be traversed.
  * @param nodeHandler The handler to perform operations on each node.
  */
-export function dispatchHandler(
+export function dispatchNodeHandler(
   specification: Specification,
   nodeHandler: NodeHandler,
 ) {

@@ -2,14 +2,14 @@
  * Enum representing different kinds of nodes.
  */
 export enum NodeKind {
+  /** Output value node */
+  AGGREGATE_OUTPUT_VALUE,
   /** Aligned modifier node */
   ALIGNED_MODIFIER,
   /** Array dimension node */
   ARRAY_DIMENSION,
   /** Array element access node */
   ARRAY_ELEMENT_ACCESS,
-  /** Array element type node */
-  ARRAY_ELEMENT_TYPE,
   /** Bit modifier node */
   BIT_MODIFIER,
   /** Class ID node */
@@ -26,16 +26,10 @@ export enum NodeKind {
   EXTENDS_MODIFIER,
   /** Identifier node */
   IDENTIFIER,
-  /** If clause node */
-  IF_CLAUSE,
   /** Length attribute node */
   LENGTH_ATTRIBUTE,
   /** Map entry node */
   MAP_ENTRY,
-  /** Map entry list node */
-  MAP_ENTRY_LIST,
-  /** Map output value node */
-  MAP_OUTPUT_VALUE,
   /** Number literal node */
   NUMBER_LITERAL,
   /** Parameter node */

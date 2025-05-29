@@ -1,5 +1,7 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type WhileStatement from "../ast/node/WhileStatement";
 const { join } = doc.builders;
 
 export default function printWhileStatement(
@@ -9,11 +11,11 @@ export default function printWhileStatement(
   const whileStatement = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(whileStatement.whileKeywordToken));
+  elements.push(getDocWithTrivia(whileStatement.whileKeyword));
   elements.push([
-    getDocWithTrivia(whileStatement.openParenthesisPunctuatorToken),
+    getDocWithTrivia(whileStatement.openParenthesisPunctuator),
     path.call(print, "expression"),
-    getDocWithTrivia(whileStatement.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(whileStatement.closeParenthesisPunctuator),
   ]);
   elements.push(path.call(print, "compoundStatement"));
 

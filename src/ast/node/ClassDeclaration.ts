@@ -1,14 +1,15 @@
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { AlignedModifier } from "./AlignedModifier.ts";
-import type { BitModifier } from "./BitModifier.ts";
+import type Token from "../token/Token.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type AlignedModifier from "./AlignedModifier.ts";
+import type BitModifier from "./BitModifier.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type { ExpandableModifier } from "./ExpandableModifier.ts";
-import type { ExtendsModifier } from "./ExtendsModifier.ts";
-import type { Identifier } from "./Identifier.ts";
-import type { ParameterList } from "./ParameterList.ts";
+import type ExpandableModifier from "./ExpandableModifier.ts";
+import type ExtendsModifier from "./ExtendsModifier.ts";
+import type Identifier from "./Identifier.ts";
+import type ParameterList from "./ParameterList.ts";
 
-export class ClassDeclaration extends AbstractStatement {
+export default class ClassDeclaration extends AbstractStatement {
   constructor(
     public readonly alignedModifier: AlignedModifier | undefined,
     public readonly expandableModifier: ExpandableModifier | undefined,
@@ -18,15 +19,16 @@ export class ClassDeclaration extends AbstractStatement {
     public readonly extendsModifier: ExtendsModifier | undefined,
     public readonly bitModifier: BitModifier | undefined,
     public readonly statements: AbstractStatement[],
-    public readonly abstractKeywordToken: SyntaxToken | undefined,
-    public readonly classKeywordToken: SyntaxToken,
-    public readonly openBracePunctuatorToken: SyntaxToken,
-    public readonly closeBracePunctuatorToken: SyntaxToken,
+    public readonly abstractKeyword: Token | undefined,
+    public readonly classKeyword: Token,
+    public readonly openBracePunctuator: Token,
+    public readonly closeBracePunctuator: Token,
   ) {
     super(
       StatementKind.CLASS_DECLARATION,
-      alignedModifier?.location ?? expandableModifier?.location ??
-        identifier.location,
+      alignedModifier?.startToken ?? expandableModifier?.startToken ??
+        classKeyword,
+      closeBracePunctuator,
     );
   }
 
@@ -56,42 +58,5 @@ export class ClassDeclaration extends AbstractStatement {
     for (const statement of this.statements) {
       yield statement;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    if (this.alignedModifier) {
-      yield* this.alignedModifier.getSyntaxTokenIterable();
-    }
-
-    if (this.expandableModifier) {
-      yield* this.expandableModifier.getSyntaxTokenIterable();
-    }
-
-    if (this.isAbstract) {
-      yield this.abstractKeywordToken!;
-    }
-
-    yield this.classKeywordToken;
-    yield* this.identifier.getSyntaxTokenIterable();
-
-    if (this.parameterList) {
-      yield* this.parameterList.getSyntaxTokenIterable();
-    }
-
-    if (this.extendsModifier) {
-      yield* this.extendsModifier.getSyntaxTokenIterable();
-    }
-
-    if (this.bitModifier) {
-      yield* this.bitModifier.getSyntaxTokenIterable();
-    }
-
-    yield this.openBracePunctuatorToken;
-
-    for (const statement of this.statements) {
-      yield* statement.getSyntaxTokenIterable();
-    }
-
-    yield this.closeBracePunctuatorToken;
   }
 }

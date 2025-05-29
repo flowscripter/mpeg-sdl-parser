@@ -1,30 +1,27 @@
-import type { AbstractExpression } from "./AbstractExpression.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
-import { AbstractStatement } from "./AbstractStatement.ts";
-import type { CompoundStatement } from "./CompoundStatement.ts";
+import type Token from "../token/Token.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
+import AbstractStatement from "./AbstractStatement.ts";
+import type CompoundStatement from "./CompoundStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export class WhileStatement extends AbstractStatement {
+export default class WhileStatement extends AbstractStatement {
   constructor(
     public readonly expression: AbstractExpression,
     public readonly compoundStatement: CompoundStatement,
-    public readonly whileKeywordToken: SyntaxToken,
-    public readonly openParenthesisPunctuatorToken: SyntaxToken,
-    public readonly closeParenthesisPunctuatorToken: SyntaxToken,
+    public readonly whileKeyword: Token,
+    public readonly openParenthesisPunctuator: Token,
+    public readonly closeParenthesisPunctuator: Token,
   ) {
-    super(StatementKind.WHILE, whileKeywordToken.location);
+    super(
+      StatementKind.WHILE,
+      whileKeyword,
+      closeParenthesisPunctuator,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.expression;
     yield this.compoundStatement;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.whileKeywordToken;
-    yield this.openParenthesisPunctuatorToken;
-    yield* this.expression.getSyntaxTokenIterable();
-    yield this.closeParenthesisPunctuatorToken;
-    yield* this.compoundStatement.getSyntaxTokenIterable();
   }
 }

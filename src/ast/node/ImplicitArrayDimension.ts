@@ -1,16 +1,32 @@
-import { AbstractArrayDimension } from "./AbstractArrayDimension.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractArrayDimension from "./AbstractArrayDimension.ts";
+import type AbstractExpression from "./AbstractExpression.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
+import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
-export class ImplicitArrayDimension extends AbstractArrayDimension {
+export default class ImplicitArrayDimension extends AbstractArrayDimension {
   constructor(
-    public readonly rangeStart: AbstractNode | undefined,
-    public readonly rangeEnd: AbstractNode | undefined,
-    public readonly openBracketPunctuatorToken: SyntaxToken,
-    public readonly rangeOperatorToken: SyntaxToken | undefined,
-    public readonly closeBracketPunctuatorToken: SyntaxToken,
+    public readonly rangeStart:
+      | AbstractExpression
+      | Identifier
+      | NumberLiteral
+      | undefined,
+    public readonly rangeEnd:
+      | AbstractExpression
+      | Identifier
+      | NumberLiteral
+      | undefined,
+    openBracketPunctuator: Token,
+    public readonly rangeOperator: Token | undefined,
+    closeBracketPunctuator: Token,
   ) {
-    super(ArrayDimensionKind.IMPLICIT, openBracketPunctuatorToken.location);
+    super(
+      ArrayDimensionKind.IMPLICIT,
+      openBracketPunctuator,
+      closeBracketPunctuator,
+    );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
@@ -18,19 +34,5 @@ export class ImplicitArrayDimension extends AbstractArrayDimension {
       yield this.rangeStart;
       yield this.rangeEnd!;
     }
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.openBracketPunctuatorToken;
-
-    if (this.rangeStart) {
-      yield* this.rangeStart.getSyntaxTokenIterable();
-
-      yield this.rangeOperatorToken!;
-
-      yield* this.rangeEnd!.getSyntaxTokenIterable();
-    }
-
-    yield this.closeBracketPunctuatorToken;
   }
 }

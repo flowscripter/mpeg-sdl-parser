@@ -1,5 +1,7 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type ForStatement from "../ast/node/ForStatement";
 const { join } = doc.builders;
 
 export default function printForStatement(
@@ -9,12 +11,12 @@ export default function printForStatement(
   const forStatement = path.node;
   const elements = [];
 
-  elements.push(getDocWithTrivia(forStatement.forKeywordToken));
+  elements.push(getDocWithTrivia(forStatement.forKeyword));
 
   const subElements = [];
 
   subElements.push(
-    getDocWithTrivia(forStatement.openParenthesisPunctuatorToken),
+    getDocWithTrivia(forStatement.openParenthesisPunctuator),
   );
 
   if (forStatement.expression1 !== undefined) {
@@ -30,8 +32,8 @@ export default function printForStatement(
         ],
       ),
     );
-  } else if (forStatement.semicolon1PunctuatorToken !== undefined) {
-    subElements.push(getDocWithTrivia(forStatement.semicolon1PunctuatorToken));
+  } else if (forStatement.semicolon1Punctuator !== undefined) {
+    subElements.push(getDocWithTrivia(forStatement.semicolon1Punctuator));
   }
 
   if (forStatement.expression2 !== undefined) {
@@ -40,7 +42,7 @@ export default function printForStatement(
       path.call(print, "expression2" as keyof ForStatement["expression2"]),
     );
   }
-  subElements.push(getDocWithTrivia(forStatement.semicolon2PunctuatorToken));
+  subElements.push(getDocWithTrivia(forStatement.semicolon2Punctuator));
   if (forStatement.expression3 !== undefined) {
     subElements.push(" ");
     subElements.push(
@@ -48,7 +50,7 @@ export default function printForStatement(
     );
   }
   subElements.push(
-    getDocWithTrivia(forStatement.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(forStatement.closeParenthesisPunctuator),
   );
 
   elements.push(subElements);

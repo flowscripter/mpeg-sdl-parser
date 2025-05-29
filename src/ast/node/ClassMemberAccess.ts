@@ -1,25 +1,22 @@
-import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
-import type { AbstractNode } from "./AbstractNode.ts";
+import type Token from "../token/Token.ts";
+import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type AbstractNode from "./AbstractNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type { Identifier } from "./Identifier.ts";
+import type Identifier from "./Identifier.ts";
 
-export class ClassMemberAccess extends AbstractCompositeNode {
+export default class ClassMemberAccess extends AbstractCompositeNode {
   constructor(
     public readonly memberIdentifier: Identifier,
-    public readonly classMemberAccessOperatorToken: SyntaxToken,
+    public readonly classMemberAccessOperator: Token,
   ) {
     super(
       NodeKind.CLASS_MEMBER_ACCESS,
-      classMemberAccessOperatorToken.location,
+      classMemberAccessOperator,
+      memberIdentifier.endToken,
     );
   }
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.memberIdentifier;
-  }
-
-  override *getSyntaxTokenIterable(): IterableIterator<SyntaxToken> {
-    yield this.classMemberAccessOperatorToken;
-    yield* this.memberIdentifier.getSyntaxTokenIterable();
   }
 }

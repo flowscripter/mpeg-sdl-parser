@@ -31,7 +31,7 @@ import {
   createLenientSdlParser,
   collateParseErrors,
   buildAst,
-  dispatchHandler,
+  dispatchNodeHandler,
   prettyPrint
 } from "@flowscripter/mpeg-sdl-parser";
 
@@ -79,7 +79,7 @@ class MyNodeHandler implements NodeHandler {
 }
 
 // Dispatch the handler to visit all nodes in the AST
-dispatchHandler(specification, new MyNodeHandler());
+dispatchNodeHandler(specification, new MyNodeHandler());
 
 // Pretty print the specification (retaining comments)
 let prettifiedSpecification = await prettyPrint(specification)

@@ -1,0 +1,65 @@
+import { Text } from "@codemirror/state";
+import type { SyntaxNode } from "@lezer/common";
+import { InternalParseError } from "../../ParseError";
+import {
+  assertSyntaxNodeType,
+  getChildNodesAndTokens,
+  isAbstractNode,
+} from "../../util/nodeFactoryUtils";
+import { NodeKind } from "../node/enum/node_kind";
+import type Token from "../token/Token";
+import type NumberLiteral from "../node/NumberLiteral";
+import AlignedModifier from "../node/AlignedModifier";
+
+export function getAlignedModifier(
+  syntaxNode: SyntaxNode,
+  text: Text,
+): AlignedModifier {
+  assertSyntaxNodeType(syntaxNode, "AlignedModifier");
+
+  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+
+  let bitCount: number | undefined;
+  let bitCountModifier: NumberLiteral | undefined;
+  let alignedKeyword: Token | undefined;
+  let openParenthesisPunctuator: Token | undefined;
+  let closedParenthesisPunctuator: Token | undefined;
+
+  for (const childNodeOrToken of childNodesAndTokens) {
+    if (isAbstractNode(childNodeOrToken)) {
+      if (childNodeOrToken.nodeKind === NodeKind.NUMBER_LITERAL) {
+        bitCountModifier = childNodeOrToken as NumberLiteral;
+        bitCount = bitCountModifier.value;
+      } else {
+        throw new InternalParseError(
+          `Unexpected node kind: ${NodeKind[childNodeOrToken.nodeKind]}`,
+        );
+      }
+    } else {
+      switch (childNodeOrToken.text) {
+        case "(":
+          openParenthesisPunctuator = childNodeOrToken;
+          break;
+        case ")":
+          closedParenthesisPunctuator = childNodeOrToken;
+          break;
+        case "aligned":
+          alignedKeyword = childNodeOrToken;
+          break;
+        default:
+          throw new InternalParseError(
+            `Unexpected token: ${childNodeOrToken.text}`,
+          );
+      }
+    }
+  }
+
+  return new AlignedModifier(
+    bitCount!,
+    bitCountModifier !== undefined,
+    bitCountModifier,
+    alignedKeyword!,
+    openParenthesisPunctuator,
+    closedParenthesisPunctuator,
+  );
+}

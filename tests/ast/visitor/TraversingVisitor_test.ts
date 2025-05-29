@@ -5,7 +5,7 @@ import HistoryRecordingNodeHandler, {
   expectedHistory,
 } from "../../fixtures/HistoryRecordingNodeHandler.ts";
 import { createStrictSdlParser } from "../../../src/lezer/createSdlParser.ts";
-import { TraversingVisitor } from "../../../src/ast/visitor/TraversingVisitor.ts";
+import TraversingVisitor from "../../../src/ast/visitor/TraversingVisitor.ts";
 import SdlStringInput from "../../../src/lezer/SdlStringInput.ts";
 import { buildAst } from "../../../src/ast/buildAst.ts";
 

@@ -1,5 +1,9 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type SwitchCaseClause from "../ast/node/SwitchCaseClause";
+import type SwitchDefaultClause from "../ast/node/SwitchDefaultClause";
+import type SwitchStatement from "../ast/node/SwitchStatement";
 const { hardline, indent, join } = doc.builders;
 
 export function printSwitchCaseClause(
@@ -9,15 +13,15 @@ export function printSwitchCaseClause(
   const switchCaseClause = path.node;
   const subElements = [];
 
-  subElements.push(getDocWithTrivia(switchCaseClause.caseKeywordToken));
+  subElements.push(getDocWithTrivia(switchCaseClause.caseKeyword));
   subElements.push([
     path.call(print, "value"),
-    getDocWithTrivia(switchCaseClause.colonPunctuatorToken),
+    getDocWithTrivia(switchCaseClause.colonPunctuator),
   ]);
 
-  if (switchCaseClause.openBracePunctuatorToken !== undefined) {
+  if (switchCaseClause.openBracePunctuator !== undefined) {
     subElements.push(
-      getDocWithTrivia(switchCaseClause.openBracePunctuatorToken),
+      getDocWithTrivia(switchCaseClause.openBracePunctuator),
     );
   }
 
@@ -31,10 +35,10 @@ export function printSwitchCaseClause(
     statementElements.push(...path.map(print, "statements"));
   }
 
-  if (switchCaseClause.breakKeywordToken !== undefined) {
+  if (switchCaseClause.breakKeyword !== undefined) {
     statementElements.push([
-      getDocWithTrivia(switchCaseClause.breakKeywordToken),
-      getDocWithTrivia(switchCaseClause.semicolonPunctuatorToken!),
+      getDocWithTrivia(switchCaseClause.breakKeyword),
+      getDocWithTrivia(switchCaseClause.semicolonPunctuator!),
     ]);
   }
 
@@ -48,9 +52,9 @@ export function printSwitchCaseClause(
       )],
     );
   }
-  if (switchCaseClause.closeBracePunctuatorToken !== undefined) {
+  if (switchCaseClause.closeBracePunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(switchCaseClause.closeBracePunctuatorToken, true),
+      getDocWithTrivia(switchCaseClause.closeBracePunctuator, true),
     );
   }
 
@@ -65,13 +69,13 @@ export function printSwitchDefaultClause(
   const subElements = [];
 
   subElements.push([
-    getDocWithTrivia(switchDefaultClause.defaultKeywordToken),
-    getDocWithTrivia(switchDefaultClause.colonPunctuatorToken),
+    getDocWithTrivia(switchDefaultClause.defaultKeyword),
+    getDocWithTrivia(switchDefaultClause.colonPunctuator),
   ]);
 
-  if (switchDefaultClause.openBracePunctuatorToken !== undefined) {
+  if (switchDefaultClause.openBracePunctuator !== undefined) {
     subElements.push(
-      getDocWithTrivia(switchDefaultClause.openBracePunctuatorToken),
+      getDocWithTrivia(switchDefaultClause.openBracePunctuator),
     );
   }
 
@@ -96,9 +100,9 @@ export function printSwitchDefaultClause(
     );
   }
 
-  if (switchDefaultClause.closeBracePunctuatorToken !== undefined) {
+  if (switchDefaultClause.closeBracePunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(switchDefaultClause.closeBracePunctuatorToken, true),
+      getDocWithTrivia(switchDefaultClause.closeBracePunctuator, true),
     );
   }
 
@@ -112,13 +116,13 @@ export function printSwitchStatement(
   const switchStatement = path.node;
 
   const subElements = [];
-  subElements.push(getDocWithTrivia(switchStatement.switchKeywordToken));
+  subElements.push(getDocWithTrivia(switchStatement.switchKeyword));
   subElements.push([
-    getDocWithTrivia(switchStatement.openParenthesisPunctuatorToken),
+    getDocWithTrivia(switchStatement.openParenthesisPunctuator),
     path.call(print, "expression"),
-    getDocWithTrivia(switchStatement.closeParenthesisPunctuatorToken),
+    getDocWithTrivia(switchStatement.closeParenthesisPunctuator),
   ]);
-  subElements.push(getDocWithTrivia(switchStatement.openBracePunctuatorToken));
+  subElements.push(getDocWithTrivia(switchStatement.openBracePunctuator));
 
   const elements = [
     join(" ", subElements),
@@ -146,7 +150,7 @@ export function printSwitchStatement(
   );
 
   elements.push(
-    getDocWithTrivia(switchStatement.closeBracePunctuatorToken, true),
+    getDocWithTrivia(switchStatement.closeBracePunctuator, true),
   );
 
   return elements;

@@ -16,6 +16,25 @@ import printForStatement from "./print_for";
 import printWhileStatement from "./print_while";
 import { printIfStatement } from "./print_if";
 import { printSwitchStatement } from "./print_switch";
+import type AbstractNode from "../ast/node/AbstractNode";
+import type AbstractStatement from "../ast/node/AbstractStatement";
+import type ArrayDefinition from "../ast/node/ArrayDefinition";
+import type ClassDefinition from "../ast/node/ClassDefinition";
+import type CompoundStatement from "../ast/node/CompoundStatement";
+import type ComputedArrayDefinition from "../ast/node/ComputedArrayDefinition";
+import type ComputedElementaryTypeDefinition from "../ast/node/ComputedElementaryTypeDefinition";
+import type ElementaryTypeDefinition from "../ast/node/ElementaryTypeDefinition";
+import { StatementKind } from "../ast/node/enum/statement_kind";
+import type MapDeclaration from "../ast/node/MapDeclaration";
+import type MapDefinition from "../ast/node/MapDefinition";
+import type StringDefinition from "../ast/node/StringDefinition";
+import type ExpressionStatement from "../ast/node/ExpressionStatement";
+import type SwitchStatement from "../ast/node/SwitchStatement";
+import type IfStatement from "../ast/node/IfStatement";
+import type WhileStatement from "../ast/node/WhileStatement";
+import type ForStatement from "../ast/node/ForStatement";
+import type DoStatement from "../ast/node/DoStatement";
+import type ClassDeclaration from "../ast/node/ClassDeclaration";
 const { hardline, indent, join } = doc.builders;
 
 function printCompoundStatement(
@@ -24,12 +43,12 @@ function printCompoundStatement(
 ): Doc {
   const node = path.node;
   return [
-    getDocWithTrivia(node.openBracePunctuatorToken),
+    getDocWithTrivia(node.openBracePunctuator),
     indent([
       hardline,
       join(hardline, path.map(print, "statements")),
     ]),
-    getDocWithTrivia(node.closeBracePunctuatorToken, true),
+    getDocWithTrivia(node.closeBracePunctuator, true),
   ];
 }
 
@@ -43,7 +62,7 @@ function printExpressionStatement(
       print,
       "expression",
     ),
-    getDocWithTrivia(node.semicolonPunctuatorToken),
+    getDocWithTrivia(node.semicolonPunctuator),
   ];
 }
 
