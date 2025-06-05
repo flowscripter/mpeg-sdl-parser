@@ -48,9 +48,20 @@ export function getMapEntry(
     }
   }
 
+  if (inputValue === undefined) {
+    throw new InternalParseError("Expected argument inputValue to be defined");
+  }
+  if (outputValue === undefined) {
+    throw new InternalParseError("Expected argument outputValue to be defined");
+  }
+  if (commaPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument commaPunctuator to be defined",
+    );
+  }
   return new MapEntry(
-    inputValue!,
-    outputValue!,
-    commaPunctuator!,
+    inputValue,
+    outputValue,
+    commaPunctuator,
   );
 }

@@ -1,45 +1,64 @@
-import { AstPath, type Doc } from "prettier";
+import { AstPath, type Doc, doc } from "prettier";
 import type AbstractNode from "../ast/node/AbstractNode";
 import type IfStatement from "../ast/node/IfStatement";
+import { getDocWithTrivia } from "./print_utils";
+import { StatementKind } from "../ast/node/enum/statement_kind";
 
-// TODO: rework this
-// export function printIfClause(
-//   path: AstPath<IfClause>,
-//   print: (_path: AstPath<AbstractNode>) => Doc,
-// ): Doc {
-//   const ifClause = path.node;
-
-//   const elements = [];
-
-//   if (ifClause.elseKeyword !== undefined) {
-//     elements.push(getDocWithTrivia(ifClause.elseKeyword));
-//   }
-
-//   if (ifClause.ifKeyword !== undefined) {
-//     elements.push(getDocWithTrivia(ifClause.ifKeyword));
-
-//     elements.push(
-//       [
-//         getDocWithTrivia(ifClause.openParenthesisPunctuator!),
-//         path.call(print, "condition" as keyof IfClause["condition"]),
-//         getDocWithTrivia(ifClause.closeParenthesisPunctuator!),
-//       ],
-//     );
-//   }
-
-//   const statement = ifClause.statement;
-//   if (statement.statementKind !== StatementKind.COMPOUND) {
-//     elements.push(indent([hardline, path.call(print, "statement")]));
-//   } else {
-//     elements.push(path.call(print, "statement"));
-//   }
-//   return join(" ", elements);
-// }
+const { hardline, indent, join } = doc.builders;
 
 export function printIfStatement(
-  _path: AstPath<IfStatement>,
-  _print: (_path: AstPath<AbstractNode>) => Doc,
+  path: AstPath<IfStatement>,
+  print: (_path: AstPath<AbstractNode>) => Doc,
 ): Doc {
-  // TODO: rework this
-  return []; //join(hardline, (path as AstPath<IfStatement>).map(print, "clauses"));
+  const ifStatement = path.node;
+
+  const elements = [];
+
+  elements.push(getDocWithTrivia(ifStatement.ifKeyword));
+
+  const subElements = [];
+
+  subElements.push(
+    getDocWithTrivia(ifStatement.openParenthesisPunctuator),
+    path.call(print, "condition"),
+    getDocWithTrivia(ifStatement.closeParenthesisPunctuator),
+  );
+
+  elements.push(subElements);
+
+  const ifSubStatement = ifStatement.ifStatement;
+  if (ifSubStatement.statementKind !== StatementKind.COMPOUND) {
+    elements.push(indent([hardline, path.call(print, "ifStatement")]));
+  } else {
+    elements.push(path.call(print, "ifStatement"));
+  }
+
+  if (ifStatement.elseKeyword !== undefined) {
+    elements.push([hardline, getDocWithTrivia(ifStatement.elseKeyword)]);
+    const elseSubStatement = ifStatement.elseStatement!;
+    if (elseSubStatement.statementKind === StatementKind.IF) {
+      elements.push(
+        path.call(
+          print,
+          "elseStatement" as keyof IfStatement["elseStatement"],
+        )
+      );
+    } else if (elseSubStatement.statementKind !== StatementKind.COMPOUND) {
+      elements.push(indent(
+        [          
+          hardline,
+          path.call(
+            print,
+            "elseStatement" as keyof IfStatement["elseStatement"],
+          )
+        ]
+      ));
+    } else {
+      elements.push(
+        path.call(print, "elseStatement" as keyof IfStatement["elseStatement"]),
+      );
+    }
+  }
+
+  return join(" ", elements);
 }

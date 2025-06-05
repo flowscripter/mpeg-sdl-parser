@@ -15,7 +15,7 @@ import { BinaryOperatorKind } from "../node/enum/binary_operator_kind";
 import BinaryExpression from "../node/BinaryExpression";
 
 export function getBinaryExpression(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): BinaryExpression {
   assertSyntaxNodeType(syntaxNode, "BinaryExpression");
@@ -114,13 +114,36 @@ export function getBinaryExpression(
             `Unexpected token: ${childNodeOrToken.text}`,
           );
       }
+      binaryOperator = childNodeOrToken as Token;
     }
   }
 
+  if (leftOperand === undefined) {
+    throw new InternalParseError("Expected argument leftOperand to be defined");
+  }
+
+  if (binaryOperatorKind === undefined) {
+    throw new InternalParseError(
+      "Expected argument binaryOperatorKind to be defined",
+    );
+  }
+
+  if (rightOperand === undefined) {
+    throw new InternalParseError(
+      "Expected argument rightOperand to be defined",
+    );
+  }
+
+  if (binaryOperator === undefined) {
+    throw new InternalParseError(
+      "Expected argument binaryOperator to be defined",
+    );
+  }
+
   return new BinaryExpression(
-    leftOperand!,
-    binaryOperatorKind!,
-    rightOperand!,
-    binaryOperator!,
+    leftOperand,
+    binaryOperatorKind,
+    rightOperand,
+    binaryOperator,
   );
 }

@@ -13,7 +13,7 @@ import type ExtendsModifier from "../ast/node/ExtendsModifier";
 import type Parameter from "../ast/node/Parameter";
 import type ParameterList from "../ast/node/ParameterList";
 import type ParameterValueList from "../ast/node/ParameterValueList";
-import type SingleClassId from "../ast/node/SingleClassId";
+import type SingleClassId from "../ast/node/ClassId";
 const { hardline, indent, join } = doc.builders;
 
 export function printBitModifier(

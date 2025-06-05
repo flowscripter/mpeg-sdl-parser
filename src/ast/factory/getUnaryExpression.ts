@@ -94,12 +94,19 @@ export function getUnaryExpression(
     !unaryOperator && !openParenthesisPunctuator && !postfixOperator &&
     !arrayElementAccess && !classMemberAccess
   ) {
-    return operand!;
+    if (!operand) {
+      throw new InternalParseError("Expected argument operand to be defined");
+    }
+    return operand;
+  }
+
+  if (!operand) {
+    throw new InternalParseError("Expected argument operand to be defined");
   }
 
   return new UnaryExpression(
     unaryOperatorKind,
-    operand!,
+    operand,
     arrayElementAccess,
     classMemberAccess,
     postfixOperatorKind,

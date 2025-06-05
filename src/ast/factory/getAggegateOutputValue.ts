@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { SyntaxNode, TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -10,23 +10,19 @@ import { NodeKind } from "../node/enum/node_kind";
 import type Token from "../token/Token";
 import AggregateOutputValue from "../node/AggregateOutputValue";
 import type NumberLiteral from "../node/NumberLiteral";
-import type ElementaryType from "../node/ElementaryType";
-import type LengthAttribute from "../node/LengthAttribute";
+import type ElementaryTypeOutputValue from "../node/ElementaryTypeOutputValue";
 
 export function getAggregateOutputValue(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): AggregateOutputValue {
   assertSyntaxNodeType(syntaxNode, "AggregateOutputValue");
 
-  const outputValues: (AggregateOutputValue | NumberLiteral | [
-    ElementaryType,
-    LengthAttribute,
-  ])[] = [];
+  const outputValues:
+    (AggregateOutputValue | NumberLiteral | ElementaryTypeOutputValue)[] = [];
   let openBracePunctuator: Token | undefined;
   let commaPunctuators: Token[] | undefined;
   let closeBracePunctuator: Token | undefined;
-  let tempElementaryType: ElementaryType | undefined;
 
   const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
   for (const childNodeOrToken of childNodesAndTokens) {
@@ -38,27 +34,8 @@ export function getAggregateOutputValue(
         case NodeKind.NUMBER_LITERAL:
           outputValues.push(childNodeOrToken as NumberLiteral);
           break;
-        case NodeKind.ELEMENTARY_TYPE:
-          if (tempElementaryType === undefined) {
-            tempElementaryType = childNodeOrToken as ElementaryType;
-          } else {
-            throw new InternalParseError(
-              `Unexpected ElementaryType node without LengthAttribute`,
-            );
-          }
-          break;
-        case NodeKind.LENGTH_ATTRIBUTE:
-          if (tempElementaryType !== undefined) {
-            outputValues.push([
-              tempElementaryType,
-              childNodeOrToken as LengthAttribute,
-            ]);
-            tempElementaryType = undefined; // Reset after using
-          } else {
-            throw new InternalParseError(
-              `Unexpected LengthAttribute node without preceding ElementaryType`,
-            );
-          }
+        case NodeKind.ELEMENTARY_TYPE_OUTPUT_VALUE:
+          outputValues.push(childNodeOrToken as ElementaryTypeOutputValue);
           break;
         default:
           throw new InternalParseError(
@@ -87,10 +64,22 @@ export function getAggregateOutputValue(
     }
   }
 
+  if (openBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracePunctuator to be defined",
+    );
+  }
+
+  if (closeBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracePunctuator to be defined",
+    );
+  }
+
   return new AggregateOutputValue(
     outputValues,
-    openBracePunctuator!,
+    openBracePunctuator,
     commaPunctuators,
-    closeBracePunctuator!,
+    closeBracePunctuator,
   );
 }

@@ -14,7 +14,7 @@ export default function printWhileStatement(
   elements.push(getDocWithTrivia(whileStatement.whileKeyword));
   elements.push([
     getDocWithTrivia(whileStatement.openParenthesisPunctuator),
-    path.call(print, "expression"),
+    path.call(print, "condition"),
     getDocWithTrivia(whileStatement.closeParenthesisPunctuator),
   ]);
   elements.push(path.call(print, "compoundStatement"));

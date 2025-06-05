@@ -76,14 +76,33 @@ export function getComputedElementaryTypeDefinition(
     }
   }
 
+  if (elementaryType === undefined) {
+    throw new InternalParseError(
+      "Expected argument elementaryType to be defined",
+    );
+  }
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+  if (computedKeyword === undefined) {
+    throw new InternalParseError(
+      "Expected argument computedKeyword to be defined",
+    );
+  }
+  
+  if (semicolonPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument semicolonPunctuator to be defined",
+    );
+  }
   return new ComputedElementaryTypeDefinition(
     constKeyword !== undefined,
-    elementaryType!,
-    identifier!,
-    value!,
-    computedKeyword!,
+    elementaryType,
+    identifier,
+    value,
+    computedKeyword,
     constKeyword,
     assignmentOperator,
-    semicolonPunctuator!,
+    semicolonPunctuator,
   );
 }

@@ -57,9 +57,22 @@ export function getExplicitArrayDimension(
     }
   }
 
+  if (size === undefined) {
+    throw new InternalParseError("Expected size to be defined");
+  }
+  if (openBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected openBracketPunctuator to be defined",
+    );
+  }
+  if (closeBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected closeBracketPunctuator to be defined",
+    );
+  }
   return new ExplicitArrayDimension(
-    size!,
-    openBracketPunctuator!,
-    closeBracketPunctuator!,
+    size,
+    openBracketPunctuator,
+    closeBracketPunctuator,
   );
 }

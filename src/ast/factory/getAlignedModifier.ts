@@ -12,7 +12,7 @@ import type NumberLiteral from "../node/NumberLiteral";
 import AlignedModifier from "../node/AlignedModifier";
 
 export function getAlignedModifier(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): AlignedModifier {
   assertSyntaxNodeType(syntaxNode, "AlignedModifier");
@@ -54,11 +54,21 @@ export function getAlignedModifier(
     }
   }
 
+  if (bitCount === undefined) {
+    throw new InternalParseError("Expected argument bitCount to be defined");
+  }
+
+  if (alignedKeyword === undefined) {
+    throw new InternalParseError(
+      "Expected argument alignedKeyword to be defined",
+    );
+  }
+
   return new AlignedModifier(
-    bitCount!,
-    bitCountModifier !== undefined,
+    bitCount,
+    bitCountModifier === undefined,
     bitCountModifier,
-    alignedKeyword!,
+    alignedKeyword,
     openParenthesisPunctuator,
     closedParenthesisPunctuator,
   );

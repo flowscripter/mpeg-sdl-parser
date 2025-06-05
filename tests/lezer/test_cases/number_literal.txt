@@ -176,7 +176,11 @@ Specification(
         Identifier
         Assignment
         UnaryExpression(
-            MultipleCharacterLiteral
+            MultipleCharacterLiteral(
+                SingleQuote
+                MultipleCharacterLiteralCharacters
+                SingleQuote
+            )
         )
         Semicolon
     )
@@ -199,7 +203,11 @@ Specification(
         Identifier
         Assignment
         UnaryExpression(
-            MultipleCharacterLiteral
+            MultipleCharacterLiteral(
+                SingleQuote
+                MultipleCharacterLiteralCharacters
+                SingleQuote
+            )
         )
         Semicolon
     )
@@ -222,7 +230,11 @@ Specification(
         Identifier
         Assignment
         UnaryExpression(
-            MultipleCharacterLiteral
+            MultipleCharacterLiteral(
+                SingleQuote
+                MultipleCharacterLiteralCharacters
+                SingleQuote
+            )
         )
         Semicolon
     )
@@ -245,7 +257,15 @@ Specification(
         Identifier
         Assignment
         UnaryExpression(
-            MultipleCharacterLiteral
+            MultipleCharacterLiteral(
+                SingleQuote
+                MultipleCharacterLiteralCharacters
+                SingleQuote
+                Whitespace
+                SingleQuote
+                MultipleCharacterLiteralCharacters
+                SingleQuote
+            )
         )
         Semicolon
     )

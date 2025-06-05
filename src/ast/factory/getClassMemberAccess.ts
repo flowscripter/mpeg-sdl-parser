@@ -42,8 +42,18 @@ export function getClassMemberAccess(
     }
   }
 
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+
+  if (classMemberAccessOperator === undefined) {
+    throw new InternalParseError(
+      "Expected argument classMemberAccessOperator to be defined",
+    );
+  }
+
   return new ClassMemberAccess(
-    identifier!,
-    classMemberAccessOperator!,
+    identifier,
+    classMemberAccessOperator,
   );
 }

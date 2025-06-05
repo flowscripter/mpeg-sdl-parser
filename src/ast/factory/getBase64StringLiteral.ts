@@ -15,7 +15,7 @@ const ESCAPED_BACKSLASH_REGEX = /\\\\/g;
 const ESCAPED_DOUBLE_QUOTE_REGEX = /\\"/g;
 
 export function getBase64StringLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): StringLiteral {
   assertSyntaxNodeType(syntaxNode, "Base64StringLiteral");
@@ -44,7 +44,7 @@ export function getBase64StringLiteral(
 
   return new StringLiteral(
     StringLiteralKind.BASIC,
-    value!,
+    value,
     literals,
   );
 }

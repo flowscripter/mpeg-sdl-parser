@@ -10,7 +10,7 @@ import type NumberLiteral from "./NumberLiteral.ts";
 export default class DoStatement extends AbstractStatement {
   constructor(
     public readonly compoundStatement: CompoundStatement,
-    public readonly conditionExpression:
+    public readonly condition:
       | AbstractExpression
       | Identifier
       | NumberLiteral,
@@ -25,6 +25,6 @@ export default class DoStatement extends AbstractStatement {
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.compoundStatement;
-    yield this.conditionExpression;
+    yield this.condition;
   }
 }

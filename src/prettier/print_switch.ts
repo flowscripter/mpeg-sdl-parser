@@ -1,27 +1,27 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
 import type AbstractNode from "../ast/node/AbstractNode";
-import type SwitchCaseClause from "../ast/node/SwitchCaseClause";
-import type SwitchDefaultClause from "../ast/node/SwitchDefaultClause";
+import type CaseClause from "../ast/node/CaseClause";
+import type DefaultClause from "../ast/node/DefaultClause";
 import type SwitchStatement from "../ast/node/SwitchStatement";
 const { hardline, indent, join } = doc.builders;
 
-export function printSwitchCaseClause(
-  path: AstPath<SwitchCaseClause>,
+export function printCaseClause(
+  path: AstPath<CaseClause>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {
-  const switchCaseClause = path.node;
+  const caseClause = path.node;
   const subElements = [];
 
-  subElements.push(getDocWithTrivia(switchCaseClause.caseKeyword));
+  subElements.push(getDocWithTrivia(caseClause.caseKeyword));
   subElements.push([
     path.call(print, "value"),
-    getDocWithTrivia(switchCaseClause.colonPunctuator),
+    getDocWithTrivia(caseClause.colonPunctuator),
   ]);
 
-  if (switchCaseClause.openBracePunctuator !== undefined) {
+  if (caseClause.openBracePunctuator !== undefined) {
     subElements.push(
-      getDocWithTrivia(switchCaseClause.openBracePunctuator),
+      getDocWithTrivia(caseClause.openBracePunctuator),
     );
   }
 
@@ -31,14 +31,14 @@ export function printSwitchCaseClause(
 
   const statementElements = [];
 
-  if (switchCaseClause.statements.length > 0) {
+  if (caseClause.statements.length > 0) {
     statementElements.push(...path.map(print, "statements"));
   }
 
-  if (switchCaseClause.breakKeyword !== undefined) {
+  if (caseClause.breakKeyword !== undefined) {
     statementElements.push([
-      getDocWithTrivia(switchCaseClause.breakKeyword),
-      getDocWithTrivia(switchCaseClause.semicolonPunctuator!),
+      getDocWithTrivia(caseClause.breakKeyword),
+      getDocWithTrivia(caseClause.semicolonPunctuator!),
     ]);
   }
 
@@ -52,30 +52,30 @@ export function printSwitchCaseClause(
       )],
     );
   }
-  if (switchCaseClause.closeBracePunctuator !== undefined) {
+  if (caseClause.closeBracePunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(switchCaseClause.closeBracePunctuator, true),
+      getDocWithTrivia(caseClause.closeBracePunctuator, true),
     );
   }
 
   return elements;
 }
 
-export function printSwitchDefaultClause(
-  path: AstPath<SwitchDefaultClause>,
+export function printDefaultClause(
+  path: AstPath<DefaultClause>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {
-  const switchDefaultClause = path.node;
+  const defaultClause = path.node;
   const subElements = [];
 
   subElements.push([
-    getDocWithTrivia(switchDefaultClause.defaultKeyword),
-    getDocWithTrivia(switchDefaultClause.colonPunctuator),
+    getDocWithTrivia(defaultClause.defaultKeyword),
+    getDocWithTrivia(defaultClause.colonPunctuator),
   ]);
 
-  if (switchDefaultClause.openBracePunctuator !== undefined) {
+  if (defaultClause.openBracePunctuator !== undefined) {
     subElements.push(
-      getDocWithTrivia(switchDefaultClause.openBracePunctuator),
+      getDocWithTrivia(defaultClause.openBracePunctuator),
     );
   }
 
@@ -85,7 +85,7 @@ export function printSwitchDefaultClause(
 
   const statementElements = [];
 
-  if (switchDefaultClause.statements.length > 0) {
+  if (defaultClause.statements.length > 0) {
     statementElements.push(...path.map(print, "statements"));
   }
 
@@ -100,9 +100,9 @@ export function printSwitchDefaultClause(
     );
   }
 
-  if (switchDefaultClause.closeBracePunctuator !== undefined) {
+  if (defaultClause.closeBracePunctuator !== undefined) {
     elements.push(
-      getDocWithTrivia(switchDefaultClause.closeBracePunctuator, true),
+      getDocWithTrivia(defaultClause.closeBracePunctuator, true),
     );
   }
 
@@ -131,20 +131,19 @@ export function printSwitchStatement(
   const caseClauses = [];
 
   caseClauses.push(
-    ...path.map(print, "switchCaseClauses"),
+    ...path.map(print, "caseClauses"),
   );
 
-  if (switchStatement.switchDefaultClause !== undefined) {
+  if (switchStatement.defaultClause !== undefined) {
     caseClauses.push(path.call(
       print,
-      "switchDefaultClause" as keyof SwitchStatement["switchDefaultClause"],
+      "defaultClause" as keyof SwitchStatement["defaultClause"],
     ));
   }
 
   elements.push(
     [indent([
       hardline,
-      //   caseClauses
       join(hardline, caseClauses),
     ])],
   );

@@ -87,18 +87,36 @@ export function getClassDeclaration(
     }
   }
 
+  if (classKeyword === undefined) {
+    throw new InternalParseError(
+      "Expected argument classKeyword to be defined",
+    );
+  }
+  if (openBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracePunctuator to be defined",
+    );
+  }
+  if (closeBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracePunctuator to be defined",
+    );
+  }
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
   return new ClassDeclaration(
     alignedModifier,
     expandableModifier,
     abstractKeyword !== undefined,
-    identifier!,
+    identifier,
     parameterList,
     extendsModifier,
     bitModifier,
     statements,
     abstractKeyword,
-    classKeyword!,
-    openBracePunctuator!,
-    closeBracePunctuator!,
+    classKeyword,
+    openBracePunctuator,
+    closeBracePunctuator,
   );
 }

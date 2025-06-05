@@ -18,6 +18,7 @@ export default class ForStatement extends AbstractStatement {
     public readonly compoundStatement: CompoundStatement,
     public readonly forKeyword: Token,
     public readonly openParenthesisPunctuator: Token,
+    // optional as the first semicolon can be considered part of the optional computedElementaryDefinition
     public readonly semicolon1Punctuator: Token | undefined,
     public readonly semicolon2Punctuator: Token,
     public readonly closeParenthesisPunctuator: Token,

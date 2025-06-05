@@ -1,10 +1,10 @@
-import type { Identifier } from "typescript";
 import type Token from "../token/Token.ts";
 import type AbstractNode from "./AbstractNode.ts";
 import AbstractStatement from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 import type NumberLiteral from "./NumberLiteral.ts";
 import type AbstractExpression from "./AbstractExpression.ts";
+import type Identifier from "./Identifier.ts";
 
 export default class ExpressionStatement extends AbstractStatement {
   constructor(

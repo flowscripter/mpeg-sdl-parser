@@ -22,9 +22,9 @@
   universal_character_name { ("\u" four_hexadecimal_characters) | ("\U" four_hexadecimal_characters four_hexadecimal_characters) }
   // Not including \ or '
   multiple_character_literal_character { $[\u0020-\u0026\u0028-\u005B\u005D-\u007E] }
+  escaped_multiple_character_literal_character { multiple_character_literal_character | "\\\'" | "\\\\" }
   identifier_character { digit_character | latin_character | "_" }
   base64_character { digit_character | latin_character | "+" | "/" }
-
 
   // 5.4 Comments
 
@@ -105,15 +105,6 @@
   HexadecimalLiteral { "0x" (period_separated_hexadecimal_character_string | hexadecimal_character_string) }
 
 
-  // Rule S.4: Multiple character literal value
-
-  escaped_multiple_character_literal_character { multiple_character_literal_character | "\'" | "\\" }
-
-  // One or more multiple character literals to support concatenation
-
-  multiple_character_literal { escaped_multiple_character_literal_character+ }
-
-
   // 5.17 Integer, decimal and floating-point literal values
 
   positive_integer { non_zero_digit_character digit_character* }
@@ -133,7 +124,7 @@
 
   @precedence { 
     escaped_sdl_compatible_ucs_character,
-    multiple_character_literal,
+    escaped_multiple_character_literal_character,
     base64_character,
     Comment,
     Division
@@ -141,7 +132,7 @@
 
   @precedence { 
     escaped_sdl_compatible_ucs_character,
-    multiple_character_literal,
+    escaped_multiple_character_literal_character,
     Whitespace
   }
 
@@ -288,9 +279,16 @@ statement {
   ComputedArrayDefinition 
 }
 
+
+// Rule S.4: Multiple character literal value
+
 // 5.17 Integer, decimal and floating-point literal values
 
-MultipleCharacterLiteral { (SingleQuote multiple_character_literal SingleQuote)+ }
+MultipleCharacterLiteralCharacters { escaped_multiple_character_literal_character* }
+
+// One or more multiple character literals to support concatenation
+
+MultipleCharacterLiteral { (SingleQuote MultipleCharacterLiteralCharacters SingleQuote)+ }
 
 number_literal { BinaryLiteral | HexadecimalLiteral | MultipleCharacterLiteral | IntegerLiteral | DecimalLiteral | FloatingPointLiteral }
 
@@ -301,7 +299,11 @@ UtfPrefix {
   "u"
 }
 
-UtfStringLiteral { (UtfPrefix DoubleQuote (escaped_sdl_compatible_ucs_character | universal_character_name)* DoubleQuote)+ }
+UtfStringLiteralCharacters { (escaped_sdl_compatible_ucs_character | universal_character_name)* }
+
+// One or more string literals to support concatenation
+
+UtfStringLiteral { (UtfPrefix DoubleQuote UtfStringLiteralCharacters DoubleQuote)+ }
 
 
 // 5.19 Scope
@@ -346,8 +348,12 @@ ElementaryTypeDefinition {
 // Rule E.4: Mapped data types
 // Rule E.5: Maps with escape codes
 
+ElementaryTypeOutputValue {
+  ElementaryType LengthAttribute
+}
+
 output_value {
-  number_literal | ElementaryType LengthAttribute | AggregateOutputValue
+  number_literal | ElementaryTypeOutputValue | AggregateOutputValue
 }
 
 AggregateOutputValue {
@@ -370,8 +376,12 @@ MapDefinition {
 
 // Rule E.6: String data types
 
+// One or more string literals to support concatenation
+
+Base64StringLiteralCharacters { base64_character* "="? "="? }
+
 Base64StringLiteral {
-  (DoubleQuote base64_character* "="? "="? DoubleQuote)+
+  (DoubleQuote Base64StringLiteralCharacters DoubleQuote)+
 }
 
 // 6.7 String value
@@ -434,20 +444,20 @@ ExpandableModifier {
   keyword<"expandable"> (OpenParenthesis IntegerLiteral CloseParenthesis)?
 }
 
-ParameterListItem {
+Parameter {
   (Identifier | ElementaryType) Identifier
 }
 
 ParameterList {
-  OpenParenthesis comma_separated<ParameterListItem> CloseParenthesis
+  OpenParenthesis comma_separated<Parameter> CloseParenthesis
 }
 
-ParameterValues {
+ParameterValueList {
   OpenParenthesis comma_separated<expression> CloseParenthesis
 }
 
 ExtendsModifier {
-  keyword<"extends"> Identifier ParameterValues?
+  keyword<"extends"> Identifier ParameterValueList?
 }
 
 ClassDeclaration {
@@ -457,7 +467,7 @@ ClassDeclaration {
 }
 
 ClassDefinition {
-  keyword<"legacy">? Identifier Identifier ParameterValues? Semicolon
+  keyword<"legacy">? Identifier Identifier ParameterValueList? Semicolon
 }
 
 
@@ -510,20 +520,20 @@ IfStatement {
 
 // Rule FC.2: Flow control using switch
 
-SwitchCaseClause {
+CaseClause {
   keyword<"case"> number_literal Colon
   ((statement* (keyword<"break"> Semicolon)?) | (OpenBrace statement* keyword<"break"> Semicolon CloseBrace))?
 }
 
-SwitchDefaultClause {
+DefaultClause {
   keyword<"default"> Colon
   statement*
 }
 
 SwitchStatement {
   keyword<"switch"> OpenParenthesis expression CloseParenthesis OpenBrace
-  SwitchCaseClause*
-  SwitchDefaultClause?
+  CaseClause*
+  DefaultClause?
   CloseBrace
 }
 
@@ -594,3 +604,6 @@ comma_separated<content> {
 // Lezer directive to add openedBy and closedBy props to delimiters
 
 @detectDelim
+
+// Lezer context tracker insertion will be performed when buildParser is invoked
+@context exportName from "module"

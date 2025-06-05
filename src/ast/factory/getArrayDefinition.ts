@@ -20,7 +20,7 @@ import type ElementaryType from "../node/ElementaryType";
 import type LengthAttribute from "../node/LengthAttribute";
 
 export function getArrayDefinition(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ArrayDefinition {
   assertSyntaxNodeType(syntaxNode, "ArrayDefinition");
@@ -100,6 +100,16 @@ export function getArrayDefinition(
     }
   }
 
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+
+  if (semicolonPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument semicolonPunctuator to be defined",
+    );
+  }
+
   return new ArrayDefinition(
     reservedKeyword !== undefined,
     legacyKeyword !== undefined,
@@ -107,11 +117,11 @@ export function getArrayDefinition(
     elementaryType,
     lengthAttribute,
     classsIdentifier,
-    identifier!,
+    identifier,
     implicitArrayDimension,
     dimensions,
     reservedKeyword,
     legacyKeyword,
-    semicolonPunctuator!,
+    semicolonPunctuator,
   );
 }

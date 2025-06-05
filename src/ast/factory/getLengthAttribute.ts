@@ -58,9 +58,22 @@ export function getLengthAttribute(
     }
   }
 
+  if (length === undefined) {
+    throw new InternalParseError("Expected length to be defined");
+  }
+  if (openParenthesisPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected openParenthesisPunctuator to be defined",
+    );
+  }
+  if (closedParenthesisPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected closedParenthesisPunctuator to be defined",
+    );
+  }
   return new LengthAttribute(
-    length!,
-    openParenthesisPunctuator!,
-    closedParenthesisPunctuator!,
+    length,
+    openParenthesisPunctuator,
+    closedParenthesisPunctuator,
   );
 }

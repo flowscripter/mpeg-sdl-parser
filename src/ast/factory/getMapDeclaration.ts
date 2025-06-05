@@ -83,16 +83,44 @@ export function getMapDeclaration(
     }
   }
 
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+  if (mapKeyword === undefined) {
+    throw new InternalParseError(
+      "Expected argument mapKeyword to be defined",
+    );
+  }
+  if (openParenthesisPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openParenthesisPunctuator to be defined",
+    );
+  }
+  if (closeParenthesisPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeParenthesisPunctuator to be defined",
+    );
+  }
+  if (openBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracePunctuator to be defined",
+    );
+  }
+  if (closeBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracePunctuator to be defined",
+    );
+  }
   return new MapDeclaration(
     identifier!,
     outputElementaryType,
     outputClassIdentifier,
     mapEntries,
     mapKeyword!,
-    openParenthesisPunctuator!,
-    closeParenthesisPunctuator!,
-    openBracePunctuator!,
+    openParenthesisPunctuator,
+    closeParenthesisPunctuator,
+    openBracePunctuator,
     commaPunctuators,
-    closeBracePunctuator!,
+    closeBracePunctuator,
   );
 }

@@ -88,3 +88,22 @@ Specification(
         CloseBrace
     )
 )
+
+# Comment at end of line
+
+class A {} // hello
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+    Whitespace
+    Comment
+)

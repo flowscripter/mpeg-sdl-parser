@@ -44,8 +44,16 @@ export function getExpressionStatement(
     }
   }
 
+  if (expression === undefined) {
+    throw new InternalParseError("Expected argument expression to be defined");
+  }
+  if (semicolonPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument semicolonPunctuator to be defined",
+    );
+  }
   return new ExpressionStatement(
-    expression!,
-    semicolonPunctuator!,
+    expression,
+    semicolonPunctuator,
   );
 }

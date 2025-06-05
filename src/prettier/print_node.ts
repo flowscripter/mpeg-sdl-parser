@@ -1,11 +1,14 @@
 import type { AstPath, Doc, ParserOptions } from "prettier";
-import { cleanupTrivia } from "./print_utils";
 import {
   printAbstractExpression,
   printArrayElementAccess,
   printClassMemberAccess,
 } from "./print_expression";
-import { printAggregateOutputValue, printMapEntry } from "./print_map";
+import {
+  printAggregateOutputValue,
+  printElementaryTypeOutputValue,
+  printMapEntry,
+} from "./print_map";
 import {
   printBitModifier,
   printClassId,
@@ -26,10 +29,7 @@ import {
 import { printElementaryType } from "./print_elementary_type";
 import { printStringLiteral } from "./print_string";
 import { printStatement } from "./print_statement";
-import {
-  printSwitchCaseClause,
-  printSwitchDefaultClause,
-} from "./print_switch";
+import { printCaseClause, printDefaultClause } from "./print_switch";
 import type AbstractArrayDimension from "../ast/node/AbstractArrayDimension";
 import type AbstractClassId from "../ast/node/AbstractClassId";
 import type AbstractExpression from "../ast/node/AbstractExpression";
@@ -50,11 +50,12 @@ import type Parameter from "../ast/node/Parameter";
 import type ParameterList from "../ast/node/ParameterList";
 import type ParameterValueList from "../ast/node/ParameterValueList";
 import type Specification from "../ast/node/Specification";
-import type SwitchCaseClause from "../ast/node/SwitchCaseClause";
-import type SwitchDefaultClause from "../ast/node/SwitchDefaultClause";
+import type CaseClause from "../ast/node/CaseClause";
+import type DefaultClause from "../ast/node/DefaultClause";
 import type Identifier from "../ast/node/Identifier";
 import type StringLiteral from "../ast/node/StringLiteral";
 import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
+import type ElementaryTypeOutputValue from "../ast/node/ElementaryTypeOutputValue";
 
 export default function printNode(
   path: AstPath<AbstractNode>,
@@ -63,8 +64,6 @@ export default function printNode(
 ): Doc {
   const node = path.node;
   const nodeKind = node.nodeKind;
-
-  cleanupTrivia(node);
 
   switch (nodeKind) {
     case NodeKind.AGGREGATE_OUTPUT_VALUE:
@@ -86,12 +85,24 @@ export default function printNode(
       );
     case NodeKind.BIT_MODIFIER:
       return printBitModifier(path as AstPath<BitModifier>, print);
+    case NodeKind.CASE_CLAUSE:
+      return printCaseClause(path as AstPath<CaseClause>, print);
     case NodeKind.CLASS_ID:
       return printClassId(path as AstPath<AbstractClassId>, print);
     case NodeKind.CLASS_MEMBER_ACCESS:
       return printClassMemberAccess(path as AstPath<ClassMemberAccess>, print);
+    case NodeKind.DEFAULT_CLAUSE:
+      return printDefaultClause(
+        path as AstPath<DefaultClause>,
+        print,
+      );
     case NodeKind.ELEMENTARY_TYPE:
       return printElementaryType(path as AstPath<ElementaryType>);
+    case NodeKind.ELEMENTARY_TYPE_OUTPUT_VALUE:
+      return printElementaryTypeOutputValue(
+        path as AstPath<ElementaryTypeOutputValue>,
+        print,
+      );
     case NodeKind.EXPRESSION:
       return printAbstractExpression(
         path as AstPath<AbstractExpression>,
@@ -127,13 +138,6 @@ export default function printNode(
       return printStatement(path as AstPath<AbstractStatement>, print);
     case NodeKind.STRING_LITERAL:
       return printStringLiteral(path as AstPath<StringLiteral>);
-    case NodeKind.SWITCH_CASE_CLAUSE:
-      return printSwitchCaseClause(path as AstPath<SwitchCaseClause>, print);
-    case NodeKind.SWITCH_DEFAULT_CLAUSE:
-      return printSwitchDefaultClause(
-        path as AstPath<SwitchDefaultClause>,
-        print,
-      );
     default: {
       const exhaustiveCheck: never = nodeKind;
       throw new Error(

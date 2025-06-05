@@ -104,8 +104,26 @@ export function printArrayDefinition(
     );
   }
 
-  // TODO: inline this
-  // elements.push(path.call(print, "arrayElementType"));
+  if (arrayDefinition.elementaryType !== undefined) {
+    const subElements = [
+      path.call(
+        print,
+        "elementaryType" as keyof ArrayDefinition["elementaryType"],
+      ),
+      path.call(
+        print,
+        "lengthAttribute" as keyof ArrayDefinition["lengthAttribute"],
+      ),
+    ];
+    elements.push(subElements);
+  } else {
+    elements.push(
+      path.call(
+        print,
+        "classIdentifier" as keyof ArrayDefinition["classIdentifier"],
+      ),
+    );
+  }
 
   const identifierClause = [
     path.call(print, "identifier"),
@@ -139,31 +157,6 @@ export function printArrayDefinition(
 
   return join(" ", elements);
 }
-
-// TODO: remove this
-// export function printArrayElementType(
-//   path: AstPath<ArrayElementType>,
-//   print: (path: AstPath<AbstractNode>) => Doc,
-// ): Doc {
-//   const node = path.node;
-//   if (node.elementaryType !== undefined) {
-//     return [
-//       path.call(
-//         print,
-//         "elementaryType" as keyof ArrayElementType["elementaryType"],
-//       ),
-//       path.call(
-//         print,
-//         "lengthAttribute" as keyof ArrayElementType["lengthAttribute"],
-//       ),
-//     ];
-//   } else {
-//     return path.call(
-//       print,
-//       "classIdentifier" as keyof ArrayElementType["classIdentifier"],
-//     );
-//   }
-// }
 
 export function printComputedArrayDefinition(
   path: AstPath<ComputedArrayDefinition>,

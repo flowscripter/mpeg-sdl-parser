@@ -1,5 +1,9 @@
 import process from "node:process";
 
+declare global {
+  var defaultLogger: Logger | undefined;
+}
+
 type LoggerFunction = (
   message: object | (() => string) | string,
   ...optionalParams: unknown[]
@@ -21,7 +25,7 @@ const LEVEL_PADDINGS: Record<string, string> = {
   ERROR: "    ",
 };
 
-const debugEnabled = process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
+export const debugEnabled = process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
 
 let maxLoggerNameLength = 0;
 

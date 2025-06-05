@@ -18,7 +18,7 @@ export default class ArrayDefinition extends AbstractArrayDefinition {
     public readonly elementaryType: ElementaryType | undefined,
     public readonly lengthAttribute: LengthAttribute | undefined,
     public readonly classIdentifier: Identifier | undefined,
-    identifier: Identifier,
+    public readonly identifier: Identifier,
     public readonly implicitArrayDimension: ImplicitArrayDimension | undefined,
     public readonly dimensions:
       | (ExplicitArrayDimension | PartialArrayDimension)[]

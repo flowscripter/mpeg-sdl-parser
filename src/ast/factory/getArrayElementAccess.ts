@@ -14,7 +14,7 @@ import type NumberLiteral from "../node/NumberLiteral";
 import ArrayElementAccess from "../node/ArrayElementAccess";
 
 export function getArrayElementAccess(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ArrayElementAccess {
   assertSyntaxNodeType(syntaxNode, "ArrayElementAccess");
@@ -55,9 +55,25 @@ export function getArrayElementAccess(
     }
   }
 
+  if (index === undefined) {
+    throw new InternalParseError("Expected argument index to be defined");
+  }
+
+  if (openBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracketPunctuator to be defined",
+    );
+  }
+
+  if (closeBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracketPunctuator to be defined",
+    );
+  }
+
   return new ArrayElementAccess(
-    index!,
-    openBracketPunctuator!,
-    closeBracketPunctuator!,
+    index,
+    openBracketPunctuator,
+    closeBracketPunctuator,
   );
 }

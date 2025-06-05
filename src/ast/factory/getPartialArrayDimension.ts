@@ -67,11 +67,34 @@ export function getPartialArrayDimension(
     }
   }
 
+  if (index === undefined) {
+    throw new InternalParseError("Expected argument index to be defined");
+  }
+  if (openBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracketPunctuator to be defined",
+    );
+  }
+  if (closeBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracketPunctuator to be defined",
+    );
+  }
+  if (innerOpenBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument innerOpenBracketPunctuator to be defined",
+    );
+  }
+  if (innerCloseBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument innerCloseBracketPunctuator to be defined",
+    );
+  }
   return new PartialArrayDimension(
-    index!,
-    openBracketPunctuator!,
-    innerOpenBracketPunctuator!,
-    innerCloseBracketPunctuator!,
-    closeBracketPunctuator!,
+    index,
+    openBracketPunctuator,
+    innerOpenBracketPunctuator,
+    innerCloseBracketPunctuator,
+    closeBracketPunctuator,
   );
 }

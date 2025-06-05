@@ -19,7 +19,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -54,7 +54,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -91,7 +91,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchDefaultClause(
+            DefaultClause(
                 default
                 Colon
                 ExpressionStatement(
@@ -131,7 +131,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchDefaultClause(
+            DefaultClause(
                 default
                 Colon
                 CompoundStatement(
@@ -175,7 +175,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -183,7 +183,7 @@ Specification(
                 break
                 Semicolon
             )
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -229,7 +229,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -237,7 +237,7 @@ Specification(
                 break
                 Semicolon
             )
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -256,7 +256,7 @@ Specification(
                 Semicolon
                 CloseBrace
             )
-            SwitchDefaultClause(
+            DefaultClause(
                 default
                 Colon
                 ExpressionStatement(
@@ -296,7 +296,7 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -311,7 +311,7 @@ Specification(
                     Semicolon
                 )
             )
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -326,7 +326,7 @@ Specification(
                     Semicolon
                 )
             )
-            SwitchDefaultClause(
+            DefaultClause(
                 default
                 Colon
                 ExpressionStatement(
@@ -366,13 +366,13 @@ Specification(
             )
             CloseParenthesis
             OpenBrace
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
                 Colon
             )
-            SwitchCaseClause(
+            CaseClause(
                 case
                 Whitespace
                 IntegerLiteral
@@ -387,7 +387,7 @@ Specification(
                     Semicolon
                 )
             )
-            SwitchDefaultClause(
+            DefaultClause(
                 default
                 Colon
                 ExpressionStatement(

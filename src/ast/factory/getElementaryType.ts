@@ -9,6 +9,7 @@ import {
 import ElementaryType from "../node/ElementaryType";
 import type Token from "../token/Token";
 import { ElementaryTypeKind } from "../node/enum/elementary_type_kind";
+import { NodeKind } from "../node/enum/node_kind";
 
 export function getElementaryType(
   syntaxNode: SyntaxNode,
@@ -56,9 +57,17 @@ export function getElementaryType(
     }
   }
 
+  if (elementaryTypeKind === undefined) {
+    throw new InternalParseError(
+      "Expected argument elementaryTypeKind to be defined",
+    );
+  }
+  if (typeKeyword === undefined) {
+    throw new InternalParseError("Expected argument typeKeyword to be defined");
+  }
   return new ElementaryType(
-    elementaryTypeKind!,
+    elementaryTypeKind,
     unsignedQualifierKeyword,
-    typeKeyword!,
+    typeKeyword,
   );
 }

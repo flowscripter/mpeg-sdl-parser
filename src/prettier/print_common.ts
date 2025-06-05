@@ -53,6 +53,46 @@ export function printLengthAttribute(
   ];
 }
 
+export function printMultipleCharacterNumberLiteral(
+  path: AstPath<NumberLiteral>,
+): Doc {
+  const multipleCharacterNumberLiteral = path.node;
+
+  const multipleCharacterNumberLiterals = [];
+  let opened = false;
+  let currentLiteral = [] as Doc[];
+  let containsContent = false;
+
+  for (const literal of multipleCharacterNumberLiteral.literals) {
+    if (literal.text === "'") {
+      if (!opened) {
+        currentLiteral.push(...getDocWithTrivia(literal));
+        opened = true;
+      } else {
+        currentLiteral.push(...getDocWithTrivia(literal));
+
+        // avoid empty multiple character number literals after the first one
+        if ((multipleCharacterNumberLiterals.length === 0) || containsContent) {
+          multipleCharacterNumberLiterals.push(currentLiteral);
+        }
+
+        // reset state
+        currentLiteral = [];
+        containsContent = false;
+        opened = false;
+      }
+    } else if (literal.text.length > 0) {
+      currentLiteral.push(literal.text);
+      containsContent = true;
+    }
+  }
+
+  return join(
+    " ",
+    multipleCharacterNumberLiterals,
+  );
+}
+
 export function printNumberLiteral(path: AstPath<NumberLiteral>): Doc {
   const numberLiteral = path.node;
   const numberLiteralKind = numberLiteral.numberLiteralKind;
@@ -65,12 +105,7 @@ export function printNumberLiteral(path: AstPath<NumberLiteral>): Doc {
     case NumberLiteralKind.FLOATING_POINT:
       return getDocWithTrivia(numberLiteral.literals[0]);
     case NumberLiteralKind.MULTIPLE_CHARACTER:
-      return [
-        join(
-          " ",
-          numberLiteral.literals.map((literal) => getDocWithTrivia(literal)),
-        ),
-      ];
+      return printMultipleCharacterNumberLiteral(path);
     default: {
       const exhaustiveCheck: never = numberLiteralKind;
       throw new Error(

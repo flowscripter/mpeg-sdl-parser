@@ -29,10 +29,10 @@ export function getClassDefinition(
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {
         case NodeKind.IDENTIFIER:
-          if (identifier) {
-            classIdentifier = childNodeOrToken as Identifier;
-          } else {
+          if (classIdentifier) {
             identifier = childNodeOrToken as Identifier;
+          } else {
+            classIdentifier = childNodeOrToken as Identifier;
           }
           break;
         case NodeKind.PARAMETER_VALUE_LIST:
@@ -59,12 +59,25 @@ export function getClassDefinition(
     }
   }
 
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+  if (semicolonPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument semicolonPunctuator to be defined",
+    );
+  }
+  if (classIdentifier === undefined) {
+    throw new InternalParseError(
+      "Expected argument classIdentifier to be defined",
+    );
+  }
   return new ClassDefinition(
     legacyKeyword !== undefined,
-    classIdentifier!,
-    identifier!,
+    classIdentifier,
+    identifier,
     parameterValueList,
     legacyKeyword,
-    semicolonPunctuator!,
+    semicolonPunctuator,
   );
 }

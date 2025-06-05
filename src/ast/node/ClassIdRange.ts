@@ -1,7 +1,7 @@
 import type Token from "../token/Token.ts";
 import AbstractClassId from "./AbstractClassId.ts";
 import type AbstractNode from "./AbstractNode.ts";
-import type SingleClassId from "./SingleClassId.ts";
+import type SingleClassId from "./ClassId.ts";
 import { ClassIdKind } from "./enum/class_id_kind.ts";
 
 export default class ClassIdRange extends AbstractClassId {

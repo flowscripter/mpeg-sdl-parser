@@ -109,15 +109,27 @@ export function getElementaryTypeDefinition(
     }
   }
 
+  if (elementaryType === undefined) {
+    throw new InternalParseError("Expected elementaryType to be defined");
+  }
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected identifier to be defined");
+  }
+  if (lengthAttribute === undefined) {
+    throw new InternalParseError("Expected lengthAttribute to be defined");
+  }
+  if (semicolonPunctuator === undefined) {
+    throw new InternalParseError("Expected semicolonPunctuator to be defined");
+  }
   return new ElementaryTypeDefinition(
     reservedKeyword !== undefined,
     legacyKeyword !== undefined,
     constKeyword !== undefined,
     alignedModifier,
-    elementaryType!,
-    lengthAttribute!,
+    elementaryType,
+    lengthAttribute,
     lookAheadOperator !== undefined,
-    identifier!,
+    identifier,
     value,
     endValue,
     reservedKeyword,
@@ -126,6 +138,6 @@ export function getElementaryTypeDefinition(
     lookAheadOperator,
     assignmentOperator,
     rangeOperator,
-    semicolonPunctuator!,
+    semicolonPunctuator,
   );
 }

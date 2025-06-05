@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import AbstractNode from "../node/AbstractNode";
 import { createSyntacticParseError } from "../../ParseError";
 import { getSpecification } from "./getSpecification";
@@ -37,87 +37,138 @@ import { getLengthofExpression } from "./getLengthofExpression.ts";
 import { getMapDeclaration } from "./getMapDeclaration.ts";
 import { getMapEntry } from "./getMapEntry.ts";
 import { getAggregateOutputValue } from "./getAggegateOutputValue.ts";
+import { getElementaryTypeOutputValue } from "./getElementaryTypeOutputValue.ts";
+import { getExpandableModifier } from "./getExpandableModifier.ts";
+import { getParameterList } from "./getParameterList.ts";
+import { getParameter } from "./getParameter.ts";
+import { getExtendsModifier } from "./getExtendsModifier.ts";
+import { getParameterValueList } from "./getParameterValueList.ts";
+import { getBitModifier } from "./getBitModifier.ts";
+import { getClassIdRange } from "./getClassIdRange.ts";
+import { getExtendedClassIdRange } from "./getExtendedClassIdRange.ts";
+import { getClassId } from "./getClassId.ts";
+import { getComputedArrayDefinition } from "./getComputedArrayDefinition.ts";
+import { getSwitchStatement } from "./getSwitchStatement.ts";
+import { getWhileStatement } from "./getWhileStatement.ts";
+import { getForStatement } from "./getForStatement.ts";
+import { getDoStatement } from "./getDoStatement.ts";
+import { getDefaultClause } from "./getDefaultClause.ts";
+import { getCaseClause } from "./getCaseClause.ts";
 
 export default class NodeFactory {
-  static createNode(syntaxNode: SyntaxNode, text: Text): AbstractNode {
-    if (syntaxNode.type.isError) {
-      throw createSyntacticParseError(text, syntaxNode.from);
+  static createNode(cursor: TreeCursor, text: Text): AbstractNode {
+    if (cursor.type.isError) {
+      throw createSyntacticParseError(text, cursor.from);
     }
 
-    switch (syntaxNode.type.name) {
+    switch (cursor.type.name) {
       case "AggregateOutputValue":
-        return getAggregateOutputValue(syntaxNode, text);
+        return getAggregateOutputValue(cursor, text);
       case "AlignedModifier":
-        return getAlignedModifier(syntaxNode, text);
+        return getAlignedModifier(cursor, text);
       case "AlignmentBitCount":
-        return getAlignmentBitCount(syntaxNode, text);
+        return getAlignmentBitCount(cursor, text);
       case "ArrayDefinition":
-        return getArrayDefinition(syntaxNode, text);
+        return getArrayDefinition(cursor, text);
       case "ArrayElementAccess":
-        return getArrayElementAccess(syntaxNode, text);
+        return getArrayElementAccess(cursor, text);
       case "AssignmentExpression":
-        return getAssignmentExpression(syntaxNode, text);
+        return getAssignmentExpression(cursor, text);
       case "Base64StringLiteral":
-        return getBase64StringLiteral(syntaxNode, text);
+        return getBase64StringLiteral(cursor, text);
       case "BinaryExpression":
-        return getBinaryExpression(syntaxNode, text);
+        return getBinaryExpression(cursor, text);
       case "BinaryLiteral":
-        return getBinaryLiteral(syntaxNode, text);
+        return getBinaryLiteral(cursor, text);
+      case "BitModifier":
+        return getBitModifier(cursor, text);
+      case "CaseClause":
+        return getCaseClause(cursor, text);
       case "ClassDeclaration":
-        return getClassDeclaration(syntaxNode, text);
+        return getClassDeclaration(cursor, text);
       case "ClassDefinition":
-        return getClassDefinition(syntaxNode, text);
+        return getClassDefinition(cursor, text);
+      case "ClassId":
+        return getClassId(cursor, text);
+      case "ClassIdRange":
+        return getClassIdRange(cursor, text);
       case "ClassMemberAccess":
-        return getClassMemberAccess(syntaxNode, text);
+        return getClassMemberAccess(cursor, text);
       case "CompoundStatement":
-        return getCompoundStatement(syntaxNode, text);
+        return getCompoundStatement(cursor, text);
+      case "ComputedArrayDefinition":
+        return getComputedArrayDefinition(cursor, text);
       case "ComputedElementaryTypeDefinition":
-        return getComputedElementaryTypeDefinition(syntaxNode, text);
+        return getComputedElementaryTypeDefinition(cursor, text);
       case "DecimalLiteral":
-        return getDecimalLiteral(syntaxNode, text);
+        return getDecimalLiteral(cursor, text);
+      case "DefaultClause":
+        return getDefaultClause(cursor, text);
+      case "DoStatement":
+        return getDoStatement(cursor, text);
       case "ElementaryType":
-        return getElementaryType(syntaxNode, text);
+        return getElementaryType(cursor, text);
       case "ElementaryTypeDefinition":
-        return getElementaryTypeDefinition(syntaxNode, text);
+        return getElementaryTypeDefinition(cursor, text);
+      case "ElementaryTypeOutputValue":
+        return getElementaryTypeOutputValue(cursor, text);
+      case "ExpandableModifier":
+        return getExpandableModifier(cursor, text);
       case "ExplicitArrayDimension":
-        return getExplicitArrayDimension(syntaxNode, text);
+        return getExplicitArrayDimension(cursor, text);
       case "ExpressionStatement":
-        return getExpressionStatement(syntaxNode, text);
+        return getExpressionStatement(cursor, text);
+      case "ExtendedClassIdRange":
+        return getExtendedClassIdRange(cursor, text);
+      case "ExtendsModifier":
+        return getExtendsModifier(cursor, text);
       case "FloatingPointLiteral":
-        return getFloatingPointLiteral(syntaxNode, text);
+        return getFloatingPointLiteral(cursor, text);
+      case "ForStatement":
+        return getForStatement(cursor, text);
       case "HexadecimalLiteral":
-        return getHexadecimalLiteral(syntaxNode, text);
+        return getHexadecimalLiteral(cursor, text);
       case "Identifier":
-        return getIdentifier(syntaxNode, text);
+        return getIdentifier(cursor, text);
       case "IfStatement":
-        return getIfStatement(syntaxNode, text);
+        return getIfStatement(cursor, text);
       case "ImplicitArrayDimension":
-        return getImplicitArrayDimension(syntaxNode, text);
+        return getImplicitArrayDimension(cursor, text);
       case "IntegerLiteral":
-        return getIntegerLiteral(syntaxNode, text);
+        return getIntegerLiteral(cursor, text);
       case "LengthAttribute":
-        return getLengthAttribute(syntaxNode, text);
+        return getLengthAttribute(cursor, text);
       case "LengthofExpression":
-        return getLengthofExpression(syntaxNode, text);
+        return getLengthofExpression(cursor, text);
       case "MapDeclaration":
-        return getMapDeclaration(syntaxNode, text);
+        return getMapDeclaration(cursor, text);
       case "MapEntry":
-        return getMapEntry(syntaxNode, text);
+        return getMapEntry(cursor, text);
       case "MultipleCharacterLiteral":
-        return getMultipleCharacterLiteral(syntaxNode, text);
+        return getMultipleCharacterLiteral(cursor, text);
+      case "Parameter":
+        return getParameter(cursor, text);
+      case "ParameterList":
+        return getParameterList(cursor, text);
+      case "ParameterValueList":
+        return getParameterValueList(cursor, text);
       case "PartialArrayDimension":
-        return getPartialArrayDimension(syntaxNode, text);
+        return getPartialArrayDimension(cursor, text);
       case "Specification":
-        return getSpecification(syntaxNode, text);
+        return getSpecification(cursor, text);
       case "StringDefinition":
-        return getStringDefinition(syntaxNode, text);
+        return getStringDefinition(cursor, text);
+      case "SwitchStatement":
+        return getSwitchStatement(cursor, text);
       case "UtfStringLiteral":
-        return getUtfStringLiteral(syntaxNode, text);
+        return getUtfStringLiteral(cursor, text);
       case "UnaryExpression":
-        return getUnaryExpression(syntaxNode, text);
+        return getUnaryExpression(cursor, text);
+      case "WhileStatement":
+        return getWhileStatement(cursor, text);
       default:
         throw new Error(
-          `Unsupported node type: ${syntaxNode.type.name}`,
+          `Unsupported node type: ${cursor.type.name}`,
         );
     }
   }

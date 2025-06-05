@@ -48,9 +48,21 @@ export function getCompoundStatement(
     }
   }
 
+  if (openBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracePunctuator to be defined",
+    );
+  }
+
+  if (closeBracePunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracePunctuator to be defined",
+    );
+  }
+
   return new CompoundStatement(
     statements,
-    openBracePunctuator!,
-    closeBracePunctuator!,
+    openBracePunctuator,
+    closeBracePunctuator,
   );
 }

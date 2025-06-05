@@ -12,12 +12,18 @@ export enum NodeKind {
   ARRAY_ELEMENT_ACCESS,
   /** Bit modifier node */
   BIT_MODIFIER,
+  /** Switch case clause node */
+  CASE_CLAUSE,
   /** Class ID node */
   CLASS_ID,
   /** Class member access node */
   CLASS_MEMBER_ACCESS,
+  /** Switch default clause node */
+  DEFAULT_CLAUSE,
   /** Elementary type node */
   ELEMENTARY_TYPE,
+  /** Elementary type output value node */
+  ELEMENTARY_TYPE_OUTPUT_VALUE,
   /** Expandable modifier node */
   EXPANDABLE_MODIFIER,
   /** Expression node */
@@ -44,8 +50,4 @@ export enum NodeKind {
   STATEMENT,
   /** String literal node */
   STRING_LITERAL,
-  /** Switch case clause node */
-  SWITCH_CASE_CLAUSE,
-  /** Switch default clause node */
-  SWITCH_DEFAULT_CLAUSE,
 }

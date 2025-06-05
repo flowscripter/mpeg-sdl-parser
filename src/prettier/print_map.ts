@@ -5,75 +5,50 @@ import type MapDeclaration from "../ast/node/MapDeclaration";
 import type MapDefinition from "../ast/node/MapDefinition";
 import type MapEntry from "../ast/node/MapEntry";
 import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
+import type ElementaryTypeOutputValue from "../ast/node/ElementaryTypeOutputValue";
 const { hardline, indent, join } = doc.builders;
 
-// TODO: reimplement this
-export function printAggregateOutputValue(
-  _path: AstPath<AggregateOutputValue>,
-  _print: (path: AstPath<AbstractNode>) => Doc,
+export function printElementaryTypeOutputValue(
+  path: AstPath<ElementaryTypeOutputValue>,
+  print: (path: AstPath<AbstractNode>) => Doc,
 ): doc.builders.Doc {
-  return [];
-  // const { outputValueKind } = path.node;
-  // switch (outputValueKind) {
-  //   case OutputValueKind.SINGLE: {
-  //     const singleMapOutputValue = path.node as SingleMapOutputValue;
-  //     if (singleMapOutputValue.numberLiteralValue !== undefined) {
-  //       return path.call(
-  //         print,
-  //         "numberLiteralValue" as keyof SingleMapOutputValue[
-  //           "numberLiteralValue"
-  //         ],
-  //       );
-  //     }
-  //     return [
-  //       path.call(
-  //         print,
-  //         "elementaryType" as keyof SingleMapOutputValue["elementaryType"],
-  //       ),
-  //       path.call(
-  //         print,
-  //         "lengthAttribute" as keyof SingleMapOutputValue["lengthAttribute"],
-  //       ),
-  //     ];
-  //   }
-  //   case OutputValueKind.AGGREGATE: {
-  //     const aggregateOutputValue = path.node as AggregateOutputValue;
-  //     const elements = [];
+  const elements = [];
+  elements.push(path.call(print, "elementaryType"));
+  elements.push(path.call(print, "lengthAttribute"));
+  return join(" ", elements);
+}
 
-  //     elements.push(
-  //       getDocWithTrivia(aggregateOutputValue.openBracePunctuator),
-  //     );
-  //     elements.push(
-  //       " ",
-  //     );
+export function printAggregateOutputValue(
+  path: AstPath<AggregateOutputValue>,
+  print: (path: AstPath<AbstractNode>) => Doc,
+): doc.builders.Doc {
+  const aggregateOutputValue = path.node as AggregateOutputValue;
+  const elements = [];
 
-  //     const outputValuesDoc = (path as AstPath<AggregateOutputValue>).map(
-  //       print,
-  //       "outputValues",
-  //     );
+  elements.push(
+    getDocWithTrivia(aggregateOutputValue.openBracePunctuator),
+  );
+  elements.push(
+    " ",
+  );
 
-  //     elements.push(
-  //       ...addCommaSeparatorsToDoc(
-  //         outputValuesDoc,
-  //         aggregateOutputValue.commaPunctuators,
-  //       ),
-  //     );
-  //     elements.push(
-  //       " ",
-  //     );
-  //     elements.push(
-  //       getDocWithTrivia(aggregateOutputValue.closeBracePunctuator),
-  //     );
+  const outputValuesDoc = path.map(print, "outputValues");
 
-  //     return elements;
-  //   }
-  //   default: {
-  //     const exhaustiveCheck: never = outputValueKind;
-  //     throw new Error(
-  //       "Unreachable code reached, outputValueKind == " + exhaustiveCheck,
-  //     );
-  //   }
-  // }
+  elements.push(
+    ...addCommaSeparatorsToDoc(
+      outputValuesDoc,
+      aggregateOutputValue.commaPunctuators,
+    ),
+  );
+
+  elements.push(
+    " ",
+  );
+  elements.push(
+    getDocWithTrivia(aggregateOutputValue.closeBracePunctuator),
+  );
+
+  return elements;
 }
 
 export function printMapDeclaration(

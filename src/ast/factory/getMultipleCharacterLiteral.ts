@@ -48,7 +48,6 @@ export function getMultipleCharacterLiteral(
 
   const literals = [];
   let literalText = "";
-
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       throw new InternalParseError(

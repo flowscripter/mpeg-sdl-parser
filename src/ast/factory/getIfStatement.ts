@@ -76,13 +76,37 @@ export function getIfStatement(
     }
   }
 
+  if (!condition) {
+    throw new InternalParseError("Expected argument condition to be defined");
+  }
+
+  if (!ifStatement) {
+    throw new InternalParseError("Expected argument ifStatement to be defined");
+  }
+
+  if (!ifKeyword) {
+    throw new InternalParseError("Expected argument ifKeyword to be defined");
+  }
+
+  if (!openParenthesisPunctuator) {
+    throw new InternalParseError(
+      "Expected argument openParenthesisPunctuator to be defined",
+    );
+  }
+
+  if (!closeParenthesisPunctuator) {
+    throw new InternalParseError(
+      "Expected argument closeParenthesisPunctuator to be defined",
+    );
+  }
+
   return new IfStatement(
-    condition!,
-    ifStatement!,
+    condition,
+    ifStatement,
     elseStatement,
-    ifKeyword!,
-    openParenthesisPunctuator!,
-    closeParenthesisPunctuator!,
+    ifKeyword,
+    openParenthesisPunctuator,
+    closeParenthesisPunctuator,
     elseKeyword,
   );
 }

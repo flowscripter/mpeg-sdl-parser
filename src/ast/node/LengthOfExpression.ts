@@ -12,7 +12,7 @@ export default class LengthofExpression extends AbstractExpression {
     public readonly closeParenthesisPunctuator: Token,
   ) {
     super(
-      ExpressionKind.LENGTH_OF,
+      ExpressionKind.LENGTHOF,
       lengthOfKeyword,
       closeParenthesisPunctuator,
     );

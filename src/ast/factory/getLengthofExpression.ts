@@ -58,10 +58,32 @@ export function getLengthofExpression(
     }
   }
 
+  if (!operand) {
+    throw new InternalParseError("Expected argument operand to be defined");
+  }
+
+  if (!lengthOfKeyword) {
+    throw new InternalParseError(
+      "Expected argument lengthOfKeyword to be defined",
+    );
+  }
+
+  if (!openParenthesisPunctuator) {
+    throw new InternalParseError(
+      "Expected argument openParenthesisPunctuator to be defined",
+    );
+  }
+
+  if (!closedParenthesisPunctuator) {
+    throw new InternalParseError(
+      "Expected argument closedParenthesisPunctuator to be defined",
+    );
+  }
+
   return new LengthofExpression(
-    operand!,
-    lengthOfKeyword!,
-    openParenthesisPunctuator!,
-    closedParenthesisPunctuator!,
+    operand,
+    lengthOfKeyword,
+    openParenthesisPunctuator,
+    closedParenthesisPunctuator,
   );
 }

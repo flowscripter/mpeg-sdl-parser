@@ -40,7 +40,7 @@ Specification(
             Identifier
             Whitespace
             Identifier
-            ParameterValues(
+            ParameterValueList(
                 OpenParenthesis
                 UnaryExpression(
                     IntegerLiteral
@@ -70,7 +70,7 @@ Specification(
             Identifier
             Whitespace
             Identifier
-            ParameterValues(
+            ParameterValueList(
                 OpenParenthesis
                 UnaryExpression(
                     Identifier

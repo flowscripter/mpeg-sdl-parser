@@ -5,14 +5,14 @@ import AbstractStatement from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 import type Identifier from "./Identifier.ts";
 import type NumberLiteral from "./NumberLiteral.ts";
-import type SwitchCaseClause from "./SwitchCaseClause.ts";
-import type SwitchDefaultClause from "./SwitchDefaultClause.ts";
+import type CaseClause from "./CaseClause.ts";
+import type DefaultClause from "./DefaultClause.ts";
 
 export default class SwitchStatement extends AbstractStatement {
   constructor(
     public readonly expression: AbstractExpression | Identifier | NumberLiteral,
-    public readonly switchCaseClauses: SwitchCaseClause[],
-    public readonly switchDefaultClause: SwitchDefaultClause | undefined,
+    public readonly caseClauses: CaseClause[],
+    public readonly defaultClause: DefaultClause | undefined,
     public readonly switchKeyword: Token,
     public readonly openParenthesisPunctuator: Token,
     public readonly closeParenthesisPunctuator: Token,
@@ -24,11 +24,11 @@ export default class SwitchStatement extends AbstractStatement {
 
   override *getChildNodeIterable(): IterableIterator<AbstractNode> {
     yield this.expression;
-    for (const clause of this.switchCaseClauses) {
+    for (const clause of this.caseClauses) {
       yield clause;
     }
-    if (this.switchDefaultClause) {
-      yield this.switchDefaultClause;
+    if (this.defaultClause) {
+      yield this.defaultClause;
     }
   }
 }

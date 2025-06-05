@@ -21,6 +21,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -52,6 +53,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -83,6 +85,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -114,6 +117,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -145,6 +149,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -176,6 +181,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -207,6 +213,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -217,7 +224,7 @@ Specification(
 
 # Concatenated on same line
 
-class A {utfstring foo = u"hello" u" world";}
+class A {utfstring foo = u"hello" u" world"u"";}
 
 ==>
 
@@ -238,12 +245,16 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
-            )
-            Whitespace
-            UtfStringLiteral(
+                Whitespace
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -277,12 +288,12 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
-            )
-            Whitespace
-            UtfStringLiteral(
+                Whitespace
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon

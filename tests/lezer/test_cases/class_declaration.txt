@@ -28,7 +28,7 @@ Specification(
         Identifier
         ParameterList(
             OpenParenthesis
-            ParameterListItem(
+            Parameter(
                 ElementaryType(
                     int
                 )
@@ -73,7 +73,7 @@ Specification(
         Whitespace
         ParameterList(
             OpenParenthesis
-            ParameterListItem(
+            Parameter(
                 ElementaryType(
                     int
                 )
@@ -82,7 +82,7 @@ Specification(
             )
             Comma
             Whitespace
-            ParameterListItem(
+            Parameter(
                 Identifier
                 Whitespace
                 Identifier
@@ -94,7 +94,7 @@ Specification(
             extends
             Whitespace
             Identifier
-            ParameterValues(
+            ParameterValueList(
                 OpenParenthesis
                 UnaryExpression(
                     IntegerLiteral

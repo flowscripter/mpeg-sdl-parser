@@ -1,13 +1,13 @@
-import { buildParser } from "@lezer/generator";
-import { LRParser as LezerParser } from "@lezer/lr";
+import { type BuildOptions, buildParser } from "@lezer/generator";
+import { ContextTracker, LRParser as LezerParser } from "@lezer/lr";
 import fs from "node:fs/promises";
 import path from "node:path";
-import getLogger from "../util/logger.ts";
+import getLogger, { debugEnabled } from "../util/logger.ts";
 import { createSyntacticParseError } from "../ParseError.ts";
 import { Text } from "@codemirror/state";
 import type { Input } from "@lezer/common";
 
-const sdlParserLogger = getLogger("SdlParser");
+const logger = getLogger("SdlParser");
 
 let lenientSdlParser: LezerParser | undefined;
 let strictSdlParser: LezerParser | undefined;
@@ -24,10 +24,43 @@ export async function createLenientSdlParser(): Promise<LezerParser> {
     );
     const grammarText = await fs.readFile(grammarPath, "utf-8");
 
-    lenientSdlParser = buildParser(grammarText, {
+    const buildOptions: BuildOptions = {
       fileName,
-      warn: sdlParserLogger.warn,
-    });
+      warn: logger.warn,
+    };
+
+    if (debugEnabled) {
+      // Define a custom context tracker for debug logging via the framework wide logger
+      const contextTracker = new ContextTracker<number>({
+        start: 0,
+        shift: (_context, term, stack, _input) => {
+          const termName = lenientSdlParser?.getName(term) ?? "unknown";
+
+          logger.debug("shift term: %s at position %d", termName, stack.pos);
+
+          return 0;
+        },
+        reduce: (_context, term, stack, _input) => {
+          const termName = lenientSdlParser?.getName(term) ?? "unknown";
+
+          logger.debug("reduce term: %s at position %d", termName, stack.pos);
+
+          return 0;
+        },
+        reuse: (_context, node, stack, _input) => {
+          const nodeName = lenientSdlParser?.getName(node.type.id) ?? "unknown";
+
+          logger.debug("reuse node: %s at position %d", nodeName, stack.pos);
+
+          return 0;
+        },
+        strict: false,
+      });
+
+      buildOptions.contextTracker = contextTracker;
+    }
+
+    lenientSdlParser = buildParser(grammarText, buildOptions);
   }
 
   return lenientSdlParser;

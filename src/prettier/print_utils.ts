@@ -1,24 +1,10 @@
 import type { Doc } from "prettier";
 import { doc } from "prettier";
+import type Token from "../ast/token/Token";
+import type Trivia from "../ast/token/Trivia";
 const { hardline, indent, join } = doc.builders;
 
-export function cleanupTrivia(node: AbstractNode) {
-  for (const token of node.getSyntaxTokenIterable()) {
-    token.leadingTrivia = token.leadingTrivia.filter((trivia) =>
-      trivia.tokenKind !== TokenKind.WHITESPACE_TOKEN
-    );
-    token.trailingTrivia = token.trailingTrivia.filter((trivia) =>
-      trivia.tokenKind !== TokenKind.WHITESPACE_TOKEN
-    );
-  }
-}
-
 function getCommentString(trivia: Trivia): string {
-  if (trivia.tokenKind !== TokenKind.COMMENT_TOKEN) {
-    throw new Error(
-      "Logic Error: Expected a comment token: " + JSON.stringify(trivia),
-    );
-  }
   if (!trivia.text.startsWith("//")) {
     throw new Error(
       "Logic Error: Expected comment to start with // : " +
@@ -31,18 +17,18 @@ function getCommentString(trivia: Trivia): string {
 }
 
 /**
- * Returns a doc for the leading trivia of a syntax token.
- * @param syntaxToken The syntax token to get the leading trivia for.
+ * Returns a doc for the leading trivia of a token.
+ * @param token The token to get the leading trivia for.
  * @param indentLeadingTriviaAsIndentIsCompleting Whether to indent the leading trivia as if it is completing a line.
  *
  * Note that if indentLeadingTriviaAsIndentIsCompleting is true, the leading trivia will include a hardline as this
  * is required to perform the indent.
  */
 function getLeadingTriviaDoc(
-  syntaxToken: SyntaxToken,
+  token: Token,
   indentLeadingTriviaAsIndentIsCompleting: boolean,
 ): Doc[] {
-  if (!syntaxToken.leadingTrivia.length) {
+  if (!token.leadingTrivia.length) {
     if (indentLeadingTriviaAsIndentIsCompleting) {
       return [hardline];
     }
@@ -51,7 +37,7 @@ function getLeadingTriviaDoc(
 
   const elements = join(
     hardline,
-    syntaxToken.leadingTrivia.map((trivia) => getCommentString(trivia)),
+    token.leadingTrivia.map((trivia) => getCommentString(trivia)),
   );
 
   if (indentLeadingTriviaAsIndentIsCompleting) {
@@ -69,8 +55,8 @@ function getLeadingTriviaDoc(
   ];
 }
 
-function getTrailingTriviaDoc(syntaxToken: SyntaxToken): Doc[] {
-  if (!syntaxToken.trailingTrivia.length) {
+function getTrailingTriviaDoc(token: Token): Doc[] {
+  if (!token.trailingTrivia.length) {
     return [];
   }
 
@@ -78,14 +64,14 @@ function getTrailingTriviaDoc(syntaxToken: SyntaxToken): Doc[] {
     " ",
     join(
       hardline,
-      syntaxToken.trailingTrivia.map((trivia) => getCommentString(trivia)),
+      token.trailingTrivia.map((trivia) => getCommentString(trivia)),
     ),
     hardline,
   ];
 }
 
 export function getDocWithTrivia(
-  token: SyntaxToken,
+  token: Token,
   indentLeadingTriviaAsIndentIsCompleting = false,
 ): Doc[] {
   const leadingTriviaDoc = getLeadingTriviaDoc(
@@ -94,16 +80,21 @@ export function getDocWithTrivia(
   );
   const trailingTriviaDoc = getTrailingTriviaDoc(token);
 
-  return [
-    leadingTriviaDoc,
-    token.text,
-    trailingTriviaDoc,
-  ];
+  const doc = []
+  if (leadingTriviaDoc.length > 0) {
+    doc.push(leadingTriviaDoc);
+  }
+  doc.push(token.text);
+  if (trailingTriviaDoc.length > 0) {
+    doc.push(trailingTriviaDoc);
+  }
+
+  return doc;
 }
 
 export function addCommaSeparatorsToDoc(
   valuesDoc: Doc[],
-  commaSeparatorTokens: SyntaxToken[] | undefined,
+  commaSeparatorTokens: Token[] | undefined,
 ): Doc[] {
   if (commaSeparatorTokens === undefined) {
     if (valuesDoc.length > 1) {

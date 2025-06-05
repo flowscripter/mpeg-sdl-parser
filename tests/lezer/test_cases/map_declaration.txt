@@ -22,9 +22,7 @@ Specification(
             Comma
             AggregateOutputValue(
                 OpenBrace
-                OutputValue(
-                    IntegerLiteral
-                )
+                IntegerLiteral
                 CloseBrace
             )
         )
@@ -34,9 +32,7 @@ Specification(
             Comma
             AggregateOutputValue(
                 OpenBrace
-                OutputValue(
-                    IntegerLiteral
-                )
+                IntegerLiteral
                 CloseBrace
             )
         )
@@ -66,9 +62,7 @@ Specification(
             Comma
             AggregateOutputValue(
                 OpenBrace
-                OutputValue(
-                    IntegerLiteral
-                )
+                IntegerLiteral
                 CloseBrace
             )
         )
@@ -98,22 +92,14 @@ Specification(
             Comma
             AggregateOutputValue(
                 OpenBrace
-                OutputValue(
-                    IntegerLiteral
-                )
+                IntegerLiteral
                 Comma
-                OutputValue(
-                    AggregateOutputValue(
-                        OpenBrace
-                        OutputValue(
-                            IntegerLiteral
-                        )
-                        Comma
-                        OutputValue(
-                            IntegerLiteral
-                        )
-                        CloseBrace
-                    )
+                AggregateOutputValue(
+                    OpenBrace
+                    IntegerLiteral
+                    Comma
+                    IntegerLiteral
+                    CloseBrace
                 )
                 CloseBrace
             )
@@ -146,7 +132,7 @@ Specification(
             Comma
             AggregateOutputValue(
                 OpenBrace
-                OutputValue(
+                ElementaryTypeOutputValue(
                     ElementaryType(
                         int
                     )

@@ -164,6 +164,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -193,6 +194,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -222,6 +224,7 @@ Specification(
             UtfStringLiteral(
                 UtfPrefix
                 DoubleQuote
+                UtfStringLiteralCharacters
                 DoubleQuote
             )
             Semicolon
@@ -250,6 +253,7 @@ Specification(
             Assignment
             Base64StringLiteral(
                 DoubleQuote
+                Base64StringLiteralCharacters
                 DoubleQuote
             )
             Semicolon

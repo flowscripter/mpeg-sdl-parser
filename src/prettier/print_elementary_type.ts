@@ -52,11 +52,11 @@ export function printElementaryType(path: AstPath<ElementaryType>): Doc {
     case ElementaryTypeKind.BIT:
     case ElementaryTypeKind.FLOATING_POINT:
     case ElementaryTypeKind.INTEGER:
-      return getDocWithTrivia(elementaryType.type);
+      return getDocWithTrivia(elementaryType.typeKeyword);
     case ElementaryTypeKind.UNSIGNED_INTEGER:
       return join(" ", [
         getDocWithTrivia(elementaryType.unsignedQualifierKeyword!),
-        getDocWithTrivia(elementaryType.type),
+        getDocWithTrivia(elementaryType.typeKeyword),
       ]);
     default: {
       const exhaustiveCheck: never = elementaryTypeKind;

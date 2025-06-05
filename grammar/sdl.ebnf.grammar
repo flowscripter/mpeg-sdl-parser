@@ -243,7 +243,8 @@ elementary_type_definition ::= (reserved | legacy)? const? aligned_modifier? ele
 
 /* Rule E.5: Maps with escape codes */
 
-output_value ::= number_literal | elementary_type length_attribute | aggregate_output_value
+output_value ::= number_literal | elementary_type_output_value | aggregate_output_value
+elementary_type_output_value ::= elementary_type length_attribute
 aggregate_output_value ::= open_brace (output_value comma)* output_value close_brace
 map_entry ::= binary_literal comma aggregate_output_value
 
@@ -306,18 +307,18 @@ expandable_modifier ::= expandable (open_parenthesis positive_integer close_pare
 
 /* Rule C.7: Class parameter types */
 
-parameter_list_item ::= (identifier | elementary_type) identifier
-parameter_list ::= open_parenthesis (parameter_list_item comma)* parameter_list_item close_parenthesis
-parameter_values ::= open_parenthesis (expression comma)* expression close_parenthesis
+parameter ::= (identifier | elementary_type) identifier
+parameter_list ::= open_parenthesis (parameter comma)* parameter close_parenthesis
+parameter_value_list ::= open_parenthesis (expression comma)* expression close_parenthesis
 
-extends_modifier ::= extends identifier parameter_values?
+extends_modifier ::= extends identifier parameter_value_list?
 
 class_declaration ::= aligned_modifier? expandable_modifier? abstract? class identifier
     parameter_list? extends_modifier? bit_modifier? open_brace statement* close_brace
 
 /* Rule C.8: Parameterized class data types */
 
-class_definition ::= legacy? identifier identifier parameter_values? semicolon
+class_definition ::= legacy? identifier identifier parameter_value_list? semicolon
 
 /* 7.7 Arrays */
 
@@ -375,12 +376,12 @@ if_statement ::= if open_parenthesis expression close_parenthesis statement
 
 /* Rule FC.2: Flow control using switch */
 
-switch_case_clause ::= case number_literal colon 
+case_clause ::= case number_literal colon 
     ((statement* (break semicolon)?) | (open_brace statement* break semicolon close_brace))?
-switch_default_clause ::= default colon statement*
+default_clause ::= default colon statement*
 
 switch_statement ::= switch open_parenthesis expression close_parenthesis open_brace
-	switch_case_clause* switch_default_clause? close_brace
+	case_clause* default_clause? close_brace
 
 /* 9.2 Loops */
 

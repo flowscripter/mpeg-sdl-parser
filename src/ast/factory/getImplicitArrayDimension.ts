@@ -74,11 +74,21 @@ export function getImplicitArrayDimension(
     }
   }
 
+  if (openBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument openBracketPunctuator to be defined",
+    );
+  }
+  if (closeBracketPunctuator === undefined) {
+    throw new InternalParseError(
+      "Expected argument closeBracketPunctuator to be defined",
+    );
+  }
   return new ImplicitArrayDimension(
     rangeStart,
     rangeEnd,
-    openBracketPunctuator!,
+    openBracketPunctuator,
     rangeOperator,
-    closeBracketPunctuator!,
+    closeBracketPunctuator,
   );
 }

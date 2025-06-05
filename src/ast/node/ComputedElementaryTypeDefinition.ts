@@ -1,4 +1,3 @@
-import type { NullLiteral } from "typescript";
 import type Token from "../token/Token.ts";
 import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
 import type AbstractExpression from "./AbstractExpression.ts";
@@ -6,6 +5,7 @@ import type AbstractNode from "./AbstractNode.ts";
 import type ElementaryType from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 import type Identifier from "./Identifier.ts";
+import type NumberLiteral from "./NumberLiteral.ts";
 
 export default class ComputedElementaryTypeDefinition
   extends AbstractElementaryTypeDefinition {
@@ -13,7 +13,7 @@ export default class ComputedElementaryTypeDefinition
     isConst: boolean,
     elementaryType: ElementaryType,
     identifier: Identifier,
-    value: AbstractExpression | Identifier | NullLiteral | undefined,
+    value: AbstractExpression | Identifier | NumberLiteral | undefined,
     public readonly computedKeyword: Token,
     constKeyword: Token | undefined,
     assignmentOperator: Token | undefined,

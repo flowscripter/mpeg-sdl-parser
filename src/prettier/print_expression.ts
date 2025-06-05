@@ -6,10 +6,8 @@ import type ArrayElementAccess from "../ast/node/ArrayElementAccess";
 import type ClassMemberAccess from "../ast/node/ClassMemberAccess";
 import { ExpressionKind } from "../ast/node/enum/expression_kind";
 import type LengthOfExpression from "../ast/node/LengthofExpression";
-import type PostfixExpression from "../ast/node/PostfixExpression";
 import type BinaryExpression from "../ast/node/BinaryExpression";
 import type UnaryExpression from "../ast/node/UnaryExpression";
-import type PrimaryExpression from "../ast/node/PrimaryExpression";
 const { join } = doc.builders;
 
 export function printClassMemberAccess(
@@ -35,77 +33,64 @@ export function printArrayElementAccess(
   ];
 }
 
-function printPostfixExpression(
-  path: AstPath<PostfixExpression>,
-  print: (path: AstPath<AbstractNode>) => Doc,
-): Doc {
-  const postfixExpression = path.node;
-  const elements = [];
-
-  elements.push(path.call(print, "operand"));
-
-  if (postfixExpression.arrayElementAccess !== undefined) {
-    elements.push(
-      path.call(
-        print,
-        "arrayElementAccess" as keyof PostfixExpression["arrayElementAccess"],
-      ),
-    );
-  }
-
-  if (postfixExpression.classMemberAccess !== undefined) {
-    elements.push(
-      path.call(
-        print,
-        "classMemberAccess" as keyof PostfixExpression["classMemberAccess"],
-      ),
-    );
-  }
-
-  if (postfixExpression.postfixOperatorKind !== undefined) {
-    elements.push(getDocWithTrivia(postfixExpression.postfixOperator!));
-  }
-
-  return elements;
-}
-
-function printPrimaryExpression(
-  path: AstPath<PrimaryExpression>,
-  print: (path: AstPath<AbstractNode>) => Doc,
-): Doc {
-  const primaryExpression = path.node;
-  const elements = [];
-
-  if (primaryExpression.openParenthesisPunctuator !== undefined) {
-    elements.push(
-      getDocWithTrivia(primaryExpression.openParenthesisPunctuator),
-    );
-  }
-
-  elements.push(path.call(print, "operand"));
-
-  if (primaryExpression.closeParenthesisPunctuator !== undefined) {
-    elements.push(
-      getDocWithTrivia(primaryExpression.closeParenthesisPunctuator),
-    );
-  }
-
-  return elements;
-}
-
 function printUnaryExpression(
   path: AstPath<UnaryExpression>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {
   const unaryExpression = path.node;
 
-  return [
-    getDocWithTrivia(unaryExpression.unaryOperator),
+  const elements = [];
+
+  if (unaryExpression.unaryOperator !== undefined) {
+    elements.push(
+      getDocWithTrivia(unaryExpression.unaryOperator),
+    );
+  }
+
+  if (unaryExpression.openParenthesisPunctuator !== undefined) {
+    elements.push(
+      getDocWithTrivia(unaryExpression.openParenthesisPunctuator),
+    );
+  }
+
+  elements.push([
     path.call(
       print,
-      "operand",
+      "operand" as keyof UnaryExpression["operand"],
     ),
-  ];
+  ]);
+
+  if (unaryExpression.arrayElementAccess !== undefined) {
+    elements.push(
+      path.call(
+        print,
+        "arrayElementAccess" as keyof UnaryExpression["arrayElementAccess"],
+      ),
+    );
+  }
+
+  if (unaryExpression.classMemberAccess !== undefined) {
+    elements.push(
+      path.call(
+        print,
+        "classMemberAccess" as keyof UnaryExpression["classMemberAccess"],
+      ),
+    );
+  }
+
+  if (unaryExpression.closeParenthesisPunctuator !== undefined) {
+    elements.push(
+      getDocWithTrivia(unaryExpression.closeParenthesisPunctuator),
+    );
+  }
+
+  if (unaryExpression.postfixOperator !== undefined) {
+    elements.push(
+      getDocWithTrivia(unaryExpression.postfixOperator),
+    );
+  }
+
+  return elements;
 }
 
 function printBinaryExpression(
@@ -147,15 +132,11 @@ export function printAbstractExpression(
   switch (expressionKind) {
     case ExpressionKind.BINARY:
       return printBinaryExpression(path as AstPath<BinaryExpression>, print);
-    case ExpressionKind.LENGTH_OF:
+    case ExpressionKind.LENGTHOF:
       return printLengthOfExpression(
         path as AstPath<LengthOfExpression>,
         print,
       );
-    case ExpressionKind.POSTFIX:
-      return printPostfixExpression(path as AstPath<PostfixExpression>, print);
-    case ExpressionKind.PRIMARY:
-      return printPrimaryExpression(path as AstPath<PrimaryExpression>, print);
     case ExpressionKind.UNARY:
       return printUnaryExpression(path as AstPath<UnaryExpression>, print);
     default: {

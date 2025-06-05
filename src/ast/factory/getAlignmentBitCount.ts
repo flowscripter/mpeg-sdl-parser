@@ -9,7 +9,7 @@ import NumberLiteral from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 
 export function getAlignmentBitCount(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
   assertSyntaxNodeType(syntaxNode, "AlignmentBitCount");

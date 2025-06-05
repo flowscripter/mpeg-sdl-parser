@@ -42,14 +42,24 @@ function printCompoundStatement(
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {
   const node = path.node;
-  return [
-    getDocWithTrivia(node.openBracePunctuator),
+
+  const elements: Doc = [
+    getDocWithTrivia(node.openBracePunctuator)
+  ];
+
+  if (node.statements.length > 0) {
+    elements.push(
     indent([
       hardline,
       join(hardline, path.map(print, "statements")),
     ]),
-    getDocWithTrivia(node.closeBracePunctuator, true),
-  ];
+    );
+  }
+  elements.push(hardline);
+
+  elements.push(getDocWithTrivia(node.closeBracePunctuator));
+
+  return elements;
 }
 
 function printExpressionStatement(
@@ -58,10 +68,7 @@ function printExpressionStatement(
 ): Doc {
   const node = path.node;
   return [
-    path.call(
-      print,
-      "expression",
-    ),
+    path.call(print, "expression"),
     getDocWithTrivia(node.semicolonPunctuator),
   ];
 }

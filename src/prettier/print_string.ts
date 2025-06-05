@@ -52,13 +52,47 @@ export function printStringDefinition(
 
 export function printStringLiteral(
   path: AstPath<StringLiteral>,
-) {
+): Doc {
   const stringLiteral = path.node;
+
+  const stringLiterals = [];
+  let opened = false;
+  let currentLiteral = [] as Doc[];
+  let containsContent = false;
+
+  for (const literal of stringLiteral.literals) {
+    if (literal.text === "\"") {
+      if (!opened) {
+        currentLiteral.push(...getDocWithTrivia(literal));
+        opened = true;
+      } else {
+        currentLiteral.push(...getDocWithTrivia(literal));
+
+        // avoid empty string literals after the first one
+        if ((stringLiterals.length === 0) || containsContent) {
+          stringLiterals.push(currentLiteral);
+        }
+
+        // reset state
+        currentLiteral = [];
+        containsContent = false;
+        opened = false;
+      }
+    } else if (literal.text === "u") {
+      if (opened) {
+        currentLiteral.push(literal.text);
+        containsContent = true;
+      } else {
+        currentLiteral.push(...getDocWithTrivia(literal));
+      }
+    } else if (literal.text.length > 0) {
+      currentLiteral.push(literal.text);
+      containsContent = true;
+    }
+  }
 
   return join(
     " ",
-    stringLiteral.stringLiterals.map((stringLiteral) =>
-      getDocWithTrivia(stringLiteral)
-    ),
+    stringLiterals,
   );
 }

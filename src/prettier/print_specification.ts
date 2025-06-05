@@ -47,6 +47,5 @@ export function printSpecification(
       hardline,
       elements,
     ),
-    hardline,
   ];
 }

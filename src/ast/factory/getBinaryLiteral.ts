@@ -12,7 +12,7 @@ import { getLocationFromTextPosition } from "../../util/locationUtils";
 const DOT_SEPARATOR_REGEX = /\./g;
 
 export function getBinaryLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
   assertSyntaxNodeType(syntaxNode, "BinaryLiteral");

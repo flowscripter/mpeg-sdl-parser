@@ -16,7 +16,7 @@ export default function printDoStatement(
   elements.push(getDocWithTrivia(doStatement.whileKeyword));
   elements.push([
     getDocWithTrivia(doStatement.openParenthesisPunctuator),
-    path.call(print, "conditionExpression"),
+    path.call(print, "condition"),
     getDocWithTrivia(doStatement.closeParenthesisPunctuator),
     getDocWithTrivia(doStatement.semicolonPunctuator),
   ]);

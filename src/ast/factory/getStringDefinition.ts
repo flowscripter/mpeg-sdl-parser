@@ -94,13 +94,27 @@ export function getStringDefinition(
     }
   }
 
+  if (identifier === undefined) {
+    throw new InternalParseError("Expected argument identifier to be defined");
+  }
+  if (stringVariableKind === undefined) {
+    throw new InternalParseError(
+      "Expected argument stringVariableKind to be defined",
+    );
+  }
+  if (stringLiteral === undefined) {
+    throw new InternalParseError(
+      "Expected argument stringLiteral to be defined",
+    );
+  }
+
   return new StringDefinition(
     reservedKeyword !== undefined,
     legacyKeyword !== undefined,
     constKeyword !== undefined,
     alignedModifier,
-    stringVariableKind!,
-    identifier!,
+    stringVariableKind,
+    identifier,
     stringLiteral,
     reservedKeyword,
     legacyKeyword,
