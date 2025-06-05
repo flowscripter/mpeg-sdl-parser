@@ -5,7 +5,11 @@ import type { Input } from "@lezer/common";
  * It provides methods to read and chunk the input string.
  */
 export default class SdlStringInput implements Input {
-  constructor(private readonly input: string) {}
+  private readonly input: string;
+
+  constructor(input: string) {
+    this.input = input.replace(/\r\n?/g, "\n");
+  }
 
   /**
     The length of the document.
