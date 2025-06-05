@@ -4,6 +4,7 @@ import type AbstractNode from "../ast/node/AbstractNode";
 import { createStrictSdlParser } from "../lezer/createSdlParser";
 import { buildAst } from "../ast/buildAst";
 import SdlStringInput from "../lezer/SdlStringInput";
+
 const languages: SupportLanguage[] = [
   {
     name: "sdl",
@@ -14,7 +15,7 @@ const languages: SupportLanguage[] = [
 const parsers: Record<string, Parser<AbstractNode>> = {
   sdl: {
     astFormat: "sdl",
-    parse: async (sdlSpecification) => {
+    parse: async (sdlSpecification: string) => {
       const sdlStringInput = new SdlStringInput(sdlSpecification);
       const sdlParser = await createStrictSdlParser();
       const parseTree = sdlParser.parse(sdlSpecification);

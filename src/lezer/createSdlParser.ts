@@ -3,9 +3,9 @@ import { ContextTracker, LRParser as LezerParser } from "@lezer/lr";
 import fs from "node:fs/promises";
 import path from "node:path";
 import getLogger, { debugEnabled } from "../util/logger.ts";
-import { createSyntacticParseError } from "../ParseError.ts";
 import { Text } from "@codemirror/state";
 import type { Input } from "@lezer/common";
+import { SyntacticParseError } from "../ParseError.ts";
 
 const logger = getLogger("SdlParser");
 
@@ -103,7 +103,7 @@ export async function createStrictSdlParser(): Promise<LezerParser> {
           inputText.split("\n"),
         );
 
-        throw createSyntacticParseError(text, position);
+        throw SyntacticParseError.fromTextAndPosition(text, position);
       }
     };
   }

@@ -14,12 +14,19 @@ describe("Invalid Syntax Tests", () => {
     );
   });
 
-  // TODO: add all of these to the collate errors tests and ensure error includes: missing or unexpected token
   test("No class parameter values in parenthesis fails to parse", () => {
     const sdlStringInput = new SdlStringInput("class A {ClassD d();}");
 
     expect(() => sdlParser.parse(sdlStringInput)).toThrow(
       "SYNTACTIC ERROR: Parse error => { row: 1, column: 19, position: 18 }",
+    );
+  });
+
+  test("Unexpected token fails to parse", () => {
+    const sdlStringInput = new SdlStringInput("class A {ClassD computed d;}");
+
+    expect(() => sdlParser.parse(sdlStringInput)).toThrow(
+      "SYNTACTIC ERROR: Parse error => { row: 1, column: 17, position: 16 }",
     );
   });
 

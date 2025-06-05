@@ -82,7 +82,7 @@ class MyNodeHandler implements NodeHandler {
 dispatchNodeHandler(specification, new MyNodeHandler());
 
 // Pretty print the specification (retaining comments)
-let prettifiedSpecification = await prettyPrint(specification)
+let prettifiedSpecification = await prettyPrint(specification, sdlStringInput)
 
 console.log(prettifiedSpecification);
 

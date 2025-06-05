@@ -1,7 +1,7 @@
 import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import AbstractNode from "../node/AbstractNode";
-import { createSyntacticParseError } from "../../ParseError";
+import { SyntacticParseError } from "../../ParseError";
 import { getSpecification } from "./getSpecification";
 import { getComputedElementaryTypeDefinition } from "./getComputedElementaryTypeDefinition";
 import { getElementaryType } from "./getElementaryType";
@@ -58,7 +58,7 @@ import { getCaseClause } from "./getCaseClause.ts";
 export default class NodeFactory {
   static createNode(cursor: TreeCursor, text: Text): AbstractNode {
     if (cursor.type.isError) {
-      throw createSyntacticParseError(text, cursor.from);
+      throw SyntacticParseError.fromTextAndCursor(text, cursor);
     }
 
     switch (cursor.type.name) {

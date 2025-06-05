@@ -4,7 +4,7 @@ import type Token from "../ast/token/Token";
 import type AbstractNode from "../ast/node/AbstractNode";
 import NodeFactory from "../ast/factory/NodeFactory";
 import type Trivia from "../ast/token/Trivia";
-import { createSyntacticParseError, InternalParseError } from "../ParseError";
+import { InternalParseError, SyntacticParseError } from "../ParseError";
 import { getLocationFromTextPosition } from "./locationUtils";
 
 const primitiveNodeTypes = new Set([
@@ -59,7 +59,7 @@ export function getChildNodesAndTokens(
 
   while (childExists) {
     if (cursor.type.isError) {
-      throw createSyntacticParseError(text, cursor.from);
+      throw SyntacticParseError.fromTextAndCursor(text, cursor);
     }
 
     // Skip whitespace
@@ -123,18 +123,16 @@ export function getChildNodesAndTokens(
   while (hasSibling) {
     if (cursor.type.name === "Comment") {
       trivia.push(getCommentTrivia(cursor, text));
-    } 
-    else if (cursor.type.name === "Whitespace") {
+    } else if (cursor.type.name === "Whitespace") {
       // Only continute while whitespace doesn't contain a newline
       const whitespace = text.sliceString(cursor.from, cursor.to);
 
       if (whitespace.includes("\n")) {
         // Stop if we encounter a newline in whitespace
         cursor.prevSibling();
-        break; 
+        break;
       }
-    } 
-    else {
+    } else {
       // Stop at the first non-comment, non-whitespace node
       cursor.prevSibling();
       break;
