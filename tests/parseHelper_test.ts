@@ -148,12 +148,13 @@ describe("Parse Helper Tests", () => {
     const sdlString = await fs.readFile(
       path.join(__dirname, "./sample_specifications/various_elements.sdl"),
     ).then((buffer) => buffer.toString());
-    const expectedSdlString = await fs.readFile(
+    let expectedSdlString = await fs.readFile(
       path.join(
         __dirname,
         "./sample_specifications/prettified_various_elements.sdl",
       ),
     ).then((buffer) => buffer.toString());
+    expectedSdlString = expectedSdlString.replace(/\r/g, "");
 
     const sdlStringInput = new SdlStringInput(sdlString);
     const parseTree = strictSdlParser.parse(sdlStringInput);
