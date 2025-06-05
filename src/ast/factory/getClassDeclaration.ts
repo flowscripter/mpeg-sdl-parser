@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -18,10 +18,10 @@ import type ExpandableModifier from "../node/ExpandableModifier";
 import type AlignedModifier from "../node/AlignedModifier";
 
 export function getClassDeclaration(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ClassDeclaration {
-  assertSyntaxNodeType(syntaxNode, "ClassDeclaration");
+  assertSyntaxNodeType(cursor, "ClassDeclaration");
 
   let alignedModifier: AlignedModifier | undefined;
   let expandableModifier: ExpandableModifier | undefined;
@@ -35,7 +35,7 @@ export function getClassDeclaration(
   let openBracePunctuator: Token | undefined;
   let closeBracePunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

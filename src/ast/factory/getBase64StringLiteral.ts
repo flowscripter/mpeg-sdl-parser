@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -18,9 +18,9 @@ export function getBase64StringLiteral(
   cursor: TreeCursor,
   text: Text,
 ): StringLiteral {
-  assertSyntaxNodeType(syntaxNode, "Base64StringLiteral");
+  assertSyntaxNodeType(cursor, "Base64StringLiteral");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals: Token[] = [];
   let value = "";
@@ -34,7 +34,7 @@ export function getBase64StringLiteral(
       const tokenText = childNodeOrToken.text;
 
       if (tokenText !== '"') {
-        value += tokenText, syntaxNode;
+        value += tokenText;
       }
       literals.push(childNodeOrToken);
     }

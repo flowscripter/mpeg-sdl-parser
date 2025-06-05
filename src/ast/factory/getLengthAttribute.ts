@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -14,12 +14,12 @@ import LengthAttribute from "../node/LengthAttribute";
 import type NumberLiteral from "../node/NumberLiteral";
 
 export function getLengthAttribute(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): LengthAttribute {
-  assertSyntaxNodeType(syntaxNode, "LengthAttribute");
+  assertSyntaxNodeType(cursor, "LengthAttribute");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let length: AbstractExpression | Identifier | NumberLiteral | undefined;
   let openParenthesisPunctuator: Token | undefined;

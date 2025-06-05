@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -13,10 +13,10 @@ import ClassDefinition from "../node/ClassDefinition";
 import type ParameterValueList from "../node/ParameterValueList";
 
 export function getClassDefinition(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ClassDefinition {
-  assertSyntaxNodeType(syntaxNode, "ClassDefinition");
+  assertSyntaxNodeType(cursor, "ClassDefinition");
 
   let legacyKeyword: Token | undefined;
   let classIdentifier: Identifier | undefined;
@@ -24,7 +24,7 @@ export function getClassDefinition(
   let parameterValueList: ParameterValueList | undefined;
   let semicolonPunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

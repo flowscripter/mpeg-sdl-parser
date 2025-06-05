@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,12 +12,12 @@ import type NumberLiteral from "../node/NumberLiteral";
 import ExpandableModifier from "../node/ExpandableModifier";
 
 export function getExpandableModifier(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ExpandableModifier {
-  assertSyntaxNodeType(syntaxNode, "ExpandableModifier");
+  assertSyntaxNodeType(cursor, "ExpandableModifier");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let maxClassSize: NumberLiteral | undefined;
   let expandableKeyword: Token | undefined;

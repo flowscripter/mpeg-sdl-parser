@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -16,12 +16,12 @@ import CompoundStatement from "../node/CompoundStatement";
 import { StatementKind } from "../node/enum/statement_kind";
 
 export function getForStatement(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ForStatement {
-  assertSyntaxNodeType(syntaxNode, "ForStatement");
+  assertSyntaxNodeType(cursor, "ForStatement");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let expression1: AbstractExpression | undefined;
   let computedElementaryTypeDefinition:

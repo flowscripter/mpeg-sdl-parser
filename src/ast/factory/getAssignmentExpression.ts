@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -18,9 +18,9 @@ export function getAssignmentExpression(
   cursor: TreeCursor,
   text: Text,
 ): BinaryExpression {
-  assertSyntaxNodeType(syntaxNode, "AssignmentExpression");
+  assertSyntaxNodeType(cursor, "AssignmentExpression");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let leftOperand: AbstractExpression | Identifier | NumberLiteral | undefined;
   let binaryOperatorKind: BinaryOperatorKind | undefined;

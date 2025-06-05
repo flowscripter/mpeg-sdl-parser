@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -18,12 +18,12 @@ import ArrayElementAccess from "../node/ArrayElementAccess";
 import type ClassMemberAccess from "../node/ClassMemberAccess";
 
 export function getUnaryExpression(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): AbstractExpression | Identifier | NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "UnaryExpression");
+  assertSyntaxNodeType(cursor, "UnaryExpression");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let unaryOperatorKind: UnaryOperatorKind | undefined;
   let operand: AbstractExpression | Identifier | NumberLiteral | undefined;

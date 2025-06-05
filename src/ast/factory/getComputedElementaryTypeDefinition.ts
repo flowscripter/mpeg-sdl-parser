@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -15,12 +15,12 @@ import type Token from "../token/Token";
 import type NumberLiteral from "../node/NumberLiteral";
 
 export function getComputedElementaryTypeDefinition(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ComputedElementaryTypeDefinition {
-  assertSyntaxNodeType(syntaxNode, "ComputedElementaryTypeDefinition");
+  assertSyntaxNodeType(cursor, "ComputedElementaryTypeDefinition");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let constKeyword: Token | undefined;
   let computedKeyword: Token | undefined;
@@ -89,7 +89,7 @@ export function getComputedElementaryTypeDefinition(
       "Expected argument computedKeyword to be defined",
     );
   }
-  
+
   if (semicolonPunctuator === undefined) {
     throw new InternalParseError(
       "Expected argument semicolonPunctuator to be defined",

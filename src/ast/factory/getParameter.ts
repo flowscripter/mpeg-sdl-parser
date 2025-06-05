@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,12 +12,12 @@ import Parameter from "../node/Parameter";
 import type Identifier from "../node/Identifier";
 
 export function getParameter(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): Parameter {
-  assertSyntaxNodeType(syntaxNode, "Parameter");
+  assertSyntaxNodeType(cursor, "Parameter");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let classIdentifier: Identifier | undefined;
   let elementaryType: ElementaryType | undefined;

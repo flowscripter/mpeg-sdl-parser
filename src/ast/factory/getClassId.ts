@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import {
   assertSyntaxNodeType,
   getChildNodesAndTokens,
@@ -11,12 +11,12 @@ import { NodeKind } from "../node/enum/node_kind";
 import ClassId from "../node/ClassId";
 
 export function getClassId(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ClassId {
-  assertSyntaxNodeType(syntaxNode, "ClassId");
+  assertSyntaxNodeType(cursor, "ClassId");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let value: NumberLiteral | undefined;
 

@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -13,12 +13,12 @@ import type Token from "../token/Token";
 import LengthofExpression from "../node/LengthofExpression";
 
 export function getLengthofExpression(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): LengthofExpression {
-  assertSyntaxNodeType(syntaxNode, "LengthofExpression");
+  assertSyntaxNodeType(cursor, "LengthofExpression");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let operand: AbstractExpression | Identifier | undefined;
   let lengthOfKeyword: Token | undefined;

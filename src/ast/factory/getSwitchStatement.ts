@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -16,12 +16,12 @@ import CaseClause from "../node/CaseClause";
 import DefaultClause from "../node/DefaultClause";
 
 export function getSwitchStatement(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): SwitchStatement {
-  assertSyntaxNodeType(syntaxNode, "SwitchStatement");
+  assertSyntaxNodeType(cursor, "SwitchStatement");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let expression: AbstractExpression | NumberLiteral | Identifier | undefined;
   const caseClauses: CaseClause[] = [];

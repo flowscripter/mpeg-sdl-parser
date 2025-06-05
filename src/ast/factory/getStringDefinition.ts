@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -15,10 +15,10 @@ import AlignedModifier from "../node/AlignedModifier";
 import { StringVariableKind } from "../node/enum/string_variable_kind";
 
 export function getStringDefinition(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): StringDefinition {
-  assertSyntaxNodeType(syntaxNode, "StringDefinition");
+  assertSyntaxNodeType(cursor, "StringDefinition");
 
   let alignedModifier: AlignedModifier | undefined;
   let stringVariableKind: StringVariableKind | undefined;
@@ -31,7 +31,7 @@ export function getStringDefinition(
   let assignmentPunctuator: Token | undefined;
   let semicolonPunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -14,10 +14,10 @@ import type AbstractExpression from "../node/AbstractExpression";
 import type NumberLiteral from "../node/NumberLiteral";
 
 export function getImplicitArrayDimension(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ImplicitArrayDimension {
-  assertSyntaxNodeType(syntaxNode, "ImplicitArrayDimension");
+  assertSyntaxNodeType(cursor, "ImplicitArrayDimension");
 
   let rangeStart: AbstractExpression | Identifier | NumberLiteral | undefined;
   let rangeEnd: AbstractExpression | Identifier | NumberLiteral | undefined;
@@ -25,7 +25,7 @@ export function getImplicitArrayDimension(
   let rangeOperator: Token | undefined;
   let closeBracketPunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

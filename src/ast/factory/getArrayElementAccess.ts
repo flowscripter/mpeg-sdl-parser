@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -17,9 +17,9 @@ export function getArrayElementAccess(
   cursor: TreeCursor,
   text: Text,
 ): ArrayElementAccess {
-  assertSyntaxNodeType(syntaxNode, "ArrayElementAccess");
+  assertSyntaxNodeType(cursor, "ArrayElementAccess");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let index: AbstractExpression | Identifier | NumberLiteral | undefined;
   let openBracketPunctuator: Token | undefined;

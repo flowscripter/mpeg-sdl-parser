@@ -1,9 +1,6 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
-import {
-  assertSyntaxNodeType,
-  getTokenFromSyntaxNode,
-} from "../../util/nodeFactoryUtils";
+import type { TreeCursor } from "@lezer/common";
+import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
 import NumberLiteral from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 import { InternalParseError } from "../../ParseError";
@@ -15,22 +12,22 @@ export function getBinaryLiteral(
   cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "BinaryLiteral");
+  assertSyntaxNodeType(cursor, "BinaryLiteral");
 
-  const literal = getTokenFromSyntaxNode(syntaxNode, text);
+  const literal = getToken(cursor, text);
   const literalText = literal.text;
 
   if (!literalText.startsWith("0b")) {
     throw new InternalParseError(
       `Missing binary literal prefix '0b': ${literalText}`,
-      getLocationFromTextPosition(text, syntaxNode.from),
+      getLocationFromTextPosition(text, cursor.from),
     );
   }
 
   if (literalText.length === 2) {
     throw new InternalParseError(
       `Missing binary literal value after prefix '0b'`,
-      getLocationFromTextPosition(text, syntaxNode.from),
+      getLocationFromTextPosition(text, cursor.from),
     );
   }
 

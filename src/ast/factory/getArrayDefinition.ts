@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -23,7 +23,7 @@ export function getArrayDefinition(
   cursor: TreeCursor,
   text: Text,
 ): ArrayDefinition {
-  assertSyntaxNodeType(syntaxNode, "ArrayDefinition");
+  assertSyntaxNodeType(cursor, "ArrayDefinition");
 
   let legacyKeyword: Token | undefined;
   let alignedModifier: AlignedModifier | undefined;
@@ -38,7 +38,7 @@ export function getArrayDefinition(
   let reservedKeyword: Token | undefined;
   let semicolonPunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

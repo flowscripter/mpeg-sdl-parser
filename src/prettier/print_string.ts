@@ -61,7 +61,7 @@ export function printStringLiteral(
   let containsContent = false;
 
   for (const literal of stringLiteral.literals) {
-    if (literal.text === "\"") {
+    if (literal.text === '"') {
       if (!opened) {
         currentLiteral.push(...getDocWithTrivia(literal));
         opened = true;

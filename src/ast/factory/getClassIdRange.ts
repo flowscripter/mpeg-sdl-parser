@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import {
   assertSyntaxNodeType,
   getChildNodesAndTokens,
@@ -12,12 +12,12 @@ import ClassIdRange from "../node/ClassIdRange";
 import type Token from "../token/Token";
 
 export function getClassIdRange(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ClassIdRange {
-  assertSyntaxNodeType(syntaxNode, "ClassIdRange");
+  assertSyntaxNodeType(cursor, "ClassIdRange");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let startClassId: SingleClassId | undefined;
   let endClassId: SingleClassId | undefined;

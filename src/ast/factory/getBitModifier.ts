@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -14,12 +14,12 @@ import type Identifier from "../node/Identifier";
 import type AbstractClassId from "../node/AbstractClassId";
 
 export function getBitModifier(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): BitModifier {
-  assertSyntaxNodeType(syntaxNode, "BitModifier");
+  assertSyntaxNodeType(cursor, "BitModifier");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let length: NumberLiteral | undefined;
   let identifier: Identifier | undefined;

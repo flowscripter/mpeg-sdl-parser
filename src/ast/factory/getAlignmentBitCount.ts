@@ -1,10 +1,7 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
-import {
-  assertSyntaxNodeType,
-  getTokenFromSyntaxNode,
-} from "../../util/nodeFactoryUtils";
+import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
 import NumberLiteral from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 
@@ -12,9 +9,9 @@ export function getAlignmentBitCount(
   cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "AlignmentBitCount");
+  assertSyntaxNodeType(cursor, "AlignmentBitCount");
 
-  const literal = getTokenFromSyntaxNode(syntaxNode, text);
+  const literal = getToken(cursor, text);
   const literalText = literal.text;
   const value = parseInt(literalText, 10);
 

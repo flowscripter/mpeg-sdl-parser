@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -17,12 +17,12 @@ import type LengthAttribute from "../node/LengthAttribute";
 import type NumberLiteral from "../node/NumberLiteral";
 
 export function getElementaryTypeDefinition(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ElementaryTypeDefinition {
-  assertSyntaxNodeType(syntaxNode, "ElementaryTypeDefinition");
+  assertSyntaxNodeType(cursor, "ElementaryTypeDefinition");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let reservedKeyword: Token | undefined;
   let legacyKeyword: Token | undefined;
@@ -121,6 +121,7 @@ export function getElementaryTypeDefinition(
   if (semicolonPunctuator === undefined) {
     throw new InternalParseError("Expected semicolonPunctuator to be defined");
   }
+
   return new ElementaryTypeDefinition(
     reservedKeyword !== undefined,
     legacyKeyword !== undefined,

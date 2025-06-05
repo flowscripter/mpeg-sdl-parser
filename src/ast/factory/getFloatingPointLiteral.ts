@@ -1,19 +1,16 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
-import {
-  assertSyntaxNodeType,
-  getTokenFromSyntaxNode,
-} from "../../util/nodeFactoryUtils";
+import type { TreeCursor } from "@lezer/common";
+import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
 import NumberLiteral from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 
 export function getFloatingPointLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "FloatingPointLiteral");
+  assertSyntaxNodeType(cursor, "FloatingPointLiteral");
 
-  const literal = getTokenFromSyntaxNode(syntaxNode, text);
+  const literal = getToken(cursor, text);
   const literalText = literal.text;
   const value = parseFloat(literalText);
 

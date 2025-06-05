@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -14,10 +14,10 @@ import type ElementaryType from "../node/ElementaryType";
 import type MapEntry from "../node/MapEntry";
 
 export function getMapDeclaration(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): MapDeclaration {
-  assertSyntaxNodeType(syntaxNode, "MapDeclaration");
+  assertSyntaxNodeType(cursor, "MapDeclaration");
 
   let identifier: Identifier | undefined;
   let outputElementaryType: ElementaryType | undefined;
@@ -30,7 +30,7 @@ export function getMapDeclaration(
   let commaPunctuators: Token[] | undefined;
   let closeBracePunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

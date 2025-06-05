@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -13,12 +13,12 @@ import CaseClause from "../node/CaseClause";
 import type AbstractStatement from "../node/AbstractStatement";
 
 export function getCaseClause(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): CaseClause {
-  assertSyntaxNodeType(syntaxNode, "CaseClause");
+  assertSyntaxNodeType(cursor, "CaseClause");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let value: NumberLiteral | undefined;
   const statements: AbstractStatement[] = [];

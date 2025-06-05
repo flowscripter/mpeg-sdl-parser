@@ -44,15 +44,15 @@ function printCompoundStatement(
   const node = path.node;
 
   const elements: Doc = [
-    getDocWithTrivia(node.openBracePunctuator)
+    getDocWithTrivia(node.openBracePunctuator),
   ];
 
   if (node.statements.length > 0) {
     elements.push(
-    indent([
-      hardline,
-      join(hardline, path.map(print, "statements")),
-    ]),
+      indent([
+        hardline,
+        join(hardline, path.map(print, "statements")),
+      ]),
     );
   }
   elements.push(hardline);

@@ -7,7 +7,7 @@ class transport_packet {
   bit(1) payload_unit_start_indicator;
   bit(1) transport_priority;
   unsigned int(13) // odd but valid comment position
-  PID;
+   PID;
   bit(2)* transport_scrambling_control;
   aligned(16) bit(2) adaptation_field_control = 0x0000.0000;
   computed unsigned int N = 184;
@@ -17,8 +17,8 @@ class transport_packet {
   computed int dummy1 = 'ABCD' '01AB';
   computed int dummy2 = lengthof(transport_scrambling_control) + N++;
   if (adaptation_field_control == 0b10 || adaptation_field_control == 0b11) {
-    adaptation_field data;
-    // previously declared class
+    adaptation_field data; // previously declared class
+
     // N is 184 minus the number of bytes in the adaptation_field
     N = N - // and another
     1 // and another odd comment

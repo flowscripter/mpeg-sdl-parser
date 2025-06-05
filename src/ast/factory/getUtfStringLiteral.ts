@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -19,7 +19,7 @@ const EIGHT_HEXADECIMAL_UNIVERSAL_CHARACTER_NAME_REGEX = /\\U[0-9A-F]{8}/g;
 
 function getStringValueFromLiteralText(
   literalText: string,
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): string {
   let value = literalText.replaceAll(ESCAPED_DOUBLE_QUOTE_REGEX, "'")
@@ -31,7 +31,7 @@ function getStringValueFromLiteralText(
       if (!match.startsWith("\\u")) {
         throw new InternalParseError(
           `Missing prefix "\\u" in universal character name: ${match}`,
-          getLocationFromTextPosition(text, syntaxNode.from),
+          getLocationFromTextPosition(text, cursor.from),
         );
       }
 
@@ -40,7 +40,7 @@ function getStringValueFromLiteralText(
       if (isNaN(codePoint)) {
         throw new InternalParseError(
           `Unable to convert universal character name: ${codePoint} to code point number`,
-          getLocationFromTextPosition(text, syntaxNode.from),
+          getLocationFromTextPosition(text, cursor.from),
         );
       }
 
@@ -54,7 +54,7 @@ function getStringValueFromLiteralText(
       if (!match.startsWith("\\U")) {
         throw new InternalParseError(
           `Missing prefix "\\U" in universal character name: ${match}`,
-          getLocationFromTextPosition(text, syntaxNode.from),
+          getLocationFromTextPosition(text, cursor.from),
         );
       }
 
@@ -63,7 +63,7 @@ function getStringValueFromLiteralText(
       if (isNaN(codePoint)) {
         throw new InternalParseError(
           `Unable to convert universal character name: ${match} to code point number`,
-          getLocationFromTextPosition(text, syntaxNode.from),
+          getLocationFromTextPosition(text, cursor.from),
         );
       }
 
@@ -75,12 +75,12 @@ function getStringValueFromLiteralText(
 }
 
 export function getUtfStringLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): StringLiteral {
-  assertSyntaxNodeType(syntaxNode, "UtfStringLiteral");
+  assertSyntaxNodeType(cursor, "UtfStringLiteral");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals: Token[] = [];
   let value = "";
@@ -95,7 +95,7 @@ export function getUtfStringLiteral(
       const tokenText = childNodeOrToken.text;
 
       if ((tokenText !== '"') && (tokenText !== "u")) {
-        value += getStringValueFromLiteralText(tokenText, syntaxNode, text);
+        value += getStringValueFromLiteralText(tokenText, cursor, text);
       } else if ((tokenText === "u") && literalOpened) {
         value += tokenText;
       } else if (tokenText === '"') {

@@ -1,18 +1,15 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
-import {
-  assertSyntaxNodeType,
-  getTokenFromSyntaxNode,
-} from "../../util/nodeFactoryUtils";
+import type { TreeCursor } from "@lezer/common";
+import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
 import Identifier from "../node/Identifier";
 
 export function getIdentifier(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): Identifier {
-  assertSyntaxNodeType(syntaxNode, "Identifier");
+  assertSyntaxNodeType(cursor, "Identifier");
 
-  const literal = getTokenFromSyntaxNode(syntaxNode, text);
+  const literal = getToken(cursor, text);
 
   return new Identifier(literal.text, literal);
 }

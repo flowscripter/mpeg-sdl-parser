@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -14,12 +14,12 @@ import type NumberLiteral from "../node/NumberLiteral";
 import ExpressionStatement from "../node/ExpressionStatement";
 
 export function getExpressionStatement(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ExpressionStatement {
-  assertSyntaxNodeType(syntaxNode, "ExpressionStatement");
+  assertSyntaxNodeType(cursor, "ExpressionStatement");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let expression: AbstractExpression | Identifier | NumberLiteral | undefined;
   let semicolonPunctuator: Token | undefined;

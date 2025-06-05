@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode, TreeCursor } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -16,7 +16,7 @@ export function getAggregateOutputValue(
   cursor: TreeCursor,
   text: Text,
 ): AggregateOutputValue {
-  assertSyntaxNodeType(syntaxNode, "AggregateOutputValue");
+  assertSyntaxNodeType(cursor, "AggregateOutputValue");
 
   const outputValues:
     (AggregateOutputValue | NumberLiteral | ElementaryTypeOutputValue)[] = [];
@@ -24,7 +24,7 @@ export function getAggregateOutputValue(
   let commaPunctuators: Token[] | undefined;
   let closeBracePunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       switch (childNodeOrToken.nodeKind) {

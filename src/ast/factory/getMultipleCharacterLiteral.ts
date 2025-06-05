@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import {
   assertSyntaxNodeType,
   getChildNodesAndTokens,
@@ -39,12 +39,12 @@ function parseUnsignedIntFromMultipleCharacterLiteral(literal: string): number {
 }
 
 export function getMultipleCharacterLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "MultipleCharacterLiteral");
+  assertSyntaxNodeType(cursor, "MultipleCharacterLiteral");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals = [];
   let literalText = "";

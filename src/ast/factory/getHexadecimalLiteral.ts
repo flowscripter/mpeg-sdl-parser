@@ -1,9 +1,6 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
-import {
-  assertSyntaxNodeType,
-  getTokenFromSyntaxNode,
-} from "../../util/nodeFactoryUtils";
+import type { TreeCursor } from "@lezer/common";
+import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
 import NumberLiteral from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 import { InternalParseError } from "../../ParseError";
@@ -12,25 +9,25 @@ import { getLocationFromTextPosition } from "../../util/locationUtils";
 const DOT_SEPARATOR_REGEX = /\./g;
 
 export function getHexadecimalLiteral(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(syntaxNode, "HexadecimalLiteral");
+  assertSyntaxNodeType(cursor, "HexadecimalLiteral");
 
-  const literal = getTokenFromSyntaxNode(syntaxNode, text);
+  const literal = getToken(cursor, text);
   const literalText = literal.text;
 
   if (!literalText.startsWith("0x")) {
     throw new InternalParseError(
       `Missing hexadecimal literal prefix '0x': ${literalText}`,
-      getLocationFromTextPosition(text, syntaxNode.from),
+      getLocationFromTextPosition(text, cursor.from),
     );
   }
 
   if (literalText.length === 2) {
     throw new InternalParseError(
       `Missing hexadecimal literal value after prefix '0x'`,
-      getLocationFromTextPosition(text, syntaxNode.from),
+      getLocationFromTextPosition(text, cursor.from),
     );
   }
 

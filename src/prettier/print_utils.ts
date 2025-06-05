@@ -80,7 +80,7 @@ export function getDocWithTrivia(
   );
   const trailingTriviaDoc = getTrailingTriviaDoc(token);
 
-  const doc = []
+  const doc = [];
   if (leadingTriviaDoc.length > 0) {
     doc.push(leadingTriviaDoc);
   }

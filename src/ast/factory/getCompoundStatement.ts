@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,12 +12,12 @@ import CompoundStatement from "../node/CompoundStatement";
 import type AbstractStatement from "../node/AbstractStatement";
 
 export function getCompoundStatement(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): CompoundStatement {
-  assertSyntaxNodeType(syntaxNode, "CompoundStatement");
+  assertSyntaxNodeType(cursor, "CompoundStatement");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const statements: AbstractStatement[] = [];
   let openBracePunctuator: Token | undefined;

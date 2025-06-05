@@ -1,5 +1,4 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -11,14 +10,15 @@ import type Token from "../token/Token";
 import ExtendsModifier from "../node/ExtendsModifier";
 import type Identifier from "../node/Identifier";
 import type ParameterValueList from "../node/ParameterValueList";
+import type { TreeCursor } from "@lezer/common";
 
 export function getExtendsModifier(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ExtendsModifier {
-  assertSyntaxNodeType(syntaxNode, "ExtendsModifier");
+  assertSyntaxNodeType(cursor, "ExtendsModifier");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let identifier: Identifier | undefined;
   let parameterValueList: ParameterValueList | undefined;

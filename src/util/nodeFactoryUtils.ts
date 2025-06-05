@@ -1,13 +1,11 @@
 import { Text } from "@codemirror/state";
-import { type SyntaxNode } from "@lezer/common";
+import { TreeCursor } from "@lezer/common";
 import type Token from "../ast/token/Token";
 import type AbstractNode from "../ast/node/AbstractNode";
 import NodeFactory from "../ast/factory/NodeFactory";
 import type Trivia from "../ast/token/Trivia";
 import { createSyntacticParseError, InternalParseError } from "../ParseError";
 import { getLocationFromTextPosition } from "./locationUtils";
-import { NodeKind } from "../ast/node/enum/node_kind";
-import type Identifier from "../ast/node/Identifier";
 
 const primitiveNodeTypes = new Set([
   "AlignmentBitCount",
@@ -16,90 +14,92 @@ const primitiveNodeTypes = new Set([
   "FloatingPointLiteral",
   "HexadecimalLiteral",
   "Identifier",
-  "IntegerLiteral"
+  "IntegerLiteral",
 ]);
 
 export function assertSyntaxNodeType(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   expectedType: string,
 ): void {
-  if (syntaxNode.type.name !== expectedType) {
+  if (cursor.node.type.name !== expectedType) {
     throw new InternalParseError(
-      `Expected node to be of type ${expectedType}, it was: ${syntaxNode.type.name}`,
+      `Expected node to be of type ${expectedType}, it was: ${cursor.node.type.name}`,
     );
   }
 }
 
-function getTriviaFromSyntaxNode(syntaxNode: SyntaxNode, text: Text): Trivia {
-  assertSyntaxNodeType(syntaxNode, "Comment");
+function getCommentTrivia(cursor: TreeCursor, text: Text): Trivia {
+  assertSyntaxNodeType(cursor, "Comment");
 
   return {
-    text: text.sliceString(syntaxNode.from, syntaxNode.to),
-    location: getLocationFromTextPosition(text, syntaxNode.from),
+    text: text.sliceString(cursor.from, cursor.to),
+    location: getLocationFromTextPosition(text, cursor.from),
   };
 }
 
-export function getTokenFromSyntaxNode(
-  syntaxNode: SyntaxNode,
+export function getToken(
+  cursor: TreeCursor,
   text: Text,
 ): Token {
   return {
-    text: text.sliceString(syntaxNode.from, syntaxNode.to),
-    location: getLocationFromTextPosition(text, syntaxNode.from),
+    text: text.sliceString(cursor.from, cursor.to),
+    location: getLocationFromTextPosition(text, cursor.from),
     leadingTrivia: [],
     trailingTrivia: [],
   };
 }
 
 export function getChildNodesAndTokens(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): (AbstractNode | Token)[] {
   const childNodesAndTokens = [];
-  let child = syntaxNode.firstChild;
-
+  let childExists = cursor.firstChild();
   let trivia = [];
-  let foundData = false;
-  while (child) {
-    if (child.type.isError) {
-      throw createSyntacticParseError(text, child.from);
+
+  while (childExists) {
+    if (cursor.type.isError) {
+      throw createSyntacticParseError(text, cursor.from);
     }
 
     // Skip whitespace
-    if (child.type.name === "Whitespace") {
-      child = child.nextSibling;
+    if (cursor.type.name === "Whitespace") {
+      childExists = cursor.nextSibling();
       continue;
     }
 
     // Save comments to set as leading or trailing trivia
-    if (child.type.name === "Comment") {
-      trivia.push(getTriviaFromSyntaxNode(child, text));
-      child = child.nextSibling;
+    if (cursor.type.name === "Comment") {
+      trivia.push(getCommentTrivia(cursor, text));
+      childExists = cursor.nextSibling();
       continue;
     }
 
     let childNode: AbstractNode | Token;
 
-    // Check if SyntaxNode is a terminal token AND not a primitive node
-    if (
-      (child.firstChild === null) && (!primitiveNodeTypes.has(child.type.name))
-    ) {
-      // If it is a terminal token, create a Token from the SyntaxNode
-      childNode = getTokenFromSyntaxNode(child, text);
-      if (foundData) {
-        console.error('found token ' + childNode.text);
-      }
+    // Check if current sytax node is a terminal token and if so also check it is not a primitive node type
+    const isTerminal = !cursor.firstChild();
+    let isToken = false;
+
+    if (isTerminal) {
+      isToken = !primitiveNodeTypes.has(cursor.type.name);
+    } else {
+      // return to parent
+      cursor.parent();
+    }
+
+    // If it is a terminal token, create a Token from the syntax node
+    if (isTerminal && isToken) {
+      childNode = getToken(cursor, text);
+
       if (trivia.length > 0) {
         childNode.leadingTrivia = trivia;
         trivia = [];
       }
-    } // Otherwise create an AbstractNode from the SyntaxNode
+    } // Otherwise create an AST node from the syntax node
     else {
-      childNode = NodeFactory.createNode(child, text);
-      if ((childNode.nodeKind === NodeKind.IDENTIFIER) && ((childNode as Identifier).name === "data")) {
-        console.error('found data identifier ' + (childNode as Identifier).name);
-        foundData = true;
-      }
+      childNode = NodeFactory.createNode(cursor, text);
+
       if (trivia.length > 0) {
         childNode.startToken.leadingTrivia = trivia;
         trivia = [];
@@ -108,51 +108,40 @@ export function getChildNodesAndTokens(
 
     childNodesAndTokens.push(childNode);
 
-    child = child.nextSibling;
-    if (foundData) {
-    if (!child) {
-      console.error('out');
-    }
-    else {
-            console.error('not out');
-
-    }
-
-    }
+    childExists = cursor.nextSibling();
   }
+
+  // return to parent
+  cursor.parent();
 
   // Now look for any trailing comment which might be a sibling to the provided syntaxNode
   // Look for sibling nodes that are comments or whitespace and set them as trailing trivia
   // until a non-comment or non-whitespace node is found and only while any whitespace nodes
   // do not include a newline character.
-  let sibling = syntaxNode.nextSibling;
-  let currentNode = syntaxNode;
-  while (sibling) {
-    if (sibling.type.name === "Comment") {
-      const comment =  getTriviaFromSyntaxNode(sibling, text);
-      if (foundData) {
-        console.error('found comment ' + comment.text);
-      }
-      // trivia.push(comment);
-    } else if (sibling.type.name === "Whitespace") {
-      // Only include whitespace if it doesn't contain a newline
-      const whitespace = text.sliceString(sibling.from, sibling.to);
-      if (foundData) {
-        console.error('found whitespace ' + whitespace);
-      }
+  let hasSibling = cursor.nextSibling();
+
+  while (hasSibling) {
+    if (cursor.type.name === "Comment") {
+      trivia.push(getCommentTrivia(cursor, text));
+    } 
+    else if (cursor.type.name === "Whitespace") {
+      // Only continute while whitespace doesn't contain a newline
+      const whitespace = text.sliceString(cursor.from, cursor.to);
+
       if (whitespace.includes("\n")) {
-        console.error('found newline in whitespace x' + whitespace + 'x');
-        break; // Stop if we encounter a newline in whitespace
+        // Stop if we encounter a newline in whitespace
+        cursor.prevSibling();
+        break; 
       }
-    } else {
+    } 
+    else {
       // Stop at the first non-comment, non-whitespace node
+      cursor.prevSibling();
       break;
     }
-    currentNode = sibling;
-    sibling = sibling.nextSibling;
-  }
 
-  // syntaxNode = currentNode;
+    hasSibling = cursor.nextSibling();
+  }
 
   // If there are remaining trivia, set them as trailing trivia on the last token
   if (trivia.length > 0) {

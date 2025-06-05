@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,12 +12,12 @@ import ElementaryTypeOutputValue from "../node/ElementaryTypeOutputValue";
 import LengthAttribute from "../node/LengthAttribute";
 
 export function getElementaryTypeOutputValue(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ElementaryTypeOutputValue {
-  assertSyntaxNodeType(syntaxNode, "ElementaryTypeOutputValue");
+  assertSyntaxNodeType(cursor, "ElementaryTypeOutputValue");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let elementaryType: ElementaryType | undefined;
   let lengthAttribute: LengthAttribute | undefined;

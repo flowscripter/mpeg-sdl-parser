@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,17 +12,17 @@ import ParameterList from "../node/ParameterList";
 import type Parameter from "../node/Parameter";
 
 export function getParameterList(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ParameterList {
-  assertSyntaxNodeType(syntaxNode, "ParameterList");
+  assertSyntaxNodeType(cursor, "ParameterList");
 
   const parameters: Parameter[] = [];
   let openParenthesisPunctuator: Token | undefined;
   let commaPunctuators: Token[] | undefined;
   let closeParenthesisPunctuator: Token | undefined;
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       if (childNodeOrToken.nodeKind === NodeKind.PARAMETER) {

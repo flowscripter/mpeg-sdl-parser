@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -12,12 +12,12 @@ import type AbstractStatement from "../node/AbstractStatement";
 import DefaultClause from "../node/DefaultClause";
 
 export function getDefaultClause(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): DefaultClause {
-  assertSyntaxNodeType(syntaxNode, "DefaultClause");
+  assertSyntaxNodeType(cursor, "DefaultClause");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const statements: AbstractStatement[] = [];
   let defaultKeyword: Token | undefined;

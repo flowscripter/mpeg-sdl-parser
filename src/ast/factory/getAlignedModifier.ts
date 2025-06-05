@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -15,9 +15,9 @@ export function getAlignedModifier(
   cursor: TreeCursor,
   text: Text,
 ): AlignedModifier {
-  assertSyntaxNodeType(syntaxNode, "AlignedModifier");
+  assertSyntaxNodeType(cursor, "AlignedModifier");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let bitCount: number | undefined;
   let bitCountModifier: NumberLiteral | undefined;

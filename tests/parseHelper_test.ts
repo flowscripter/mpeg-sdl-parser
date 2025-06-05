@@ -66,7 +66,7 @@ describe("Parse Helper Tests", () => {
     const specification = buildAst(parseTree, sdlStringInput);
 
     const prettifiedSdlString = await prettyPrint(specification, sdlString);
-console.error(prettifiedSdlString);
+    console.error(prettifiedSdlString);
     expect(
       prettifiedSdlString,
     ).toEqual(

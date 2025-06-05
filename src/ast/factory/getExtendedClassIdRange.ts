@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import {
   assertSyntaxNodeType,
   getChildNodesAndTokens,
@@ -15,12 +15,12 @@ import type AbstractClassId from "../node/AbstractClassId";
 import { ClassIdKind } from "../node/enum/class_id_kind";
 
 export function getExtendedClassIdRange(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): ExtendedClassIdRange {
-  assertSyntaxNodeType(syntaxNode, "ExtendedClassIdRange");
+  assertSyntaxNodeType(cursor, "ExtendedClassIdRange");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   const classIds: (SingleClassId | ClassIdRange)[] = [];
   const commaPunctuators: Token[] = [];
 

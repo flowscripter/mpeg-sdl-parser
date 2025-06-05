@@ -41,17 +41,17 @@ export function printIfStatement(
         path.call(
           print,
           "elseStatement" as keyof IfStatement["elseStatement"],
-        )
+        ),
       );
     } else if (elseSubStatement.statementKind !== StatementKind.COMPOUND) {
       elements.push(indent(
-        [          
+        [
           hardline,
           path.call(
             print,
             "elseStatement" as keyof IfStatement["elseStatement"],
-          )
-        ]
+          ),
+        ],
       ));
     } else {
       elements.push(

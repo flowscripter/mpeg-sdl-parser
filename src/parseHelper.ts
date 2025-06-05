@@ -67,7 +67,7 @@ export function collateParseErrors(
  */
 export function prettyPrint(
   specification: Specification,
-  sdlString: string
+  sdlString: string,
 ): Promise<string> {
   // Pass an empty string to the format function as the plugin provided already
   // has a reference to the pre-parsed AST.

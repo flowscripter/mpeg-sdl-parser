@@ -1,5 +1,5 @@
 import { Text } from "@codemirror/state";
-import type { SyntaxNode } from "@lezer/common";
+import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
   assertSyntaxNodeType,
@@ -15,12 +15,12 @@ import type NumberLiteral from "../node/NumberLiteral";
 import type Identifier from "../node/Identifier";
 
 export function getIfStatement(
-  syntaxNode: SyntaxNode,
+  cursor: TreeCursor,
   text: Text,
 ): IfStatement {
-  assertSyntaxNodeType(syntaxNode, "IfStatement");
+  assertSyntaxNodeType(cursor, "IfStatement");
 
-  const childNodesAndTokens = getChildNodesAndTokens(syntaxNode, text);
+  const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let condition: AbstractExpression | NumberLiteral | Identifier | undefined;
   let ifStatement: AbstractStatement | undefined;
