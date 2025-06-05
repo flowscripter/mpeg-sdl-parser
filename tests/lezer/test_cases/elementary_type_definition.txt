@@ -1,0 +1,158 @@
+# Simple
+
+class A{int(3) a;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        OpenBrace
+        ElementaryTypeDefinition(
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Legacy, const, aligned, lookahead value range
+
+class A{legacy const aligned(8) unsigned int(7)* a=3..i;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        OpenBrace
+        ElementaryTypeDefinition(
+            legacy
+            Whitespace
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+                OpenParenthesis
+                AlignmentBitCount
+                CloseParenthesis
+            )
+            Whitespace
+            ElementaryType(
+                unsigned
+                Whitespace
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            LookAhead
+            Whitespace
+            Identifier
+            Assignment
+            UnaryExpression(
+                IntegerLiteral
+            )
+            RangeOperator
+            UnaryExpression(
+                Identifier
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Default aligned
+
+class A {aligned int(2) a;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ElementaryTypeDefinition(
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Explicit aligned bit count
+
+class A {aligned(16) int(2) a;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ElementaryTypeDefinition(
+            AlignedModifier(
+                aligned
+                OpenParenthesis
+                AlignmentBitCount
+                CloseParenthesis
+            )
+            Whitespace
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)

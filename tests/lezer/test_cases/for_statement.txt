@@ -1,0 +1,183 @@
+# First expression is expression
+
+class A {for (i=1;i<9;i++) {j++;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ForStatement(
+            for
+            Whitespace
+            OpenParenthesis
+            AssignmentExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                Assignment
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                PostfixIncrement
+            )
+            CloseParenthesis
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)
+
+# First expression is computed elementary type definition
+
+class A {for (computed int i=1;i<9;i++) {j++;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ForStatement(
+            for
+            Whitespace
+            OpenParenthesis
+            ComputedElementaryTypeDefinition(
+                computed
+                Whitespace
+                ElementaryType(
+                    int
+                )
+                Whitespace
+                Identifier
+                Assignment
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                Semicolon
+            )
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                PostfixIncrement
+            )
+            CloseParenthesis
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)
+
+# First expression is empty
+
+class A {for (;i<9;i++) {j++;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ForStatement(
+            for
+            Whitespace
+            OpenParenthesis
+            Semicolon
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            Semicolon
+            UnaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                PostfixIncrement
+            )
+            CloseParenthesis
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)

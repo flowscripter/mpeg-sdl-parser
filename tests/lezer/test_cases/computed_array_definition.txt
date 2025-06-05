@@ -1,0 +1,33 @@
+# Simple
+
+class A {computed int a[3];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ComputedArrayDefinition(
+            computed
+            Whitespace
+            ElementaryType(
+                int
+            )
+            Whitespace
+            Identifier
+            ExplicitArrayDimension(
+                OpenBracket
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseBracket
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)

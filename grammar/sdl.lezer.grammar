@@ -1,0 +1,609 @@
+// Syntactic description language in Lezer syntax: https://lezer.codemirror.net
+// References are either to sub-clauses or rules appearing in 14496-34
+
+
+// Lezer terminal tokens
+
+@tokens {
+
+  Whitespace { @whitespace+ }
+
+
+  // 5.1 Character set
+
+  non_zero_digit_character { $[1-9] }
+  digit_character { "0" | non_zero_digit_character }
+  latin_character { $[a-zA-Z] }
+
+  // Lezer only supports up to \uFFFF and not \u10FFFF
+  // Not including \ or "
+  sdl_compatible_ucs_character { $[\u0020-\u0021\u0023-\u005B\u005D-\u0084\u0086-\u2027\u202A-\uFEFE\uFF00-\uFFFF] }
+  escaped_sdl_compatible_ucs_character { sdl_compatible_ucs_character | "\\\"" | "\\\\" }
+  universal_character_name { ("\u" four_hexadecimal_characters) | ("\U" four_hexadecimal_characters four_hexadecimal_characters) }
+  // Not including \ or '
+  multiple_character_literal_character { $[\u0020-\u0026\u0028-\u005B\u005D-\u007E] }
+  escaped_multiple_character_literal_character { multiple_character_literal_character | "\\\'" | "\\\\" }
+  identifier_character { digit_character | latin_character | "_" }
+  base64_character { digit_character | latin_character | "+" | "/" }
+
+  // 5.4 Comments
+
+  Comment { "//" ("\\" (![\n] | "\\r"? "\\n") | ![\n])* }
+
+
+  // 5.5 Identifiers
+  // An identifier must include at least one alphabetic character.
+
+  Identifier { identifier_character* latin_character identifier_character* }
+
+
+  // 5.6 Punctuators
+
+  OpenParenthesis { "(" }
+  CloseParenthesis { ")" }
+  OpenBrace { "{" }
+  CloseBrace { "}" }
+  OpenBracket { "[" }
+  CloseBracket { "]" }
+  Colon { ":" }
+  Semicolon { ";" }
+  Comma { "," }
+  DoubleQuote { "\"" }
+  SingleQuote { "'" }
+  Period { "." }
+
+  // 5.8 Operators
+
+  PostfixIncrement { "++" }
+  PostfixDecrement { "--" }
+  UnaryPlus { "+" }
+  UnaryNegation { "-" }
+  Multiplication { "*" }
+  Division { "/" }
+  Modulus { "%" }
+  Addition { "+" }
+  Subtraction { "-" }
+  BitwiseShiftLeft { "<<" }
+  BitwiseShiftRight { ">>" }
+  RelationalLessThan { "<" }
+  RelationalLessThanOrEqual { "<=" }
+  RelationalGreaterThan { ">" }
+  RelationalGreaterThanOrEqual { ">=" }
+  RelationalEqual { "==" }
+  RelationalNotEqual { "!=" }
+  BitwiseAnd { "&" }
+  BitwiseOr { "|" }
+  LogicalAnd { "&&" }
+  LogicalOr { "||" }
+  Assignment { "=" }
+
+
+  // Rule O.2: Range operator
+
+  RangeOperator { ".." }
+
+
+  // Rule S.2: Binary literal value
+
+  binary_character { "0" | "1" }
+  binary_character_string { binary_character* }
+  four_binary_characters { binary_character binary_character binary_character binary_character }
+  one_to_four_binary_characters { binary_character binary_character? binary_character? binary_character? }
+  period_separated_binary_character_string { four_binary_characters "." (four_binary_characters ".")* one_to_four_binary_characters }
+
+  BinaryLiteral { "0b" (period_separated_binary_character_string | binary_character_string) }
+
+
+  // Rule S.3: Hexadecimal literal value
+
+  hexadecimal_character { $[0-9A-F] }
+  hexadecimal_character_string {hexadecimal_character* }
+  four_hexadecimal_characters { hexadecimal_character hexadecimal_character hexadecimal_character hexadecimal_character }
+  one_to_four_hexadecimal_characters { hexadecimal_character hexadecimal_character? hexadecimal_character? hexadecimal_character? }
+  period_separated_hexadecimal_character_string { four_hexadecimal_characters "." (four_hexadecimal_characters ".")* one_to_four_hexadecimal_characters }
+
+  HexadecimalLiteral { "0x" (period_separated_hexadecimal_character_string | hexadecimal_character_string) }
+
+
+  // 5.17 Integer, decimal and floating-point literal values
+
+  positive_integer { non_zero_digit_character digit_character* }
+
+  integer_literal { "0" | positive_integer }
+
+  IntegerLiteral { integer_literal }
+
+  decimal_literal { integer_literal "." digit_character+ }
+
+  DecimalLiteral { decimal_literal }
+
+  FloatingPointLiteral { (integer_literal | decimal_literal) "e" ("0" | (("+" | "-")? positive_integer)) }
+
+
+  // Lezer token precedence rules
+
+  @precedence { 
+    escaped_sdl_compatible_ucs_character,
+    escaped_multiple_character_literal_character,
+    base64_character,
+    Comment,
+    Division
+  }
+
+  @precedence { 
+    escaped_sdl_compatible_ucs_character,
+    escaped_multiple_character_literal_character,
+    Whitespace
+  }
+
+  @precedence { 
+    BinaryLiteral,
+    HexadecimalLiteral,
+    FloatingPointLiteral,
+    DecimalLiteral,
+    IntegerLiteral,
+    Identifier
+  }
+}
+
+
+// 5.8 Operators
+
+postfix_operator {
+  PostfixIncrement |
+  PostfixDecrement
+}
+
+unary_operator {
+  UnaryPlus |
+  UnaryNegation
+}
+
+multiplicative_operator {
+  Multiplication |
+  Division |
+  Modulus
+}
+
+additive_operator {
+  Addition |
+  Subtraction
+}
+
+shift_operator {
+  BitwiseShiftLeft |
+  BitwiseShiftRight
+}
+
+relational_operator {
+  RelationalLessThan |
+  RelationalLessThanOrEqual |
+  RelationalGreaterThan |
+  RelationalGreaterThanOrEqual
+}
+
+equality_operator {
+  RelationalEqual |
+  RelationalNotEqual
+}
+
+bitwise_operator {
+  BitwiseAnd |
+  BitwiseOr
+}
+
+logical_operator {
+  LogicalAnd |
+  LogicalOr
+}
+
+
+// 5.9 Expressions and evaluation
+
+ArrayElementAccess {
+  OpenBracket expression CloseBracket
+}
+
+ClassMemberAccess {
+  Period Identifier
+}
+
+
+// Rule O.1: lengthof() Operator
+
+LengthofExpression { keyword<"lengthof"> OpenParenthesis expression CloseParenthesis }
+
+// includes Lezer precedence markers
+
+UnaryExpression {
+  expression !array_element_access_precedence ArrayElementAccess |
+  expression !class_member_access_precedence ClassMemberAccess |
+  expression !postfix_operator_precedence postfix_operator |
+  unary_operator !unary_operator_precedence expression |
+  LengthofExpression !lengthof_precedence |
+  Identifier !identifier_precedence |
+  number_literal !number_literal_precedence |
+  OpenParenthesis expression CloseParenthesis
+}
+
+// includes Lezer precedence markers
+
+BinaryExpression {
+  expression !multiplicative_precedence multiplicative_operator expression |
+  expression !additive_precedence additive_operator expression |
+  expression !shift_precedence shift_operator expression |
+  expression !relational_precedence relational_operator expression |
+  expression !equality_precedence equality_operator expression |
+  expression !bitwise_precedence bitwise_operator expression |
+  expression !logical_precedence logical_operator expression
+}
+
+expression {
+  BinaryExpression |
+  UnaryExpression
+}
+
+// Left hand operand must evaluate to a parsed variable value target, right hand operand must evaluate to a value source
+
+AssignmentExpression {
+  expression Assignment expression
+}
+
+
+// 5.10 Statements
+
+ExpressionStatement {
+  (expression | AssignmentExpression) Semicolon
+}
+
+// Block scoping
+
+CompoundStatement {
+  OpenBrace statement* CloseBrace
+}
+
+statement {
+  CompoundStatement |
+  IfStatement |
+  SwitchStatement |
+  ForStatement |
+  DoStatement |
+  WhileStatement |
+  ExpressionStatement |
+  ElementaryTypeDefinition |
+  MapDefinition |
+  ClassDefinition |
+  StringDefinition |
+  ArrayDefinition |
+  ComputedElementaryTypeDefinition |
+  ComputedArrayDefinition 
+}
+
+
+// Rule S.4: Multiple character literal value
+
+// 5.17 Integer, decimal and floating-point literal values
+
+MultipleCharacterLiteralCharacters { escaped_multiple_character_literal_character* }
+
+// One or more multiple character literals to support concatenation
+
+MultipleCharacterLiteral { (SingleQuote MultipleCharacterLiteralCharacters SingleQuote)+ }
+
+number_literal { BinaryLiteral | HexadecimalLiteral | MultipleCharacterLiteral | IntegerLiteral | DecimalLiteral | FloatingPointLiteral }
+
+
+// 5.18 String literal values
+
+UtfPrefix {
+  "u"
+}
+
+UtfStringLiteralCharacters { (escaped_sdl_compatible_ucs_character | universal_character_name)* }
+
+// One or more string literals to support concatenation
+
+UtfStringLiteral { (UtfPrefix DoubleQuote UtfStringLiteralCharacters DoubleQuote)+ }
+
+
+// 5.19 Scope
+
+@top Specification { 
+  (ClassDeclaration | MapDeclaration | ComputedElementaryTypeDefinition)+
+}
+
+
+// Rule E.1: Elementary data types
+// Rule E.2: Look-ahead parsing
+// Rule E.3: Legacy keyword
+// Rule E.4: Reserved keyword
+
+AlignmentBitCount {
+  "8" | "16" | "32" | "64" | "128"
+}
+
+AlignedModifier { 
+  keyword<"aligned"> (OpenParenthesis AlignmentBitCount CloseParenthesis)?
+}
+
+ElementaryType {
+  keyword<"int"> | keyword<"unsigned"> keyword<"int"> | keyword<"float"> | keyword<"bit">
+}
+
+LengthAttribute {
+  OpenParenthesis expression CloseParenthesis
+}
+
+LookAhead {
+  "*"
+}
+
+ElementaryTypeDefinition {
+  (keyword<"reserved"> | keyword<"legacy">)? keyword<"const">? AlignedModifier? ElementaryType LengthAttribute LookAhead?
+    Identifier (Assignment expression (RangeOperator expression)?)? Semicolon
+}
+
+
+// Rule E.3: Maps
+// Rule E.4: Mapped data types
+// Rule E.5: Maps with escape codes
+
+ElementaryTypeOutputValue {
+  ElementaryType LengthAttribute
+}
+
+output_value {
+  number_literal | ElementaryTypeOutputValue | AggregateOutputValue
+}
+
+AggregateOutputValue {
+  OpenBrace comma_separated<output_value> CloseBrace
+}
+
+MapEntry {
+  BinaryLiteral Comma AggregateOutputValue
+}
+
+MapDeclaration {
+  keyword<"map"> Identifier OpenParenthesis (ElementaryType | Identifier) CloseParenthesis
+    OpenBrace comma_separated<MapEntry> CloseBrace
+}
+
+MapDefinition {
+  (keyword<"reserved"> | keyword<"legacy">)? (ElementaryType | Identifier) RelationalLessThan Identifier RelationalGreaterThan Identifier Semicolon
+}
+
+
+// Rule E.6: String data types
+
+// One or more string literals to support concatenation
+
+Base64StringLiteralCharacters { base64_character* "="? "="? }
+
+Base64StringLiteral {
+  (DoubleQuote Base64StringLiteralCharacters DoubleQuote)+
+}
+
+// 6.7 String value
+// One or more string literals to support concatenation
+
+utf16_string_definition {
+  keyword<"utf16string"> Identifier (Assignment UtfStringLiteral)?
+}
+
+utf8_string_definition {
+  (keyword<"utf8string"> | keyword<"utf8list">) Identifier (Assignment UtfStringLiteral)?
+}
+
+utf_string_definition {
+  keyword<"utfstring"> Identifier (Assignment UtfStringLiteral)?
+}
+
+base64_string_definition {
+  keyword<"base64string"> Identifier (Assignment Base64StringLiteral)?
+}
+
+string_definition {
+  base64_string_definition |
+  utf16_string_definition |
+  utf8_string_definition |
+  utf_string_definition
+}
+
+StringDefinition {
+  (keyword<"reserved"> | keyword<"legacy">)? keyword<"const">? AlignedModifier? string_definition Semicolon
+}
+
+
+// Rule C.1: Classes
+// Rule C.2: Class data types
+// RULE C.3: Derived classes
+// Rule C.4: Abstract classes
+// Rule C.5: Class polymorphism
+// Rule C.6: Expandable classes
+// Rule C.7: Class parameter types
+// Rule C.8: Parameterized class data types
+
+ClassId {
+  IntegerLiteral
+}
+
+ClassIdRange {
+  ClassId RangeOperator ClassId
+}
+
+ExtendedClassIdRange {
+  comma_separated<(ClassId | ClassIdRange)>
+}
+
+BitModifier {
+  Colon keyword<"bit"> OpenParenthesis IntegerLiteral CloseParenthesis (Identifier Assignment)? ExtendedClassIdRange
+}
+
+ExpandableModifier {
+  keyword<"expandable"> (OpenParenthesis IntegerLiteral CloseParenthesis)?
+}
+
+Parameter {
+  (Identifier | ElementaryType) Identifier
+}
+
+ParameterList {
+  OpenParenthesis comma_separated<Parameter> CloseParenthesis
+}
+
+ParameterValueList {
+  OpenParenthesis comma_separated<expression> CloseParenthesis
+}
+
+ExtendsModifier {
+  keyword<"extends"> Identifier ParameterValueList?
+}
+
+ClassDeclaration {
+  AlignedModifier? ExpandableModifier? keyword<"abstract">? keyword<"class"> Identifier ParameterList? ExtendsModifier? BitModifier? OpenBrace
+  statement*
+  CloseBrace
+}
+
+ClassDefinition {
+  keyword<"legacy">? Identifier Identifier ParameterValueList? Semicolon
+}
+
+
+// Rule A.1: Arrays
+// Rule A.2: Multi-dimensional arrays
+// Rule A.3: Partial arrays
+// Rule A.4: Partial multi-dimensional arrays
+// Rule A.5: Implicit arrays
+
+ExplicitArrayDimension {
+  OpenBracket expression CloseBracket
+}
+
+PartialArrayDimension {
+  OpenBracket OpenBracket expression CloseBracket CloseBracket
+}
+
+ImplicitArrayDimension {
+  OpenBracket (IntegerLiteral RangeOperator IntegerLiteral)? CloseBracket
+}
+
+ArrayDefinition {
+  (keyword<"reserved"> | keyword<"legacy">)? AlignedModifier? ((ElementaryType LengthAttribute) | Identifier) Identifier (ImplicitArrayDimension | (ExplicitArrayDimension | PartialArrayDimension)+) Semicolon
+}
+
+
+// Rule NP.1: Elementary data types
+
+ComputedElementaryTypeDefinition {
+  keyword<"computed"> keyword<"const">? ElementaryType Identifier (Assignment expression)? Semicolon
+}
+
+
+// Rule NP.2: Arrays
+// Rule NP.3: Multi-dimensional arrays
+
+ComputedArrayDefinition {
+  keyword<"computed"> ElementaryType Identifier (ExplicitArrayDimension)+ Semicolon
+}
+
+
+// Rule FC.1: Flow control using if-then-else
+
+IfStatement {
+  keyword<"if"> OpenParenthesis expression CloseParenthesis
+  statement
+  (!else_precedence keyword<"else"> statement)?
+}
+
+
+// Rule FC.2: Flow control using switch
+
+CaseClause {
+  keyword<"case"> number_literal Colon
+  ((statement* (keyword<"break"> Semicolon)?) | (OpenBrace statement* keyword<"break"> Semicolon CloseBrace))?
+}
+
+DefaultClause {
+  keyword<"default"> Colon
+  statement*
+}
+
+SwitchStatement {
+  keyword<"switch"> OpenParenthesis expression CloseParenthesis OpenBrace
+  CaseClause*
+  DefaultClause?
+  CloseBrace
+}
+
+
+// Rule FC.3: Flow control using for
+
+ForStatement { 
+  keyword<"for"> OpenParenthesis ((AssignmentExpression Semicolon) | ComputedElementaryTypeDefinition | Semicolon)
+  expression? Semicolon
+  (AssignmentExpression | expression)? CloseParenthesis 
+  CompoundStatement
+}
+
+
+// Rule FC.4: Flow control using do
+
+DoStatement { 
+  keyword<"do"> 
+  CompoundStatement
+  keyword<"while"> OpenParenthesis expression CloseParenthesis Semicolon
+}
+
+
+// Rule FC.5: Flow control using while
+
+WhileStatement { 
+  keyword<"while"> OpenParenthesis expression CloseParenthesis
+  CompoundStatement
+}
+
+
+// Lezer precedence rule
+
+@precedence {
+  array_element_access_precedence @left,
+  class_member_access_precedence @left,
+  postfix_operator_precedence @right,
+  unary_operator_precedence @right,
+  lengthof_precedence @right,
+  multiplicative_precedence @left,
+  additive_precedence @left,
+  shift_precedence @left,
+  relational_precedence @left,
+  equality_precedence @left,
+  bitwise_precedence @left,
+  logical_precedence @left,
+  identifier_precedence,
+  number_literal_precedence,
+  else_precedence @right
+}
+
+
+// Lezer template rules
+
+keyword<term> {
+  @specialize[@name={term}]<Identifier, term>
+}
+
+comma_separated<content> {
+  content (Comma content)*
+}
+
+// Lezer skip expressions
+
+@skip { Whitespace | Comment }
+
+
+// Lezer directive to add openedBy and closedBy props to delimiters
+
+@detectDelim
+
+// Lezer context tracker insertion will be performed when buildParser is invoked
+@context exportName from "module"

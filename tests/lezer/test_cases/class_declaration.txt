@@ -1,0 +1,141 @@
+# Simple class declaration
+
+class A {}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# Single parameter with single id
+
+class A(int a) {}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        ParameterList(
+            OpenParenthesis
+            Parameter(
+                ElementaryType(
+                    int
+                )
+                Whitespace
+                Identifier
+            )
+            CloseParenthesis
+        )
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)
+
+# All features
+
+aligned(8) expandable(20) abstract class A (int a, B b) extends C(1, d) : bit(3) id=1..2,5 {}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        AlignedModifier(
+            aligned
+            OpenParenthesis
+            AlignmentBitCount
+            CloseParenthesis
+        )
+        Whitespace
+        ExpandableModifier(
+            expandable
+            OpenParenthesis
+            IntegerLiteral
+            CloseParenthesis
+        )
+        Whitespace
+        abstract
+        Whitespace
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        ParameterList(
+            OpenParenthesis
+            Parameter(
+                ElementaryType(
+                    int
+                )
+                Whitespace
+                Identifier
+            )
+            Comma
+            Whitespace
+            Parameter(
+                Identifier
+                Whitespace
+                Identifier
+            )
+            CloseParenthesis
+        )
+        Whitespace
+        ExtendsModifier(
+            extends
+            Whitespace
+            Identifier
+            ParameterValueList(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                Comma
+                Whitespace
+                UnaryExpression(
+                    Identifier
+                )
+                CloseParenthesis
+            )
+        )
+        Whitespace
+        BitModifier(
+            Colon
+            Whitespace
+            bit
+            OpenParenthesis
+            IntegerLiteral
+            CloseParenthesis
+            Whitespace
+            Identifier
+            Assignment
+            ExtendedClassIdRange(
+                ClassIdRange(
+                    ClassId(
+                        IntegerLiteral
+                    )
+                    RangeOperator
+                    ClassId(
+                        IntegerLiteral
+                    )
+                )
+                Comma
+                ClassId(
+                    IntegerLiteral
+                )
+            )
+        )
+        Whitespace
+        OpenBrace
+        CloseBrace
+    )
+)

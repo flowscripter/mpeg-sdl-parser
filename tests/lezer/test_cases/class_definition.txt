@@ -1,0 +1,89 @@
+# Simple
+
+class A {ClassA a;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ClassDefinition(
+            Identifier
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Legacy and one parameter value
+
+class A {legacy ClassB b(3);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ClassDefinition(
+            legacy
+            Whitespace
+            Identifier
+            Whitespace
+            Identifier
+            ParameterValueList(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Multiple parameter values
+
+class A {ClassC c(i, 3);}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ClassDefinition(
+            Identifier
+            Whitespace
+            Identifier
+            ParameterValueList(
+                OpenParenthesis
+                UnaryExpression(
+                    Identifier
+                )
+                Comma
+                Whitespace
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)

@@ -1,0 +1,263 @@
+# String definition
+
+class A {utf8string foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utf8string
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# const aligned default
+
+class A {const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Aligned explicit
+
+class A {aligned (16) utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            AlignedModifier(
+                aligned
+                Whitespace
+                OpenParenthesis
+                AlignmentBitCount
+                CloseParenthesis
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Reserved const aligned default
+
+class A {reserved const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            reserved
+            Whitespace
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Legacy const aligned default
+
+class A {legacy const aligned utfstring foo;}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            legacy
+            Whitespace
+            const
+            Whitespace
+            AlignedModifier(
+                aligned
+            )
+            Whitespace
+            utfstring
+            Whitespace
+            Identifier
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# utfstring with literal
+
+class A {utfstring foo=u"hello";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# utf16string with literal
+
+class A {utf16string foo=u"hello";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utf16string
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# utf8list with literal
+
+class A {utf8list foo=u"hello world";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utf8list
+            Whitespace
+            Identifier
+            Assignment
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# base64 string literal
+
+class A {base64string foo="aGVsbG8K";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            base64string
+            Whitespace
+            Identifier
+            Assignment
+            Base64StringLiteral(
+                DoubleQuote
+                Base64StringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)

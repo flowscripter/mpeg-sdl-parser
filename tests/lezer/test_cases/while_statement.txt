@@ -1,0 +1,45 @@
+# Simple
+
+class A {while (i<9) {i++;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class,
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        WhileStatement(
+            while
+            Whitespace
+            OpenParenthesis
+            BinaryExpression(
+                UnaryExpression(
+                    Identifier
+                )
+                RelationalLessThan
+                UnaryExpression(
+                    IntegerLiteral
+                )
+            )
+            CloseParenthesis
+            Whitespace
+            CompoundStatement(
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                CloseBrace
+            )
+        )
+        CloseBrace
+    )
+)

@@ -1,7 +1,7 @@
-import type { AbstractCompositeNode } from "../../src/abstract_syntax_tree/node/AbstractCompositeNode";
-import type { AbstractLeafNode } from "../../src/abstract_syntax_tree/node/AbstractLeafNode";
-import { NodeKind } from "../../src/abstract_syntax_tree/node/enum/node_kind";
-import type { NodeHandler } from "../../src/abstract_syntax_tree/visitor/NodeHandler";
+import type AbstractCompositeNode from "../../src/ast/node/AbstractCompositeNode";
+import type AbstractLeafNode from "../../src/ast/node/AbstractLeafNode";
+import { NodeKind } from "../../src/ast/node/enum/node_kind";
+import type NodeHandler from "../../src/ast/visitor/NodeHandler";
 
 export default class HistoryRecordingNodeHandler implements NodeHandler {
   nodeHistory: string[] = [];
@@ -63,7 +63,6 @@ const expectedHistory = [
   "IDENTIFIER",
   "NUMBER_LITERAL",
   "STATEMENT",
-  "IF_CLAUSE",
   "EXPRESSION",
   "EXPRESSION",
   "IDENTIFIER",
@@ -87,7 +86,6 @@ const expectedHistory = [
   "CLASS_MEMBER_ACCESS",
   "IDENTIFIER",
   "STATEMENT",
-  "IF_CLAUSE",
   "EXPRESSION",
   "EXPRESSION",
   "IDENTIFIER",
@@ -97,7 +95,6 @@ const expectedHistory = [
   "NUMBER_LITERAL",
   "STATEMENT",
   "STATEMENT",
-  "ARRAY_ELEMENT_TYPE",
   "ELEMENTARY_TYPE",
   "LENGTH_ATTRIBUTE",
   "NUMBER_LITERAL",

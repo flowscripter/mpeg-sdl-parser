@@ -1,0 +1,109 @@
+# Simple
+
+class A {int(3) a[3];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ArrayDefinition(
+            ElementaryType(
+                int
+            )
+            LengthAttribute(
+                OpenParenthesis
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseParenthesis
+            )
+            Whitespace
+            Identifier
+            ExplicitArrayDimension(
+                OpenBracket
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseBracket
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Reserved multiple dimensions with mixed explicit and partial dimensions
+
+class A {reserved MyClass a[3][[2]];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ArrayDefinition(
+            reserved
+            Whitespace
+            Identifier
+            Whitespace
+            Identifier
+            ExplicitArrayDimension(
+                OpenBracket
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseBracket
+            )
+            PartialArrayDimension(
+                OpenBracket
+                OpenBracket
+                UnaryExpression(
+                    IntegerLiteral
+                )
+                CloseBracket
+                CloseBracket
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Implicit dimension
+
+class A {MyClass a[1..3];}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        ArrayDefinition(
+            Identifier
+            Whitespace
+            Identifier
+            ImplicitArrayDimension(
+                OpenBracket
+                IntegerLiteral
+                RangeOperator
+                IntegerLiteral
+                CloseBracket
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)

@@ -1,0 +1,303 @@
+# Simple
+
+class A {utfstring foo = u"hello";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Escaped double quote
+
+class A {utfstring foo = u"hello \"world\"";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Escaped backslash
+
+class A {utfstring foo = u"hello \\\\world\\\\";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# SDL compatible UCS characters
+
+class A {utfstring foo = u"hello πό";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Short UCS code point escape sequence
+
+class A {utfstring foo = u"hello \\u1234";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Long UCS code point escape sequence
+
+class A {utfstring foo = u"hello \\U00001234";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Ignore line break escape code in literal
+
+class A {utfstring foo = u"hello\\n";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Concatenated on same line
+
+class A {utfstring foo = u"hello" u" world"u"";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+                Whitespace
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)
+
+# Concatenated across multiple lines
+
+class A {utfstring foo = u"hello"
+
+u" world";}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        StringDefinition(
+            utfstring
+            Whitespace
+            Identifier
+            Whitespace
+            Assignment
+            Whitespace
+            UtfStringLiteral(
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+                Whitespace
+                UtfPrefix
+                DoubleQuote
+                UtfStringLiteralCharacters
+                DoubleQuote
+            )
+            Semicolon
+        )
+        CloseBrace
+    )
+)

@@ -1,0 +1,407 @@
+# Single case
+
+class A {switch(i){case 1:break;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# Single case with braces
+
+class A {switch(i){case 1:{break;}}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                break
+                Semicolon
+                CloseBrace
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# No cases and default
+
+class A {switch(i){default:i--;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            DefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# No cases and default with braces
+
+class A {switch(i){default:{i--;}}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+         SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            DefaultClause(
+                default
+                Colon
+                CompoundStatement(
+                    OpenBrace
+                    ExpressionStatement(
+                        UnaryExpression(
+                            UnaryExpression(
+                                Identifier
+                            )
+                            PostfixDecrement
+                        )
+                        Semicolon
+                    )
+                    CloseBrace
+                )
+            )
+            CloseBrace
+        )
+       CloseBrace
+    )
+)
+
+# Multiple cases
+
+class A {switch(i){case 1:break;case 2:{i++;break;}}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                break
+                Semicolon
+                CloseBrace
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# Multiple cases and default
+
+class A {switch(i){case 1:break;case 2:{i++;break;}default:i--;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                break
+                Semicolon
+            )
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                OpenBrace
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+                break
+                Semicolon
+                CloseBrace
+            )
+            DefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# Multiple cases with no break and default
+
+class A {switch(i){case 1:i++;case 2:i++;default:i--;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+            )
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+            )
+            DefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)
+
+# Multiple cases with no break and no expression and default
+
+class A {switch(i){case 1:case 2:i++;default:i--;}}
+
+==>
+
+Specification(
+    ClassDeclaration(
+        class
+        Whitespace
+        Identifier
+        Whitespace
+        OpenBrace
+        SwitchStatement(
+            switch
+            OpenParenthesis
+            UnaryExpression(
+                Identifier
+            )
+            CloseParenthesis
+            OpenBrace
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+            )
+            CaseClause(
+                case
+                Whitespace
+                IntegerLiteral
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixIncrement
+                    )
+                    Semicolon
+                )
+            )
+            DefaultClause(
+                default
+                Colon
+                ExpressionStatement(
+                    UnaryExpression(
+                        UnaryExpression(
+                            Identifier
+                        )
+                        PostfixDecrement
+                    )
+                    Semicolon
+                )
+            )
+            CloseBrace
+        )
+        CloseBrace
+    )
+)

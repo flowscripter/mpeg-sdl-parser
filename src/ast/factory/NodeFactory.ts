@@ -1,0 +1,175 @@
+import { Text } from "@codemirror/state";
+import type { TreeCursor } from "@lezer/common";
+import AbstractNode from "../node/AbstractNode";
+import { SyntacticParseError } from "../../ParseError";
+import { getSpecification } from "./getSpecification";
+import { getComputedElementaryTypeDefinition } from "./getComputedElementaryTypeDefinition";
+import { getElementaryType } from "./getElementaryType";
+import { getLengthAttribute } from "./getLengthAttribute";
+import { getIdentifier } from "./getIdentifier";
+import { getClassDeclaration } from "./getClassDeclaration";
+import { getElementaryTypeDefinition } from "./getElementaryTypeDefinition";
+import { getUnaryExpression } from "./getUnaryExpression";
+import { getBinaryLiteral } from "./getBinaryLiteral";
+import { getDecimalLiteral } from "./getDecimalLiteral";
+import { getFloatingPointLiteral } from "./getFloatingPointLiteral";
+import { getMultipleCharacterLiteral } from "./getMultipleCharacterLiteral";
+import { getHexadecimalLiteral } from "./getHexadecimalLiteral";
+import { getIntegerLiteral } from "./getIntegerLiteral";
+import { getIfStatement } from "./getIfStatement";
+import { getBinaryExpression } from "./getBinaryExpression";
+import { getCompoundStatement } from "./getCompoundStatement";
+import { getClassDefinition } from "./getClassDefinition";
+import { getExpressionStatement } from "./getExpressionStatement";
+import { getAssignmentExpression } from "./getAssignmentExpression";
+import { getClassMemberAccess } from "./getClassMemberAccess";
+import { getArrayElementAccess } from "./getArrayElementAccess";
+import { getArrayDefinition } from "./getArrayDefinition.ts";
+import { getExplicitArrayDimension } from "./getExplicitArrayDimension.ts";
+import { getImplicitArrayDimension } from "./getImplicitArrayDimension.ts";
+import { getPartialArrayDimension } from "./getPartialArrayDimension.ts";
+import { getAlignedModifier } from "./getAlignedModifier.ts";
+import { getAlignmentBitCount } from "./getAlignmentBitCount.ts";
+import { getStringDefinition } from "./getStringDefinition.ts";
+import { getUtfStringLiteral } from "./getUtfStringLiteral.ts";
+import { getBase64StringLiteral } from "./getBase64StringLiteral.ts";
+import { getLengthofExpression } from "./getLengthofExpression.ts";
+import { getMapDeclaration } from "./getMapDeclaration.ts";
+import { getMapEntry } from "./getMapEntry.ts";
+import { getAggregateOutputValue } from "./getAggegateOutputValue.ts";
+import { getElementaryTypeOutputValue } from "./getElementaryTypeOutputValue.ts";
+import { getExpandableModifier } from "./getExpandableModifier.ts";
+import { getParameterList } from "./getParameterList.ts";
+import { getParameter } from "./getParameter.ts";
+import { getExtendsModifier } from "./getExtendsModifier.ts";
+import { getParameterValueList } from "./getParameterValueList.ts";
+import { getBitModifier } from "./getBitModifier.ts";
+import { getClassIdRange } from "./getClassIdRange.ts";
+import { getExtendedClassIdRange } from "./getExtendedClassIdRange.ts";
+import { getClassId } from "./getClassId.ts";
+import { getComputedArrayDefinition } from "./getComputedArrayDefinition.ts";
+import { getSwitchStatement } from "./getSwitchStatement.ts";
+import { getWhileStatement } from "./getWhileStatement.ts";
+import { getForStatement } from "./getForStatement.ts";
+import { getDoStatement } from "./getDoStatement.ts";
+import { getDefaultClause } from "./getDefaultClause.ts";
+import { getCaseClause } from "./getCaseClause.ts";
+
+export default class NodeFactory {
+  static createNode(cursor: TreeCursor, text: Text): AbstractNode {
+    if (cursor.type.isError) {
+      throw SyntacticParseError.fromTextAndCursor(text, cursor);
+    }
+
+    switch (cursor.type.name) {
+      case "AggregateOutputValue":
+        return getAggregateOutputValue(cursor, text);
+      case "AlignedModifier":
+        return getAlignedModifier(cursor, text);
+      case "AlignmentBitCount":
+        return getAlignmentBitCount(cursor, text);
+      case "ArrayDefinition":
+        return getArrayDefinition(cursor, text);
+      case "ArrayElementAccess":
+        return getArrayElementAccess(cursor, text);
+      case "AssignmentExpression":
+        return getAssignmentExpression(cursor, text);
+      case "Base64StringLiteral":
+        return getBase64StringLiteral(cursor, text);
+      case "BinaryExpression":
+        return getBinaryExpression(cursor, text);
+      case "BinaryLiteral":
+        return getBinaryLiteral(cursor, text);
+      case "BitModifier":
+        return getBitModifier(cursor, text);
+      case "CaseClause":
+        return getCaseClause(cursor, text);
+      case "ClassDeclaration":
+        return getClassDeclaration(cursor, text);
+      case "ClassDefinition":
+        return getClassDefinition(cursor, text);
+      case "ClassId":
+        return getClassId(cursor, text);
+      case "ClassIdRange":
+        return getClassIdRange(cursor, text);
+      case "ClassMemberAccess":
+        return getClassMemberAccess(cursor, text);
+      case "CompoundStatement":
+        return getCompoundStatement(cursor, text);
+      case "ComputedArrayDefinition":
+        return getComputedArrayDefinition(cursor, text);
+      case "ComputedElementaryTypeDefinition":
+        return getComputedElementaryTypeDefinition(cursor, text);
+      case "DecimalLiteral":
+        return getDecimalLiteral(cursor, text);
+      case "DefaultClause":
+        return getDefaultClause(cursor, text);
+      case "DoStatement":
+        return getDoStatement(cursor, text);
+      case "ElementaryType":
+        return getElementaryType(cursor, text);
+      case "ElementaryTypeDefinition":
+        return getElementaryTypeDefinition(cursor, text);
+      case "ElementaryTypeOutputValue":
+        return getElementaryTypeOutputValue(cursor, text);
+      case "ExpandableModifier":
+        return getExpandableModifier(cursor, text);
+      case "ExplicitArrayDimension":
+        return getExplicitArrayDimension(cursor, text);
+      case "ExpressionStatement":
+        return getExpressionStatement(cursor, text);
+      case "ExtendedClassIdRange":
+        return getExtendedClassIdRange(cursor, text);
+      case "ExtendsModifier":
+        return getExtendsModifier(cursor, text);
+      case "FloatingPointLiteral":
+        return getFloatingPointLiteral(cursor, text);
+      case "ForStatement":
+        return getForStatement(cursor, text);
+      case "HexadecimalLiteral":
+        return getHexadecimalLiteral(cursor, text);
+      case "Identifier":
+        return getIdentifier(cursor, text);
+      case "IfStatement":
+        return getIfStatement(cursor, text);
+      case "ImplicitArrayDimension":
+        return getImplicitArrayDimension(cursor, text);
+      case "IntegerLiteral":
+        return getIntegerLiteral(cursor, text);
+      case "LengthAttribute":
+        return getLengthAttribute(cursor, text);
+      case "LengthofExpression":
+        return getLengthofExpression(cursor, text);
+      case "MapDeclaration":
+        return getMapDeclaration(cursor, text);
+      case "MapEntry":
+        return getMapEntry(cursor, text);
+      case "MultipleCharacterLiteral":
+        return getMultipleCharacterLiteral(cursor, text);
+      case "Parameter":
+        return getParameter(cursor, text);
+      case "ParameterList":
+        return getParameterList(cursor, text);
+      case "ParameterValueList":
+        return getParameterValueList(cursor, text);
+      case "PartialArrayDimension":
+        return getPartialArrayDimension(cursor, text);
+      case "Specification":
+        return getSpecification(cursor, text);
+      case "StringDefinition":
+        return getStringDefinition(cursor, text);
+      case "SwitchStatement":
+        return getSwitchStatement(cursor, text);
+      case "UtfStringLiteral":
+        return getUtfStringLiteral(cursor, text);
+      case "UnaryExpression":
+        return getUnaryExpression(cursor, text);
+      case "WhileStatement":
+        return getWhileStatement(cursor, text);
+      default:
+        throw new Error(
+          `Unsupported node type: ${cursor.type.name}`,
+        );
+    }
+  }
+}
