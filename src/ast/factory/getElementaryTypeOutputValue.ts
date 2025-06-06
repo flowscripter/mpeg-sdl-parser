@@ -6,10 +6,10 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import ElementaryType from "../node/ElementaryType";
+import { ElementaryType } from "../node/ElementaryType";
 import { NodeKind } from "../node/enum/node_kind";
-import ElementaryTypeOutputValue from "../node/ElementaryTypeOutputValue";
-import LengthAttribute from "../node/LengthAttribute";
+import { ElementaryTypeOutputValue } from "../node/ElementaryTypeOutputValue";
+import { LengthAttribute } from "../node/LengthAttribute";
 
 export function getElementaryTypeOutputValue(
   cursor: TreeCursor,

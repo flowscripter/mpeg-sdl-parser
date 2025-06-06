@@ -1,6 +1,6 @@
 import { type BuildOptions, buildParser } from "@lezer/generator";
 import { ContextTracker, LRParser as LezerParser } from "@lezer/lr";
-import fs from "node:fs/promises";
+import { promises as fs } from "node:fs";
 import path from "node:path";
 import getLogger, { debugEnabled } from "../util/logger.ts";
 import { Text } from "@codemirror/state";

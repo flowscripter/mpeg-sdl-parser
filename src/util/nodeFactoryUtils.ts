@@ -1,9 +1,9 @@
 import { Text } from "@codemirror/state";
 import { TreeCursor } from "@lezer/common";
-import type Token from "../ast/token/Token";
-import type AbstractNode from "../ast/node/AbstractNode";
-import NodeFactory from "../ast/factory/NodeFactory";
-import type Trivia from "../ast/token/Trivia";
+import type { Token } from "../ast/token/Token";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import { NodeFactory } from "../ast/factory/NodeFactory";
+import type { Trivia } from "../ast/token/Trivia";
 import { InternalParseError, SyntacticParseError } from "../ParseError";
 import { getLocationFromTextPosition } from "./locationUtils";
 

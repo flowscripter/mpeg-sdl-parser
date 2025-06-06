@@ -1,11 +1,11 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AbstractStatement from "./AbstractStatement.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AbstractStatement } from "./AbstractStatement.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class CaseClause extends AbstractCompositeNode {
+export class CaseClause extends AbstractCompositeNode {
   constructor(
     public readonly value: NumberLiteral,
     public readonly statements: AbstractStatement[],

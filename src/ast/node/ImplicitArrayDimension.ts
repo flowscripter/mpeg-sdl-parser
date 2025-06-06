@@ -1,12 +1,12 @@
-import type Token from "../token/Token.ts";
-import AbstractArrayDimension from "./AbstractArrayDimension.ts";
-import type AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractArrayDimension } from "./AbstractArrayDimension.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
 import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class ImplicitArrayDimension extends AbstractArrayDimension {
+export class ImplicitArrayDimension extends AbstractArrayDimension {
   constructor(
     public readonly rangeStart:
       | AbstractExpression

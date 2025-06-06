@@ -1,8 +1,8 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type StringDefinition from "../ast/node/StringDefinition";
-import type StringLiteral from "../ast/node/StringLiteral";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { StringDefinition } from "../ast/node/StringDefinition";
+import type { StringLiteral } from "../ast/node/StringLiteral";
 const { join } = doc.builders;
 
 export function printStringDefinition(

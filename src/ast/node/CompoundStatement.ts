@@ -1,9 +1,9 @@
-import type Token from "../token/Token.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export default class CompoundStatement extends AbstractStatement {
+export class CompoundStatement extends AbstractStatement {
   constructor(
     public readonly statements: AbstractStatement[],
     public readonly openBracePunctuator: Token,

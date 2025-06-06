@@ -1,13 +1,13 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type PartialArrayDimension from "../ast/node/PartialArrayDimension";
+import type { PartialArrayDimension } from "../ast/node/PartialArrayDimension";
 import { ArrayDimensionKind } from "../ast/node/enum/array_dimension_kind";
-import type ArrayDefinition from "../ast/node/ArrayDefinition";
-import type AbstractArrayDimension from "../ast/node/AbstractArrayDimension";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type ComputedArrayDefinition from "../ast/node/ComputedArrayDefinition";
-import type ExplicitArrayDimension from "../ast/node/ExplicitArrayDimension";
-import type ImplicitArrayDimension from "../ast/node/ImplicitArrayDimension";
+import type { ArrayDefinition } from "../ast/node/ArrayDefinition";
+import type { AbstractArrayDimension } from "../ast/node/AbstractArrayDimension";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { ComputedArrayDefinition } from "../ast/node/ComputedArrayDefinition";
+import type { ExplicitArrayDimension } from "../ast/node/ExplicitArrayDimension";
+import type { ImplicitArrayDimension } from "../ast/node/ImplicitArrayDimension";
 const { join } = doc.builders;
 
 export function printAbstractArrayDimension(

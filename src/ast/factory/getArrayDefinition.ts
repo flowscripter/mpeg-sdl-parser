@@ -7,17 +7,17 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import ArrayDefinition from "../node/ArrayDefinition";
-import AlignedModifier from "../node/AlignedModifier";
-import ImplicitArrayDimension from "../node/ImplicitArrayDimension";
-import type AbstractArrayDimension from "../node/AbstractArrayDimension";
-import type ExplicitArrayDimension from "../node/ExplicitArrayDimension";
-import type PartialArrayDimension from "../node/PartialArrayDimension";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { ArrayDefinition } from "../node/ArrayDefinition";
+import { AlignedModifier } from "../node/AlignedModifier";
+import { ImplicitArrayDimension } from "../node/ImplicitArrayDimension";
+import type { AbstractArrayDimension } from "../node/AbstractArrayDimension";
+import type { ExplicitArrayDimension } from "../node/ExplicitArrayDimension";
+import type { PartialArrayDimension } from "../node/PartialArrayDimension";
 import { ArrayDimensionKind } from "../node/enum/array_dimension_kind";
-import type ElementaryType from "../node/ElementaryType";
-import type LengthAttribute from "../node/LengthAttribute";
+import type { ElementaryType } from "../node/ElementaryType";
+import type { LengthAttribute } from "../node/LengthAttribute";
 
 export function getArrayDefinition(
   cursor: TreeCursor,

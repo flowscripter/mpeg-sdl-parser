@@ -1,11 +1,11 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { addCommaSeparatorsToDoc, getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type MapDeclaration from "../ast/node/MapDeclaration";
-import type MapDefinition from "../ast/node/MapDefinition";
-import type MapEntry from "../ast/node/MapEntry";
-import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
-import type ElementaryTypeOutputValue from "../ast/node/ElementaryTypeOutputValue";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { MapDeclaration } from "../ast/node/MapDeclaration";
+import type { MapDefinition } from "../ast/node/MapDefinition";
+import type { MapEntry } from "../ast/node/MapEntry";
+import type { AggregateOutputValue } from "../ast/node/AggregateOutputValue";
+import type { ElementaryTypeOutputValue } from "../ast/node/ElementaryTypeOutputValue";
 const { hardline, indent, join } = doc.builders;
 
 export function printElementaryTypeOutputValue(

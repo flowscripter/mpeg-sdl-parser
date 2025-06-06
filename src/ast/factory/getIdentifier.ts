@@ -1,7 +1,7 @@
 import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
-import Identifier from "../node/Identifier";
+import { Identifier } from "../node/Identifier";
 
 export function getIdentifier(
   cursor: TreeCursor,

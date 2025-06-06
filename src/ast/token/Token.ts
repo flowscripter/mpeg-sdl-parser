@@ -1,10 +1,10 @@
-import type Location from "../../Location";
-import type Trivia from "./Trivia";
+import type { Location } from "../../Location";
+import type { Trivia } from "./Trivia";
 
 /**
  * ParseToken represents a token from the parsing process.
  */
-export default interface Token {
+export interface Token {
   readonly text: string;
   readonly location: Location;
   leadingTrivia: Trivia[];

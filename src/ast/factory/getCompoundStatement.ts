@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import CompoundStatement from "../node/CompoundStatement";
-import type AbstractStatement from "../node/AbstractStatement";
+import type { Token } from "../token/Token";
+import { CompoundStatement } from "../node/CompoundStatement";
+import type { AbstractStatement } from "../node/AbstractStatement";
 
 export function getCompoundStatement(
   cursor: TreeCursor,

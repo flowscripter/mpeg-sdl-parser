@@ -1,11 +1,11 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type AlignedModifier from "../ast/node/AlignedModifier";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { AlignedModifier } from "../ast/node/AlignedModifier";
 import { NumberLiteralKind } from "../ast/node/enum/number_literal_kind";
-import type LengthAttribute from "../ast/node/LengthAttribute";
-import type NumberLiteral from "../ast/node/NumberLiteral";
-import type Identifier from "../ast/node/Identifier";
+import type { LengthAttribute } from "../ast/node/LengthAttribute";
+import type { NumberLiteral } from "../ast/node/NumberLiteral";
+import type { Identifier } from "../ast/node/Identifier";
 const { join } = doc.builders;
 
 export function printAlignedModifier(

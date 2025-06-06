@@ -1,6 +1,6 @@
 import type { Text } from "@codemirror/state";
 import { TreeCursor } from "@lezer/common";
-import type Location from "./Location.ts";
+import type { Location } from "./Location.ts";
 import { getLocationFromTextPosition } from "./util/locationUtils.ts";
 
 /**

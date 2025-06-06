@@ -1,13 +1,13 @@
-import AbstractClassId from "./AbstractClassId.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type SingleClassId from "./ClassId.ts";
-import type ClassIdRange from "./ClassIdRange.ts";
+import { AbstractClassId } from "./AbstractClassId.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ClassId } from "./ClassId.ts";
+import type { ClassIdRange } from "./ClassIdRange.ts";
 import { ClassIdKind } from "./enum/class_id_kind.ts";
-import type Token from "../token/Token.ts";
+import type { Token } from "../token/Token.ts";
 
-export default class ExtendedClassIdRange extends AbstractClassId {
+export class ExtendedClassIdRange extends AbstractClassId {
   constructor(
-    public readonly classIds: Array<(SingleClassId | ClassIdRange)>,
+    public readonly classIds: Array<(ClassId | ClassIdRange)>,
     public readonly commaPunctuators: Token[],
   ) {
     super(

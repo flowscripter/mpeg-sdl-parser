@@ -1,10 +1,10 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AbstractStatement from "./AbstractStatement.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AbstractStatement } from "./AbstractStatement.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export default class DefaultClause extends AbstractCompositeNode {
+export class DefaultClause extends AbstractCompositeNode {
   constructor(
     public readonly statements: AbstractStatement[],
     public readonly defaultKeyword: Token,

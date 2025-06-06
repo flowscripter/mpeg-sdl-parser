@@ -1,6 +1,6 @@
 import { AstPath, type Doc, doc } from "prettier";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type IfStatement from "../ast/node/IfStatement";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { IfStatement } from "../ast/node/IfStatement";
 import { getDocWithTrivia } from "./print_utils";
 import { StatementKind } from "../ast/node/enum/statement_kind";
 

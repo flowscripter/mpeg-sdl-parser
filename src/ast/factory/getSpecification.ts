@@ -6,13 +6,13 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import Specification from "../node/Specification";
-import type ComputedElementaryTypeDefinition from "../node/ComputedElementaryTypeDefinition";
+import { Specification } from "../node/Specification";
+import type { ComputedElementaryTypeDefinition } from "../node/ComputedElementaryTypeDefinition";
 import { NodeKind } from "../node/enum/node_kind";
-import type AbstractStatement from "../node/AbstractStatement";
+import type { AbstractStatement } from "../node/AbstractStatement";
 import { StatementKind } from "../node/enum/statement_kind";
-import type MapDeclaration from "../node/MapDeclaration";
-import type ClassDeclaration from "../node/ClassDeclaration";
+import type { MapDeclaration } from "../node/MapDeclaration";
+import type { ClassDeclaration } from "../node/ClassDeclaration";
 
 export function getSpecification(
   cursor: TreeCursor,

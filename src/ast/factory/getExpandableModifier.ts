@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import ExpandableModifier from "../node/ExpandableModifier";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { ExpandableModifier } from "../node/ExpandableModifier";
 
 export function getExpandableModifier(
   cursor: TreeCursor,

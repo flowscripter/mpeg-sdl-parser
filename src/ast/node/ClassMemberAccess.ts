@@ -1,10 +1,10 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { Identifier } from "./Identifier.ts";
 
-export default class ClassMemberAccess extends AbstractCompositeNode {
+export class ClassMemberAccess extends AbstractCompositeNode {
   constructor(
     public readonly memberIdentifier: Identifier,
     public readonly classMemberAccessOperator: Token,

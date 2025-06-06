@@ -1,13 +1,13 @@
-import type Token from "../token/Token.ts";
-import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
-import type AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractElementaryTypeDefinition } from "./AbstractElementaryTypeDefinition.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class ComputedElementaryTypeDefinition
+export class ComputedElementaryTypeDefinition
   extends AbstractElementaryTypeDefinition {
   constructor(
     isConst: boolean,

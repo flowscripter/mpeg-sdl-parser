@@ -1,10 +1,9 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
 import { ArrayDimensionKind } from "./enum/array_dimension_kind.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 
-export default abstract class AbstractArrayDimension
-  extends AbstractCompositeNode {
+export abstract class AbstractArrayDimension extends AbstractCompositeNode {
   constructor(
     public readonly arrayDimensionKind: ArrayDimensionKind,
     public readonly openBracketPunctuator: Token,

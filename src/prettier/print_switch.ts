@@ -1,9 +1,9 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type CaseClause from "../ast/node/CaseClause";
-import type DefaultClause from "../ast/node/DefaultClause";
-import type SwitchStatement from "../ast/node/SwitchStatement";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { CaseClause } from "../ast/node/CaseClause";
+import type { DefaultClause } from "../ast/node/DefaultClause";
+import type { SwitchStatement } from "../ast/node/SwitchStatement";
 const { hardline, indent, join } = doc.builders;
 
 export function printCaseClause(

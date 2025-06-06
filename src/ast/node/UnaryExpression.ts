@@ -1,15 +1,15 @@
-import type Token from "../token/Token.ts";
-import AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ArrayElementAccess from "./ArrayElementAccess.ts";
-import type ClassMemberAccess from "./ClassMemberAccess.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ArrayElementAccess } from "./ArrayElementAccess.ts";
+import type { ClassMemberAccess } from "./ClassMemberAccess.ts";
 import { ExpressionKind } from "./enum/expression_kind.ts";
 import { PostfixOperatorKind } from "./enum/postfix_operator_kind.ts";
 import { UnaryOperatorKind } from "./enum/unary_operator_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class UnaryExpression extends AbstractExpression {
+export class UnaryExpression extends AbstractExpression {
   constructor(
     public readonly unaryOperatorKind: UnaryOperatorKind | undefined,
     public readonly operand:

@@ -1,7 +1,7 @@
 import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { assertSyntaxNodeType, getToken } from "../../util/nodeFactoryUtils";
-import NumberLiteral from "../node/NumberLiteral";
+import { NumberLiteral } from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 
 export function getIntegerLiteral(

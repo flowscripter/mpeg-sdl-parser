@@ -7,10 +7,10 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import CaseClause from "../node/CaseClause";
-import type AbstractStatement from "../node/AbstractStatement";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { CaseClause } from "../node/CaseClause";
+import type { AbstractStatement } from "../node/AbstractStatement";
 
 export function getCaseClause(
   cursor: TreeCursor,

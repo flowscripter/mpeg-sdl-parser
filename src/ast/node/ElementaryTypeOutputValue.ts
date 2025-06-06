@@ -1,10 +1,10 @@
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type LengthAttribute from "./LengthAttribute.ts";
-import type ElementaryType from "./ElementaryType.ts";
+import type { LengthAttribute } from "./LengthAttribute.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
 
-export default class ElementaryTypeOutputValue extends AbstractCompositeNode {
+export class ElementaryTypeOutputValue extends AbstractCompositeNode {
   constructor(
     public readonly elementaryType: ElementaryType,
     public readonly lengthAttribute: LengthAttribute,

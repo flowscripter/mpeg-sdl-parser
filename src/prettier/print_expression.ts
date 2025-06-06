@@ -1,13 +1,13 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractExpression from "../ast/node/AbstractExpression";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type ArrayElementAccess from "../ast/node/ArrayElementAccess";
-import type ClassMemberAccess from "../ast/node/ClassMemberAccess";
+import type { AbstractExpression } from "../ast/node/AbstractExpression";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { ArrayElementAccess } from "../ast/node/ArrayElementAccess";
+import type { ClassMemberAccess } from "../ast/node/ClassMemberAccess";
 import { ExpressionKind } from "../ast/node/enum/expression_kind";
-import type LengthOfExpression from "../ast/node/LengthofExpression";
-import type BinaryExpression from "../ast/node/BinaryExpression";
-import type UnaryExpression from "../ast/node/UnaryExpression";
+import type { LengthofExpression } from "../ast/node/LengthofExpression";
+import type { BinaryExpression } from "../ast/node/BinaryExpression";
+import type { UnaryExpression } from "../ast/node/UnaryExpression";
 const { join } = doc.builders;
 
 export function printClassMemberAccess(
@@ -106,7 +106,7 @@ function printBinaryExpression(
 }
 
 function printLengthOfExpression(
-  path: AstPath<LengthOfExpression>,
+  path: AstPath<LengthofExpression>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {
   const lengthOfExpression = path.node;
@@ -134,7 +134,7 @@ export function printAbstractExpression(
       return printBinaryExpression(path as AstPath<BinaryExpression>, print);
     case ExpressionKind.LENGTHOF:
       return printLengthOfExpression(
-        path as AstPath<LengthOfExpression>,
+        path as AstPath<LengthofExpression>,
         print,
       );
     case ExpressionKind.UNARY:

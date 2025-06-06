@@ -30,34 +30,34 @@ import { printElementaryType } from "./print_elementary_type";
 import { printStringLiteral } from "./print_string";
 import { printStatement } from "./print_statement";
 import { printCaseClause, printDefaultClause } from "./print_switch";
-import type AbstractArrayDimension from "../ast/node/AbstractArrayDimension";
-import type AbstractClassId from "../ast/node/AbstractClassId";
-import type AbstractExpression from "../ast/node/AbstractExpression";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type AbstractStatement from "../ast/node/AbstractStatement";
-import type AlignedModifier from "../ast/node/AlignedModifier";
-import type ArrayElementAccess from "../ast/node/ArrayElementAccess";
-import type BitModifier from "../ast/node/BitModifier";
-import type ClassMemberAccess from "../ast/node/ClassMemberAccess";
-import type ElementaryType from "../ast/node/ElementaryType";
+import type { AbstractArrayDimension } from "../ast/node/AbstractArrayDimension";
+import type { AbstractClassId } from "../ast/node/AbstractClassId";
+import type { AbstractExpression } from "../ast/node/AbstractExpression";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { AbstractStatement } from "../ast/node/AbstractStatement";
+import type { AlignedModifier } from "../ast/node/AlignedModifier";
+import type { ArrayElementAccess } from "../ast/node/ArrayElementAccess";
+import type { BitModifier } from "../ast/node/BitModifier";
+import type { ClassMemberAccess } from "../ast/node/ClassMemberAccess";
+import type { ElementaryType } from "../ast/node/ElementaryType";
 import { NodeKind } from "../ast/node/enum/node_kind";
-import type ExpandableModifier from "../ast/node/ExpandableModifier";
-import type ExtendsModifier from "../ast/node/ExtendsModifier";
-import type LengthAttribute from "../ast/node/LengthAttribute";
-import type MapEntry from "../ast/node/MapEntry";
-import type NumberLiteral from "../ast/node/NumberLiteral";
-import type Parameter from "../ast/node/Parameter";
-import type ParameterList from "../ast/node/ParameterList";
-import type ParameterValueList from "../ast/node/ParameterValueList";
-import type Specification from "../ast/node/Specification";
-import type CaseClause from "../ast/node/CaseClause";
-import type DefaultClause from "../ast/node/DefaultClause";
-import type Identifier from "../ast/node/Identifier";
-import type StringLiteral from "../ast/node/StringLiteral";
-import type AggregateOutputValue from "../ast/node/AggregateOutputValue";
-import type ElementaryTypeOutputValue from "../ast/node/ElementaryTypeOutputValue";
+import type { ExpandableModifier } from "../ast/node/ExpandableModifier";
+import type { ExtendsModifier } from "../ast/node/ExtendsModifier";
+import type { LengthAttribute } from "../ast/node/LengthAttribute";
+import type { MapEntry } from "../ast/node/MapEntry";
+import type { NumberLiteral } from "../ast/node/NumberLiteral";
+import type { Parameter } from "../ast/node/Parameter";
+import type { ParameterList } from "../ast/node/ParameterList";
+import type { ParameterValueList } from "../ast/node/ParameterValueList";
+import type { Specification } from "../ast/node/Specification";
+import type { CaseClause } from "../ast/node/CaseClause";
+import type { DefaultClause } from "../ast/node/DefaultClause";
+import type { Identifier } from "../ast/node/Identifier";
+import type { StringLiteral } from "../ast/node/StringLiteral";
+import type { AggregateOutputValue } from "../ast/node/AggregateOutputValue";
+import type { ElementaryTypeOutputValue } from "../ast/node/ElementaryTypeOutputValue";
 
-export default function printNode(
+export function printNode(
   path: AstPath<AbstractNode>,
   _options: ParserOptions<AbstractNode>,
   print: (_path: AstPath<AbstractNode>) => Doc,

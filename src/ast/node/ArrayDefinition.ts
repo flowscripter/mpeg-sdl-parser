@@ -1,16 +1,16 @@
-import type Token from "../token/Token.ts";
-import AbstractArrayDefinition from "./AbstractArrayDefinition.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AlignedModifier from "./AlignedModifier.ts";
-import type ElementaryType from "./ElementaryType.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractArrayDefinition } from "./AbstractArrayDefinition.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AlignedModifier } from "./AlignedModifier.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type ExplicitArrayDimension from "./ExplicitArrayDimension.ts";
-import type Identifier from "./Identifier.ts";
-import type ImplicitArrayDimension from "./ImplicitArrayDimension.ts";
-import type LengthAttribute from "./LengthAttribute.ts";
-import type PartialArrayDimension from "./PartialArrayDimension.ts";
+import type { ExplicitArrayDimension } from "./ExplicitArrayDimension.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { ImplicitArrayDimension } from "./ImplicitArrayDimension.ts";
+import type { LengthAttribute } from "./LengthAttribute.ts";
+import type { PartialArrayDimension } from "./PartialArrayDimension.ts";
 
-export default class ArrayDefinition extends AbstractArrayDefinition {
+export class ArrayDefinition extends AbstractArrayDefinition {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,

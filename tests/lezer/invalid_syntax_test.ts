@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 
 import { createStrictSdlParser } from "../../src/lezer/createSdlParser.ts";
-import SdlStringInput from "../../src/lezer/SdlStringInput.ts";
+import { SdlStringInput } from "../../src/lezer/SdlStringInput.ts";
 
 const sdlParser = await createStrictSdlParser();
 

@@ -1,10 +1,10 @@
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ElementaryType from "./ElementaryType.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
+import type { Identifier } from "./Identifier.ts";
 
-export default class Parameter extends AbstractCompositeNode {
+export class Parameter extends AbstractCompositeNode {
   constructor(
     public readonly classIdentifier: Identifier | undefined,
     public readonly elementaryType: ElementaryType | undefined,

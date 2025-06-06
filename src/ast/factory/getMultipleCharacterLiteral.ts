@@ -5,7 +5,7 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import NumberLiteral from "../node/NumberLiteral";
+import { NumberLiteral } from "../node/NumberLiteral";
 import { NumberLiteralKind } from "../node/enum/number_literal_kind";
 import { InternalParseError } from "../../ParseError";
 import { NodeKind } from "../node/enum/node_kind";

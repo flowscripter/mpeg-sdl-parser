@@ -1,10 +1,10 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type WhileStatement from "../ast/node/WhileStatement";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { WhileStatement } from "../ast/node/WhileStatement";
 const { join } = doc.builders;
 
-export default function printWhileStatement(
+export function printWhileStatement(
   path: AstPath<WhileStatement>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {

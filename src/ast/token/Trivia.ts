@@ -1,4 +1,4 @@
-import type Location from "../../Location.ts";
+import type { Location } from "../../Location.ts";
 
 /**
  * Represents a parsed trivia item.
@@ -7,7 +7,7 @@ import type Location from "../../Location.ts";
  * @property {string} text - The text content of the trivia.
  * @property {Location} location - The location of the trivia.
  */
-export default interface Trivia {
+export interface Trivia {
   readonly text: string;
   readonly location: Location;
 }

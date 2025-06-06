@@ -1,9 +1,9 @@
 import type { Parser, Plugin, Printer, SupportLanguage } from "prettier";
-import printNode from "./print_node";
-import type AbstractNode from "../ast/node/AbstractNode";
+import { printNode } from "./print_node";
+import type { AbstractNode } from "../ast/node/AbstractNode";
 import { createStrictSdlParser } from "../lezer/createSdlParser";
 import { buildAst } from "../ast/buildAst";
-import SdlStringInput from "../lezer/SdlStringInput";
+import { SdlStringInput } from "../lezer/SdlStringInput";
 
 const languages: SupportLanguage[] = [
   {

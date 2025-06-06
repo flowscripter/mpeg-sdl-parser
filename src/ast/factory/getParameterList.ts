@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import ParameterList from "../node/ParameterList";
-import type Parameter from "../node/Parameter";
+import type { Token } from "../token/Token";
+import { ParameterList } from "../node/ParameterList";
+import type { Parameter } from "../node/Parameter";
 
 export function getParameterList(
   cursor: TreeCursor,

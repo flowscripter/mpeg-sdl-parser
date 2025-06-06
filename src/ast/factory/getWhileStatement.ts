@@ -7,13 +7,13 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type AbstractStatement from "../node/AbstractStatement";
-import type AbstractExpression from "../node/AbstractExpression";
-import type NumberLiteral from "../node/NumberLiteral";
-import type Identifier from "../node/Identifier";
-import WhileStatement from "../node/WhileStatement";
-import CompoundStatement from "../node/CompoundStatement";
+import type { Token } from "../token/Token";
+import type { AbstractStatement } from "../node/AbstractStatement";
+import type { AbstractExpression } from "../node/AbstractExpression";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { Identifier } from "../node/Identifier";
+import { WhileStatement } from "../node/WhileStatement";
+import { CompoundStatement } from "../node/CompoundStatement";
 import { StatementKind } from "../node/enum/statement_kind";
 
 export function getWhileStatement(

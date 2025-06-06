@@ -7,15 +7,15 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import ClassDeclaration from "../node/ClassDeclaration";
-import AbstractStatement from "../node/AbstractStatement";
-import BitModifier from "../node/BitModifier";
-import ExtendsModifier from "../node/ExtendsModifier";
-import ParameterList from "../node/ParameterList";
-import type ExpandableModifier from "../node/ExpandableModifier";
-import type AlignedModifier from "../node/AlignedModifier";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { ClassDeclaration } from "../node/ClassDeclaration";
+import { AbstractStatement } from "../node/AbstractStatement";
+import { BitModifier } from "../node/BitModifier";
+import { ExtendsModifier } from "../node/ExtendsModifier";
+import { ParameterList } from "../node/ParameterList";
+import type { ExpandableModifier } from "../node/ExpandableModifier";
+import type { AlignedModifier } from "../node/AlignedModifier";
 
 export function getClassDeclaration(
   cursor: TreeCursor,
