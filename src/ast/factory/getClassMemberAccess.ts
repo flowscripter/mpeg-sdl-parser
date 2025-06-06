@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import ClassMemberAccess from "../node/ClassMemberAccess";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { ClassMemberAccess } from "../node/ClassMemberAccess";
 
 export function getClassMemberAccess(
   cursor: TreeCursor,

@@ -4,7 +4,7 @@ import type { Input } from "@lezer/common";
  * The `SdlStringInput` class implements the `Input` interface for a string input.
  * It provides methods to read and chunk the input string.
  */
-export default class SdlStringInput implements Input {
+export class SdlStringInput implements Input {
   private readonly input: string;
 
   constructor(input: string) {

@@ -1,13 +1,13 @@
-import type Token from "../token/Token.ts";
-import AbstractClassId from "./AbstractClassId.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type SingleClassId from "./ClassId.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractClassId } from "./AbstractClassId.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ClassId } from "./ClassId.ts";
 import { ClassIdKind } from "./enum/class_id_kind.ts";
 
-export default class ClassIdRange extends AbstractClassId {
+export class ClassIdRange extends AbstractClassId {
   constructor(
-    public readonly startClassId: SingleClassId,
-    public readonly endClassId: SingleClassId,
+    public readonly startClassId: ClassId,
+    public readonly endClassId: ClassId,
     public readonly rangeOperator: Token,
   ) {
     super(ClassIdKind.RANGE, startClassId.startToken, endClassId.endToken);

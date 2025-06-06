@@ -1,9 +1,9 @@
-import type Token from "../token/Token.ts";
-import AbstractLeafNode from "./AbstractLeafNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractLeafNode } from "./AbstractLeafNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 import { StringLiteralKind } from "./enum/string_literal_kind.ts";
 
-export default class StringLiteral extends AbstractLeafNode {
+export class StringLiteral extends AbstractLeafNode {
   constructor(
     public readonly stringLiteralKind: StringLiteralKind,
     public readonly value: string,

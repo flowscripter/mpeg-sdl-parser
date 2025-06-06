@@ -7,12 +7,12 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import IfStatement from "../node/IfStatement";
-import type Token from "../token/Token";
-import type AbstractStatement from "../node/AbstractStatement";
-import type AbstractExpression from "../node/AbstractExpression";
-import type NumberLiteral from "../node/NumberLiteral";
-import type Identifier from "../node/Identifier";
+import { IfStatement } from "../node/IfStatement";
+import type { Token } from "../token/Token";
+import type { AbstractStatement } from "../node/AbstractStatement";
+import type { AbstractExpression } from "../node/AbstractExpression";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { Identifier } from "../node/Identifier";
 
 export function getIfStatement(
   cursor: TreeCursor,

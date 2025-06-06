@@ -1,19 +1,19 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { addCommaSeparatorsToDoc, getDocWithTrivia } from "./print_utils";
-import type BitModifier from "../ast/node/BitModifier";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type ClassDeclaration from "../ast/node/ClassDeclaration";
-import type ExtendedClassIdRange from "../ast/node/ExtendedClassIdRange";
-import type AbstractClassId from "../ast/node/AbstractClassId";
-import type ClassDefinition from "../ast/node/ClassDefinition";
-import type ClassIdRange from "../ast/node/ClassIdRange";
+import type { BitModifier } from "../ast/node/BitModifier";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { ClassDeclaration } from "../ast/node/ClassDeclaration";
+import type { ExtendedClassIdRange } from "../ast/node/ExtendedClassIdRange";
+import type { AbstractClassId } from "../ast/node/AbstractClassId";
+import type { ClassDefinition } from "../ast/node/ClassDefinition";
+import type { ClassIdRange } from "../ast/node/ClassIdRange";
 import { ClassIdKind } from "../ast/node/enum/class_id_kind";
-import type ExpandableModifier from "../ast/node/ExpandableModifier";
-import type ExtendsModifier from "../ast/node/ExtendsModifier";
-import type Parameter from "../ast/node/Parameter";
-import type ParameterList from "../ast/node/ParameterList";
-import type ParameterValueList from "../ast/node/ParameterValueList";
-import type SingleClassId from "../ast/node/ClassId";
+import type { ExpandableModifier } from "../ast/node/ExpandableModifier";
+import type { ExtendsModifier } from "../ast/node/ExtendsModifier";
+import type { Parameter } from "../ast/node/Parameter";
+import type { ParameterList } from "../ast/node/ParameterList";
+import type { ParameterValueList } from "../ast/node/ParameterValueList";
+import type { ClassId } from "../ast/node/ClassId";
 const { hardline, indent, join } = doc.builders;
 
 export function printBitModifier(
@@ -184,7 +184,7 @@ export function printClassId(
   const { classIdKind } = path.node;
   switch (classIdKind) {
     case ClassIdKind.SINGLE:
-      return (path as AstPath<SingleClassId>).call(print, "value");
+      return (path as AstPath<ClassId>).call(print, "value");
     case ClassIdKind.RANGE: {
       const classIdRange = path.node as ClassIdRange;
       return [

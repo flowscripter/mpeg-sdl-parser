@@ -1,9 +1,9 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export default abstract class AbstractStatement extends AbstractCompositeNode {
+export abstract class AbstractStatement extends AbstractCompositeNode {
   constructor(
     public readonly statementKind: StatementKind,
     startToken: Token,

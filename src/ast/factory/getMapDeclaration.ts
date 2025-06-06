@@ -7,11 +7,11 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import MapDeclaration from "../node/MapDeclaration";
-import type ElementaryType from "../node/ElementaryType";
-import type MapEntry from "../node/MapEntry";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { MapDeclaration } from "../node/MapDeclaration";
+import type { ElementaryType } from "../node/ElementaryType";
+import type { MapEntry } from "../node/MapEntry";
 
 export function getMapDeclaration(
   cursor: TreeCursor,

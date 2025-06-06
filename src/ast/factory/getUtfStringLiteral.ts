@@ -7,8 +7,8 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import StringLiteral from "../node/StringLiteral";
+import type { Token } from "../token/Token";
+import { StringLiteral } from "../node/StringLiteral";
 import { StringLiteralKind } from "../node/enum/string_literal_kind";
 import { getLocationFromTextPosition } from "../../util/locationUtils";
 

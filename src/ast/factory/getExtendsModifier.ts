@@ -6,10 +6,10 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import ExtendsModifier from "../node/ExtendsModifier";
-import type Identifier from "../node/Identifier";
-import type ParameterValueList from "../node/ParameterValueList";
+import type { Token } from "../token/Token";
+import { ExtendsModifier } from "../node/ExtendsModifier";
+import type { Identifier } from "../node/Identifier";
+import type { ParameterValueList } from "../node/ParameterValueList";
 import type { TreeCursor } from "@lezer/common";
 
 export function getExtendsModifier(

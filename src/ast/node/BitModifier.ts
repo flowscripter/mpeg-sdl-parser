@@ -1,12 +1,12 @@
-import type Token from "../token/Token.ts";
-import type AbstractClassId from "./AbstractClassId.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractClassId } from "./AbstractClassId.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class BitModifier extends AbstractCompositeNode {
+export class BitModifier extends AbstractCompositeNode {
   constructor(
     public readonly length: NumberLiteral,
     public readonly identifier: Identifier | undefined,

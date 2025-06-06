@@ -7,10 +7,10 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import MapEntry from "../node/MapEntry";
-import type NumberLiteral from "../node/NumberLiteral";
-import type AggregateOutputValue from "../node/AggregateOutputValue";
+import type { Token } from "../token/Token";
+import { MapEntry } from "../node/MapEntry";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { AggregateOutputValue } from "../node/AggregateOutputValue";
 
 export function getMapEntry(
   cursor: TreeCursor,

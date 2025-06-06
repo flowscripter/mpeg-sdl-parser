@@ -1,16 +1,15 @@
-import type Token from "../token/Token.ts";
-import AbstractElementaryTypeDefinition from "./AbstractElementaryTypeDefinition.ts";
-import type AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type AlignedModifier from "./AlignedModifier.ts";
-import type ElementaryType from "./ElementaryType.ts";
-import type Identifier from "./Identifier.ts";
-import type LengthAttribute from "./LengthAttribute.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractElementaryTypeDefinition } from "./AbstractElementaryTypeDefinition.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { AlignedModifier } from "./AlignedModifier.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { LengthAttribute } from "./LengthAttribute.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 
-export default class ElementaryTypeDefinition
-  extends AbstractElementaryTypeDefinition {
+export class ElementaryTypeDefinition extends AbstractElementaryTypeDefinition {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,

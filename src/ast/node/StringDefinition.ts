@@ -1,13 +1,13 @@
-import type Token from "../token/Token.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type AlignedModifier from "./AlignedModifier.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { AlignedModifier } from "./AlignedModifier.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
 import type { StringVariableKind } from "./enum/string_variable_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type StringLiteral from "./StringLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { StringLiteral } from "./StringLiteral.ts";
 
-export default class StringDefinition extends AbstractStatement {
+export class StringDefinition extends AbstractStatement {
   constructor(
     public readonly isReserved: boolean,
     public readonly isLegacy: boolean,

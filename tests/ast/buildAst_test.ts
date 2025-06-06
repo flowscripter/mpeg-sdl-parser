@@ -4,10 +4,10 @@ import {
   createLenientSdlParser,
   createStrictSdlParser,
 } from "../../src/lezer/createSdlParser.ts";
-import SdlStringInput from "../../src/lezer/SdlStringInput.ts";
-import Specification from "../../src/ast/node/Specification.ts";
-import ClassDeclaration from "../../src/ast/node/ClassDeclaration.ts";
-import Identifier from "../../src/ast/node/Identifier.ts";
+import { SdlStringInput } from "../../src/lezer/SdlStringInput.ts";
+import { Specification } from "../../src/ast/node/Specification.ts";
+import { ClassDeclaration } from "../../src/ast/node/ClassDeclaration.ts";
+import { Identifier } from "../../src/ast/node/Identifier.ts";
 
 const lenientSdlParser = await createLenientSdlParser();
 const strictSdlParser = await createStrictSdlParser();

@@ -1,10 +1,10 @@
 import { AstPath, type Doc, doc } from "prettier";
 import { getDocWithTrivia } from "./print_utils";
-import type AbstractNode from "../ast/node/AbstractNode";
-import type DoStatement from "../ast/node/DoStatement";
+import type { AbstractNode } from "../ast/node/AbstractNode";
+import type { DoStatement } from "../ast/node/DoStatement";
 const { join } = doc.builders;
 
-export default function printDoStatement(
+export function printDoStatement(
   path: AstPath<DoStatement>,
   print: (path: AstPath<AbstractNode>) => Doc,
 ): Doc {

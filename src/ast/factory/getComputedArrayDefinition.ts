@@ -7,11 +7,11 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import type ExplicitArrayDimension from "../node/ExplicitArrayDimension";
-import type ElementaryType from "../node/ElementaryType";
-import ComputedArrayDefinition from "../node/ComputedArrayDefinition";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import type { ExplicitArrayDimension } from "../node/ExplicitArrayDimension";
+import type { ElementaryType } from "../node/ElementaryType";
+import { ComputedArrayDefinition } from "../node/ComputedArrayDefinition";
 
 export function getComputedArrayDefinition(
   cursor: TreeCursor,

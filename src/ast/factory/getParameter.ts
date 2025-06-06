@@ -6,10 +6,10 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import ElementaryType from "../node/ElementaryType";
+import { ElementaryType } from "../node/ElementaryType";
 import { NodeKind } from "../node/enum/node_kind";
-import Parameter from "../node/Parameter";
-import type Identifier from "../node/Identifier";
+import { Parameter } from "../node/Parameter";
+import type { Identifier } from "../node/Identifier";
 
 export function getParameter(
   cursor: TreeCursor,

@@ -1,12 +1,12 @@
-import type Token from "../token/Token.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
-import type ElementaryType from "./ElementaryType.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
+import type { ElementaryType } from "./ElementaryType.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type MapEntry from "./MapEntry.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { MapEntry } from "./MapEntry.ts";
 
-export default class MapDeclaration extends AbstractStatement {
+export class MapDeclaration extends AbstractStatement {
   constructor(
     public readonly identifier: Identifier,
     public readonly outputElementaryType: ElementaryType | undefined,

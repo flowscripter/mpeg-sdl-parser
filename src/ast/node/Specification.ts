@@ -1,11 +1,11 @@
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import type ClassDeclaration from "./ClassDeclaration.ts";
-import type ComputedElementaryTypeDefinition from "./ComputedElementaryTypeDefinition.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import type { ClassDeclaration } from "./ClassDeclaration.ts";
+import type { ComputedElementaryTypeDefinition } from "./ComputedElementaryTypeDefinition.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type MapDeclaration from "./MapDeclaration.ts";
+import type { MapDeclaration } from "./MapDeclaration.ts";
 
-export default class Specification extends AbstractCompositeNode {
+export class Specification extends AbstractCompositeNode {
   constructor(
     public readonly globals: Array<
       ComputedElementaryTypeDefinition | MapDeclaration | ClassDeclaration

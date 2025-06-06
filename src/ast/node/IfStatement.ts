@@ -1,12 +1,12 @@
-import type Token from "../token/Token.ts";
-import type AbstractExpression from "./AbstractExpression.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractStatement from "./AbstractStatement.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractExpression } from "./AbstractExpression.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractStatement } from "./AbstractStatement.ts";
 import { StatementKind } from "./enum/statement_kind.ts";
-import type Identifier from "./Identifier.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { Identifier } from "./Identifier.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class IfStatement extends AbstractStatement {
+export class IfStatement extends AbstractStatement {
   constructor(
     public readonly condition: AbstractExpression | Identifier | NumberLiteral,
     public readonly ifStatement: AbstractStatement,

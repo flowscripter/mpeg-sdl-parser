@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import AlignedModifier from "../node/AlignedModifier";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { AlignedModifier } from "../node/AlignedModifier";
 
 export function getAlignedModifier(
   cursor: TreeCursor,

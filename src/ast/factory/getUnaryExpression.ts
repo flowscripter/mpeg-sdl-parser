@@ -6,16 +6,16 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import type AbstractExpression from "../node/AbstractExpression";
+import type { AbstractExpression } from "../node/AbstractExpression";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import UnaryExpression from "../node/UnaryExpression";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { UnaryExpression } from "../node/UnaryExpression";
 import { UnaryOperatorKind } from "../node/enum/unary_operator_kind";
 import { PostfixOperatorKind } from "../node/enum/postfix_operator_kind";
-import ArrayElementAccess from "../node/ArrayElementAccess";
-import type ClassMemberAccess from "../node/ClassMemberAccess";
+import { ArrayElementAccess } from "../node/ArrayElementAccess";
+import type { ClassMemberAccess } from "../node/ClassMemberAccess";
 
 export function getUnaryExpression(
   cursor: TreeCursor,

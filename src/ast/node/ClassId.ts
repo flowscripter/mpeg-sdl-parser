@@ -1,9 +1,9 @@
-import AbstractClassId from "./AbstractClassId.ts";
-import type AbstractNode from "./AbstractNode.ts";
+import { AbstractClassId } from "./AbstractClassId.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
 import { ClassIdKind } from "./enum/class_id_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class ClassId extends AbstractClassId {
+export class ClassId extends AbstractClassId {
   constructor(
     public readonly value: NumberLiteral,
   ) {

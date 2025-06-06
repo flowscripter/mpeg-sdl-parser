@@ -7,10 +7,10 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import AggregateOutputValue from "../node/AggregateOutputValue";
-import type NumberLiteral from "../node/NumberLiteral";
-import type ElementaryTypeOutputValue from "../node/ElementaryTypeOutputValue";
+import type { Token } from "../token/Token";
+import { AggregateOutputValue } from "../node/AggregateOutputValue";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { ElementaryTypeOutputValue } from "../node/ElementaryTypeOutputValue";
 
 export function getAggregateOutputValue(
   cursor: TreeCursor,

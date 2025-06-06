@@ -6,7 +6,7 @@
  * @property {number} column - The one-based column number in the text document.
  * @property {number} position - The zero-based position within the entire text.
  */
-export default interface Location {
+export interface Location {
   readonly row: number;
   readonly column: number;
   readonly position: number;

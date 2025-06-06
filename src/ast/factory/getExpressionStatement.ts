@@ -6,12 +6,12 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import type AbstractExpression from "../node/AbstractExpression";
+import type { AbstractExpression } from "../node/AbstractExpression";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import ExpressionStatement from "../node/ExpressionStatement";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { ExpressionStatement } from "../node/ExpressionStatement";
 
 export function getExpressionStatement(
   cursor: TreeCursor,

@@ -7,11 +7,11 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import ParameterValueList from "../node/ParameterValueList";
-import type AbstractExpression from "../node/AbstractExpression";
-import type NumberLiteral from "../node/NumberLiteral";
-import type Identifier from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { ParameterValueList } from "../node/ParameterValueList";
+import type { AbstractExpression } from "../node/AbstractExpression";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { Identifier } from "../node/Identifier";
 
 export function getParameterValueList(
   cursor: TreeCursor,

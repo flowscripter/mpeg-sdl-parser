@@ -7,9 +7,9 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type AbstractStatement from "../node/AbstractStatement";
-import DefaultClause from "../node/DefaultClause";
+import type { Token } from "../token/Token";
+import type { AbstractStatement } from "../node/AbstractStatement";
+import { DefaultClause } from "../node/DefaultClause";
 
 export function getDefaultClause(
   cursor: TreeCursor,

@@ -5,10 +5,10 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import type NumberLiteral from "../node/NumberLiteral";
+import type { NumberLiteral } from "../node/NumberLiteral";
 import { InternalParseError } from "../../ParseError";
 import { NodeKind } from "../node/enum/node_kind";
-import ClassId from "../node/ClassId";
+import { ClassId } from "../node/ClassId";
 
 export function getClassId(
   cursor: TreeCursor,

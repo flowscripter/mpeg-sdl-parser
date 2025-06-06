@@ -1,10 +1,10 @@
-import type Token from "../token/Token.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
-import type AbstractNode from "./AbstractNode.ts";
+import type { Token } from "../token/Token.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
 
-export default class ExpandableModifier extends AbstractCompositeNode {
+export class ExpandableModifier extends AbstractCompositeNode {
   constructor(
     public readonly maxClassSize: NumberLiteral | undefined,
     public readonly expandableKeyword: Token,

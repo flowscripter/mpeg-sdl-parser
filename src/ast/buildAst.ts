@@ -1,11 +1,11 @@
 import type { Tree } from "@lezer/common";
 import { Text } from "@codemirror/state";
-import type SdlStringInput from "../lezer/SdlStringInput";
-import type Specification from "./node/Specification";
-import NodeFactory from "./factory/NodeFactory";
+import type { SdlStringInput } from "../lezer/SdlStringInput";
+import type { Specification } from "./node/Specification";
+import { NodeFactory } from "./factory/NodeFactory";
 import { debugEnabled } from "../util/logger.ts";
-import type NodeHandler from "./visitor/NodeHandler.ts";
-import TraversingVisitor from "./visitor/TraversingVisitor.ts";
+import type { NodeHandler } from "./visitor/NodeHandler.ts";
+import { TraversingVisitor } from "./visitor/TraversingVisitor.ts";
 import { InternalParseError } from "../ParseError.ts";
 
 /**

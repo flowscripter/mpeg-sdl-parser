@@ -7,11 +7,11 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type NumberLiteral from "../node/NumberLiteral";
-import BitModifier from "../node/BitModifier";
-import type Identifier from "../node/Identifier";
-import type AbstractClassId from "../node/AbstractClassId";
+import type { Token } from "../token/Token";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import { BitModifier } from "../node/BitModifier";
+import type { Identifier } from "../node/Identifier";
+import type { AbstractClassId } from "../node/AbstractClassId";
 
 export function getBitModifier(
   cursor: TreeCursor,

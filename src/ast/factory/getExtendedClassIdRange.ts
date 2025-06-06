@@ -5,13 +5,13 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import SingleClassId from "../node/ClassId";
+import { ClassId } from "../node/ClassId";
 import { InternalParseError } from "../../ParseError";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import ExtendedClassIdRange from "../node/ExtendedClassIdRange";
-import type ClassIdRange from "../node/ClassIdRange";
-import type AbstractClassId from "../node/AbstractClassId";
+import type { Token } from "../token/Token";
+import { ExtendedClassIdRange } from "../node/ExtendedClassIdRange";
+import type { ClassIdRange } from "../node/ClassIdRange";
+import type { AbstractClassId } from "../node/AbstractClassId";
 import { ClassIdKind } from "../node/enum/class_id_kind";
 
 export function getExtendedClassIdRange(
@@ -21,7 +21,7 @@ export function getExtendedClassIdRange(
   assertSyntaxNodeType(cursor, "ExtendedClassIdRange");
 
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
-  const classIds: (SingleClassId | ClassIdRange)[] = [];
+  const classIds: (ClassId | ClassIdRange)[] = [];
   const commaPunctuators: Token[] = [];
 
   for (const childNodeOrToken of childNodesAndTokens) {
@@ -31,7 +31,7 @@ export function getExtendedClassIdRange(
           (childNodeOrToken as AbstractClassId).classIdKind ===
             ClassIdKind.SINGLE
         ) {
-          classIds.push(childNodeOrToken as SingleClassId);
+          classIds.push(childNodeOrToken as ClassId);
         } else if (
           (childNodeOrToken as AbstractClassId).classIdKind ===
             ClassIdKind.RANGE

@@ -1,14 +1,14 @@
 import { type Tree } from "@lezer/common";
-import type NodeHandler from "./ast/visitor/NodeHandler.ts";
-import type Specification from "./ast/node/Specification.ts";
+import type { NodeHandler } from "./ast/visitor/NodeHandler.ts";
+import type { Specification } from "./ast/node/Specification.ts";
 import { SyntacticParseError } from "./ParseError.ts";
-import TraversingVisitor from "./ast/visitor/TraversingVisitor.ts";
+import { TraversingVisitor } from "./ast/visitor/TraversingVisitor.ts";
 import * as prettier from "prettier/standalone.js";
 import prettierPluginSdl from "./prettier/prettierPluginSdl.ts";
 import type { Plugin } from "prettier";
 import { Text } from "@codemirror/state";
-import type AbstractNode from "./ast/node/AbstractNode.ts";
-import SdlStringInput from "./lezer/SdlStringInput.ts";
+import type { AbstractNode } from "./ast/node/AbstractNode.ts";
+import { SdlStringInput } from "./lezer/SdlStringInput.ts";
 
 /**
  * Create a dynamic prettier plugin for SDL using the pre-parsed AST.

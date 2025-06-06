@@ -5,11 +5,11 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import SingleClassId from "../node/ClassId";
+import { ClassId } from "../node/ClassId";
 import { InternalParseError } from "../../ParseError";
 import { NodeKind } from "../node/enum/node_kind";
-import ClassIdRange from "../node/ClassIdRange";
-import type Token from "../token/Token";
+import { ClassIdRange } from "../node/ClassIdRange";
+import type { Token } from "../token/Token";
 
 export function getClassIdRange(
   cursor: TreeCursor,
@@ -19,17 +19,17 @@ export function getClassIdRange(
 
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
-  let startClassId: SingleClassId | undefined;
-  let endClassId: SingleClassId | undefined;
+  let startClassId: ClassId | undefined;
+  let endClassId: ClassId | undefined;
   let rangeOperator: Token | undefined;
 
   for (const childNodeOrToken of childNodesAndTokens) {
     if (isAbstractNode(childNodeOrToken)) {
       if (childNodeOrToken.nodeKind === NodeKind.CLASS_ID) {
         if (startClassId === undefined) {
-          startClassId = childNodeOrToken as SingleClassId;
+          startClassId = childNodeOrToken as ClassId;
         } else {
-          endClassId = childNodeOrToken as SingleClassId;
+          endClassId = childNodeOrToken as ClassId;
         }
       } else {
         throw new InternalParseError(

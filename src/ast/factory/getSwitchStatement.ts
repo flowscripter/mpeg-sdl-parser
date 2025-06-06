@@ -7,13 +7,13 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Token from "../token/Token";
-import type AbstractExpression from "../node/AbstractExpression";
-import type NumberLiteral from "../node/NumberLiteral";
-import type Identifier from "../node/Identifier";
-import SwitchStatement from "../node/SwitchStatement";
-import CaseClause from "../node/CaseClause";
-import DefaultClause from "../node/DefaultClause";
+import type { Token } from "../token/Token";
+import type { AbstractExpression } from "../node/AbstractExpression";
+import type { NumberLiteral } from "../node/NumberLiteral";
+import type { Identifier } from "../node/Identifier";
+import { SwitchStatement } from "../node/SwitchStatement";
+import { CaseClause } from "../node/CaseClause";
+import { DefaultClause } from "../node/DefaultClause";
 
 export function getSwitchStatement(
   cursor: TreeCursor,

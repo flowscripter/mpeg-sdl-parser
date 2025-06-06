@@ -7,10 +7,10 @@ import {
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
 import { NodeKind } from "../node/enum/node_kind";
-import type Identifier from "../node/Identifier";
-import type Token from "../token/Token";
-import ClassDefinition from "../node/ClassDefinition";
-import type ParameterValueList from "../node/ParameterValueList";
+import type { Identifier } from "../node/Identifier";
+import type { Token } from "../token/Token";
+import { ClassDefinition } from "../node/ClassDefinition";
+import type { ParameterValueList } from "../node/ParameterValueList";
 
 export function getClassDefinition(
   cursor: TreeCursor,

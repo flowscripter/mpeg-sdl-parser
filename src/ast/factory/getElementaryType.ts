@@ -6,8 +6,8 @@ import {
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
-import ElementaryType from "../node/ElementaryType";
-import type Token from "../token/Token";
+import { ElementaryType } from "../node/ElementaryType";
+import type { Token } from "../token/Token";
 import { ElementaryTypeKind } from "../node/enum/elementary_type_kind";
 import { NodeKind } from "../node/enum/node_kind";
 

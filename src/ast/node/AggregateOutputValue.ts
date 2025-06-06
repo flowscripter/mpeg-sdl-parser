@@ -1,11 +1,11 @@
-import type Token from "../token/Token.ts";
-import type AbstractNode from "./AbstractNode.ts";
-import AbstractCompositeNode from "./AbstractCompositeNode.ts";
+import type { Token } from "../token/Token.ts";
+import type { AbstractNode } from "./AbstractNode.ts";
+import { AbstractCompositeNode } from "./AbstractCompositeNode.ts";
 import { NodeKind } from "./enum/node_kind.ts";
-import type NumberLiteral from "./NumberLiteral.ts";
-import type ElementaryTypeOutputValue from "./ElementaryTypeOutputValue.ts";
+import type { NumberLiteral } from "./NumberLiteral.ts";
+import type { ElementaryTypeOutputValue } from "./ElementaryTypeOutputValue.ts";
 
-export default class AggregateOutputValue extends AbstractCompositeNode {
+export class AggregateOutputValue extends AbstractCompositeNode {
   constructor(
     public readonly outputValues:
       (AggregateOutputValue | ElementaryTypeOutputValue | NumberLiteral)[],

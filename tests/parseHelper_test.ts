@@ -1,6 +1,7 @@
 import { describe, expect, test } from "bun:test";
+import { type Buffer } from "node:buffer";
 import path from "node:path";
-import fs from "node:fs/promises";
+import { promises as fs } from "node:fs";
 import HistoryRecordingNodeHandler, {
   expectedHistory,
 } from "./fixtures/HistoryRecordingNodeHandler.ts";
@@ -14,7 +15,7 @@ import {
   dispatchNodeHandler,
   prettyPrint,
 } from "../src/parseHelper.ts";
-import SdlStringInput from "../src/lezer/SdlStringInput.ts";
+import { SdlStringInput } from "../src/lezer/SdlStringInput.ts";
 
 const strictSdlParser = await createStrictSdlParser();
 const lenientSdlParser = await createLenientSdlParser();
@@ -23,7 +24,7 @@ describe("Parse Helper Tests", () => {
   test("Test collateParseErrors", async () => {
     const sdlString = await fs.readFile(
       path.join(__dirname, "./sample_specifications/invalid.sdl"),
-    ).then((buffer) => buffer.toString());
+    ).then((buffer: Buffer) => buffer.toString());
 
     const sdlStringInput = new SdlStringInput(sdlString);
     const parseTree = lenientSdlParser.parse(sdlStringInput);
@@ -147,13 +148,13 @@ describe("Parse Helper Tests", () => {
   test("Test prettyPrint", async () => {
     const sdlString = await fs.readFile(
       path.join(__dirname, "./sample_specifications/various_elements.sdl"),
-    ).then((buffer) => buffer.toString());
+    ).then((buffer: Buffer) => buffer.toString());
     let expectedSdlString = await fs.readFile(
       path.join(
         __dirname,
         "./sample_specifications/prettified_various_elements.sdl",
       ),
-    ).then((buffer) => buffer.toString());
+    ).then((buffer: Buffer) => buffer.toString());
     expectedSdlString = expectedSdlString.replace(/\r/g, "");
 
     const sdlStringInput = new SdlStringInput(sdlString);
@@ -175,7 +176,7 @@ describe("Parse Helper Tests", () => {
   test("Test dispatchNodeHandler", async () => {
     const sdlString = await fs.readFile(
       path.join(__dirname, "./sample_specifications/sample.sdl"),
-    ).then((buffer) => buffer.toString());
+    ).then((buffer: Buffer) => buffer.toString());
 
     const sdlStringInput = new SdlStringInput(sdlString);
     const parseTree = strictSdlParser.parse(sdlStringInput);
