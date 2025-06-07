@@ -42,7 +42,7 @@ const printers: Record<string, Printer<AbstractNode>> = {
   },
 };
 
-const prettierPluginSdl: Plugin<AbstractNode> = {
+const prettierPluginSdl: Plugin = {
   languages,
   parsers,
   printers,

@@ -53,9 +53,7 @@ do {
 } while (cursor.next());
 
 // Print any parsing errors by collating any error nodes in the parse tree
-cursor = sdlParseTree.cursor();
-
-const parseErrors = collateParseErrors(cursor, sdlStringInput);
+const parseErrors = collateParseErrors(sdlParseTree, sdlStringInput);
 
 console.log(JSON.stringify(parseErrors);
 
