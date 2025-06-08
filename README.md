@@ -102,6 +102,10 @@ Install dependencies:
 
 `bun install`
 
+Generate parser from grammar:
+
+`bun run generate`
+
 Test:
 
 `bun test`

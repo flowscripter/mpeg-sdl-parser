@@ -6,6 +6,9 @@
     "type": "git",
     "url": "git+https://github.com/flowscripter/mpeg-sdl-parser.git"
   },
+  "scripts": {
+    "generate": "node_modules/.bin/lezer-generator --typeScript --noTerms --output src/lezer/parser ./grammar/sdl.lezer.grammar"
+  },
   "license": "MIT",
   "keywords": [
     "bun",
