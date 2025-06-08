@@ -1,11 +1,10 @@
 import { type BuildOptions, buildParser } from "@lezer/generator";
 import { ContextTracker, LRParser as LezerParser } from "@lezer/lr";
-import { promises as fs } from "node:fs";
-import path from "node:path";
 import getLogger, { debugEnabled } from "../util/logger.ts";
 import { Text } from "@codemirror/state";
 import type { Input } from "@lezer/common";
 import { SyntacticParseError } from "../ParseError.ts";
+import { loadGrammarFile } from "./loadGrammarFile.ts" with { type: "macro" };
 
 const logger = getLogger("SdlParser");
 
@@ -17,15 +16,9 @@ let strictSdlParser: LezerParser | undefined;
  */
 export async function createLenientSdlParser(): Promise<LezerParser> {
   if (!lenientSdlParser) {
-    const fileName = "sdl.lezer.grammar";
-    const grammarPath = new URL(
-      path.join("../..", "grammar", fileName),
-      import.meta.url,
-    );
-    const grammarText = await fs.readFile(grammarPath, "utf-8");
+    const grammarText = await loadGrammarFile();
 
     const buildOptions: BuildOptions = {
-      fileName,
       warn: logger.warn,
     };
 

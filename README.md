@@ -47,7 +47,7 @@ const sdlStringInput = new SdlStringInput("computed int i;");
 const sdlParseTree = sdlParser.parse(sdlStringInput);
 
 // Traverse and print the parse tree
-let cursor = sdlParseTree.cursor();
+const cursor = sdlParseTree.cursor();
 do {
   console.log(`Node ${cursor.name} from ${cursor.from} to ${cursor.to}`)
 } while (cursor.next());
