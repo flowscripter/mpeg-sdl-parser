@@ -4,7 +4,7 @@ import { describe, test } from "bun:test";
 import { createStrictSdlParser } from "../../src/lezer/createSdlParser.ts";
 import { fileTests } from "@lezer/generator/dist/test";
 
-const sdlParser = await createStrictSdlParser();
+const sdlParser = createStrictSdlParser();
 const testCaseDir = path.join(__dirname, "./test_cases");
 
 for (const filename of fs.readdirSync(testCaseDir)) {

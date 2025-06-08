@@ -3,7 +3,7 @@ import { describe, expect, test } from "bun:test";
 import { createStrictSdlParser } from "../../src/lezer/createSdlParser.ts";
 import { SdlStringInput } from "../../src/lezer/SdlStringInput.ts";
 
-const sdlParser = await createStrictSdlParser();
+const sdlParser = createStrictSdlParser();
 
 describe("Invalid Syntax Tests", () => {
   test("No declarations fails to parse", () => {

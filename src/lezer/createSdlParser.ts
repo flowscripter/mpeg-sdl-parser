@@ -14,10 +14,9 @@ let strictSdlParser: LezerParser | undefined;
 /**
  * Create an in memory lenient Lezer based parser using the SDL grammar and store it as a "singleton".
  */
-export async function createLenientSdlParser(): Promise<LezerParser> {
+export function createLenientSdlParser(): LezerParser {
   if (!lenientSdlParser) {
-    const grammarText = await loadGrammarFile();
-
+    const grammarText = loadGrammarFile();
     const buildOptions: BuildOptions = {
       warn: logger.warn,
     };
@@ -62,9 +61,9 @@ export async function createLenientSdlParser(): Promise<LezerParser> {
 /**
  * Create an in memory strict Lezer based parser using the SDL grammar and store it as a "singleton".
  */
-export async function createStrictSdlParser(): Promise<LezerParser> {
+export function createStrictSdlParser(): LezerParser {
   if (!strictSdlParser) {
-    strictSdlParser = (await createLenientSdlParser()).configure({
+    strictSdlParser = createLenientSdlParser().configure({
       strict: true,
     });
 

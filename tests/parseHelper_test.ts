@@ -17,8 +17,8 @@ import {
 } from "../src/parseHelper.ts";
 import { SdlStringInput } from "../src/lezer/SdlStringInput.ts";
 
-const strictSdlParser = await createStrictSdlParser();
-const lenientSdlParser = await createLenientSdlParser();
+const strictSdlParser = createStrictSdlParser();
+const lenientSdlParser = createLenientSdlParser();
 
 describe("Parse Helper Tests", () => {
   test("Test collateParseErrors", async () => {

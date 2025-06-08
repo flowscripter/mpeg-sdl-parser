@@ -16,7 +16,7 @@ describe("TraversingVisitor Tests", () => {
       path.join(__dirname, "../../sample_specifications/sample.sdl"),
     ).then((buffer: Buffer) => buffer.toString());
     const sdlStringInput = new SdlStringInput(sdlSource);
-    const sdlParser = await createStrictSdlParser();
+    const sdlParser = createStrictSdlParser();
     const sdlParseTree = sdlParser.parse(sdlStringInput);
     const specification = buildAst(sdlParseTree, sdlStringInput);
 

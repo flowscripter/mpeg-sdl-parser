@@ -7,7 +7,7 @@ import prettierPluginSdl from "../../src/prettier/prettierPluginSdl";
 import { createStrictSdlParser } from "../../src/lezer/createSdlParser.ts";
 import { SdlStringInput } from "../../src/lezer/SdlStringInput";
 
-const strictSdlParser = await createStrictSdlParser();
+const strictSdlParser = createStrictSdlParser();
 
 describe("Prettier Plugin SDL tests", () => {
   test("prettified output is as expected", async () => {
