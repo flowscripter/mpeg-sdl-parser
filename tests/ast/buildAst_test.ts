@@ -9,8 +9,8 @@ import { Specification } from "../../src/ast/node/Specification.ts";
 import { ClassDeclaration } from "../../src/ast/node/ClassDeclaration.ts";
 import { Identifier } from "../../src/ast/node/Identifier.ts";
 
-const lenientSdlParser = await createLenientSdlParser();
-const strictSdlParser = await createStrictSdlParser();
+const lenientSdlParser = createLenientSdlParser();
+const strictSdlParser = createStrictSdlParser();
 
 describe("buildAst Tests", () => {
   test("Parse tree with parse errors causes SyntacticParseError", () => {

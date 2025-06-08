@@ -15,9 +15,9 @@ const languages: SupportLanguage[] = [
 const parsers: Record<string, Parser<AbstractNode>> = {
   sdl: {
     astFormat: "sdl",
-    parse: async (sdlSpecification: string) => {
+    parse: (sdlSpecification: string) => {
       const sdlStringInput = new SdlStringInput(sdlSpecification);
-      const sdlParser = await createStrictSdlParser();
+      const sdlParser = createStrictSdlParser();
       const parseTree = sdlParser.parse(sdlSpecification);
 
       return buildAst(parseTree, sdlStringInput);
