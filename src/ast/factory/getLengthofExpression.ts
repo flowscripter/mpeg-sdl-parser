@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -16,8 +15,6 @@ export function getLengthofExpression(
   cursor: TreeCursor,
   text: Text,
 ): LengthofExpression {
-  assertSyntaxNodeType(cursor, "LengthofExpression");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let operand: AbstractExpression | Identifier | undefined;

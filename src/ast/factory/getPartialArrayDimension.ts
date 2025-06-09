@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -17,8 +16,6 @@ export function getPartialArrayDimension(
   cursor: TreeCursor,
   text: Text,
 ): PartialArrayDimension {
-  assertSyntaxNodeType(cursor, "PartialArrayDimension");
-
   let index: AbstractExpression | Identifier | NumberLiteral | undefined;
   let openBracketPunctuator: Token | undefined;
   let innerOpenBracketPunctuator: Token | undefined;

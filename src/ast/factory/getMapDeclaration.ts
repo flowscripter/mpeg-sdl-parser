@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -17,8 +16,6 @@ export function getMapDeclaration(
   cursor: TreeCursor,
   text: Text,
 ): MapDeclaration {
-  assertSyntaxNodeType(cursor, "MapDeclaration");
-
   let identifier: Identifier | undefined;
   let outputElementaryType: ElementaryType | undefined;
   let outputClassIdentifier: Identifier | undefined;

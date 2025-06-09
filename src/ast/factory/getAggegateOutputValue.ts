@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -16,8 +15,6 @@ export function getAggregateOutputValue(
   cursor: TreeCursor,
   text: Text,
 ): AggregateOutputValue {
-  assertSyntaxNodeType(cursor, "AggregateOutputValue");
-
   const outputValues:
     (AggregateOutputValue | NumberLiteral | ElementaryTypeOutputValue)[] = [];
   let openBracePunctuator: Token | undefined;

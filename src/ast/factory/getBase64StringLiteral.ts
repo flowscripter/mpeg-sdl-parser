@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -18,8 +17,6 @@ export function getBase64StringLiteral(
   cursor: TreeCursor,
   text: Text,
 ): StringLiteral {
-  assertSyntaxNodeType(cursor, "Base64StringLiteral");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals: Token[] = [];

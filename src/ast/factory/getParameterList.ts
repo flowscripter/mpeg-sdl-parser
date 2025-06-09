@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -15,8 +14,6 @@ export function getParameterList(
   cursor: TreeCursor,
   text: Text,
 ): ParameterList {
-  assertSyntaxNodeType(cursor, "ParameterList");
-
   const parameters: Parameter[] = [];
   let openParenthesisPunctuator: Token | undefined;
   let commaPunctuators: Token[] | undefined;

@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -23,8 +22,6 @@ export function getArrayDefinition(
   cursor: TreeCursor,
   text: Text,
 ): ArrayDefinition {
-  assertSyntaxNodeType(cursor, "ArrayDefinition");
-
   let legacyKeyword: Token | undefined;
   let alignedModifier: AlignedModifier | undefined;
   let elementaryType: ElementaryType | undefined;

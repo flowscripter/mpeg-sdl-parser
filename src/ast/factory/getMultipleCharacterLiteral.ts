@@ -1,7 +1,6 @@
 import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -42,8 +41,6 @@ export function getMultipleCharacterLiteral(
   cursor: TreeCursor,
   text: Text,
 ): NumberLiteral {
-  assertSyntaxNodeType(cursor, "MultipleCharacterLiteral");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals = [];

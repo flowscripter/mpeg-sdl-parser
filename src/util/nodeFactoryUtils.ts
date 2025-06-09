@@ -4,33 +4,31 @@ import type { Token } from "../ast/token/Token";
 import type { AbstractNode } from "../ast/node/AbstractNode";
 import { NodeFactory } from "../ast/factory/NodeFactory";
 import type { Trivia } from "../ast/token/Trivia";
-import { InternalParseError, SyntacticParseError } from "../ParseError";
+import { SyntacticParseError } from "../ParseError";
 import { getLocationFromTextPosition } from "./locationUtils";
+import {
+  AlignmentBitCount,
+  BinaryLiteral,
+  Comment,
+  DecimalLiteral,
+  FloatingPointLiteral,
+  HexadecimalLiteral,
+  Identifier,
+  IntegerLiteral,
+  Whitespace,
+} from "../lezer/parser.terms";
 
 const primitiveNodeTypes = new Set([
-  "AlignmentBitCount",
-  "BinaryLiteral",
-  "DecimalLiteral",
-  "FloatingPointLiteral",
-  "HexadecimalLiteral",
-  "Identifier",
-  "IntegerLiteral",
+  AlignmentBitCount,
+  BinaryLiteral,
+  DecimalLiteral,
+  FloatingPointLiteral,
+  HexadecimalLiteral,
+  Identifier,
+  IntegerLiteral,
 ]);
 
-export function assertSyntaxNodeType(
-  cursor: TreeCursor,
-  expectedType: string,
-): void {
-  if (cursor.node.type.name !== expectedType) {
-    throw new InternalParseError(
-      `Expected node to be of type ${expectedType}, it was: ${cursor.node.type.name}`,
-    );
-  }
-}
-
 function getCommentTrivia(cursor: TreeCursor, text: Text): Trivia {
-  assertSyntaxNodeType(cursor, "Comment");
-
   return {
     text: text.sliceString(cursor.from, cursor.to),
     location: getLocationFromTextPosition(text, cursor.from),
@@ -63,13 +61,13 @@ export function getChildNodesAndTokens(
     }
 
     // Skip whitespace
-    if (cursor.type.name === "Whitespace") {
+    if (cursor.type.id === Whitespace) {
       childExists = cursor.nextSibling();
       continue;
     }
 
     // Save comments to set as leading or trailing trivia
-    if (cursor.type.name === "Comment") {
+    if (cursor.type.id === Comment) {
       trivia.push(getCommentTrivia(cursor, text));
       childExists = cursor.nextSibling();
       continue;
@@ -82,7 +80,7 @@ export function getChildNodesAndTokens(
     let isToken = false;
 
     if (isTerminal) {
-      isToken = !primitiveNodeTypes.has(cursor.type.name);
+      isToken = !primitiveNodeTypes.has(cursor.type.id);
     } else {
       // return to parent
       cursor.parent();
@@ -121,9 +119,9 @@ export function getChildNodesAndTokens(
   let hasSibling = cursor.nextSibling();
 
   while (hasSibling) {
-    if (cursor.type.name === "Comment") {
+    if (cursor.type.id === Comment) {
       trivia.push(getCommentTrivia(cursor, text));
-    } else if (cursor.type.name === "Whitespace") {
+    } else if (cursor.type.id === Whitespace) {
       // Only continute while whitespace doesn't contain a newline
       const whitespace = text.sliceString(cursor.from, cursor.to);
 

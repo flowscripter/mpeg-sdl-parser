@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -17,8 +16,6 @@ export function getArrayElementAccess(
   cursor: TreeCursor,
   text: Text,
 ): ArrayElementAccess {
-  assertSyntaxNodeType(cursor, "ArrayElementAccess");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let index: AbstractExpression | Identifier | NumberLiteral | undefined;

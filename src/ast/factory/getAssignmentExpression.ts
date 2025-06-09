@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -18,8 +17,6 @@ export function getAssignmentExpression(
   cursor: TreeCursor,
   text: Text,
 ): BinaryExpression {
-  assertSyntaxNodeType(cursor, "AssignmentExpression");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let leftOperand: AbstractExpression | Identifier | NumberLiteral | undefined;

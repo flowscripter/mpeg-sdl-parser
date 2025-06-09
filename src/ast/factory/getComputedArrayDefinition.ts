@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -17,8 +16,6 @@ export function getComputedArrayDefinition(
   cursor: TreeCursor,
   text: Text,
 ): ComputedArrayDefinition {
-  assertSyntaxNodeType(cursor, "ComputedArrayDefinition");
-
   let elementaryType: ElementaryType | undefined;
   let identifier: Identifier | undefined;
   const dimensions: ExplicitArrayDimension[] = [];

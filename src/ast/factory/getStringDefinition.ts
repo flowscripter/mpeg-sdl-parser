@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -18,8 +17,6 @@ export function getStringDefinition(
   cursor: TreeCursor,
   text: Text,
 ): StringDefinition {
-  assertSyntaxNodeType(cursor, "StringDefinition");
-
   let alignedModifier: AlignedModifier | undefined;
   let stringVariableKind: StringVariableKind | undefined;
   let identifier: Identifier | undefined;

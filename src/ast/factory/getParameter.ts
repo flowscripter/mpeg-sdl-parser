@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -15,8 +14,6 @@ export function getParameter(
   cursor: TreeCursor,
   text: Text,
 ): Parameter {
-  assertSyntaxNodeType(cursor, "Parameter");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let classIdentifier: Identifier | undefined;

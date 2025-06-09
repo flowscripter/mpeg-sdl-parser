@@ -1,7 +1,6 @@
 import { Text } from "@codemirror/state";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -16,8 +15,6 @@ export function getExtendsModifier(
   cursor: TreeCursor,
   text: Text,
 ): ExtendsModifier {
-  assertSyntaxNodeType(cursor, "ExtendsModifier");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let identifier: Identifier | undefined;

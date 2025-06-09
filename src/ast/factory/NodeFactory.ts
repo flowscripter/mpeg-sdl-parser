@@ -54,6 +54,60 @@ import { getForStatement } from "./getForStatement.ts";
 import { getDoStatement } from "./getDoStatement.ts";
 import { getDefaultClause } from "./getDefaultClause.ts";
 import { getCaseClause } from "./getCaseClause.ts";
+import {
+  AggregateOutputValue,
+  AlignedModifier,
+  AlignmentBitCount,
+  ArrayDefinition,
+  ArrayElementAccess,
+  AssignmentExpression,
+  Base64StringLiteral,
+  BinaryExpression,
+  BinaryLiteral,
+  BitModifier,
+  CaseClause,
+  ClassDeclaration,
+  ClassDefinition,
+  ClassId,
+  ClassIdRange,
+  ClassMemberAccess,
+  CompoundStatement,
+  ComputedArrayDefinition,
+  ComputedElementaryTypeDefinition,
+  DecimalLiteral,
+  DefaultClause,
+  DoStatement,
+  ElementaryType,
+  ElementaryTypeDefinition,
+  ElementaryTypeOutputValue,
+  ExpandableModifier,
+  ExplicitArrayDimension,
+  ExpressionStatement,
+  ExtendedClassIdRange,
+  ExtendsModifier,
+  FloatingPointLiteral,
+  ForStatement,
+  HexadecimalLiteral,
+  Identifier,
+  IfStatement,
+  ImplicitArrayDimension,
+  IntegerLiteral,
+  LengthAttribute,
+  LengthofExpression,
+  MapDeclaration,
+  MapEntry,
+  MultipleCharacterLiteral,
+  Parameter,
+  ParameterList,
+  ParameterValueList,
+  PartialArrayDimension,
+  Specification,
+  StringDefinition,
+  SwitchStatement,
+  UnaryExpression,
+  UtfStringLiteral,
+  WhileStatement,
+} from "../../lezer/parser.terms.ts";
 
 export class NodeFactory {
   static createNode(cursor: TreeCursor, text: Text): AbstractNode {
@@ -61,110 +115,110 @@ export class NodeFactory {
       throw SyntacticParseError.fromTextAndCursor(text, cursor);
     }
 
-    switch (cursor.type.name) {
-      case "AggregateOutputValue":
+    switch (cursor.type.id) {
+      case AggregateOutputValue:
         return getAggregateOutputValue(cursor, text);
-      case "AlignedModifier":
+      case AlignedModifier:
         return getAlignedModifier(cursor, text);
-      case "AlignmentBitCount":
+      case AlignmentBitCount:
         return getAlignmentBitCount(cursor, text);
-      case "ArrayDefinition":
+      case ArrayDefinition:
         return getArrayDefinition(cursor, text);
-      case "ArrayElementAccess":
+      case ArrayElementAccess:
         return getArrayElementAccess(cursor, text);
-      case "AssignmentExpression":
+      case AssignmentExpression:
         return getAssignmentExpression(cursor, text);
-      case "Base64StringLiteral":
+      case Base64StringLiteral:
         return getBase64StringLiteral(cursor, text);
-      case "BinaryExpression":
+      case BinaryExpression:
         return getBinaryExpression(cursor, text);
-      case "BinaryLiteral":
+      case BinaryLiteral:
         return getBinaryLiteral(cursor, text);
-      case "BitModifier":
+      case BitModifier:
         return getBitModifier(cursor, text);
-      case "CaseClause":
+      case CaseClause:
         return getCaseClause(cursor, text);
-      case "ClassDeclaration":
+      case ClassDeclaration:
         return getClassDeclaration(cursor, text);
-      case "ClassDefinition":
+      case ClassDefinition:
         return getClassDefinition(cursor, text);
-      case "ClassId":
+      case ClassId:
         return getClassId(cursor, text);
-      case "ClassIdRange":
+      case ClassIdRange:
         return getClassIdRange(cursor, text);
-      case "ClassMemberAccess":
+      case ClassMemberAccess:
         return getClassMemberAccess(cursor, text);
-      case "CompoundStatement":
+      case CompoundStatement:
         return getCompoundStatement(cursor, text);
-      case "ComputedArrayDefinition":
+      case ComputedArrayDefinition:
         return getComputedArrayDefinition(cursor, text);
-      case "ComputedElementaryTypeDefinition":
+      case ComputedElementaryTypeDefinition:
         return getComputedElementaryTypeDefinition(cursor, text);
-      case "DecimalLiteral":
+      case DecimalLiteral:
         return getDecimalLiteral(cursor, text);
-      case "DefaultClause":
+      case DefaultClause:
         return getDefaultClause(cursor, text);
-      case "DoStatement":
+      case DoStatement:
         return getDoStatement(cursor, text);
-      case "ElementaryType":
+      case ElementaryType:
         return getElementaryType(cursor, text);
-      case "ElementaryTypeDefinition":
+      case ElementaryTypeDefinition:
         return getElementaryTypeDefinition(cursor, text);
-      case "ElementaryTypeOutputValue":
+      case ElementaryTypeOutputValue:
         return getElementaryTypeOutputValue(cursor, text);
-      case "ExpandableModifier":
+      case ExpandableModifier:
         return getExpandableModifier(cursor, text);
-      case "ExplicitArrayDimension":
+      case ExplicitArrayDimension:
         return getExplicitArrayDimension(cursor, text);
-      case "ExpressionStatement":
+      case ExpressionStatement:
         return getExpressionStatement(cursor, text);
-      case "ExtendedClassIdRange":
+      case ExtendedClassIdRange:
         return getExtendedClassIdRange(cursor, text);
-      case "ExtendsModifier":
+      case ExtendsModifier:
         return getExtendsModifier(cursor, text);
-      case "FloatingPointLiteral":
+      case FloatingPointLiteral:
         return getFloatingPointLiteral(cursor, text);
-      case "ForStatement":
+      case ForStatement:
         return getForStatement(cursor, text);
-      case "HexadecimalLiteral":
+      case HexadecimalLiteral:
         return getHexadecimalLiteral(cursor, text);
-      case "Identifier":
+      case Identifier:
         return getIdentifier(cursor, text);
-      case "IfStatement":
+      case IfStatement:
         return getIfStatement(cursor, text);
-      case "ImplicitArrayDimension":
+      case ImplicitArrayDimension:
         return getImplicitArrayDimension(cursor, text);
-      case "IntegerLiteral":
+      case IntegerLiteral:
         return getIntegerLiteral(cursor, text);
-      case "LengthAttribute":
+      case LengthAttribute:
         return getLengthAttribute(cursor, text);
-      case "LengthofExpression":
+      case LengthofExpression:
         return getLengthofExpression(cursor, text);
-      case "MapDeclaration":
+      case MapDeclaration:
         return getMapDeclaration(cursor, text);
-      case "MapEntry":
+      case MapEntry:
         return getMapEntry(cursor, text);
-      case "MultipleCharacterLiteral":
+      case MultipleCharacterLiteral:
         return getMultipleCharacterLiteral(cursor, text);
-      case "Parameter":
+      case Parameter:
         return getParameter(cursor, text);
-      case "ParameterList":
+      case ParameterList:
         return getParameterList(cursor, text);
-      case "ParameterValueList":
+      case ParameterValueList:
         return getParameterValueList(cursor, text);
-      case "PartialArrayDimension":
+      case PartialArrayDimension:
         return getPartialArrayDimension(cursor, text);
-      case "Specification":
+      case Specification:
         return getSpecification(cursor, text);
-      case "StringDefinition":
+      case StringDefinition:
         return getStringDefinition(cursor, text);
-      case "SwitchStatement":
+      case SwitchStatement:
         return getSwitchStatement(cursor, text);
-      case "UtfStringLiteral":
+      case UtfStringLiteral:
         return getUtfStringLiteral(cursor, text);
-      case "UnaryExpression":
+      case UnaryExpression:
         return getUnaryExpression(cursor, text);
-      case "WhileStatement":
+      case WhileStatement:
         return getWhileStatement(cursor, text);
       default:
         throw new Error(
