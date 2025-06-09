@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -16,8 +15,6 @@ export function getMapEntry(
   cursor: TreeCursor,
   text: Text,
 ): MapEntry {
-  assertSyntaxNodeType(cursor, "MapEntry");
-
   let inputValue: NumberLiteral | undefined;
   let outputValue: AggregateOutputValue | undefined;
   let commaPunctuator: Token | undefined;

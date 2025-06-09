@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -78,8 +77,6 @@ export function getUtfStringLiteral(
   cursor: TreeCursor,
   text: Text,
 ): StringLiteral {
-  assertSyntaxNodeType(cursor, "UtfStringLiteral");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   const literals: Token[] = [];

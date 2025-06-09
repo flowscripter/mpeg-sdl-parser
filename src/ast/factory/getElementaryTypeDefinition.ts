@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -20,8 +19,6 @@ export function getElementaryTypeDefinition(
   cursor: TreeCursor,
   text: Text,
 ): ElementaryTypeDefinition {
-  assertSyntaxNodeType(cursor, "ElementaryTypeDefinition");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let reservedKeyword: Token | undefined;

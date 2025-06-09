@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -15,8 +14,6 @@ export function getClassMemberAccess(
   cursor: TreeCursor,
   text: Text,
 ): ClassMemberAccess {
-  assertSyntaxNodeType(cursor, "ClassMemberAccess");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let identifier: Identifier | undefined;

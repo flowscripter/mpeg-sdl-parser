@@ -2,6 +2,7 @@ import type { Tree } from "@lezer/common";
 import { Text } from "@codemirror/state";
 import type { SdlStringInput } from "../lezer/SdlStringInput";
 import type { Specification } from "./node/Specification";
+import { Specification as SpecificationNodeType } from "../lezer/parser.terms";
 import { NodeFactory } from "./factory/NodeFactory";
 import { debugEnabled } from "../util/logger.ts";
 import type { NodeHandler } from "./visitor/NodeHandler.ts";
@@ -23,7 +24,7 @@ export function buildAst(
   );
   const cursor = parseTree.cursor();
 
-  if (cursor.type.name !== "Specification") {
+  if (cursor.type.id !== SpecificationNodeType) {
     throw new InternalParseError(
       "Expected top node of parseTree to be of type Specification, it was: " +
         cursor.type.name,

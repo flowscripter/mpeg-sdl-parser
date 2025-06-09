@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -17,8 +16,6 @@ export function getExplicitArrayDimension(
   cursor: TreeCursor,
   text: Text,
 ): ExplicitArrayDimension {
-  assertSyntaxNodeType(cursor, "ExplicitArrayDimension");
-
   let size: AbstractExpression | Identifier | NumberLiteral | undefined;
   let openBracketPunctuator: Token | undefined;
   let closeBracketPunctuator: Token | undefined;

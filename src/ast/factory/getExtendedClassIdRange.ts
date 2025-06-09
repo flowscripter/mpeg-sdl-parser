@@ -1,7 +1,6 @@
 import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -18,8 +17,6 @@ export function getExtendedClassIdRange(
   cursor: TreeCursor,
   text: Text,
 ): ExtendedClassIdRange {
-  assertSyntaxNodeType(cursor, "ExtendedClassIdRange");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
   const classIds: (ClassId | ClassIdRange)[] = [];
   const commaPunctuators: Token[] = [];

@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -21,8 +20,6 @@ export function getClassDeclaration(
   cursor: TreeCursor,
   text: Text,
 ): ClassDeclaration {
-  assertSyntaxNodeType(cursor, "ClassDeclaration");
-
   let alignedModifier: AlignedModifier | undefined;
   let expandableModifier: ExpandableModifier | undefined;
   let identifier: Identifier | undefined;

@@ -2,7 +2,6 @@ import { Text } from "@codemirror/state";
 import type { TreeCursor } from "@lezer/common";
 import { InternalParseError } from "../../ParseError";
 import {
-  assertSyntaxNodeType,
   getChildNodesAndTokens,
   isAbstractNode,
 } from "../../util/nodeFactoryUtils";
@@ -18,8 +17,6 @@ export function getIfStatement(
   cursor: TreeCursor,
   text: Text,
 ): IfStatement {
-  assertSyntaxNodeType(cursor, "IfStatement");
-
   const childNodesAndTokens = getChildNodesAndTokens(cursor, text);
 
   let condition: AbstractExpression | NumberLiteral | Identifier | undefined;
