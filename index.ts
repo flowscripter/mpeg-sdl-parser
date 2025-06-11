@@ -75,3 +75,4 @@ export * from "./src/prettier/prettierPluginSdl.ts";
 export * from "./src/Location.ts";
 export * from "./src/ParseError.ts";
 export * from "./src/parseHelper.ts";
+export * from "./src/ast/buildAst.ts";
