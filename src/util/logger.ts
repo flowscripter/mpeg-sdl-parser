@@ -25,7 +25,7 @@ const LEVEL_PADDINGS: Record<string, string> = {
   ERROR: "    ",
 };
 
-export const debugEnabled = process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
+export const debugEnabled = process?.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
 
 let maxLoggerNameLength = 0;
 
