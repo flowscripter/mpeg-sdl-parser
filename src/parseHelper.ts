@@ -4,7 +4,7 @@ import type { Specification } from "./ast/node/Specification.ts";
 import { SyntacticParseError } from "./ParseError.ts";
 import { TraversingVisitor } from "./ast/visitor/TraversingVisitor.ts";
 import * as prettier from "prettier/standalone.js";
-import prettierPluginSdl from "./prettier/prettierPluginSdl.ts";
+import { prettierPluginSdl } from "./prettier/prettierPluginSdl.ts";
 import type { Plugin } from "prettier";
 import { Text } from "@codemirror/state";
 import type { AbstractNode } from "./ast/node/AbstractNode.ts";
