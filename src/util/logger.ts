@@ -25,7 +25,23 @@ const LEVEL_PADDINGS: Record<string, string> = {
   ERROR: "    ",
 };
 
-export const debugEnabled = process?.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
+export const debugEnabled = (() => {
+  // In a node-like environment, check for the environment variable.
+  if (typeof process !== "undefined" && process.env) {
+    return process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
+  }
+
+  // In a browser-like environment, check for the local storage item.
+  if (typeof localStorage !== "undefined") {
+    try {
+      return localStorage.getItem("MPEG_SDL_PARSER_DEBUG") !== null;
+    } catch (_e) {
+      // Ignore SecurityError if localStorage is disabled.
+      return false;
+    }
+  }
+  return false;
+})();
 
 let maxLoggerNameLength = 0;
 

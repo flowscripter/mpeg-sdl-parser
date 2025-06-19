@@ -192,7 +192,10 @@ Link to auto-generated API docs:
 ### Debug Logging
 
 Internal framework logging can be enabled by setting the `MPEG_SDL_PARSER_DEBUG`
-environment variable.
+environment variable. If running in a browser open the developer console and
+run:
+
+`localStorage.setItem("MPEG_SDL_PARSER_DEBUG", "true")`
 
 The logging implementation will look for an object conforming to the `Logger`
 interface and use it if found. If not found, a simple logging implementation
