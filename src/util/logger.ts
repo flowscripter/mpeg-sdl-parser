@@ -1,5 +1,3 @@
-import process from "node:process";
-
 declare global {
   var defaultLogger: Logger | undefined;
 }
@@ -27,8 +25,8 @@ const LEVEL_PADDINGS: Record<string, string> = {
 
 export const debugEnabled = (() => {
   // In a node-like environment, check for the environment variable.
-  if (typeof process !== "undefined" && process.env) {
-    return process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
+  if (typeof globalThis.process !== "undefined" && globalThis.process.env) {
+    return globalThis.process.env["MPEG_SDL_PARSER_DEBUG"] !== undefined;
   }
 
   // In a browser-like environment, check for the local storage item.
