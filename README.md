@@ -9,6 +9,8 @@
 [![docs](https://img.shields.io/badge/docs-API-blue)](https://flowscripter.github.io/mpeg-sdl-parser/index.html)
 [![license: MIT](https://img.shields.io/github/license/flowscripter/mpeg-sdl-parser)](https://github.com/flowscripter/mpeg-sdl-parser/blob/main/LICENSE)
 
+**NOTE: This project has been adopted by MPEG and has been migrated to https://github.com/mpeggroup/mpeg-sdl-parser**
+
 ## CLI
 
 A CLI tool using this module is available at
